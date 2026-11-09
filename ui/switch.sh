@@ -50,6 +50,8 @@ sleep 25
 for _ in $(seq 1 80); do u=$(s 'cut -d. -f1 /proc/uptime' 2>/dev/null || true); [ -n "$u" ] && [ "$u" -lt 400 ] && break; sleep 3; done
 while [ "$(s 'cut -d. -f1 /proc/uptime' 2>/dev/null || echo 0)" -lt 60 ]; do sleep 3; done
 echo "== $SHELL_NAME after boot =="
+# a shell finishes starting a little after login: give it up to 90 s
+for _ in $(seq 1 30); do s "pgrep -x $proc >/dev/null" && break; sleep 3; done
 echo "shell running: $(s "pgrep -x $proc >/dev/null && echo yes || echo NO")"
 echo "audio DSP crashes: $(r 'dmesg | grep -c "crash detected in adsp"'), sound card: $(s 'grep -c "POCO X3" /proc/asound/cards')"
 echo "speaker: $(s 'pactl list sinks 2>/dev/null | grep -A4 "Name: alsa_output.platform-sound.HiFi__Speaker" | grep "Sample Spec" | tr -d "\t" || echo none')"
