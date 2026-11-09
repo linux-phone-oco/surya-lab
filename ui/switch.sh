@@ -19,7 +19,8 @@ case $SHELL_NAME in
   sxmo)          pkg=postmarketos-ui-sxmo-de-sway;  session=swmo;          proc=sway ;;
   *) echo "unknown shell: $SHELL_NAME" >&2; exit 2 ;;
 esac
-current=$(s "apk info 2>/dev/null | grep '^postmarketos-ui-' | grep -vE -- '-(openrc|systemd|extras.*|web|default-osk)\$' | head -1")
+# the installed shell that is not the target (a half-finished earlier switch may have both)
+current=$(s "apk info 2>/dev/null | grep '^postmarketos-ui-' | grep -vE -- '-(openrc|systemd|extras.*|web|default-osk)\$' | grep -vx $pkg | head -1")
 echo "now: $current -> $pkg"
 extra=$(s "apk search -q $pkg-systemd 2>/dev/null | grep -x $pkg-systemd || true")
 # postmarketOS expects one UI at a time: when the new one cannot install beside the current one
