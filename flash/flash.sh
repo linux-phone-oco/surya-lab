@@ -18,6 +18,7 @@ IMG=${1:?usage: flash.sh IMAGE UBOOT [DTB]}; UBOOT=${2:?}; DTB=${3:-}
 LAB=$(cd "$(dirname "$0")/.." && pwd)
 MODULE=${MODULE:-$HOME/Projects/surya-audio/kernel-rc3/snd-soc-tas2562.ko.zst}
 MODULE_KERNEL=7.1.0-rc3-sm7150
+FIXES=${FIXES:-1}   # FIXES=0: flash the image as it is (sshd only), to tell an image fault from ours
 BOARD_DTB=dtbs/qcom/sm7150-xiaomi-surya-huaxing.dtb
 R="sudo -n lab-agent root-exec --"
 W=$(mktemp -d); LOOP=""
@@ -37,6 +38,7 @@ ROOT="$W/root"
 if [ -n "$DTB" ]; then
   $R cp "$DTB" "$W/esp/$BOARD_DTB"; echo "device tree: $(sha256sum "$DTB" | cut -c1-16) <- $DTB"
 fi
+if [ "$FIXES" = 1 ]; then
 echo "== sound: stereo speaker profile =="
 $R install -D -m 644 "$LAB/ucm/Xiaomi/surya/HiFi.conf" "$ROOT/usr/share/alsa/ucm2/Xiaomi/surya/HiFi.conf" && echo "installed"
 echo "== sound: the fixed amplifier driver =="
@@ -49,6 +51,9 @@ else
 fi
 echo "== stability: ADSP sensors service masked =="
 $R ln -sf /dev/null "$ROOT/etc/systemd/system/hexagonrpcd-adsp-sensorspd.service" && echo "masked"
+else
+  echo "== FIXES=0: the image as it is, nothing but sshd =="
+fi
 echo "== access: sshd on first boot =="
 printf '# written by surya-lab flash.sh: Nura disables sshd by preset; this wins by sorting first\nenable sshd.service\n' \
   | $R install -D -m 644 /dev/stdin "$ROOT/etc/systemd/system-preset/10-lab.preset" && echo "enabled"
