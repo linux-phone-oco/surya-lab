@@ -44,8 +44,11 @@ $R install -D -m 644 "$LAB/ucm/Xiaomi/surya/HiFi.conf" "$ROOT/usr/share/alsa/ucm
 echo "== sound: the fixed amplifier driver =="
 kernels=$(ls "$ROOT/lib/modules" | tr '\n' ' ')
 if [ -d "$ROOT/lib/modules/$MODULE_KERNEL" ] && [ -f "$MODULE" ]; then
+  # Same name, same dependencies and aliases as the packaged module, so the image's own module
+  # index already covers it: no depmod. Re-indexing from the PC with -b made the phone boot-loop
+  # (2026-11-09: the image booted unmodified, and with the fixes applied on the phone).
   $R install -m 644 "$MODULE" "$ROOT/lib/modules/$MODULE_KERNEL/kernel/sound/soc/codecs/snd-soc-tas2562.ko.zst"
-  $R depmod -b "$ROOT" "$MODULE_KERNEL" && echo "installed for $MODULE_KERNEL"
+  echo "installed for $MODULE_KERNEL"
 else
   echo "NOT installed: the image runs $kernels, the module is for $MODULE_KERNEL (or no module at $MODULE) - speaker will be mono"
 fi
