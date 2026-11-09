@@ -3,9 +3,8 @@
 #
 #   ui/switch.sh SHELL        SHELL: phosh | plasma-mobile | gnome-mobile | sxmo
 #
-# Uses postmarketOS's own UI packages: installs the shell's package (removing the other shell's if
-# apk says they conflict), lets the package bring its login manager if it has one, else points
-# tinydm at the shell's session, reboots, and checks the shell, the audio DSP and the speaker.
+# Uses postmarketOS's own UI packages: installs the shell's package (replacing the current shell's
+# when they cannot coexist), points tinydm at the shell's session, reboots, and checks the shell, the audio DSP and the speaker.
 # Environment: PHONE (default user@172.16.42.1), PHONE_PASS (default 147147).
 set -eu
 SHELL_NAME=${1:?usage: ui/switch.sh phosh|plasma-mobile|gnome-mobile|sxmo}
@@ -23,11 +22,21 @@ esac
 current=$(s "apk info 2>/dev/null | grep '^postmarketos-ui-' | grep -vE -- '-(openrc|systemd|extras.*|web|default-osk)\$' | head -1")
 echo "now: $current -> $pkg"
 extra=$(s "apk search -q $pkg-systemd 2>/dev/null | grep -x $pkg-systemd || true")
-if ! r "apk add -q $pkg $extra" 2>/tmp/apk.err; then
-  grep -q -i conflict /tmp/apk.err && [ -n "$current" ] && [ "$current" != "$pkg" ] || { cat /tmp/apk.err >&2; exit 1; }
-  echo "conflicts with $current: replacing it"
-  r "apk del -q $current $current-systemd 2>/dev/null; apk add -q $pkg $extra"
+# postmarketOS expects one UI at a time: when the new one cannot install beside the current one
+# (a conflict, or files the other UI owns), the current one is removed first. Switch back any time.
+if ! r "apk add -q $pkg $extra" >/tmp/apk.out 2>&1 || grep -q '^ERROR' /tmp/apk.out; then
+  if [ -n "$current" ] && [ "$current" != "$pkg" ]; then
+    echo "$pkg cannot sit beside $current ($(grep -m1 '^ERROR' /tmp/apk.out | cut -c1-90)): replacing it"
+    r "apk del -q $current" >/dev/null 2>&1
+    r "apk fix -q $pkg $extra || apk add -q $pkg $extra" >/tmp/apk.out 2>&1 || { tail -5 /tmp/apk.out >&2; exit 1; }
+  else
+    tail -5 /tmp/apk.out >&2; exit 1
+  fi
 fi
+echo "installed: $(s "apk info 2>/dev/null | grep '^postmarketos-ui-' | tr '\\n' ' '")"
+# One login manager for every shell: tinydm starts the chosen session directly, the same way for
+# all of them, so shells compare fairly and switching stays scriptable.
+r "systemctl enable --force -q tinydm.service"
 dm=$(s 'basename $(readlink /etc/systemd/system/display-manager.service)')
 echo "login manager: $dm"
 if [ "$dm" = tinydm.service ]; then
