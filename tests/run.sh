@@ -6,7 +6,7 @@ set -eu
 D=$(cd "$(dirname "$0")" && pwd)
 . "$D/../lib/phone.sh"
 phone_find || { echo "nothing tested" >&2; exit 2; }
-at=$(date -u +%Y-%m-%dT%H:%M:%SZ); id=$(date -u +%Y%m%d-%H%M)
+at=$(date -u +%Y-%m-%dT%H:%M:%SZ); id=$(date -u +%Y%m%d-%H%M%S)   # per second: two runs in a minute keep both
 kernel=$(echo 'uname -r' | phone_sh)
 shell=$(phone_sh <<'CMDS'
 basename "$(readlink /var/lib/tinydm/default-session.desktop 2>/dev/null)" .desktop 2>/dev/null
