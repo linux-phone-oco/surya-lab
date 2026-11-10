@@ -13,11 +13,16 @@ say() { printf '{"test":"%s","component":"%s","outcome":"%s","detail":"%s"}\n' "
 check() { if [ "$3" = true ]; then say "$1" "$2" pass "$4"; else say "$1" "$2" fail "$4"; fi; }
 
 # audio
-# crashes, and how many came right after a resume (within 2 s of "PM: suspend exit"); the kernel
-# pads its timestamps with spaces, so they are read from inside the brackets
+# crashes, and how many came with a suspend: between "PM: suspend entry" and 2 s after "PM: suspend
+# exit" (the crash can be logged just before the exit line). In awk alone: the phone's sed is
+# BusyBox's, which has no \| - the earlier pattern matched nothing and always counted 0.
 crashes=$(klog | grep -c 'crash detected in adsp' || true)
-after_resume=$(klog | sed -n 's/^\[ *\([0-9.]*\)\] .*\(PM: suspend exit\|crash detected in adsp\).*/\1 \2/p' \
-	| awk '$2 == "PM:" {r = $1} $2 == "crash" && r != "" && $1 - r < 2 {n++} END {print n + 0}')
+after_resume=$(klog | awk '
+	function at(line) { sub(/^\[ */, "", line); sub(/\].*/, "", line); return line + 0 }
+	/PM: suspend entry/ { asleep = 1 }
+	/PM: suspend exit/ { woke = at($0); asleep = 0 }
+	/crash detected in adsp/ { if (asleep || (woke != "" && at($0) - woke < 2)) n++ }
+	END { print n + 0 }')
 check adsp-stable audio-speaker "$([ "$crashes" = 0 ] && echo true)" "$crashes audio DSP crashes since boot, $after_resume right after a resume"
 card=$(grep -c 'POCO X3' /proc/asound/cards); check sound-card audio-speaker "$([ "$card" -ge 1 ] && echo true)" "sound card present: $card"
 spec=$(as_user "pactl list sinks" | grep -A4 'HiFi__Speaker' | grep 'Sample Spec' | sed 's/.*: //')

@@ -20,7 +20,11 @@ when = "command -v sxmo_init.sh"
 [flash]
 sector_size = 4096
 dtb = "esp:dtbs/qcom/sm7150-xiaomi-surya-huaxing.dtb"
-mask = ["hexagonrpcd-adsp-sensorspd.service"]   # the ADSP crash-looped with the sensors service on
+# masked services:
+#  - sensorspd: the ADSP crash-looped with the sensors service on (its registry init needs writes hexagonrpcd refuses)
+#  - rootpd: with this FastRPC helper attached, the ADSP died on every suspend attempt (24 of 24; 0 of 9 without it);
+#    sound does not need it
+mask = ["hexagonrpcd-adsp-sensorspd.service", "hexagonrpcd-adsp-rootpd.service"]
 enable = ["sshd.service"]                         # the image disables sshd by preset
 
 [[flash.overlay]]   # the stereo speaker profile
