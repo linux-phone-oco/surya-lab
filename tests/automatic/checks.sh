@@ -60,3 +60,13 @@ done
 total=$(klog | grep -c "WARNING: " || true)
 check boot-warnings kernel "$([ -z "$new" ] && echo true)" "$total warnings, ${new:+new:$new}${new:-all known}"
 
+# -- audio: the default output is a real sound card, not a loopback or dummy (once, Sxmo's loopback
+#    card became the default at boot and nothing was heard)
+u=$(stat -c %U /run/user/* 2>/dev/null | grep -v '^root$' | head -1)
+sink=$([ -n "$u" ] && su "$u" -c 'XDG_RUNTIME_DIR=/run/user/$(id -u) pactl get-default-sink' 2>/dev/null)
+case $sink in
+	"") say default-output audio-speaker skip "no sound server to ask" ;;
+	*aloop*|*dummy*|*null*) check default-output audio-speaker "" "the default output is $sink" ;;
+	*) check default-output audio-speaker true "$sink" ;;
+esac
+
