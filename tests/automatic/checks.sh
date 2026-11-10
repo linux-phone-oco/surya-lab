@@ -25,8 +25,9 @@ else say amp-volume audio-speaker skip "no i2c-tools on the phone"; fi
 conn=$(cat /sys/class/drm/card*-DSI*/status 2>/dev/null | head -1); check panel-connected display-panel "$([ "$conn" = connected ] && echo true)" "DSI: ${conn:-none}"
 b=$(cat /sys/class/backlight/*/brightness 2>/dev/null | head -1); check backlight display-panel "$([ "${b:-0}" -gt 0 ] && echo true)" "brightness ${b:-none}"
 t=$(grep -iE '^N: Name=.*(touch|ts|fts|nvt|goodix)' /proc/bus/input/devices | head -1 | sed 's/N: Name=//'); check touch-device touchscreen "$([ -n "$t" ] && echo true)" "${t:-no touch input device}"
-v=$(ls /sys/class/leds 2>/dev/null | grep -i vib; grep -l 'FF=' /proc/bus/input/devices 2>/dev/null | head -0); [ -z "$v" ] && v=$(grep -B6 '^B: FF=' /proc/bus/input/devices | grep 'N: Name' | head -1 | sed 's/N: Name=//')
-check vibrator haptics "$([ -n "$v" ] && echo true)" "${v:-no vibration device}"
+# a vibration motor is an input device with force feedback: read each device as a whole block
+v=$(awk -v RS= '/\nB: FF=/' /proc/bus/input/devices | sed -n 's/^N: Name=//p' | head -1)
+check vibrator haptics "$([ -n "$v" ] && echo true)" "${v:-no force-feedback input device}"
 # connectivity
 w=$(ls /sys/class/net | grep -E '^wl' | head -1); hb=$(cat /sys/class/rfkill/*/hard 2>/dev/null | sort -u | tr '\n' ' ')
 check wifi-interface wifi "$([ -n "$w" ] && echo true)" "interface ${w:-none}; rfkill hard: ${hb:-none}"
