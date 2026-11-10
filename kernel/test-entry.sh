@@ -1,21 +1,24 @@
 #!/bin/sh
-# A test kernel beside the stock one: a second systemd-boot entry, pmos-NAME.conf, with its own
-# kernel, device tree and modules (its own version, so nothing of the stock kernel is touched); the
-# stock initramfs is reused - storage, filesystem and display are built in, it needs no modules to
-# reach the root. The stock entry stays the default. A test entry boots with pmos.debug-shell: if its
-# initramfs stalls, a telnet shell at 172.16.42.1:23 shows why (/pmOS_init.log) and can restore stock.
+# A test kernel beside the stock one, tried once, never stranding the phone.
 #
 #   kernel/test-entry.sh install NAME VMLINUZ DTB MODULES.tgz   (MODULES.tgz holds lib/modules/RELEASE)
-#   kernel/test-entry.sh boot-once NAME   - reboot into it once: the next boot makes stock the default again
+#   kernel/test-entry.sh try NAME       - reboot into it once; any later boot is stock
+#   kernel/test-entry.sh log NAME       - what a timed-out try left on the boot partition
 #   kernel/test-entry.sh remove NAME
 #
-# boot-once uses files on the ESP only: this firmware's EFI variables are read-only, so systemd-boot's
-# one-shot entry cannot be set. loader.conf is saved, the test entry made the default with a 5 s menu,
-# and a service restores loader.conf at the next boot, whichever kernel gets there - so the test
-# kernel boots once. If it hangs before that: hold power, pick the stock entry in the menu.
+# How it stays safe, with no EFI variables (this firmware's are read-only):
+# - boot counting: the entry is pmos-NAME+1-0.conf, sorted ahead of stock. systemd-boot counts the
+#   try down on the ESP before booting it; an entry with no tries left sorts last, so the next boot
+#   is stock. The test kernel's own command line masks systemd-bless-boot, so even a good boot is
+#   not blessed: it runs once.
+# - a boot timeout: a second initramfs adds a hook (run early in the initramfs) that, if the real
+#   system is not up in 5 minutes, saves the initramfs log and kernel messages to the ESP and reboots.
+#   It tests for the real system with shell builtins only, so it cannot misfire after switch_root.
+# - the test kernel's own copies of the modules the stock initramfs carries (stock ones cannot load).
+# Own kernel, device tree and modules: its own version, refused if it is the running kernel's.
 set -eu
 D=$(cd "$(dirname "$0")" && pwd)
-usage() { echo "usage: kernel/test-entry.sh install NAME VMLINUZ DTB MODULES.tgz | boot-once NAME | remove NAME" >&2; exit 2; }
+usage() { echo "usage: kernel/test-entry.sh install NAME VMLINUZ DTB MODULES.tgz | try NAME | log NAME | remove NAME" >&2; exit 2; }
 verb=${1:-}; name=${2:-}
 [ -n "$name" ] || usage
 . "$D/../lib/phone.sh"
@@ -25,68 +28,89 @@ install)
 	vmlinuz=${3:?}; dtb=${4:?}; mods=${5:?}
 	release=$(tar tzf "$mods" | sed -n 's|^lib/modules/\([^/]*\)/$|\1|p' | head -1)
 	[ -n "$release" ] || { echo "no lib/modules/RELEASE in $mods" >&2; exit 1; }
-	[ "$release" != "$(echo 'uname -r' | phone_sh)" ] || { echo "$release is the running kernel's version: refusing (its modules would replace the stock ones)" >&2; exit 1; }
-	phone_put "$vmlinuz" /tmp/te-vmlinuz; phone_put "$dtb" /tmp/te-dtb; phone_put "$mods" /tmp/te-mods.tgz
+	[ "$release" != "$(echo 'uname -r' | phone_sh)" ] || { echo "$release is the running kernel's version: refusing" >&2; exit 1; }
+	W=$(mktemp -d); trap 'rm -rf "$W"' EXIT
+	# the second initramfs: the timeout hook, and this kernel's copies of the stock initramfs's modules
+	mkdir -p "$W/mods" "$W/rd/hooks"
+	tar xzf "$mods" -C "$W/mods"
+	echo 'cat /boot/initramfs' | phone_root > "$W/stock.cpio.gz"
+	(cd "$W/mods" && zcat "$W/stock.cpio.gz" | cpio -it --quiet 2>/dev/null | sed -n 's|^\(usr/\)\{0,1\}lib/modules/[^/]*/\(.*\.ko[^/]*\)$|\2|p') > "$W/names"
+	# staged in a tree of its own for depmod, then carried as usr/lib/modules only: in the initramfs
+	# lib is a link to usr/lib, which a real lib/ directory in this archive would unpack over
+	S=$W/stage/lib/modules/$release
+	while read -r m; do
+		[ -f "$W/mods/lib/modules/$release/$m" ] || continue
+		mkdir -p "$S/$(dirname "$m")"
+		cp "$W/mods/lib/modules/$release/$m" "$S/$m"
+	done < "$W/names"
+	[ -d "$S" ] || { echo "none of the stock initramfs's modules found for $release" >&2; exit 1; }
+	cp "$W/mods/lib/modules/$release"/modules.order "$W/mods/lib/modules/$release"/modules.builtin* "$S/" 2>/dev/null || true
+	depmod -b "$W/stage" "$release"
+	mkdir -p "$W/rd/usr/lib/modules" && cp -a "$S" "$W/rd/usr/lib/modules/"
+	cat > "$W/rd/hooks/00-test-boot-timeout.sh" <<'HOOK'
+#!/bin/sh
+# A test kernel's boot timeout: no real system after 5 minutes -> save the log to the ESP, reboot.
+(
+	sleep 300
+	read -r pid1 < /proc/1/comm
+	[ "$pid1" = systemd ] && exit 0
+	echo "test boot timeout: saving the log to the ESP and rebooting" > /dev/kmsg
+	uuid=$(sed -n 's/.*pmos_boot_uuid=\([^ ]*\).*/\1/p' /proc/cmdline)
+	mkdir -p /tmp/esp
+	if mount -t vfat "$(findfs "UUID=$uuid")" /tmp/esp; then
+		cp /pmOS_init.log /tmp/esp/test-boot.log 2>/dev/null
+		dmesg > /tmp/esp/test-boot.dmesg
+		umount /tmp/esp
+	fi
+	sync
+	reboot -f
+) &
+HOOK
+	chmod 755 "$W/rd/hooks/00-test-boot-timeout.sh"
+	(cd "$W/rd" && find . | cpio -o -H newc -R root:root --quiet | gzip -9) > "$W/initramfs-$name"
+	echo "second initramfs: $(find "$W/rd" -name '*.ko*' | wc -l) modules + the timeout hook"
+	phone_put "$vmlinuz" /tmp/te-vmlinuz; phone_put "$dtb" /tmp/te-dtb; phone_put "$mods" /tmp/te-mods.tgz; phone_put "$W/initramfs-$name" /tmp/te-initramfs
 	dtbname=$(basename "$dtb")
 	phone_root <<CMDS
 set -e
+rm -f /boot/loader/entries/pmos-$name.conf /boot/loader/entries/pmos-$name+*.conf
 install -m 644 /tmp/te-vmlinuz /boot/vmlinuz-$name
+install -m 644 /tmp/te-initramfs /boot/initramfs-$name
 mkdir -p /boot/dtbs-$name/qcom && install -m 644 /tmp/te-dtb /boot/dtbs-$name/qcom/$dtbname
 tar xzf /tmp/te-mods.tgz -C / && depmod -a $release
 options=\$(sed -n 's/^options //p' /boot/loader/entries/pmos.conf)
-cat > /boot/loader/entries/pmos-$name.conf <<ENTRY
+cat > "/boot/loader/entries/pmos-$name+1-0.conf" <<ENTRY
 title postmarketOS (test kernel: $name)
-sort-key zz-test-$name
+sort-key 0-test-$name
 linux vmlinuz-$name
 initrd initramfs
+initrd initramfs-$name
 devicetree dtbs-$name/qcom/$dtbname
-options \$options pmos.debug-shell
+options \$options systemd.mask=systemd-bless-boot.service
 ENTRY
-rm -f /tmp/te-vmlinuz /tmp/te-dtb /tmp/te-mods.tgz
-echo "installed: entry pmos-$name.conf, kernel $release, \$(find /lib/modules/$release -name '*.ko*' | wc -l) modules"
+rm -f /tmp/te-vmlinuz /tmp/te-dtb /tmp/te-mods.tgz /tmp/te-initramfs
+echo "installed: pmos-$name+1-0.conf (one try), kernel $release, \$(find /lib/modules/$release -name '*.ko*' | wc -l) modules"
 CMDS
 	;;
-boot-once)
+try)
 	phone_root <<CMDS
 set -e
-[ -f /boot/loader/entries/pmos-$name.conf ] || { echo "no entry pmos-$name.conf: install it first" >&2; exit 1; }
-mkdir -p /usr/local/sbin
-cat > /usr/local/sbin/test-entry-restore <<'RESTORE'
-#!/bin/sh
-# after a test kernel's one boot: the stock entry the default again
-L=/boot/loader/loader.conf
-if [ -f \$L.before-test ]; then mv \$L.before-test \$L; elif [ -f \$L.none-before-test ]; then rm -f \$L \$L.none-before-test; fi
-RESTORE
-chmod 755 /usr/local/sbin/test-entry-restore
-cat > /etc/systemd/system/test-entry-restore.service <<'UNIT'
-[Unit]
-Description=Make the stock kernel the default boot entry again after a test kernel's one boot
-RequiresMountsFor=/boot
-[Service]
-Type=oneshot
-ExecStart=/usr/local/sbin/test-entry-restore
-[Install]
-WantedBy=multi-user.target
-UNIT
-systemctl enable -q test-entry-restore.service
-# only now, with the way back in place, the test entry becomes the default
-L=/boot/loader/loader.conf
-[ ! -f \$L.before-test ] && [ ! -f \$L.none-before-test ] || { echo "a test boot is already pending: not saving loader.conf over its backup" >&2; exit 1; }
-if [ -f \$L ]; then cp \$L \$L.before-test; else touch \$L.none-before-test; fi
-printf 'default pmos-$name.conf\\ntimeout 5\\n' > \$L
-sync
-systemd-run --on-active=2 systemctl reboot >/dev/null
-echo "rebooting into pmos-$name.conf once"
+ls /boot/loader/entries/ | grep -q "^pmos-$name+[1-9]" || { echo "pmos-$name has no try left: install it again" >&2; exit 1; }
+rm -f /boot/test-boot.log /boot/test-boot.dmesg
+sync; systemd-run --on-active=2 systemctl reboot >/dev/null; echo "trying pmos-$name once"
 CMDS
+	;;
+log)
+	echo 'for f in /boot/test-boot.log /boot/test-boot.dmesg; do [ -f $f ] && { echo "== $f"; tail -60 $f; }; done; true' | phone_root
 	;;
 remove)
 	phone_root <<CMDS
 set -e
 release=\$(ls /lib/modules | grep -- "-$name\$" || true)
-rm -f /boot/loader/entries/pmos-$name.conf /boot/vmlinuz-$name
+rm -f /boot/loader/entries/pmos-$name.conf /boot/loader/entries/pmos-$name+*.conf /boot/vmlinuz-$name /boot/initramfs-$name /boot/test-boot.log /boot/test-boot.dmesg
 rm -rf /boot/dtbs-$name
 [ -z "\$release" ] || rm -rf "/lib/modules/\$release"
-echo "removed: pmos-$name.conf\${release:+ and the modules of \$release}"
+echo "removed: pmos-$name\${release:+ and the modules of \$release}"
 CMDS
 	;;
 *) usage ;;
