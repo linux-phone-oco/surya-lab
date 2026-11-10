@@ -1,0 +1,11 @@
+# This repository's mark: how it fits the Open Commons Observatory's picture.
+# https://github.com/open-commons-observatory/open-commons-observatory.github.io/tree/main/marks
+schema = 1
+
+[project]
+id = "linux-phone-oco/surya-lab"
+name = "The lab of the Xiaomi POCO X3 NFC (surya)"
+kind = "device-lab"
+parent = "linux-phone-oco"
+
+[exports]
