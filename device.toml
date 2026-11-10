@@ -1,0 +1,8 @@
+# This device's manifest, read by linux-phone-oco/lab-tools (devlab). Secrets and what is learned at
+# run time stay outside the repository: ~/.config/devlab/xiaomi-surya/ and ~/.local/state/devlab/xiaomi-surya/
+[device]
+codename = "xiaomi-surya"
+
+[connection]
+user = "user"
+addresses = ["172.16.42.1"]   # USB networking; the Wi-Fi address is remembered once learned
