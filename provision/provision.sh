@@ -38,3 +38,13 @@ s "ping -c1 -W3 1.1.1.1 >/dev/null" || { echo "the phone cannot reach the intern
 echo "installing: $PKGS"
 s "apk update -q && apk add -q $PKGS"   # a fresh image has no package index yet
 echo "installed: $(sshpass -e ssh $O "$P" "apk info -e $PKGS" | tr '\n' ' ')"
+
+# Wi-Fi, when this PC keeps the network's name and password (private files, never in a repo):
+# ~/.config/surya-lab/wifi-ssid and ~/.config/surya-lab/wifi-password, both mode 600.
+WIFI=$HOME/.config/surya-lab
+if [ -f "$WIFI/wifi-ssid" ] && [ -f "$WIFI/wifi-password" ]; then
+  ssid=$(cat "$WIFI/wifi-ssid")
+  sshpass -e scp $O "$WIFI/wifi-password" "$P:/tmp/.wifi-pw"
+  s "chmod 600 /tmp/.wifi-pw; nmcli dev wifi connect \"$ssid\" password \"\$(cat /tmp/.wifi-pw)\" >/dev/null 2>&1; rm -f /tmp/.wifi-pw" || true
+  echo "wifi: $(sshpass -e ssh $O "$P" "nmcli -t -f DEVICE,STATE dev | grep ^wlan")"
+fi
