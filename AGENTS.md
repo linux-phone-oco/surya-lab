@@ -19,3 +19,7 @@ shells, tests. Everything runs on the lab machine (via lab-agent), never in an a
 - **A script that changes state needs explicit intent**: an argument it cannot run without
   (flash.sh IMAGE, build-dtbs.sh KERNEL_DIR) or a verb (provision.sh now). Run by accident, it must
   print its usage and change nothing. CI checks every script (syntax, shellcheck errors) on each PR.
+- **Test kernels**: `kernel/test-entry.sh install NAME ...` then `try NAME`. One try by boot counting
+  (proven on surya: the try is counted down on the ESP, and the next boot is stock by itself); a
+  stalled initramfs saves its log to the ESP after 5 minutes and reboots (`log NAME` reads it).
+  Never `pmos.debug-shell` on an unattended try: it halts the boot until someone continues it.
