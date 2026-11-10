@@ -44,3 +44,14 @@ to = "root:/usr/share/alsa/ucm2/Xiaomi/surya/HiFi.conf"
 from = "../../surya-audio/kernel-rc3/snd-soc-tas2562.ko.zst"
 to = "root:/lib/modules/7.1.0-rc3-sm7150/kernel/sound/soc/codecs/snd-soc-tas2562.ko.zst"
 if_exists = "root:/lib/modules/7.1.0-rc3-sm7150"
+
+# the lab's ear (devlab hear): tones played on the phone and heard through the lab's microphone
+[[hear.tone]]
+name = "heard-left"
+channel = "left"
+freq = 1000
+
+[[hear.tone]]
+name = "heard-right"
+channel = "right"
+freq = 1000
