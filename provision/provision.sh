@@ -1,0 +1,31 @@
+#!/bin/sh
+# Provision a freshly flashed phone: install provision/packages.txt over the PC's internet connection
+# (the phone has none of its own until Wi-Fi is set up). The PC shares it only for the install:
+# forwarding and a masquerade rule in a table of their own, all undone on exit - also on failure.
+#   provision/provision.sh            environment: PHONE (user@172.16.42.1), PHONE_PASS (147147)
+set -eu
+P=${PHONE:-user@172.16.42.1}; export SSHPASS=${PHONE_PASS:-147147}
+O="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -o ConnectTimeout=6"
+s() { sshpass -e ssh $O "$P" "echo $SSHPASS | sudo -S -p '' sh -c '$*'"; }
+R="sudo -n lab-agent root-exec --"
+D=$(cd "$(dirname "$0")" && pwd)
+PKGS=$(grep -vE '^[[:space:]]*(#|$)' "$D/packages.txt" | tr '\n' ' ')
+UP=$(ip route show default | awk '{print $5; exit}')
+pc=$(ip -o -4 addr | awk '$4 ~ /^172\.16\.42\.2\// {print $4}' | cut -d/ -f1)
+[ -n "$UP" ] && [ -n "$pc" ] || { echo "no uplink or no USB link to the phone" >&2; exit 2; }
+was=$(cat /proc/sys/net/ipv4/ip_forward)
+cleanup() {
+  s "ip route del default via $pc 2>/dev/null; true" || true
+  $R nft delete table ip surya-provision 2>/dev/null || true
+  [ "$was" = 1 ] || $R sysctl -qw net.ipv4.ip_forward=0
+}
+trap cleanup EXIT
+$R sysctl -qw net.ipv4.ip_forward=1
+$R nft add table ip surya-provision
+$R nft add chain ip surya-provision out '{ type nat hook postrouting priority 100; }'
+$R nft add rule ip surya-provision out ip saddr 172.16.42.0/24 oifname "$UP" masquerade
+s "ip route add default via $pc"
+s "ping -c1 -W3 1.1.1.1 >/dev/null" || { echo "the phone cannot reach the internet through the PC" >&2; exit 1; }
+echo "installing: $PKGS"
+s "apk update -q && apk add -q $PKGS"   # a fresh image has no package index yet
+echo "installed: $(sshpass -e ssh $O "$P" "apk info -e $PKGS" | tr '\n' ' ')"
