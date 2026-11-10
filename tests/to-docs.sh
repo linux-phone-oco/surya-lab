@@ -1,6 +1,7 @@
 #!/bin/sh
 # File a results file from tests/run.sh into linux-phone-oco/docs as data: the test_results table
-# (made the first time), one row per check, the evidence the support grid's verdicts can cite.
+# (made the first time), one row per check, the evidence the support grid's verdicts can cite; and
+# test_runs, one line per run with its counts, computed from those rows.
 #   tests/to-docs.sh RESULTS.jsonl [DOCS_DIR]      DOCS_DIR: ~/Projects/linux-phone-oco/docs
 # Uses the docs' own tool (its .tad, its DuckDB); commit and PR are left to the caller.
 set -eu
@@ -12,5 +13,12 @@ CREATE TABLE IF NOT EXISTS test_results(id VARCHAR PRIMARY KEY, run VARCHAR NOT 
   kernel VARCHAR, shell VARCHAR, CHECK(outcome IN ('pass', 'fail', 'skip')));
 INSERT OR REPLACE INTO test_results
   SELECT run || '-' || component || '-' || test, run, device, component, test, outcome, detail, CAST(j.at AS TIMESTAMP), kernel, shell
-  FROM read_json_auto('$R', format = 'newline_delimited') AS j;" >/dev/null
+  FROM read_json_auto('$R', format = 'newline_delimited') AS j;
+-- one line per run, computed from its checks: what a reader wants first
+CREATE TABLE IF NOT EXISTS test_runs(id VARCHAR PRIMARY KEY, device_id VARCHAR NOT NULL, run_at TIMESTAMP NOT NULL,
+  kernel VARCHAR, shell VARCHAR, passed INTEGER NOT NULL, failed INTEGER NOT NULL, skipped INTEGER NOT NULL);
+INSERT OR REPLACE INTO test_runs
+  SELECT run, any_value(device_id), min(run_at), any_value(kernel), any_value(shell),
+         count_if(outcome = 'pass'), count_if(outcome = 'fail'), count_if(outcome = 'skip')
+  FROM test_results GROUP BY run;" >/dev/null
 echo "filed $(wc -l < "$R") results into $DOCS/data"
