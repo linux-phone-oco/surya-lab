@@ -9,8 +9,11 @@ say() { printf '{"test":"%s","component":"%s","outcome":"%s","detail":"%s"}\n' "
 check() { if [ "$3" = true ]; then say "$1" "$2" pass "$4"; else say "$1" "$2" fail "$4"; fi; }
 
 # audio
-# crashes, and how many came right after a resume (within 2 s of "PM: suspend exit")
-after_resume=$(dmesg | awk '/PM: suspend exit/ {gsub(/[\[\]]/, "", $1); r = $1} /crash detected in adsp/ {gsub(/[\[\]]/, "", $1); if (r != "" && $1 - r < 2) n++} END {print n + 0}')
+# crashes, and how many came right after a resume (within 2 s of "PM: suspend exit"); the kernel
+# pads its timestamps with spaces, so they are read from inside the brackets
+crashes=$(dmesg | grep -c 'crash detected in adsp' || true)
+after_resume=$(dmesg | sed -n 's/^\[ *\([0-9.]*\)\] .*\(PM: suspend exit\|crash detected in adsp\).*/\1 \2/p' \
+	| awk '$2 == "PM:" {r = $1} $2 == "crash" && r != "" && $1 - r < 2 {n++} END {print n + 0}')
 check adsp-stable audio-speaker "$([ "$crashes" = 0 ] && echo true)" "$crashes audio DSP crashes since boot, $after_resume right after a resume"
 card=$(grep -c 'POCO X3' /proc/asound/cards); check sound-card audio-speaker "$([ "$card" -ge 1 ] && echo true)" "sound card present: $card"
 spec=$(as_user "pactl list sinks" | grep -A4 'HiFi__Speaker' | grep 'Sample Spec' | sed 's/.*: //')
