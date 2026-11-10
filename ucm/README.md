@@ -2,7 +2,8 @@
 
 `Xiaomi/surya/HiFi.conf` makes the speaker stereo: two amplifiers share one I2S line, the TAS2564 at
 0x4d (top, labelled Left in the device tree) takes the left channel, the TAS2562 at 0x4c (bottom,
-Right) the right one, and the speaker device has two channels.
+Right) the right one, and the speaker device has two channels. It also sets both amplifiers' digital volume to 0 dB:
+images that restore a saved mixer state (Plasma Mobile's does) otherwise leave it at -110 dB.
 
 It needs the kernel fix on `linux-phone-oco/linux` branch `fix/tas2562-i2s-slot-length`: without
 it the amplifiers expect 32-bit slots on a link that sends 16-bit ones, and the right channel is
