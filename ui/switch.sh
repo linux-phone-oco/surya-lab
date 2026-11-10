@@ -8,10 +8,11 @@
 # Environment: PHONE (default user@172.16.42.1), PHONE_PASS (default 147147).
 set -eu
 SHELL_NAME=${1:?usage: ui/switch.sh phosh|plasma-mobile|gnome-mobile|sxmo}
-P=${PHONE:-user@172.16.42.1}; export SSHPASS=${PHONE_PASS:-147147}
-O="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -o ConnectTimeout=6"
-s() { sshpass -e ssh $O "$P" "export XDG_RUNTIME_DIR=/run/user/\$(id -u); $*"; }
-r() { sshpass -e ssh $O "$P" "echo $SSHPASS | sudo -S -p '' sh -c '$*'"; }
+D=$(cd "$(dirname "$0")" && pwd)
+. "$D/../lib/phone.sh"
+phone_find
+s() { echo "$*" | phone_sh; }
+r() { echo "$*" | phone_root; }
 case $SHELL_NAME in
   phosh)         pkg=postmarketos-ui-phosh;         session=phosh;         proc=phosh ;;
   plasma-mobile) pkg=postmarketos-ui-plasma-mobile; session=plasma-mobile; proc=plasmashell ;;
@@ -45,10 +46,8 @@ if [ "$dm" = tinydm.service ]; then
   [ -n "$f" ] || { echo "no session file for $session in /usr/share/wayland-sessions" >&2; exit 1; }
   r "tinydm-set-session -f -s /usr/share/wayland-sessions/$f" && echo "tinydm session: $f"
 fi
-r "systemd-run --on-active=2 systemctl reboot" >/dev/null; echo "rebooting"
-sleep 25
-for _ in $(seq 1 80); do u=$(s 'cut -d. -f1 /proc/uptime' 2>/dev/null || true); [ -n "$u" ] && [ "$u" -lt 400 ] && break; sleep 3; done
-while [ "$(s 'cut -d. -f1 /proc/uptime' 2>/dev/null || echo 0)" -lt 60 ]; do sleep 3; done
+echo "rebooting"; phone_reboot
+while [ "$(phone_uptime)" -lt 60 ]; do sleep 3; done
 echo "== $SHELL_NAME after boot =="
 # a shell finishes starting a little after login: give it up to 90 s
 for _ in $(seq 1 30); do s "pgrep -x $proc >/dev/null" && break; sleep 3; done
