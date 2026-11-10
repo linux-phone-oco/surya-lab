@@ -16,3 +16,18 @@ from = "../sxmo-deviceprofiles/profiles/sxmo_deviceprofile_{compatible}.sh"
 to = "/usr/bin/sxmo_deviceprofile_{compatible}.sh"
 mode = "755"
 when = "command -v sxmo_init.sh"
+
+[flash]
+sector_size = 4096
+dtb = "esp:dtbs/qcom/sm7150-xiaomi-surya-huaxing.dtb"
+mask = ["hexagonrpcd-adsp-sensorspd.service"]   # the ADSP crash-looped with the sensors service on
+enable = ["sshd.service"]                         # the image disables sshd by preset
+
+[[flash.overlay]]   # the stereo speaker profile
+from = "ucm/Xiaomi/surya/HiFi.conf"
+to = "root:/usr/share/alsa/ucm2/Xiaomi/surya/HiFi.conf"
+
+[[flash.overlay]]   # the fixed amplifier driver (slot length, volume) - only for the kernel it was built for
+from = "../../surya-audio/kernel-rc3/snd-soc-tas2562.ko.zst"
+to = "root:/lib/modules/7.1.0-rc3-sm7150/kernel/sound/soc/codecs/snd-soc-tas2562.ko.zst"
+if_exists = "root:/lib/modules/7.1.0-rc3-sm7150"
