@@ -9,3 +9,6 @@ kind = "device-lab"
 parent = "linux-phone-oco"
 
 [exports]
+activity = "oco/gathered/activity.json"
+releases = "oco/gathered/releases.json"
+ci = "oco/gathered/ci.json"
