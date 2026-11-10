@@ -70,3 +70,7 @@ case $sink in
 	*) check default-output audio-speaker true "$sink" ;;
 esac
 
+# storage: the system fills its partition - the first boot can grow the partition and leave the
+# filesystem at the image's size (2 GB on a 104 GB partition, once)
+src=$(findmnt -no SOURCE /); fs=$(df -B1 --output=size / | tail -n1 | tr -d ' '); dev=$(blockdev --getsize64 "$src" 2>/dev/null || echo 0)
+check root-fills-its-partition kernel "$([ "$dev" -gt 0 ] && [ $((fs * 100 / dev)) -ge 90 ] && echo true)" "the system is $((fs >> 30)) GB on a partition of $((dev >> 30)) GB"
