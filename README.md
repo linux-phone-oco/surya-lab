@@ -40,3 +40,12 @@ hardware test are in the PR comment. Nothing is confirmed on hardware yet.
   a bug that only running them found (a parser that stopped at the root node; `dtc` killed by
   `| head`).
 - Never pipe a tool's output into something that can exit early when the tool must finish writing.
+
+## Tests
+
+`tests/run.sh` runs the automatic checks on the phone over SSH - read-only, nothing to hear or
+touch - and keeps the results as `tests/results/DATE-TIME.jsonl`: one line per check, with its
+linux-phone-oco/docs component, pass / fail / skip, a detail, and the run (device, time, kernel,
+shell). `tests/to-docs.sh RESULTS` files them into the docs as the `test_results` table, the evidence
+the support grid's verdicts cite. A pass proves a part is there and set up; whether a person hears
+or sees it is a witnessed test (a question with buttons on the desktop and the board).
