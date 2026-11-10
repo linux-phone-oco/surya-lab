@@ -49,9 +49,7 @@ boot-once)
 	phone_root <<CMDS
 set -e
 [ -f /boot/loader/entries/pmos-$name.conf ] || { echo "no entry pmos-$name.conf: install it first" >&2; exit 1; }
-L=/boot/loader/loader.conf
-if [ -f \$L ]; then cp \$L \$L.before-test; else touch \$L.none-before-test; fi
-printf 'default pmos-$name.conf\\ntimeout 5\\n' > \$L
+mkdir -p /usr/local/sbin
 cat > /usr/local/sbin/test-entry-restore <<'RESTORE'
 #!/bin/sh
 # after a test kernel's one boot: the stock entry the default again
@@ -70,6 +68,11 @@ ExecStart=/usr/local/sbin/test-entry-restore
 WantedBy=multi-user.target
 UNIT
 systemctl enable -q test-entry-restore.service
+# only now, with the way back in place, the test entry becomes the default
+L=/boot/loader/loader.conf
+[ ! -f \$L.before-test ] && [ ! -f \$L.none-before-test ] || { echo "a test boot is already pending: not saving loader.conf over its backup" >&2; exit 1; }
+if [ -f \$L ]; then cp \$L \$L.before-test; else touch \$L.none-before-test; fi
+printf 'default pmos-$name.conf\\ntimeout 5\\n' > \$L
 sync
 systemd-run --on-active=2 systemctl reboot >/dev/null
 echo "rebooting into pmos-$name.conf once"
