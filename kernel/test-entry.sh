@@ -2,7 +2,8 @@
 # A test kernel beside the stock one: a second systemd-boot entry, pmos-NAME.conf, with its own
 # kernel, device tree and modules (its own version, so nothing of the stock kernel is touched); the
 # stock initramfs is reused - storage, filesystem and display are built in, it needs no modules to
-# reach the root. The stock entry stays the default.
+# reach the root. The stock entry stays the default. A test entry boots with pmos.debug-shell: if its
+# initramfs stalls, a telnet shell at 172.16.42.1:23 shows why (/pmOS_init.log) and can restore stock.
 #
 #   kernel/test-entry.sh install NAME VMLINUZ DTB MODULES.tgz   (MODULES.tgz holds lib/modules/RELEASE)
 #   kernel/test-entry.sh boot-once NAME   - reboot into it once: the next boot makes stock the default again
@@ -39,7 +40,7 @@ sort-key zz-test-$name
 linux vmlinuz-$name
 initrd initramfs
 devicetree dtbs-$name/qcom/$dtbname
-options \$options
+options \$options pmos.debug-shell
 ENTRY
 rm -f /tmp/te-vmlinuz /tmp/te-dtb /tmp/te-mods.tgz
 echo "installed: entry pmos-$name.conf, kernel $release, \$(find /lib/modules/$release -name '*.ko*' | wc -l) modules"
