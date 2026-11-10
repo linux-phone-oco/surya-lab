@@ -52,7 +52,7 @@ or sees it is a witnessed test (a question with buttons on the desktop and the b
 
 ## Provisioning
 
-After a flash, `provision/provision.sh now` installs the packages in `provision/packages.txt` (Firefox,
+After a flash, `devlab provision now` installs the packages in `provision/packages.txt` (Firefox,
 i2c-tools) over the PC's internet connection: the PC shares it only for the install - forwarding and
 a masquerade rule in an nftables table of its own, all undone on exit - so a phone without Wi-Fi
 set up still gets them.
