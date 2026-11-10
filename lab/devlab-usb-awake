@@ -1,0 +1,16 @@
+#!/bin/sh
+# Keeps the phone awake while its USB port is connected to a host - whatever shell runs, or none.
+#
+# On USB a suspend cannot complete (the link cannot go idle): every attempt aborts at once, and a
+# shell that suspends when idle retries every few seconds - each attempt drops the USB link, so the
+# host sees the phone disconnect and reconnect without end (26 times in 5 minutes, once). A kernel
+# wake lock held while the port is configured stops the attempts; unplugged, the phone sleeps as usual.
+while :; do
+	state=$(cat /sys/class/udc/*/state 2>/dev/null | head -n1)
+	if [ "$state" = configured ]; then
+		echo devlab-usb > /sys/power/wake_lock 2>/dev/null
+	else
+		echo devlab-usb > /sys/power/wake_unlock 2>/dev/null
+	fi
+	sleep 5
+done

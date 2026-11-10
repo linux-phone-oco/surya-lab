@@ -1,0 +1,10 @@
+[Unit]
+Description=Awake while connected by USB to a host (the lab's phone must not drop its link)
+
+[Service]
+ExecStart=/usr/local/bin/devlab-usb-awake
+ExecStopPost=/bin/sh -c 'echo devlab-usb > /sys/power/wake_unlock'
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
