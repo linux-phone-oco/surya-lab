@@ -8,6 +8,8 @@
 # Wi-Fi comes from private files on this PC, never from a repo: ~/.config/surya-lab/wifi-ssid and
 # ~/.config/surya-lab/wifi-password (mode 600).
 set -eu
+# it changes the PC's networking and the phone: never on its own, only when asked by name
+[ "${1:-}" = now ] || { echo "usage: provision/provision.sh now" >&2; exit 2; }
 D=$(cd "$(dirname "$0")" && pwd)
 . "$D/../lib/phone.sh"
 PHONE=${PHONE:-user@172.16.42.1}; export PHONE   # sharing the PC's connection needs the USB link

@@ -1,0 +1,19 @@
+name: check
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  shell:
+    name: shell scripts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: syntax and shellcheck (errors)
+        run: |
+          set -e
+          git ls-files -z '*.sh' | xargs -0 -n1 sh -n
+          git ls-files -z '*.sh' | xargs -0 shellcheck -S error -s sh
+          echo "checked: $(git ls-files '*.sh' | wc -l) scripts"
