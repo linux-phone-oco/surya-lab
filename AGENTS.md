@@ -16,3 +16,6 @@ shells, tests. Everything runs on the lab machine (via lab-agent), never in an a
 - **After a flash**: `provision/provision.sh now` (packages over the PC's connection, then Wi-Fi), then
   `tests/run.sh` and `tests/to-docs.sh` to file the results into linux-phone-oco/docs.
 - **Hardware testing** on Sxmo: the lightest shell, nothing in the way.
+- **A script that changes state needs explicit intent**: an argument it cannot run without
+  (flash.sh IMAGE, build-dtbs.sh KERNEL_DIR) or a verb (provision.sh now). Run by accident, it must
+  print its usage and change nothing. CI checks every script (syntax, shellcheck errors) on each PR.
