@@ -5,10 +5,16 @@
 # reach the root. The stock entry stays the default.
 #
 #   kernel/test-entry.sh install NAME VMLINUZ DTB MODULES.tgz   (MODULES.tgz holds lib/modules/RELEASE)
+#   kernel/test-entry.sh boot-once NAME   - reboot into it once: the next boot makes stock the default again
 #   kernel/test-entry.sh remove NAME
+#
+# boot-once uses files on the ESP only: this firmware's EFI variables are read-only, so systemd-boot's
+# one-shot entry cannot be set. loader.conf is saved, the test entry made the default with a 5 s menu,
+# and a service restores loader.conf at the next boot, whichever kernel gets there - so the test
+# kernel boots once. If it hangs before that: hold power, pick the stock entry in the menu.
 set -eu
 D=$(cd "$(dirname "$0")" && pwd)
-usage() { echo "usage: kernel/test-entry.sh install NAME VMLINUZ DTB MODULES.tgz | remove NAME" >&2; exit 2; }
+usage() { echo "usage: kernel/test-entry.sh install NAME VMLINUZ DTB MODULES.tgz | boot-once NAME | remove NAME" >&2; exit 2; }
 verb=${1:-}; name=${2:-}
 [ -n "$name" ] || usage
 . "$D/../lib/phone.sh"
@@ -37,6 +43,36 @@ options \$options
 ENTRY
 rm -f /tmp/te-vmlinuz /tmp/te-dtb /tmp/te-mods.tgz
 echo "installed: entry pmos-$name.conf, kernel $release, \$(find /lib/modules/$release -name '*.ko*' | wc -l) modules"
+CMDS
+	;;
+boot-once)
+	phone_root <<CMDS
+set -e
+[ -f /boot/loader/entries/pmos-$name.conf ] || { echo "no entry pmos-$name.conf: install it first" >&2; exit 1; }
+L=/boot/loader/loader.conf
+if [ -f \$L ]; then cp \$L \$L.before-test; else touch \$L.none-before-test; fi
+printf 'default pmos-$name.conf\\ntimeout 5\\n' > \$L
+cat > /usr/local/sbin/test-entry-restore <<'RESTORE'
+#!/bin/sh
+# after a test kernel's one boot: the stock entry the default again
+L=/boot/loader/loader.conf
+if [ -f \$L.before-test ]; then mv \$L.before-test \$L; elif [ -f \$L.none-before-test ]; then rm -f \$L \$L.none-before-test; fi
+RESTORE
+chmod 755 /usr/local/sbin/test-entry-restore
+cat > /etc/systemd/system/test-entry-restore.service <<'UNIT'
+[Unit]
+Description=Make the stock kernel the default boot entry again after a test kernel's one boot
+RequiresMountsFor=/boot
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/test-entry-restore
+[Install]
+WantedBy=multi-user.target
+UNIT
+systemctl enable -q test-entry-restore.service
+sync
+systemd-run --on-active=2 systemctl reboot >/dev/null
+echo "rebooting into pmos-$name.conf once"
 CMDS
 	;;
 remove)
