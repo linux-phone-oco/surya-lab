@@ -49,3 +49,10 @@ linux-phone-oco/docs component, pass / fail / skip, a detail, and the run (devic
 shell). `tests/to-docs.sh RESULTS` files them into the docs as the `test_results` table, the evidence
 the support grid's verdicts cite. A pass proves a part is there and set up; whether a person hears
 or sees it is a witnessed test (a question with buttons on the desktop and the board).
+
+## Provisioning
+
+After a flash, `provision/provision.sh` installs the packages in `provision/packages.txt` (Firefox,
+i2c-tools) over the PC's internet connection: the PC shares it only for the install - forwarding and
+a masquerade rule in an nftables table of its own, all undone on exit - so a phone without Wi-Fi
+set up still gets them.
