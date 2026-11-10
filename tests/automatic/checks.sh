@@ -79,3 +79,12 @@ esac
 # filesystem at the image's size (2 GB on a 104 GB partition, once)
 src=$(findmnt -no SOURCE /); fs=$(df -B1 --output=size / | tail -n1 | tr -d ' '); dev=$(blockdev --getsize64 "$src" 2>/dev/null || echo 0)
 check root-fills-its-partition kernel "$([ "$dev" -gt 0 ] && [ $((fs * 100 / dev)) -ge 90 ] && echo true)" "the system is $((fs >> 30)) GB on a partition of $((dev >> 30)) GB"
+
+# usb: connected to a host, the phone holds a wake lock - else every suspend attempt aborts and drops
+# the link, and the host sees the phone reconnect without end
+state=$(cat /sys/class/udc/*/state 2>/dev/null | head -n1)
+if [ "$state" = configured ]; then
+  check usb-awake usb-otg "$(grep -q devlab-usb /sys/power/wake_lock 2>/dev/null && echo true)" "on USB to a host; wake locks held: $(cat /sys/power/wake_lock 2>/dev/null)"
+else
+  say usb-awake usb-otg skip "not connected to a host by USB (port state: ${state:-none})"
+fi
