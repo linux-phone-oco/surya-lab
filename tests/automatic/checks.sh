@@ -3,6 +3,10 @@
 # per check: {"test", "component" (a linux-phone-oco/docs component id), "outcome" pass|fail|skip,
 # "detail"}. A pass proves what a machine can: that a part is there and set up, not that a person
 # hears or sees it - those are witnessed tests.
+# The kernel log of this boot, complete: dmesg is a ring that verbose drivers overwrite within
+# minutes (its oldest line was at 1525 s once); the journal keeps all of it.
+klog() { journalctl -k -b 0 --no-pager -o short-monotonic 2>/dev/null || dmesg; }
+
 u=$(id -u user 2>/dev/null || echo 10000)
 as_user() { su user -c "XDG_RUNTIME_DIR=/run/user/$u $*" 2>/dev/null; }
 say() { printf '{"test":"%s","component":"%s","outcome":"%s","detail":"%s"}\n' "$1" "$2" "$3" "$(printf '%s' "$4" | tr '"\n' "' ")"; }
@@ -11,8 +15,8 @@ check() { if [ "$3" = true ]; then say "$1" "$2" pass "$4"; else say "$1" "$2" f
 # audio
 # crashes, and how many came right after a resume (within 2 s of "PM: suspend exit"); the kernel
 # pads its timestamps with spaces, so they are read from inside the brackets
-crashes=$(dmesg | grep -c 'crash detected in adsp' || true)
-after_resume=$(dmesg | sed -n 's/^\[ *\([0-9.]*\)\] .*\(PM: suspend exit\|crash detected in adsp\).*/\1 \2/p' \
+crashes=$(klog | grep -c 'crash detected in adsp' || true)
+after_resume=$(klog | sed -n 's/^\[ *\([0-9.]*\)\] .*\(PM: suspend exit\|crash detected in adsp\).*/\1 \2/p' \
 	| awk '$2 == "PM:" {r = $1} $2 == "crash" && r != "" && $1 - r < 2 {n++} END {print n + 0}')
 check adsp-stable audio-speaker "$([ "$crashes" = 0 ] && echo true)" "$crashes audio DSP crashes since boot, $after_resume right after a resume"
 card=$(grep -c 'POCO X3' /proc/asound/cards); check sound-card audio-speaker "$([ "$card" -ge 1 ] && echo true)" "sound card present: $card"
@@ -50,9 +54,9 @@ r=$(ls /sys/class/usb_role 2>/dev/null | head -1); check usb-role usb-otg "$([ -
 #                   bootloader left running, released while the DSI PHY re-parents it
 known="drivers/soc/qcom/rpmh-rsc.c:451 drivers/clk/clk.c:1188 drivers/clk/clk.c:1048"
 new=""
-for w in $(dmesg | sed -n 's/.*WARNING: \([^ ]*\) at .*/\1/p'); do
+for w in $(klog | sed -n 's/.*WARNING: \([^ ]*\) at .*/\1/p'); do
 	case " $known " in *" $w "*) ;; *) new="$new $w" ;; esac
 done
-total=$(dmesg | grep -c "WARNING: " || true)
+total=$(klog | grep -c "WARNING: " || true)
 check boot-warnings kernel "$([ -z "$new" ] && echo true)" "$total warnings, ${new:+new:$new}${new:-all known}"
 
