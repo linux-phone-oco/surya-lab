@@ -38,3 +38,16 @@ for c in modem-data modem-calls modem-sms; do check modem-seen $c "$([ -n "$m" ]
 # sensors and usb
 i=$(ls /sys/bus/iio/devices 2>/dev/null | grep -c iio:device); check iio-sensors sensors "$([ "$i" -gt 0 ] && echo true)" "$i IIO devices (the ADSP sensors service is off on purpose)"
 r=$(ls /sys/class/usb_role 2>/dev/null | head -1); check usb-role usb-otg "$([ -n "$r" ] && echo true)" "${r:-no USB role switch}"
+
+# -- kernel: boot warnings - known ones pass (each with its reason), a new one fails, named
+#   rpmh-rsc.c:451  a TCS completion with no request: the bootloader's leftover traffic
+#   clk.c:1188/1048 dsi0_phy_pll_out_dsiclk already disabled/unprepared: the display clock the
+#                   bootloader left running, released while the DSI PHY re-parents it
+known="drivers/soc/qcom/rpmh-rsc.c:451 drivers/clk/clk.c:1188 drivers/clk/clk.c:1048"
+new=""
+for w in $(dmesg | sed -n 's/.*WARNING: \([^ ]*\) at .*/\1/p'); do
+	case " $known " in *" $w "*) ;; *) new="$new $w" ;; esac
+done
+total=$(dmesg | grep -c "WARNING: " || true)
+check boot-warnings kernel "$([ -z "$new" ] && echo true)" "$total warnings, ${new:+new:$new}${new:-all known}"
+
