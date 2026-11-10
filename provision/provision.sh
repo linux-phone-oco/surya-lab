@@ -46,6 +46,15 @@ CMDS
 echo "installing: $PKGS"
 echo "apk update -q && apk add -q $PKGS" | phone_root
 echo "installed: $(echo "apk info -e $PKGS" | phone_sh | tr '\n' ' ')"
+# the Sxmo device profile for this phone, until sxmo-utils ships it (linux-phone-oco/sxmo-utils,
+# branch deviceprofile/xiaomi-surya); only where Sxmo is installed and the profile is missing
+SXMO=$HOME/Projects/linux-phone-oco/sxmo-utils/scripts/deviceprofiles
+name=$(echo 'tr -c "\\0[:alnum:].,-" "_" < /proc/device-tree/compatible | tr "\\0" "\\n" | head -n1' | phone_sh)
+if [ -f "$SXMO/sxmo_deviceprofile_$name.sh" ] && echo 'command -v sxmo_init.sh' | phone_sh >/dev/null; then
+	phone_put "$SXMO/sxmo_deviceprofile_$name.sh" /tmp/profile.sh
+	echo "install -m 755 /tmp/profile.sh /usr/bin/sxmo_deviceprofile_$name.sh" | phone_root
+	echo "sxmo profile: $name"
+fi
 W=$HOME/.config/surya-lab
 if [ -f "$W/wifi-ssid" ] && [ -f "$W/wifi-password" ]; then
 	phone_put "$W/wifi-password" /tmp/.wifi-pw
