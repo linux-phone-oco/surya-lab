@@ -88,3 +88,34 @@ if [ "$state" = configured ]; then
 else
   say usb-awake usb-otg skip "not connected to a host by USB (port state: ${state:-none})"
 fi
+
+# more of the phone, measured (2026-11-11) - each still read-only
+# Wi-Fi: not only an interface - joined to a network, with an address, and the gateway answers
+st=$(cat /sys/class/net/wlan0/operstate 2>/dev/null); ad=$(ip -4 addr show wlan0 2>/dev/null | awk '/inet /{print $2; exit}')
+check wifi-connected wifi "$([ "$st" = up ] && [ -n "$ad" ] && echo true)" "wlan0 ${st:-absent}, address ${ad:-none}"
+gw=$(ip route 2>/dev/null | awk '/^default/ && /wlan0/ {print $3; exit}')
+if [ -n "$gw" ]; then check wifi-reaches-gateway wifi "$(ping -c 1 -W 2 "$gw" >/dev/null 2>&1 && echo true)" "gateway $gw"; else say wifi-reaches-gateway wifi skip "no route through wlan0"; fi
+# Bluetooth: powered, and the radio hears something (nobody nearby is not a failure)
+pw=$(bluetoothctl show 2>/dev/null | awk '/Powered:/{print $2; exit}')
+check bt-powered bluetooth "$([ "$pw" = yes ] && echo true)" "adapter powered: ${pw:-no adapter}"
+if [ "$pw" = yes ]; then
+  timeout 9 bluetoothctl --timeout 6 scan on >/dev/null 2>&1
+  nd=$(bluetoothctl devices 2>/dev/null | grep -c '^Device')
+  if [ "$nd" -gt 0 ]; then say bt-sees-devices bluetooth pass "$nd devices seen"; else say bt-sees-devices bluetooth skip "no device answered a 6 s scan"; fi
+else say bt-sees-devices bluetooth skip "adapter not powered"; fi
+# the modem and its SIM: without a SIM nothing about calls, messages or data can be shown
+if [ -n "$m" ]; then
+  mst=$(mmcli -m "${m##*/}" 2>/dev/null | sed 's/\x1b\[[0-9;]*m//g' | awk -F': ' '/ state:/ && !/power/ {print $2; exit}')
+  sim=$(mmcli -m "${m##*/}" 2>/dev/null | grep -c '/SIM/')
+  for c in modem-data modem-calls modem-sms; do
+    if [ "$sim" -gt 0 ]; then check modem-ready $c "$(case "$mst" in registered|connected|enabled) echo true;; esac)" "modem state: ${mst:-unknown}"; else say modem-ready $c skip "no SIM card in the phone (modem state: ${mst:-unknown})"; fi
+  done
+fi
+# parts the kernel does or does not expose
+jk=$(grep -c 'Headset Jack' /proc/bus/input/devices 2>/dev/null); check jack-detector audio-headphone "$([ "$jk" -ge 1 ] && echo true)" "headset jack detector: $jk (sound through it is a witnessed test)"
+fp=$(ls /dev /sys/bus/platform/devices 2>/dev/null | grep -ciE 'goodix|fingerprint|fpc1|_fp$'); check reader-exposed fingerprint "$([ "$fp" -ge 1 ] && echo true)" "fingerprint reader devices exposed by the kernel: $fp"
+sn=0; for d in /sys/bus/iio/devices/iio:device*; do [ -e "$d/name" ] || continue; case "$(cat "$d/name")" in *adc*) ;; *) sn=$((sn+1));; esac; done
+check motion-and-light sensors "$([ "$sn" -ge 1 ] && echo true)" "motion, light or proximity sensors exposed: $sn (voltage meters not counted)"
+vf=$(ls /sys/class/video4linux 2>/dev/null | grep -c '^video'); is=0
+for d in /sys/class/video4linux/v4l-subdev*; do [ -e "$d/name" ] || continue; case "$(cat "$d/name")" in msm_*) ;; *) is=$((is+1));; esac; done
+for c in camera-rear camera-front; do check image-sensor $c "$([ "$is" -ge 1 ] && echo true)" "camera pipeline nodes: $vf; image sensors bound: $is"; done
