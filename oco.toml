@@ -9,6 +9,7 @@ kind = "device-lab"
 parent = "linux-phone-oco"
 
 [exports]
+backlog = "oco/backlog.json"
 decisions = "oco/decisions.json"
 concepts = "oco/concepts.json"
 translations = "oco/translations.json"
