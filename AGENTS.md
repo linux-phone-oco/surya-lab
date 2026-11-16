@@ -14,7 +14,9 @@ shells, tests. Everything runs on the lab machine (via lab-agent), never in an a
 - **Flashing** (`flash/flash.sh`) bakes in the sound fixes; no depmod from the PC (it made Plasma
   boot-loop). The first boot of a fresh image is slow (it resizes the storage) - not a hang.
 - **After a flash**: `devlab provision now` (packages over the PC's connection, then Wi-Fi), then
-  `tests/run.sh` and `tests/to-docs.sh` to file the results into linux-phone-oco/docs.
+  `devlab suite put now --runner ...` (lab-tools' README): from then on the phone checks its own health
+  120 s after every boot, by the manifest's `[health]` and its own checks in `tests/health/`.
+  `tests/run.sh` and `tests/to-docs.sh` are the older way, from the lab, until gathering replaces them.
 - **Hardware testing** on Sxmo: the lightest shell, nothing in the way.
 - **A script that changes state needs explicit intent**: an argument it cannot run without
   (flash.sh IMAGE, build-dtbs.sh KERNEL_DIR) or a verb (devlab provision now). Run by accident, it must

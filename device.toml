@@ -55,3 +55,27 @@ freq = 1000
 name = "heard-right"
 channel = "right"
 freq = 1000
+
+# what the phone's own health suite expects (devlab suite put now; lab-tools/health)
+[health]
+sound_cards = ["POCO X3"]
+checks = "tests/health"   # surya's own: the speaker amplifiers
+gaps = [                  # never had working on surya: measured every run, not ill health
+  "fingerprint",          # no reader exposed by the kernel
+  "sensors",              # the ADSP sensors service is masked: it crash-looped the audio DSP
+  "camera-rear",          # no driver exists for any of the 5 sensors
+  "camera-front",
+]
+known_failed_units = [
+  "qbootctl.service",     # marks an A/B slot good; surya has no A/B slots ("No slots found"), so it always fails
+]
+known_warnings = [
+  "drivers/soc/qcom/rpmh-rsc.c:451",  # a TCS completion with no request: the bootloader's leftover traffic
+  "drivers/clk/clk.c:1188",           # dsi0_phy_pll_out_dsiclk already disabled: the display clock the bootloader
+  "drivers/clk/clk.c:1048",           #   left running, released while the DSI PHY re-parents it
+]
+
+[health.remoteprocs]   # the signal processors, and what rests on each
+adsp = "audio-speaker"
+cdsp = "kernel"
+modem = "modem-data"
