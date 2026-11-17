@@ -3,9 +3,10 @@
 The device lab for the Xiaomi POCO X3 NFC (surya, Huaxing panel): flashing, provisioning, switching
 shells, tests. Everything runs on the lab machine (via lab-agent), never in an agent's own sandbox.
 
-- **Talking to the phone**: always through `lib/phone.sh` - `phone_find` (USB 172.16.42.1 first,
-  then the Wi-Fi address kept in `~/.config/surya-lab/phone-wifi-address`), `phone_sh` / `phone_root`
-  with the commands as a script on standard input (no nested quoting), `phone_put`, `phone_reboot`.
+- **Talking to the phone**: always through devlab (linux-phone-oco/lab-tools), which reads this lab's
+  `device.toml` - `devlab phone sh` / `devlab phone root` with the commands as a script on standard
+  input (no nested quoting), `devlab phone put`, `devlab phone reboot`, or the MCP door `devlab mcp`. It
+  holds the phone for each change; the lab's hooks refuse a hand-written ssh to it (`devlab guard`).
 - **Secrets** stay on the lab machine, mode 600, never in this repository: `~/.config/surya-lab/`
   (`wifi-ssid`, `wifi-password`).
 - **Images**: the stock Sxmo reference is `~/Projects/surya-audio/image-fresh-stock/...img` and its
@@ -15,8 +16,8 @@ shells, tests. Everything runs on the lab machine (via lab-agent), never in an a
   boot-loop). The first boot of a fresh image is slow (it resizes the storage) - not a hang.
 - **After a flash**: `devlab provision now` (packages over the PC's connection, then Wi-Fi), then
   `devlab suite put now --runner ...` (lab-tools' README): from then on the phone checks its own health
-  120 s after every boot, by the manifest's `[health]` and its own checks in `tests/health/`.
-  `tests/run.sh` and `tests/to-docs.sh` are the older way, from the lab, until gathering replaces them.
+  120 s after every boot, by the manifest's `[health]` and its own checks in `tests/health/`, and
+  `devlab watch` gathers every report into `tests/results/` and the picture by itself.
 - **Hardware testing** on Sxmo: the lightest shell, nothing in the way.
 - **A script that changes state needs explicit intent**: an argument it cannot run without
   (flash.sh IMAGE, build-dtbs.sh KERNEL_DIR) or a verb (devlab provision now). Run by accident, it must
