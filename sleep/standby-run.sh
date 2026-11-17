@@ -37,6 +37,12 @@ if usb_in; then
 	done
 	echo "USB power gone at $(date -u +%FT%TZ): scoring starts" >> "$d/ARMED"
 fi
+# r4 (coordinator 2026-11-17): the sensors helper crashed the ADSP on every suspend (4 of 4, sleep-fastrpc-helpers): it is STOPPED for the
+# whole scoring run and restarted by any ending (done, aborted, killed). Not stopped while only waiting for the unplug.
+sns=hexagonrpcd-adsp-sensorspd.service; sns_was=$(systemctl is-active $sns 2>/dev/null)
+sns_restore() { [ "$sns_was" = active ] && systemctl start $sns 2>/dev/null; echo "sensorspd restored (was $sns_was) $(date -u +%FT%TZ): now $(systemctl is-active $sns 2>/dev/null)" >> "$d/DONE.sns"; }
+trap sns_restore EXIT; trap "exit 143" TERM INT
+systemctl stop $sns 2>/dev/null; echo "sensorspd stopped at $(date -u +%FT%TZ) (was $sns_was)" >> "$d/header.txt"
 bt_bad() { dmesg 2>/dev/null | grep -cE "Injecting HCI hardware error|Retry BT power ON|irq 157: nobody cared|tasks refusing to freeze"; }
 bt0=$(bt_bad); zero=0
 t0=$(mono); asleep=0; fails=0

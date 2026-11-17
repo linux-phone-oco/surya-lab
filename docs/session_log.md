@@ -1114,3 +1114,21 @@ Done
 
 Considered
 : next: lab-tools lets a cmdline-only entry reuse the running release (or a differently-named build of the same kernel); then install, try, confirm noirqdebug in /proc/cmdline, arm r4. Rejected: hand-editing boot entries (forbidden), faking a release name (modules would not match)
+
+---
+
+
+<a id="2026-11-17-2345-r4-armed"></a>
+### r4 armed: sensorspd stopped for the run, waiting for the unplug
+
+Entry date
+: 2026-11-17
+
+Done
+: standby-run.sh stops hexagonrpcd-adsp-sensorspd.service when scoring starts (not while waiting for the unplug) and restores it on any ending (trap; DONE.sns); r4 started as unit standby-r4, ARMED + REFUSED-TO-SCORE with USB present, sensorspd still active; serial wakeup off and Bluetooth on come from way-back.sh; no kernel install, no noirqdebug. Finding to record at scoring: sensorspd crashed the ADSP on every suspend (4 of 4), tied to sleep-fastrpc-helpers
+
+Considered
+: next: on the unplug, read /var/tmp/standby-r4/samples.tsv (measure rows, charger_online 0), score; confirm sensorspd restored (DONE.sns)
+
+About
+: deep-sleep
