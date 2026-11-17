@@ -1,3 +1,4 @@
 # Installed on a freshly flashed phone by provision/provision.sh - one package per line.
 firefox
+telegram-desktop
 i2c-tools
