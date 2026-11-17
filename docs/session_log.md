@@ -976,3 +976,21 @@ Done
 
 Considered
 : Rule of the move: docs decision 2026-11-17-moving-a-lane.
+
+---
+
+
+<a id="2026-11-17-standby-r1-invalid"></a>
+### Standby run r1 is invalid: USB was connected throughout
+
+Entry date
+: 2026-11-17
+
+Done
+: r1 ran about 85 min on the phone with USB connected the whole time (the author thought the lab link was the blocker), so its current_now/current_avg readings are charger-fed, not standby; recorded invalid, never scored. r2 is queued with a start check that refuses to score while USB power is present.
+
+Considered
+: Scoring r1 anyway with charger_online filtering (every sample is online, so nothing scores).
+
+About
+: deep-sleep
