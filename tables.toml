@@ -35,6 +35,13 @@ type = "string"
 [[tables.backlog.fields]]
 name = "waits"
 type = "string"
+pattern = "^(?s).+$"
+
+# what the item waits on that is another item of this base: ids, comma-separated. It is clear when each is done - read off the data, never typed again. waits stays for what is outside (the author, hardware).
+[[tables.backlog.fields]]
+name = "blocked_by"
+type = "string"
+pattern = "^[a-z0-9]+(-[a-z0-9]+)*(, ?[a-z0-9]+(-[a-z0-9]+)*)*$"
 
 [[tables.backlog.fields]]
 name = "about"
