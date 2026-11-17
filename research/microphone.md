@@ -85,6 +85,23 @@ interfaces: TX (device `sdw:3:0:0217:010a:00:3`, which also carries the codec's 
    jack detector present for the first time, stereo speakers as before, 0 UNATTACHED, no SoundWire or
    vote errors. `mic-records` fails honestly (exact zeros) - the next fault.
 
+14. **DMICs on the branch kernel, still zeros.** An experiment commit on `test/surya-mic` (not for
+   upstream): DMIC pins at mux 1 in the pin table (gpio8-11 here = vendor gpio26-29), DMIC pin states
+   on the VA macro, `qcom,dmic-sample-rate = <2400000>`, TX DMIC0-3 routed to mic bias 1/1/3/3, and the
+   VA macro switch that starts the DMIC clocks (divider index 2). Every DMIC through TX DEC0 reads
+   exact zeros. With the branch's LPI driver (only the 14 pins after the sensor DSP's block, runtime PM
+   on each access) the pin dump could be read during a capture: the DMIC clock pin read as a static
+   output-high in every sample, the data pin static too - no clock reached the pin. Freeing the clock
+   pin of `output-high` (the vendor does set it) changed nothing. Two readings remain open: the VA
+   block's DMIC clock generator does not run with only the TX path active (it may need the VA MCLK
+   path the vendor clocks from TX - `bolero_mclk_mux_tbl`), or this pin's DMIC clock is not at mux 1
+   on this driver's view of the hardware. A read-only feature-research session was asked for
+   (orchestration) on how SM6150/SM7125/SM7150 boards record their microphones on open stacks.
+15. **Reading LPI pins safely.** The hang of 02:15 UTC came with the old 32-pin driver, which mapped
+   the sensor DSP's pins 0-17 (0x62b40000-0x62b51fff); dumping them faults the bus. The branch driver
+   maps from 0x62b52000 and reads were fine during a capture. Never dump LPI pins on a kernel whose LPI
+   driver maps the SSC range.
+
 ## What the vendor's GPL sources say
 
 - The pin functions of the SoundWire pins agree with mainline's corrected table (gpio19 func3, gpio20
