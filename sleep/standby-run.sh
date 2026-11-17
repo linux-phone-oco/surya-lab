@@ -37,18 +37,25 @@ if usb_in; then
 	done
 	echo "USB power gone at $(date -u +%FT%TZ): scoring starts" >> "$d/ARMED"
 fi
+bt_bad() { dmesg 2>/dev/null | grep -cE "Injecting HCI hardware error|Retry BT power ON|irq 157: nobody cared|tasks refusing to freeze"; }
+bt0=$(bt_bad); zero=0
 t0=$(mono); asleep=0; fails=0
 while :; do
 	now=$(mono); el=$(awk -v a="$now" -v b="$t0" 'BEGIN{printf "%d", a-b}')
 	[ "$el" -ge $((settle + measure)) ] && break
 	ph=settle; [ "$el" -ge "$settle" ] && ph=measure
 	usb_in && ph=usb
+	# r2 (2026-11-17) was reset by its own 30 s fuse when Bluetooth (UART irq 157 disabled, QCA retry loop of ~70 s) stalled a cycle:
+	# never start a cycle after Bluetooth has failed, nor after 4 cycles in a row that did not sleep; end honestly, unscored.
+	[ "$(bt_bad)" -gt "$bt0" ] && { echo "stopped: Bluetooth failed (hci hardware error / irq 157 / freeze refused) at $(date -u +%FT%TZ), no more cycles: NOT a complete run" > "$d/STOPPED"; break; }
+	[ "$zero" -ge 4 ] && { echo "stopped: 4 cycles in a row did not sleep at $(date -u +%FT%TZ): NOT a complete run" > "$d/STOPPED"; break; }
 	printf '%s\t%s\t%s\t%s\t%s\t%s\tna\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' "$now" "$ph" "$(rd $b/status)" "$(rd $ch/online)" "$(rd $b/current_now)" "$(rd $b/current_avg)" \
 		"$(rd $b/capacity)" "$(rd $b/voltage_now)" "$(rd $b/voltage_ocv)" "$(rd $b/temp)" "$(rd /sys/power/suspend_stats/success)" "$asleep" \
 		"$(awk 'NR>1{s+=$3}END{print s+0}' /sys/kernel/debug/wakeup_sources 2>/dev/null)" >> "$t"
 	out=$(sh /var/tmp/way-back.sh cycle 15 bt-on 2>&1); rc=$?
 	{ echo "== $now rc=$rc"; echo "$out"; } >> "$c"
 	s=$(echo "$out" | sed -n 's/.*asleep (RTC) \([0-9]*\) s.*/\1/p'); asleep=$((asleep + ${s:-0}))
+	[ "${s:-0}" -gt 0 ] && zero=0 || zero=$((zero + 1))
 	if [ "$rc" != 0 ]; then fails=$((fails + 1)); sleep 5; [ "$fails" -ge 10 ] && { echo "stopped: 10 failed cycles" > "$d/STOPPED"; break; }; fi
 	sleep 2
 done
