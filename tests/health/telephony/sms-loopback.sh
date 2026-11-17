@@ -8,7 +8,9 @@ num=$(cat /etc/devlab/private/own-number 2>/dev/null)
 state=$(mmcli -m any 2>/dev/null | awk -F': ' '/ state:/{gsub(/\033\[[0-9;]*m/,"",$2); print $2; exit}')
 case $state in registered|connected|connecting) ;; *) say sms-loopback modem-sms skip "modem state ${state:-unknown}"; exit 0 ;; esac
 last=/var/lib/devlab/sms-loopback.last
-if [ -f "$last" ] && [ $(( $(date +%s) - $(stat -c %Y "$last") )) -lt 72000 ]; then
+# the telephony layer: once a day (lib.sh); on later runs that day, the day's result is told again
+if ! once_a_day sms-loopback; then
+	[ -f "$last" ] || { say sms-loopback modem-sms skip "ran today"; exit 0; }
 	set -- $(cat "$last"); outcome=$1; shift
 	say sms-loopback modem-sms "$outcome" "today's SMS (one a day): $*"; exit 0
 fi
