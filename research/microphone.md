@@ -39,13 +39,45 @@ interfaces: TX (device `sdw:3:0:0217:010a:00:3`, which also carries the codec's 
    registers (`sdw_write`, not regmap), regmap writes made while a map is cache-only, and messages to
    the DSP.
 
+7. **Found: ASoC holds the codec in reset whenever it is idle.** A function trace (with stacks) of
+   `pinctrl_commit_state` showed `snd_soc_bind_card` committing a pin state 0.24 ms before both
+   interfaces went UNATTACHED: ASoC puts every inactive component into its **sleep** pin state (at
+   card registration and after every stream) and back to default when a stream opens. The codec
+   node's sleep state drives the active-low reset (LPI gpio24) **low**. In the boot where the
+   default state drove it high, the codec came back at stream open, re-enumerated, and capture
+   prepared. Fix: no sleep state on the codec node - the reset belongs to the driver through
+   `reset-gpios` (linux-phone-oco/linux PR #4, `dt/surya-wcd9375-reset-no-sleep`). With it the
+   codec never drops off (0 UNATTACHED events in a whole boot) and capture prepares without errors.
+8. **The pin table, again.** The SoundWire pin fix of 2026-11-11 is now a commit on the real base
+   (PR #3, `fix/sm7150-lpass-lpi-swr-data-mux`). That driver counts pins from 0x62b52000, 18 after
+   the vendor's count (the first 18 belong to the sensor DSP), so vendor gpio19/23 are its gpio1/5.
+   The same shifted-SM8250 origin makes the DMIC pins wrong too (vendor: gpio26-29 are DMIC clock
+   and data at **function 1**; the table has them at function 2, and spells one group `gpi26`).
+9. **Capture yields exact zeros.** Once the bus held, a recording first rings for ~0.5 s
+   (-1774 settling to 0: the decimator's start-up transient) and then is exactly 0 - with a 1 kHz
+   tone on the speaker too. A real ADC is never exactly 0, so no microphone data flows yet. The
+   check `mic-records` now judges only the last half second (it passed falsely on the transient
+   once).
+10. **Which microphones.** The vendor's surya board (`sdmmagpie-qrd-overlay.dts`) records the
+   built-in microphones as **digital mics** - TX DMIC1-3, powered from WCD mic bias 1 (DMIC1) and 3
+   (DMIC2, DMIC3) - and only the headset mic as analog (AMIC2 -> ADC2). The ADC1 route tried first
+   was the wrong input.
+11. **This ADSP rejects the VA capture port.** Mainline records DMICs on SM8250-class SoCs through the
+   VA macro (`VA_CODEC_DMA_TX_0`); on surya the DSP refuses that AFE port (0xb021, error 3), so the
+   DMICs must go through the TX macro's decimators into `TX_CODEC_DMA_TX_3`, as the vendor does. The
+   DMIC clocks, though, are generated in the VA macro's registers (the vendor's TX macro writes
+   them); mainline only starts them from VA widgets. With an experiment switch that runs the VA DMIC
+   clocks (divider 2, 2.4 MHz) and DMIC pins at function 1, the TX path still read exact zeros for
+   DMIC0-3 - as it did for ADC1. The zeros therefore sit between the TX decimators and the DSP's
+   TX DMA (or in the decimator enable), not only at the microphones. That is the next step.
+
 ## What the vendor's GPL sources say
 
 - The pin functions of the SoundWire pins agree with mainline's corrected table (gpio19 func3, gpio20
   func2, gpio22/23 func2) - [vendor-sm6150-lpi-dtsi].
 - The reset (LPI gpio24) is driven **high** in the vendor's active pin state and low only in its sleep
   state. Our device tree's active state says `output-low`: whenever that state is (re)applied, the
-  codec is held in reset. A lead for step 4, not yet tested.
+  codec is held in reset. It was the sleep state that mattered: see step 7.
 - Supplies: L10A and BOB always on, L15A (buck) only when a headphone/earpiece path runs; mainline
   turns all four on at probe - [vendor-sm6150-audio-overlay].
 - Nothing in the vendor's headset detection touches reset, supplies or SoundWire; its insertion
@@ -65,5 +97,4 @@ each time. See the docs backlog item `audio-cold-boot-race`.
 
 ## Next
 
-Test the reset lead first (active state `output-high`, as the vendor has it), with the bus-level
-SoundWire writes and the controllers' status logged at card registration; then capture.
+Find why the TX decimators deliver zeros: compare the TX macro register writes during a capture with the vendor tx-macro sequence (decimator enable, HPF, TX path control, codec DMA channel), then the DMIC route (pins at function 1, VA DMIC clocks, mic bias 1/3).
