@@ -1,4 +1,6 @@
 # Installed on a freshly flashed phone by provision/provision.sh - one package per line.
 firefox
-telegram-desktop
+# telegram-desktop - the Telegram client; held: Alpine v3.24 ships 6.8.5-r0 linked to
+# libada.so.3 while ada is 4.0, so it cannot install and would fail the whole list.
+# Uncomment when `apk add --simulate telegram-desktop` passes on the phone.
 i2c-tools
