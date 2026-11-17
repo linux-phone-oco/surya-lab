@@ -1,0 +1,202 @@
+                                 enable  prepare  protect                                duty  hardware                            connection
+   clock                          count    count    count        rate   accuracy phase  cycle    enable   consumer                         id
+---------------------------------------------------------------------------------------------------------------------------------------------
+ LPASS_HW_MACRO                      3       3        0        0           0          0     50000      Y   62ee0000.rxmacro                macro                    
+                                                                                                           62ec0000.txmacro                macro                    
+                                                                                                           pinctrl@62b52000                no_connection_id         
+                                                                                                           62f20000.codec                  macro                    
+                                                                                                           deviceless                      no_connection_id         
+ LPASS_CLK_ID_TX_CORE_NPL_MCLK       2       2        0        19200000    0          0     50000      Y   62ee0000.rxmacro                npl                      
+                                                                                                           62ec0000.txmacro                npl                      
+                                                                                                           deviceless                      no_connection_id         
+                                                                                                              deviceless                      no_connection_id         
+                                                                                                              deviceless                      no_connection_id         
+ LPASS_CLK_ID_TX_CORE_MCLK           4       4        0        19200000    0          0     50000      Y   62ee0000.rxmacro                mclk                     
+                                                                                                           62ec0000.txmacro                mclk                     
+                                                                                                           62f20000.codec                  mclk                     
+                                                                                                           deviceless                      no_connection_id         
+    fsgen                            2       2        0        19200000    0          0     50000      Y      62ee0000.rxmacro                fsgen                    
+                                                                                                              62ec0000.txmacro                fsgen                    
+                                                                                                              62f20000.codec                  fsgen                    
+                                                                                                              deviceless                      no_connection_id         
+                                                                                                           deviceless                      no_connection_id         
+                                                                                                           deviceless                      no_connection_id         
+                                                                                                           deviceless                      no_connection_id         
+ gcc_usb_phy_cfg_ahb2phy_clk         1       1        0        0           0          0     50000      Y   88e2000.phy                     cfg_ahb                  
+                                                                                                           deviceless                      no_connection_id         
+ gcc_usb30_prim_sleep_clk            1       1        0        0           0          0     50000      Y   usb@a6f8800                     no_connection_id         
+                                                                                                           deviceless                      no_connection_id         
+ gcc_ufs_phy_tx_symbol_0_clk         150     150      0        0           0          0     50000      Y   ufshc@1d84000                   no_connection_id         
+                                                                                                           1d84000.ufshc                   tx_lane0_sync_clk        
+                                                                                                           1d84000.ufshc                   tx_lane0_sync_clk        
+                                                                                                           1d84000.ufshc                   tx_lane0_sync_clk        
+                                                                                                           deviceless                      no_connection_id         
+ gcc_ufs_phy_rx_symbol_0_clk         150     150      0        0           0          0     50000      Y   ufshc@1d84000                   no_connection_id         
+                                                                                                           1d84000.ufshc                   rx_lane0_sync_clk        
+                                                                                                           1d84000.ufshc                   rx_lane0_sync_clk        
+                                                                                                           1d84000.ufshc                   rx_lane0_sync_clk        
+                                                                                                           deviceless                      no_connection_id         
+ gcc_ufs_phy_ahb_clk                 150     150      0        0           0          0     50000      Y   ufshc@1d84000                   no_connection_id         
+                                                                                                           1d84000.ufshc                   iface_clk                
+                                                                                                           1d84000.ufshc                   iface_clk                
+                                                                                                           1d84000.ufshc                   iface_clk                
+                                                                                                           deviceless                      no_connection_id         
+ gcc_ufs_mem_clkref_clk              1       1        0        0           0          0     50000      Y   phy@1d87000                     no_connection_id         
+                                                                                                           deviceless                      no_connection_id         
+                                                                                                           deviceless                      no_connection_id         
+ gcc_qupv3_wrap_1_s_ahb_clk          1       1        0        0           0          0     50000      Y   ac0000.geniqup                  s-ahb                    
+                                                                                                           deviceless                      no_connection_id         
+ gcc_qupv3_wrap_1_m_ahb_clk          1       1        0        0           0          0     50000      Y   ac0000.geniqup                  m-ahb                    
+                                                                                                           deviceless                      no_connection_id         
+ gcc_qupv3_wrap_0_s_ahb_clk          1       1        0        0           0          0     50000      Y   8c0000.geniqup                  s-ahb                    
+                                                                                                           deviceless                      no_connection_id         
+ gcc_qupv3_wrap_0_m_ahb_clk          1       1        0        0           0          0     50000      Y   8c0000.geniqup                  m-ahb                    
+                                                                                                           deviceless                      no_connection_id         
+ gcc_npu_cfg_ahb_clk                 1       1        0        0           0          0     50000      Y   deviceless                      no_connection_id         
+                                                                                                           deviceless                      no_connection_id         
+                                                                                                           iommu@5040000                   no_connection_id         
+                                                                                                           deviceless                      no_connection_id         
+ gcc_disp_sf_axi_clk                 1       1        0        0           0          0     50000      Y   display-subsystem@ae00000       no_connection_id         
+                                                                                                           deviceless                      no_connection_id         
+ gcc_disp_hf_axi_clk                 1       1        0        0           0          0     50000      Y   ae94000.dsi                     bus                      
+                                                                                                           display-controller@ae01000      no_connection_id         
+                                                                                                           display-subsystem@ae00000       no_connection_id         
+                                                                                                           deviceless                      no_connection_id         
+                                                                                                           deviceless                      no_connection_id         
+                                                                                                           deviceless                      no_connection_id         
+                                                                                                           deviceless                      no_connection_id         
+                                                                                                           deviceless                      no_connection_id         
+ sleep-clk                           1       1        0        32000       0          0     50000      Y   17c10000.watchdog               no_connection_id         
+                                                                                                           deviceless                      no_connection_id         
+ xo-board                            2       2        0        38400000    0          0     50000      Y   deviceless                      no_connection_id         
+    bi_tcxo_ao                       1       1        0        19200000    0          0     50000      Y      deviceless                      no_connection_id         
+       gcc_cpuss_ahb_clk_src         2       2        0        19200000    0          0     50000      Y         deviceless                      no_connection_id         
+          gcc_sys_noc_cpuss_ahb_clk  1       1        0        19200000    0          0     50000      Y            deviceless                      no_connection_id         
+          gcc_cpuss_ahb_clk          1       1        0        19200000    0          0     50000      Y            deviceless                      no_connection_id         
+    bi_tcxo                          156     156      0        19200000    0          0     50000      Y      4080000.remoteproc              xo                       
+                                                                                                              8300000.remoteproc              xo                       
+                                                                                                              62400000.remoteproc             xo                       
+                                                                                                              ufshc@1d84000                   no_connection_id         
+                                                                                                              1d84000.ufshc                   ref_clk                  
+                                                                                                              1d84000.ufshc                   ref_clk                  
+                                                                                                              1d84000.ufshc                   ref_clk                  
+                                                                                                              88e2000.phy                     ref                      
+                                                                                                              phy@1d87000                     no_connection_id         
+                                                                                                              8804000.mmc                     xo                       
+                                                                                                              deviceless                      no_connection_id         
+                                                                                                                                   deviceless                      no_connection_id         
+                                                                                                                                   deviceless                      no_connection_id         
+                                                                                                                                ae94000.dsi                     byte                     
+                                                                                                                                deviceless                      no_connection_id         
+                                                                                                                    8804000.mmc                     core                     
+                                                                                                                    deviceless                      no_connection_id         
+       gcc_usb30_prim_mock_utmi_clk_src 1       1        0        19200000    0          0     50000      Y         deviceless                      no_connection_id         
+          gcc_usb30_prim_mock_utmi_clk 1       1        0        19200000    0          0     50000      Y            usb@a6f8800                     no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+       dispcc_mdss_ahb_clk_src       1       1        0        19200000    0          0     50000      ?         deviceless                      no_connection_id         
+          dispcc_mdss_ahb_clk        2       2        0        19200000    0          0     50000      Y            ae94000.dsi                     iface                    
+                                                                                                                    ae94000.dsi                     iface                    
+                                                                                                                    display-controller@ae01000      no_connection_id         
+                                                                                                                    ae94400.phy                     iface                    
+                                                                                                                    display-subsystem@ae00000       no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+       dispcc_pll0                   1       1        0        860000097   0          0     50000      Y         deviceless                      no_connection_id         
+          dispcc_mdss_mdp_clk_src    1       1        0        344000038   0          0     50000      ?            deviceless                      no_connection_id         
+                                                                                                                       deviceless                      no_connection_id         
+             dispcc_mdss_mdp_clk     1       1        0        344000038   0          0     50000      Y               display-controller@ae01000      no_connection_id         
+                                                                                                                       ae01000.display-controller      core                     
+                                                                                                                       display-subsystem@ae00000       no_connection_id         
+                                                                                                                       deviceless                      no_connection_id         
+                                                                                                                 cci@ac4b000                     no_connection_id         
+                                                                                                                 cci@ac4a000                     no_connection_id         
+                                                                                                                 deviceless                      no_connection_id         
+                                                                                                                    cci@ac4b000                     no_connection_id         
+                                                                                                                    cci@ac4a000                     no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                 deviceless                      no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                 deviceless                      no_connection_id         
+                                                                                                                    ace0000.camss                   vfe1                     
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                 deviceless                      no_connection_id         
+                                                                                                                    ace0000.camss                   vfe0_csid                
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                 deviceless                      no_connection_id         
+                                                                                                                    ace0000.camss                   vfe0                     
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                 deviceless                      no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                 deviceless                      no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                 ace0000.camss                   cphy_rx_src              
+                                                                                                                 deviceless                      no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                    ace0000.camss                   vfe0_cphy_rx             
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                 deviceless                      no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                 deviceless                      no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                 deviceless                      no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                    cci@ac4b000                     no_connection_id         
+                                                                                                                    cci@ac4a000                     no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+       gcc_ufs_phy_phy_aux_clk_src   1       1        0        19200000    0          0     50000      Y         deviceless                      no_connection_id         
+          gcc_ufs_phy_phy_aux_clk    1       1        0        19200000    0          0     50000      Y            phy@1d87000                     no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+                                                                                                                    deviceless                      no_connection_id         
+       gpll0                         3       3        0        600000000   0          0     50000      Y         deviceless                      no_connection_id         
+          gcc_usb30_prim_master_clk_src 3       3        0        200000000   0          0     50000      Y            deviceless                      no_connection_id         
+             gcc_aggre_usb3_prim_axi_clk 1       1        0        200000000   0          0     50000      Y               usb@a6f8800                     no_connection_id         
+                                                                                                                       deviceless                      no_connection_id         
+             gcc_cfg_noc_usb3_prim_axi_clk 1       1        0        200000000   0          0     50000      Y               usb@a6f8800                     no_connection_id         
+                                                                                                                       deviceless                      no_connection_id         
+             gcc_usb30_prim_master_clk 1       1        0        200000000   0          0     50000      Y               usb@a6f8800                     no_connection_id         
+                                                                                                                       deviceless                      no_connection_id         
+          gcc_ufs_phy_ice_core_clk_src 1       1        0        300000000   0          0     50000      Y            deviceless                      no_connection_id         
+             gcc_ufs_phy_ice_core_clk 1       1        0        300000000   0          0     50000      Y               1d90000.crypto                  no_connection_id         
+                                                                                                                       deviceless                      no_connection_id         
+          gpll0_out_even             4       4        0        300000000   0          0     50000      Y            deviceless                      no_connection_id         
+             gcc_ufs_phy_unipro_core_clk_src 1       1        0        37500000    0          0     50000      Y               deviceless                      no_connection_id         
+                gcc_ufs_phy_unipro_core_clk 150     150      0        37500000    0          0     50000      Y                  ufshc@1d84000                   no_connection_id         
+                                                                                                                          1d84000.ufshc                   core_clk_unipro          
+                                                                                                                          1d84000.ufshc                   core_clk_unipro          
+                                                                                                                          1d84000.ufshc                   core_clk_unipro          
+                                                                                                                          deviceless                      no_connection_id         
+             gcc_ufs_phy_axi_clk_src 2       2        0        50000000    0          0     50000      Y               deviceless                      no_connection_id         
+                gcc_aggre_ufs_phy_axi_clk 150     150      0        50000000    0          0     50000      Y                  ufshc@1d84000                   no_connection_id         
+                                                                                                                          1d84000.ufshc                   bus_aggr_clk             
+                                                                                                                          1d84000.ufshc                   bus_aggr_clk             
+                                                                                                                          1d84000.ufshc                   bus_aggr_clk             
+                                                                                                                          deviceless                      no_connection_id         
+                gcc_ufs_phy_axi_clk  150     150      0        50000000    0          0     50000      Y                  ufshc@1d84000                   no_connection_id         
+                                                                                                                          1d84000.ufshc                   core_clk                 
+                                                                                                                          1d84000.ufshc                   core_clk                 
+                                                                                                                          1d84000.ufshc                   core_clk                 
+                                                                                                                          deviceless                      no_connection_id         
+             gcc_qupv3_wrap0_s3_clk_src 1       1        0        102400000   0          0     50133      Y               deviceless                      no_connection_id         
+                gcc_qupv3_wrap0_s3_clk 1       1        0        102400000   0          0     50000      Y                  88c000.serial                   se                       
+                                                                                                                          88c000.serial                   se                       
+                                                                                                                          deviceless                      no_connection_id         
+                                                                                                                          880000.spi                      se                       
+                                                                                                                          deviceless                      no_connection_id         
+             gcc_qupv3_wrap1_s2_clk_src 1       1        0        7372800     0          0     48774      Y               deviceless                      no_connection_id         
+                gcc_qupv3_wrap1_s2_clk 1       1        0        7372800     0          0     50000      Y                  a88000.serial                   se                       
+                                                                                                                          a88000.serial                   se                       
+                                                                                                                          deviceless                      no_connection_id         
+                                                                                                                             gmu@506a000                     no_connection_id         
+                                                                                                                             deviceless                      no_connection_id         

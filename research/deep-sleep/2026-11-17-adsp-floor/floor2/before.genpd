@@ -1,0 +1,86 @@
+domain                          status          children        performance
+    /device                         runtime status                  managed by
+------------------------------------------------------------------------------
+vcodec1_gdsc                    off-0                           0
+vcodec0_gdsc                    off-0                           0
+venus_gdsc                      off-0                           0
+mdss_gdsc                       off-0                           0
+    ae00000.display-subsystem       suspended                   0           SW
+camcc_titan_top_gdsc            off-0                           0
+                                                camcc_bps_gdsc, camcc_ife_0_gdsc, camcc_ife_1_gdsc, camcc_ipe_0_gdsc, camcc_ipe_1_gdsc
+    ac4a000.cci                     suspended                   0           SW
+    ac4b000.cci                     suspended                   0           SW
+    genpd:2:ace0000.camss           suspended                   0           SW
+camcc_ipe_1_gdsc                off-0                           0
+camcc_ipe_0_gdsc                off-0                           0
+camcc_ife_1_gdsc                off-0                           0
+    genpd:1:ace0000.camss           suspended                   0           SW
+camcc_ife_0_gdsc                off-0                           0
+    genpd:0:ace0000.camss           suspended                   0           SW
+camcc_bps_gdsc                  off-0                           0
+gx_gdsc                         off-0                           0
+    genpd:1:506a000.gmu             suspended                   0           SW
+cx_gdsc                         off-0                           0
+    5040000.iommu                   suspended                   0           SW
+    genpd:0:506a000.gmu             suspended                   0           SW
+hlos1_vote_mmnoc_mmu_tbu_sf_gdsc  on                              0
+hlos1_vote_mmnoc_mmu_tbu_hf1_gdsc  on                              0
+hlos1_vote_mmnoc_mmu_tbu_hf0_gdsc  on                              0
+hlos1_vote_aggre_noc_mmu_tbu2_gdsc  on                              0
+hlos1_vote_aggre_noc_mmu_tbu1_gdsc  on                              0
+hlos1_vote_aggre_noc_mmu_pcie_tbu_gdsc  on                              0
+hlos1_vote_aggre_noc_mmu_audio_tbu_gdsc  on                              0
+usb30_prim_gdsc                 on                              256
+    a6f8800.usb                     active                      256         SW
+ufs_phy_gdsc                    on                              64
+    1d87000.phy                     unsupported                 0           SW
+    1d84000.ufshc                   active                      64          SW
+pcie_0_gdsc                     off-0                           0
+mss                             off-0                           0
+    genpd:2:4080000.remoteproc      suspended                   0           SW
+mx_ao                           off-0                           0
+                                                cx_ao
+mx                              on                              256
+                                                cx
+    genpd:1:8300000.remoteproc      suspended                   0           SW
+lmx                             off-0                           0
+    genpd:1:62400000.remoteproc     suspended                   0           SW
+lcx                             off-0                           0
+    genpd:0:62400000.remoteproc     suspended                   0           SW
+gfx                             off-0                           0
+cx_ao                           off-0                           0
+cx                              on                              256
+                                                camcc_titan_top_gdsc, mdss_gdsc, venus_gdsc, vcodec0_gdsc, vcodec1_gdsc
+    ad00000.clock-controller        unsupported                 0           SW
+    af00000.clock-controller        unsupported                 0           SW
+    ab00000.clock-controller        unsupported                 0           SW
+    8804000.mmc                     suspended                   0           SW
+    880000.spi                      suspended                   0           SW
+    884000.i2c                      suspended                   0           SW
+    888000.i2c                      suspended                   0           SW
+    88c000.serial                   active                      256         SW
+    a88000.serial                   active                      64          SW
+    a8c000.i2c                      suspended                   0           SW
+    ae01000.display-controller      suspended                   0           SW
+    ae94000.dsi                     suspended                   0           SW
+    genpd:0:8300000.remoteproc      suspended                   0           SW
+    genpd:0:4080000.remoteproc      suspended                   0           SW
+power-domain-cluster            on                              0
+                                                power-domain-cpu0, power-domain-cpu1, power-domain-cpu2, power-domain-cpu3, power-domain-cpu4, power-domain-cpu5, power-domain-cpu6, power-domain-cpu7
+    18200000.rsc                    suspended                   0           SW
+power-domain-cpu7               off-0                           0
+    genpd:0:cpu7                    suspended                   0           SW
+power-domain-cpu6               on                              0
+    genpd:0:cpu6                    active                      0           SW
+power-domain-cpu5               on                              0
+    genpd:0:cpu5                    active                      0           SW
+power-domain-cpu4               on                              0
+    genpd:0:cpu4                    active                      0           SW
+power-domain-cpu3               on                              0
+    genpd:0:cpu3                    active                      0           SW
+power-domain-cpu2               on                              0
+    genpd:0:cpu2                    active                      0           SW
+power-domain-cpu1               off-0                           0
+    genpd:0:cpu1                    suspended                   0           SW
+power-domain-cpu0               on                              0
+    genpd:0:cpu0                    active                      0           SW

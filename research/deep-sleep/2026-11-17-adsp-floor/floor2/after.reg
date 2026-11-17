@@ -1,0 +1,79 @@
+ regulator                      use open bypass  opmode voltage current     min     max
+---------------------------------------------------------------------------------------
+ regulator-dummy                  2    4      0 unknown     0mV     0mA     0mV     0mV 
+    5000000.gpu-vddcx             0                                 0mA     0mV     0mV
+    5000000.gpu-vdd               0                                 0mA     0mV     0mV
+    ldo1                          1    1      0  normal  1616mV     0mA  1616mV  1984mV 
+       wcn3998-pmu-vddxo          1                                 0mA     0mV     0mV
+    ldo8                          0    0      0  normal  1800mV     0mA  1800mV  1896mV 
+ vph_pwr                          6    6      0 unknown  3700mV     0mA  3700mV  3700mV 
+    smps1                         0    0      0 unknown  1000mV     0mA  1000mV  1200mV 
+    smps8                         1    4      0 unknown  1120mV     0mA  1120mV  1408mV 
+       ldo2                       1    1      0  normal  1200mV     0mA  1200mV  1304mV 
+          wcn3998-pmu-vddrf       1                                 0mA     0mV     0mV
+       ldo3                       0    6      0    idle  1144mV     0mA  1144mV  1256mV 
+          ace0000.camss-vdda-pll   0                                 0mA     0mV     0mV
+          ace0000.camss-vdda-pll   0                                 0mA     0mV     0mV
+          ace0000.camss-vdda-pll   0                                 0mA     0mV     0mV
+          ace0000.camss-vdda-pll   0                                 0mA     0mV     0mV
+          ae94000.dsi-vdda        0                                21mA*    0mV     0mV
+          1d87000.phy-vdda-pll    0                                18mA*    0mV     0mV
+       ldo1                       0    0      0  normal  1096mV     0mA  1096mV  1304mV 
+       ldo6                       0    0      0  normal  1096mV     0mA  1096mV  1304mV 
+    bob                           5   17      0  normal  3320mV     0mA  3320mV  3960mV 
+       audio-codec-vdd-mic-bias   1                                 0mA     0mV     0mV
+       ldo4                       0    0      0  normal  1648mV     0mA  1648mV  2944mV 
+       ldo5                       0    0      0  normal  1648mV     0mA  1648mV  2944mV 
+       ldo6                       0    1      0  normal  3000mV     0mA  3000mV  3096mV 
+          8804000.mmc-vqmmc       0                                 0mA     0mV     0mV
+       ldo7                       0    0      0  normal  3000mV     0mA  3000mV  3312mV 
+       ldo9                       0    1      0    idle  3000mV     0mA  2952mV  3096mV 
+          8804000.mmc-vmmc        0                                 0mA  3000mV  3096mV
+       ldo10                      1    1      0  normal  3200mV     0mA  3200mV  3312mV 
+          wcn3998-pmu-vddch0      1                                 0mA     0mV     0mV
+       ldo11                      1    1      0  normal  2952mV     0mA  2952mV  3400mV 
+          wcn3998-pmu-vddch1      1                                 0mA     0mV     0mV
+       wide_ldo_avdd2             0    0      0 unknown  2800mV     0mA  2800mV  2800mV 
+       uw_ldo_ois_drv             0    0      0 unknown  2800mV     0mA  2800mV  2800mV 
+       camera_vdig                0    0      0 unknown  2800mV     0mA  2800mV  2800mV 
+       camera_mipi_switch_en      0    0      0 unknown  2800mV     0mA  2800mV  2800mV 
+       ldo5                       0    0      0  normal  2600mV     0mA  2600mV  2800mV 
+       ldo16                      0    0      0  normal  1800mV     0mA  1800mV  1800mV 
+       ldo17                      2    2      0  normal  3000mV     0mA  3000mV  3232mV 
+          c440000.spmi:pmic@0:typec@1500-vdd-pdphy   1                                 0mA     0mV     0mV
+          88e2000.phy-vdda-phy-dpdm   1                                 0mA     0mV     0mV
+       ldo18                      0    1      0  normal  1696mV     0mA  1696mV  1904mV 
+          ae94000.dsi.0-vddio     0                                 0mA     0mV     0mV
+       ldo19                      1    1      0  normal  2944mV     0mA  2944mV  3304mV 
+          1d84000.ufshc-vcc       1                               600mA     0mV     0mV
+    vreg_s3a_0p8                  1    1      0 unknown   800mV     0mA   800mV   800mV 
+       ldo9                       0    1      0  normal   624mV     0mA   624mV   760mV 
+          18800000.wifi-vdd-0.8-cx-mx   0                                 0mA     0mV     0mV
+    smps4                         1    3      0 unknown   824mV     0mA   824mV  1120mV 
+       ldo2                       0    0      0  normal   944mV     0mA   944mV  1056mV 
+       ldo3                       0    0      0  normal   968mV     0mA   968mV  1064mV 
+       ldo4                       1    7      0    idle   824mV     0mA   824mV   920mV 
+          ace0000.camss-vdda-phy   0                                 0mA     0mV     0mV
+          ace0000.camss-vdda-phy   0                                 0mA     0mV     0mV
+          ace0000.camss-vdda-phy   0                                 0mA     0mV     0mV
+          ace0000.camss-vdda-phy   0                                 0mA     0mV     0mV
+          ae94400.phy-vdds        0                                36mA*    0mV     0mV
+          88e2000.phy-vdd         1                                 0mA     0mV     0mV
+          1d87000.phy-vdda-phy    0                                62mA*    0mV     0mV
+    smps5                         4    6      0 unknown  1744mV     0mA  1744mV  2040mV 
+       ldo10                      3    3      0  normal  1720mV     0mA  1720mV  1832mV 
+          audio-codec-vdd-px      1                                 0mA     0mV     0mV
+          audio-codec-vdd-rxtx    1                                 0mA     0mV     0mV
+          wcn3998-pmu-vddio       1                                 0mA     0mV     0mV
+       ldo11                      1    1      0  normal  1696mV     0mA  1696mV  1984mV 
+          88e2000.phy-vdda-pll    1                                 0mA     0mV     0mV
+       ldo12                      1    1      0  normal  1696mV     0mA  1696mV  1952mV 
+          1d84000.ufshc-vccq2     1                               600mA     0mV     0mV
+       ldo13                      0    0      0  normal  1696mV     0mA  1696mV  1904mV 
+       ldo14                      0    0      0  normal  1720mV     0mA  1720mV  1856mV 
+       ldo15                      1    1      0  normal  1696mV     0mA  1696mV  1904mV 
+          audio-codec-vdd-buck    1                                 0mA     0mV     0mV
+ refgen                           0    1      0 unknown     0mV     0mA     0mV     0mV 
+    ae94000.dsi-refgen            0                                 0mA     0mV     0mV
+ usb_vbus                         0    1      0 unknown     0mV  3000mA     0mV     0mV 
+    c440000.spmi:pmic@0:typec@1500-vdd-vbus   0                                 0mA     0mV     0mV

@@ -2,15 +2,15 @@
 
 # Index
 
-- [Backlog](backlog.md): 0
-- [Decisions](decisions.md): 0
+- [Backlog](backlog.md): 48
+- [Decisions](decisions.md): 23
 - [Devices](devices.md): 0
-- [Parts](parts.md): 0
-- [Research](research.md): 0
-- [Session Log](session_log.md): 1
+- [Parts](parts.md): 20
+- [Research](research.md): 34
+- [Session Log](session_log.md): 54
 - [Sources](sources.md): 0
 - [Summaries](summaries.md): 0
-- [Test Results](test_results.md): 0
-- [Test Runs](test_runs.md): 0
+- [Test Results](test_results.md): 5456
+- [Test Runs](test_runs.md): 143
 - [Upstream Items](upstream_items.md): 0
 - [Upstreams](upstreams.md): 2

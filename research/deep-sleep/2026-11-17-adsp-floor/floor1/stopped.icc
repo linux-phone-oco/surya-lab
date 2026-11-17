@@ -1,0 +1,369 @@
+ node                                  tag          avg         peak
+--------------------------------------------------------------------
+osm_l3_master@18321000.interconnect                   0     46694400
+  cpu6                                   0            0     46694400
+  cpu0                                   0            0     38092800
+osm_l3_slave@18321000.interconnect                    0     46694400
+  cpu6                                   0            0     46694400
+  cpu0                                   0            0     38092800
+llcc_mc@1380000.interconnect                     240000     12288000
+  ace0000.camss                          7            0            0
+  ace0000.camss                          7            0            0
+  ace0000.camss                          7            0            0
+  90cd000.pmu                            3            0            0
+  1e40000.ipa                            0            0            0
+  ae00000.display-subsystem              7            0            0
+  ae00000.display-subsystem              7            0            0
+  1d84000.ufshc                          7            0            0
+  ae00000.display-subsystem              7            0            0
+  ae00000.display-subsystem              7            0            0
+  a8c000.i2c                             7            0            0
+  888000.i2c                             7            0            0
+  884000.i2c                             7            0            0
+  880000.spi                             7            0            0
+  8804000.mmc                            7            0            0
+  a6f8800.usb                            7       240000       700000
+  firmware:scm                           7            0            0
+  cpu6                                   3            0     12288000
+  cpu0                                   3            0      7216000
+ebi@1380000.interconnect                         240000     12288000
+  ace0000.camss                          7            0            0
+  ace0000.camss                          7            0            0
+  ace0000.camss                          7            0            0
+  90cd000.pmu                            3            0            0
+  1e40000.ipa                            0            0            0
+  ae00000.display-subsystem              7            0            0
+  ae00000.display-subsystem              7            0            0
+  1d84000.ufshc                          7            0            0
+  ae00000.display-subsystem              7            0            0
+  ae00000.display-subsystem              7            0            0
+  a8c000.i2c                             7            0            0
+  888000.i2c                             7            0            0
+  884000.i2c                             7            0            0
+  880000.spi                             7            0            0
+  8804000.mmc                            7            0            0
+  a6f8800.usb                            7       240000       700000
+  firmware:scm                           7            0            0
+  cpu6                                   3            0     12288000
+  cpu0                                   3            0      7216000
+qhm_spdm@1500000.interconnect                         0            0
+qnm_snoc@1500000.interconnect                         3        40000
+  ace0000.camss                          3            0            0
+  1e40000.ipa                            0            0            0
+  1d84000.ufshc                          7            0            0
+  ae00000.display-subsystem              3            0            0
+  a8c000.i2c                             7            0            0
+  a8c000.i2c                             7            0            0
+  a88000.serial                          7            1            1
+  88c000.serial                          7            2            2
+  888000.i2c                             7            0            0
+  888000.i2c                             7            0            0
+  884000.i2c                             7            0            0
+  884000.i2c                             7            0            0
+  880000.spi                             7            0            0
+  880000.spi                             7            0            0
+  8804000.mmc                            7            0            0
+  a6f8800.usb                            7            0        40000
+xm_qdss_dap@1500000.interconnect                      0            0
+qhs_a1_noc_cfg@1500000.interconnect                   0            0
+qhs_a2_noc_cfg@1500000.interconnect                   0            0
+qhs_ahb2phy_north@1500000.interconnect                0            0
+qhs_ahb2phy_south@1500000.interconnect                0            0
+qhs_ahb2phy_west@1500000.interconnect                 0            0
+qhs_aop@1500000.interconnect                          0            0
+qhs_aoss@1500000.interconnect                         0            0
+qhs_camera_cfg@1500000.interconnect                   0            0
+  ace0000.camss                          3            0            0
+qhs_camera_nrt_thrott_cfg@1500000.interconnect            0            0
+qhs_camera_rt_throttle_cfg@1500000.interconnect            0            0
+qhs_clk_ctl@1500000.interconnect                      0            0
+qhs_compute_dsp_cfg@1500000.interconnect              0            0
+qhs_cpr_cx@1500000.interconnect                       0            0
+qhs_cpr_mx@1500000.interconnect                       0            0
+qhs_crypto0_cfg@1500000.interconnect                  0            0
+qhs_ddrss_cfg@1500000.interconnect                    0            0
+qhs_display_cfg@1500000.interconnect                  0            0
+  ae00000.display-subsystem              3            0            0
+qhs_display_throttle_cfg@1500000.interconnect            0            0
+qhs_emmc_cfg@1500000.interconnect                     0            0
+qhs_glm@1500000.interconnect                          0            0
+qhs_gpuss_cfg@1500000.interconnect                    0            0
+qhs_imem_cfg@1500000.interconnect                     0            0
+qhs_ipa@1500000.interconnect                          0            0
+  1e40000.ipa                            0            0            0
+qhs_mnoc_cfg@1500000.interconnect                     0            0
+qhs_pcie_cfg@1500000.interconnect                     0            0
+qhs_pdm@1500000.interconnect                          0            0
+qhs_pimem_cfg@1500000.interconnect                    0            0
+qhs_prng@1500000.interconnect                         0            0
+qhs_qdss_cfg@1500000.interconnect                     0            0
+qhs_qupv3_center@1500000.interconnect                 2            2
+  88c000.serial                          7            2            2
+  888000.i2c                             7            0            0
+  888000.i2c                             7            0            0
+  884000.i2c                             7            0            0
+  884000.i2c                             7            0            0
+  880000.spi                             7            0            0
+  880000.spi                             7            0            0
+qhs_qupv3_north@1500000.interconnect                  1            1
+  a8c000.i2c                             7            0            0
+  a8c000.i2c                             7            0            0
+  a88000.serial                          7            1            1
+qhs_sdc2@1500000.interconnect                         0            0
+  8804000.mmc                            7            0            0
+qhs_sdc4@1500000.interconnect                         0            0
+qhs_snoc_cfg@1500000.interconnect                     0            0
+qhs_spdm@1500000.interconnect                         0            0
+qhs_tcsr@1500000.interconnect                         0            0
+qhs_tlmm_north@1500000.interconnect                   0            0
+qhs_tlmm_south@1500000.interconnect                   0            0
+qhs_tlmm_west@1500000.interconnect                    0            0
+qhs_tsif@1500000.interconnect                         0            0
+qhs_ufs_mem_cfg@1500000.interconnect                  0            0
+  1d84000.ufshc                          7            0            0
+qhs_usb3_0@1500000.interconnect                       0        40000
+  a6f8800.usb                            7            0        40000
+qhs_venus_cfg@1500000.interconnect                    0            0
+qhs_venus_cvp_throttle_cfg@1500000.interconnect            0            0
+qhs_venus_throttle_cfg@1500000.interconnect            0            0
+qhs_vsense_ctrl_cfg@1500000.interconnect              0            0
+qns_cnoc_a2noc@1500000.interconnect                   0            0
+srvc_cnoc@1500000.interconnect                        0            0
+qhm_snoc_cfg@1620000.interconnect                     0            0
+qnm_aggre1_noc@1620000.interconnect                3318         3200
+  1d84000.ufshc                          7            0            0
+  a8c000.i2c                             7            0            0
+  a8c000.i2c                             7            0            0
+  a88000.serial                          7          115          115
+  a88000.serial                          7            1            1
+  88c000.serial                          7         3200         3200
+  88c000.serial                          7            2            2
+  888000.i2c                             7            0            0
+  888000.i2c                             7            0            0
+  884000.i2c                             7            0            0
+  884000.i2c                             7            0            0
+  880000.spi                             7            0            0
+  880000.spi                             7            0            0
+qnm_aggre2_noc@1620000.interconnect              240000       700000
+  1e40000.ipa                            0            0            0
+  1e40000.ipa                            0            0            0
+  8804000.mmc                            7            0            0
+  a6f8800.usb                            7       240000       700000
+  firmware:scm                           7            0            0
+qnm_gemnoc@1620000.interconnect                       0        40000
+  ace0000.camss                          3            0            0
+  1e40000.ipa                            0            0            0
+  1d84000.ufshc                          7            0            0
+  ae00000.display-subsystem              3            0            0
+  a8c000.i2c                             7            0            0
+  888000.i2c                             7            0            0
+  884000.i2c                             7            0            0
+  880000.spi                             7            0            0
+  8804000.mmc                            7            0            0
+  a6f8800.usb                            7            0        40000
+qxm_pimem@1620000.interconnect                        0            0
+xm_gic@1620000.interconnect                           0            0
+qhs_apss@1620000.interconnect                         0            0
+qns_cnoc@1620000.interconnect                         3        40000
+  ace0000.camss                          3            0            0
+  1e40000.ipa                            0            0            0
+  1d84000.ufshc                          7            0            0
+  ae00000.display-subsystem              3            0            0
+  a8c000.i2c                             7            0            0
+  a8c000.i2c                             7            0            0
+  a88000.serial                          7            1            1
+  88c000.serial                          7            2            2
+  888000.i2c                             7            0            0
+  888000.i2c                             7            0            0
+  884000.i2c                             7            0            0
+  884000.i2c                             7            0            0
+  880000.spi                             7            0            0
+  880000.spi                             7            0            0
+  8804000.mmc                            7            0            0
+  a6f8800.usb                            7            0        40000
+qns_gemnoc_gc@1620000.interconnect                    0            0
+qns_gemnoc_sf@1620000.interconnect               243315       700000
+  1e40000.ipa                            0            0            0
+  1d84000.ufshc                          7            0            0
+  a8c000.i2c                             7            0            0
+  a88000.serial                          7          115          115
+  88c000.serial                          7         3200         3200
+  888000.i2c                             7            0            0
+  884000.i2c                             7            0            0
+  880000.spi                             7            0            0
+  8804000.mmc                            7            0            0
+  a6f8800.usb                            7       240000       700000
+  firmware:scm                           7            0            0
+qxs_imem@1620000.interconnect                         0            0
+  1e40000.ipa                            0            0            0
+qxs_pimem@1620000.interconnect                        0            0
+srvc_snoc@1620000.interconnect                        0            0
+xs_qdss_stm@1620000.interconnect                      0            0
+xs_sys_tcu_cfg@1620000.interconnect                   0            0
+qxm_camnoc_hf0_uncomp@1620000.interconnect:interconnect-0            0            0
+qxm_camnoc_rt_uncomp@1620000.interconnect:interconnect-0            0            0
+qxm_camnoc_sf_uncomp@1620000.interconnect:interconnect-0            0            0
+qxm_camnoc_nrt_uncomp@1620000.interconnect:interconnect-0            0            0
+qns_camnoc_uncomp@1620000.interconnect:interconnect-0            0            0
+qhm_a1noc_cfg@16e0000.interconnect                    0            0
+qhm_qup_center@16e0000.interconnect                   2            2
+  88c000.serial                          7            2            2
+  888000.i2c                             7            0            0
+  888000.i2c                             7            0            0
+  884000.i2c                             7            0            0
+  884000.i2c                             7            0            0
+  880000.spi                             7            0            0
+  880000.spi                             7            0            0
+qhm_tsif@16e0000.interconnect                         1            1
+  a8c000.i2c                             7            0            0
+  a8c000.i2c                             7            0            0
+  a88000.serial                          7            1            1
+xm_emmc@16e0000.interconnect                          0            0
+xm_sdc2@16e0000.interconnect                          0            0
+xm_sdc4@16e0000.interconnect                          0            0
+xm_ufs_mem@16e0000.interconnect                       0            0
+  1d84000.ufshc                          7            0            0
+qns_a1noc_snoc@16e0000.interconnect                   3            2
+  1d84000.ufshc                          7            0            0
+  a8c000.i2c                             7            0            0
+  a8c000.i2c                             7            0            0
+  a88000.serial                          7            1            1
+  88c000.serial                          7            2            2
+  888000.i2c                             7            0            0
+  888000.i2c                             7            0            0
+  884000.i2c                             7            0            0
+  884000.i2c                             7            0            0
+  880000.spi                             7            0            0
+  880000.spi                             7            0            0
+srvc_aggre1_noc@16e0000.interconnect                  0            0
+qhm_a2noc_cfg@1700000.interconnect                    0            0
+qhm_qdss_bam@1700000.interconnect                     0            0
+qhm_qup_north@1700000.interconnect                    0            0
+qnm_cnoc@1700000.interconnect                         0            0
+qxm_crypto@1700000.interconnect                       0            0
+  8804000.mmc                            7            0            0
+  firmware:scm                           7            0            0
+qxm_ipa@1700000.interconnect                          0            0
+  1e40000.ipa                            0            0            0
+  1e40000.ipa                            0            0            0
+xm_pcie3_0@1700000.interconnect                       0            0
+xm_qdss_etr@1700000.interconnect                      0            0
+xm_usb3_0@1700000.interconnect                   240000       700000
+  a6f8800.usb                            7       240000       700000
+qns_a2noc_snoc@1700000.interconnect              240000       700000
+  1e40000.ipa                            0            0            0
+  1e40000.ipa                            0            0            0
+  8804000.mmc                            7            0            0
+  a6f8800.usb                            7       240000       700000
+  firmware:scm                           7            0            0
+qns_pcie_gemnoc@1700000.interconnect                  0            0
+srvc_aggre2_noc@1700000.interconnect                  0            0
+qhm_mnoc_cfg@1740000.interconnect                     0            0
+qxm_camnoc_hf@1740000.interconnect                    0            0
+  ace0000.camss                          7            0            0
+qxm_camnoc_nrt@1740000.interconnect                   0            0
+qxm_camnoc_rt@1740000.interconnect                    0            0
+  ace0000.camss                          7            0            0
+qxm_camnoc_sf@1740000.interconnect                    0            0
+  ace0000.camss                          7            0            0
+qxm_mdp0@1740000.interconnect                         0            0
+  ae00000.display-subsystem              7            0            0
+  ae00000.display-subsystem              7            0            0
+qxm_mdp1@1740000.interconnect                         0            0
+  ae00000.display-subsystem              7            0            0
+  ae00000.display-subsystem              7            0            0
+qxm_rot@1740000.interconnect                          0            0
+qxm_venus0@1740000.interconnect                       0            0
+qxm_venus1@1740000.interconnect                       0            0
+qxm_venus_arm9@1740000.interconnect                   0            0
+qns2_mem_noc@1740000.interconnect                     0            0
+  ace0000.camss                          7            0            0
+qns_mem_noc_hf@1740000.interconnect                   0            0
+  ace0000.camss                          7            0            0
+  ace0000.camss                          7            0            0
+  ae00000.display-subsystem              7            0            0
+  ae00000.display-subsystem              7            0            0
+  ae00000.display-subsystem              7            0            0
+  ae00000.display-subsystem              7            0            0
+srvc_mnoc@1740000.interconnect                        0            0
+qnm_npu@80a8000.interconnect                          0            0
+qns_cdsp_gemnoc@80a8000.interconnect                  0            0
+qhm_cnoc_dc_noc@9160000.interconnect                  0            0
+qhs_gemnoc@9160000.interconnect                       0            0
+qhs_llcc@9160000.interconnect                         0            0
+acm_apps@9680000.interconnect                         0     12288000
+  ace0000.camss                          3            0            0
+  90b6300.pmu                            3            0      4577000
+  1e40000.ipa                            0            0            0
+  1d84000.ufshc                          7            0            0
+  ae00000.display-subsystem              3            0            0
+  a8c000.i2c                             7            0            0
+  888000.i2c                             7            0            0
+  884000.i2c                             7            0            0
+  880000.spi                             7            0            0
+  8804000.mmc                            7            0            0
+  a6f8800.usb                            7            0        40000
+  cpu6                                   3            0     12288000
+  cpu0                                   3            0      7216000
+acm_sys_tcu@9680000.interconnect                      0            0
+qhm_gemnoc_cfg@9680000.interconnect                   0            0
+qnm_cmpnoc@9680000.interconnect                       0            0
+qnm_mnoc_hf@9680000.interconnect                      0            0
+  ace0000.camss                          7            0            0
+  ace0000.camss                          7            0            0
+  ae00000.display-subsystem              7            0            0
+  ae00000.display-subsystem              7            0            0
+  ae00000.display-subsystem              7            0            0
+  ae00000.display-subsystem              7            0            0
+qnm_mnoc_sf@9680000.interconnect                      0            0
+  ace0000.camss                          7            0            0
+qnm_pcie@9680000.interconnect                         0            0
+qnm_snoc_gc@9680000.interconnect                      0            0
+qnm_snoc_sf@9680000.interconnect                 243315       700000
+  1e40000.ipa                            0            0            0
+  1d84000.ufshc                          7            0            0
+  a8c000.i2c                             7            0            0
+  a88000.serial                          7          115          115
+  88c000.serial                          7         3200         3200
+  888000.i2c                             7            0            0
+  884000.i2c                             7            0            0
+  880000.spi                             7            0            0
+  8804000.mmc                            7            0            0
+  a6f8800.usb                            7       240000       700000
+  firmware:scm                           7            0            0
+qxm_gpu@9680000.interconnect                          0            0
+qhs_mdsp_ms_mpu_cfg@9680000.interconnect              0            0
+qns_gem_noc_snoc@9680000.interconnect                 0        40000
+  ace0000.camss                          3            0            0
+  1e40000.ipa                            0            0            0
+  1d84000.ufshc                          7            0            0
+  ae00000.display-subsystem              3            0            0
+  a8c000.i2c                             7            0            0
+  888000.i2c                             7            0            0
+  884000.i2c                             7            0            0
+  880000.spi                             7            0            0
+  8804000.mmc                            7            0            0
+  a6f8800.usb                            7            0        40000
+qns_llcc@9680000.interconnect                    243315     12288000
+  ace0000.camss                          7            0            0
+  ace0000.camss                          7            0            0
+  ace0000.camss                          7            0            0
+  90b6300.pmu                            3            0      4577000
+  1e40000.ipa                            0            0            0
+  ae00000.display-subsystem              7            0            0
+  ae00000.display-subsystem              7            0            0
+  1d84000.ufshc                          7            0            0
+  ae00000.display-subsystem              7            0            0
+  ae00000.display-subsystem              7            0            0
+  a8c000.i2c                             7            0            0
+  a88000.serial                          7          115          115
+  88c000.serial                          7         3200         3200
+  888000.i2c                             7            0            0
+  884000.i2c                             7            0            0
+  880000.spi                             7            0            0
+  8804000.mmc                            7            0            0
+  a6f8800.usb                            7       240000       700000
+  firmware:scm                           7            0            0
+  cpu6                                   3            0     12288000
+  cpu0                                   3            0      7216000
+srvc_gemnoc@9680000.interconnect                      0            0

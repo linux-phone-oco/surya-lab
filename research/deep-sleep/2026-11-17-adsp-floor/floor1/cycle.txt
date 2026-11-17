@@ -1,0 +1,21 @@
+qcom_stats before:
+  cxsd Count: 0 Accumulated Duration: 0 
+  aosd Count: 0 Accumulated Duration: 0 
+  ddr Count: 0 Accumulated Duration: 0 
+  adsp Count: 0 Accumulated Duration: 0 
+  cdsp Count: 64 Accumulated Duration: 24120308200 
+  modem Count: 1936 Accumulated Duration: 21716074373 
+rtcwake: assuming RTC uses UTC ...
+rtcwake: wakeup from "freeze" using /dev/rtc0 at Thu Jan 15 22:33:53 1970
+back: watchdog stopped; RTC 1290834, asleep (RTC) 17 s of 15 asked
+qcom_stats after:
+  cxsd Count: 0 Accumulated Duration: 0 
+  aosd Count: 0 Accumulated Duration: 0 
+  ddr Count: 0 Accumulated Duration: 0 
+  adsp Count: 0 Accumulated Duration: 0 
+  cdsp Count: 64 Accumulated Duration: 24511616295 
+  modem Count: 1944 Accumulated Duration: 22061607590 
+dmesg since the suspend:
+[ 1271.155750] PM: suspend entry (s2idle)
+[ 1273.585866] PM: suspend exit
+hci0 present after resume, rfkill: 1: hci0: Bluetooth 	Soft blocked: no 	Hard blocked: no 

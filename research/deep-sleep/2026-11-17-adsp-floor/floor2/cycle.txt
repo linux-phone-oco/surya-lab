@@ -1,0 +1,28 @@
+qcom_stats before:
+  cxsd Count: 0 Accumulated Duration: 0 
+  aosd Count: 0 Accumulated Duration: 0 
+  ddr Count: 0 Accumulated Duration: 0 
+  adsp Count: 0 Accumulated Duration: 0 
+  cdsp Count: 76 Accumulated Duration: 26457264246 
+  modem Count: 2145 Accumulated Duration: 23524965949 
+rtcwake: assuming RTC uses UTC ...
+rtcwake: wakeup from "freeze" using /dev/rtc0 at Thu Jan 15 22:35:59 1970
+back: watchdog stopped; RTC 1290960, asleep (RTC) 17 s of 15 asked
+qcom_stats after:
+  cxsd Count: 0 Accumulated Duration: 0 
+  aosd Count: 0 Accumulated Duration: 0 
+  ddr Count: 0 Accumulated Duration: 0 
+  adsp Count: 0 Accumulated Duration: 0 
+  cdsp Count: 76 Accumulated Duration: 26457264246 
+  modem Count: 2145 Accumulated Duration: 23524965949 
+dmesg since the suspend:
+[ 1271.155750] PM: suspend entry (s2idle)
+[ 1273.585866] PM: suspend exit
+[ 1273.925572] PM: suspend entry (s2idle)
+[ 1274.456027] PM: suspend exit
+[ 1382.569013] PM: suspend entry (s2idle)
+[ 1382.710499] Modules linked in: rfcomm algif_hash algif_skcipher bnep q6asm_dai q6afe_dai q6afe_clocks q6routing q6voice_dai q6voice q6adm q6cvp q6cvs q6asm q6afe q6mvm q6core snd_q6dsp_common q6voice_common fastrpc snd_soc_sm8250 snd_soc_qcom_offload_utils snd_soc_qcom_sdw qrtr_smd snd_soc_qcom_common rpmsg_ctrl soc_usb rpmsg_char hci_uart btqca btbcm snd_usb_audio bluetooth snd_ump leds_qcom_lpg led_class_multicolor snd_hwdep qcom_pbs ecdh_generic snd_usbmidi_lib ecc snd_rawmidi pwrseq_qcom_wcn qcom_camss videobuf2_dma_sg videobuf2_memops snd_soc_tas2562 qcom_qg videobuf2_v4l2 qcom_spmi_temp_alarm videobuf2_common v4l2_fwnode v4l2_async nxp_nci_i2c nxp_nci nci videodev nfc ath10k_snoc qcom_spmi_adc5 nvmem_qcom_spmi_sdam qcom_stats mc qcom_smbx ath10k_core i2c_qcom_cci aw8695_haptics icc_bwmon ff_memless ath snd_soc_wcd937x snd_soc_wcd937x_sdw mac80211 snd_soc_wcd_common qcom_q6v5_pas regmap_sdw qcom_pd_mapper snd_soc_wcd_classh snd_soc_lpass_rx_macro snd_soc_lpass_tx_macro qcom_pil_info snd_soc_lpass_va_macro
+[ 1382.772124] Modules linked in: rfcomm algif_hash algif_skcipher bnep q6asm_dai q6afe_dai q6afe_clocks q6routing q6voice_dai q6voice q6adm q6cvp q6cvs q6asm q6afe q6mvm q6core snd_q6dsp_common q6voice_common fastrpc snd_soc_sm8250 snd_soc_qcom_offload_utils snd_soc_qcom_sdw qrtr_smd snd_soc_qcom_common rpmsg_ctrl soc_usb rpmsg_char hci_uart btqca btbcm snd_usb_audio bluetooth snd_ump leds_qcom_lpg led_class_multicolor snd_hwdep qcom_pbs ecdh_generic snd_usbmidi_lib ecc snd_rawmidi pwrseq_qcom_wcn qcom_camss videobuf2_dma_sg videobuf2_memops snd_soc_tas2562 qcom_qg videobuf2_v4l2 qcom_spmi_temp_alarm videobuf2_common v4l2_fwnode v4l2_async nxp_nci_i2c nxp_nci nci videodev nfc ath10k_snoc qcom_spmi_adc5 nvmem_qcom_spmi_sdam qcom_stats mc qcom_smbx ath10k_core i2c_qcom_cci aw8695_haptics icc_bwmon ff_memless ath snd_soc_wcd937x snd_soc_wcd937x_sdw mac80211 snd_soc_wcd_common qcom_q6v5_pas regmap_sdw qcom_pd_mapper snd_soc_wcd_classh snd_soc_lpass_rx_macro snd_soc_lpass_tx_macro qcom_pil_info snd_soc_lpass_va_macro
+[ 1382.777594] Modules linked in: rfcomm algif_hash algif_skcipher bnep q6asm_dai q6afe_dai q6afe_clocks q6routing q6voice_dai q6voice q6adm q6cvp q6cvs q6asm q6afe q6mvm q6core snd_q6dsp_common q6voice_common fastrpc snd_soc_sm8250 snd_soc_qcom_offload_utils snd_soc_qcom_sdw qrtr_smd snd_soc_qcom_common rpmsg_ctrl soc_usb rpmsg_char hci_uart btqca btbcm snd_usb_audio bluetooth snd_ump leds_qcom_lpg led_class_multicolor snd_hwdep qcom_pbs ecdh_generic snd_usbmidi_lib ecc snd_rawmidi pwrseq_qcom_wcn qcom_camss videobuf2_dma_sg videobuf2_memops snd_soc_tas2562 qcom_qg videobuf2_v4l2 qcom_spmi_temp_alarm videobuf2_common v4l2_fwnode v4l2_async nxp_nci_i2c nxp_nci nci videodev nfc ath10k_snoc qcom_spmi_adc5 nvmem_qcom_spmi_sdam qcom_stats mc qcom_smbx ath10k_core i2c_qcom_cci aw8695_haptics icc_bwmon ff_memless ath snd_soc_wcd937x snd_soc_wcd937x_sdw mac80211 snd_soc_wcd_common qcom_q6v5_pas regmap_sdw qcom_pd_mapper snd_soc_wcd_classh snd_soc_lpass_rx_macro snd_soc_lpass_tx_macro qcom_pil_info snd_soc_lpass_va_macro
+[ 1382.857883] PM: suspend exit
+hci0 present after resume, rfkill: 1: hci0: Bluetooth 	Soft blocked: no 	Hard blocked: no 
