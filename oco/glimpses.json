@@ -22,3 +22,4 @@
 {"id":"g-20261117-014702","at":"2026-11-17T01:47:02Z","by":"orchestration","kind":"refactor","summary":"surya-lab gives up its own conveyor: devlab reaches, tests and files for it","touches":"decisions:2026-11-17-the-lab-s-own-conveyor-retires"}
 {"id":"g-20261117-020644","at":"2026-11-17T02:06:44Z","by":"devlab","kind":"docs","summary":"xiaomi-surya's own health reports, gathered"}
 {"id":"g-20261117-021012","at":"2026-11-17T02:10:12Z","by":"devlab","kind":"docs","summary":"xiaomi-surya's own health reports, gathered"}
+{"id":"g-20261117-023018","at":"2026-11-17T02:30:18Z","by":"claude","kind":"docs","summary":"Microphone research: the codec drops off both SoundWire buses as the card registers","touches":"sources:vendor-sm6150-lpi-dtsi sources:vendor-sm6150-audio-overlay sources:lineage-sm6150-wcd937x research:microphone-codec-drops-off"}
