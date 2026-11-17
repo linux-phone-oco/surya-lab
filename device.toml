@@ -46,6 +46,12 @@ to = "root:/lib/modules/7.1.0-rc3-sm7150/kernel/sound/soc/codecs/snd-soc-tas2562
 if_exists = "root:/lib/modules/7.1.0-rc3-sm7150"
 
 # the lab's ear (devlab hear): tones played on the phone and heard through the lab's microphone
+# how loud every test sound is (devlab hear, and the suite's TEST_TONE_DBFS and TEST_VOLUME): the author, 2026-11-17 -
+# "sound is fine, just quieter - about 20% volume"; the phone's own microphone sits right by its speakers
+[hear]
+level_dbfs = -20.0
+volume = 20
+
 [[hear.tone]]
 name = "heard-left"
 channel = "left"
