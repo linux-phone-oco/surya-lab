@@ -73,7 +73,6 @@ gaps = [                  # never had working on surya: measured every run, not 
   "sensors",              # the ADSP sensors service is masked: it crash-looped the audio DSP
   "camera-rear",          # no driver exists for any of the 5 sensors
   "camera-front",
-  "audio-mic",            # the WCD9375 capture path: the TX SoundWire bus reads nothing back (bring-up, 2026-11-17)
 ]
 known_failed_units = [
   "qbootctl.service",     # marks an A/B slot good; surya has no A/B slots ("No slots found"), so it always fails
