@@ -82,6 +82,8 @@ freq = 1000
 [health]
 sound_cards = ["POCO X3"]
 checks = "tests/health"   # surya's own: the speaker amplifiers, the microphones, the earpiece, the call audio path
+data_budget_mb = 250       # mobile data the checks may spend a month (the telephony layer's mobile-data, lab-tools):
+                          # the author gave a SIM with 3 GB for tests; ~150 kB a boot and 5 MB a week stay under it
 gaps = [                  # never had working on surya: measured every run, not ill health
   "fingerprint",          # no reader exposed by the kernel
   "sensors",              # the ADSP sensors service is masked: it crash-looped the audio DSP
