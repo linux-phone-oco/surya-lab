@@ -1369,7 +1369,7 @@ Status
 : open
 
 Note
-: r2 ended unscored 2026-11-17 (its own fuse reset the phone after Bluetooth's retry loop stalled a cycle; research 2026-11-17-r2-reboot-was-the-fuse). r3 needs the author's unplugging and a settled Bluetooth treatment first (decision 2026-11-17-r3-waits-on-the-bluetooth-choice) - sent to the surya coordinator
+: r3 ready to arm once the author unplugs: sleep/standby-run.sh (landed, also on the phone in /var/tmp) ends itself on a Bluetooth failure (decision 2026-11-17-r3-stops-itself-when-bluetooth-fails); r1 INVALID, r2 UNSCORED. A reset in the first stalled cycle still ends a run unscored.
 
 About
 : deep-sleep

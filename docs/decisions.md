@@ -549,3 +549,28 @@ About
 
 Research
 : 2026-11-17-r2-reboot-was-the-fuse
+
+
+<a id="2026-11-17-r3-stops-itself-when-bluetooth-fails"></a>
+### 2026-11-17-r3-stops-itself-when-bluetooth-fails
+
+Date
+: 2026-11-17
+
+Brief
+: r3 runs with Bluetooth on but ends itself, unscored, before any cycle after a Bluetooth failure or 4 non-sleeping cycles
+
+Decision
+: Option (a) of 2026-11-17-r3-waits-on-the-bluetooth-choice, taken on the coordinator's order to make r3 safe: standby-run.sh counts hci hardware error / irq 157 nobody cared / freeze refused in dmesg and, once the count rises, or after 4 cycles in a row that slept 0 s, writes STOPPED and ends without another cycle (no fuse can fire then); a run without DONE and a full measure phase is never scored. r1 marked INVALID, r2 UNSCORED on the phone. The first cycle that stalls can still reset the phone; then the run is unscored and the boot journal says so.
+
+Why
+: Bluetooth blocked hangs the phone hard (research 2026-11-17-surya-s2idle-bt-blocked-hang) and irq 157 quieting is untried; (a) changes only the run and keeps the phone as stock.
+
+Rejected
+: (b) BT blocked: hung hard before. (c) quieting irq 157 first: a driver/dt change no research decided.
+
+About
+: deep-sleep
+
+Research
+: 2026-11-17-r2-reboot-was-the-fuse
