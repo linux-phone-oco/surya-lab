@@ -80,3 +80,12 @@ known_warnings = [
 adsp = "audio-speaker"
 cdsp = "kernel"
 modem = "modem-data"
+
+# paths devlab refuses to carry to the phone (devlab guard): reading them can hang the phone
+[[hazard]]
+path = "/sys/kernel/debug/gpio"
+why = "dumps every GPIO chip, the LPASS LPI pins among them; with an LPI driver that maps the sensor DSP's pins (0x62b40000-0x62b51fff, the 32-pin driver of the WCD test kernels) the read stalls the bus and the phone hangs until a person holds power (2026-11-17, ~02:15 UTC)"
+
+[[hazard]]
+path = "/sys/kernel/debug/pinctrl/62b40000"
+why = "the LPASS LPI pin controller registered from 0x62b40000 includes the sensor DSP's pins; reading its pins or pinconf there faults the bus and hangs the phone (2026-11-17). The branch driver's controller at 62b52000 maps only the 14 pins after them"
