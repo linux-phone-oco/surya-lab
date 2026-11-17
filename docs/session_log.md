@@ -1048,3 +1048,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-17-2300-r3-scored-partial"></a>
+### r3 scored partial, reset cause read
+
+Entry date
+: 2026-11-17
+
+Done
+: Read r3's logs and boot -1: abort rule fired first (BT, irq 157, 21:41:39Z), reset ~21:45Z after it in BT retries; scored 63 min partial, median 31 mA, 63% asleep; recorded research and decision for r4.
+
+Considered
+: next: author unplugs, r4 with noirqdebug
+
+About
+: deep-sleep
