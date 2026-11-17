@@ -3,15 +3,11 @@
 # on the earpiece and records the microphone through the call (devlab-call-uplink). The tone goes up, comes
 # back from the echo line, plays again, is heard again: 1 to 2 s after the tone ended it is still there,
 # which only the echo can make. devlab-health tone find decides (20 dB above the noise). ~30 s of a call a
-# day; other runs tell that day's result again. Skipped without registration or a sound server.
+# day; other runs that day skip ("ran today"). Skipped without registration or a sound server.
 . /usr/lib/devlab/health/lib.sh
 num=${CALL_ECHO_NUMBER:-+498972101099701}
-last=/var/lib/devlab/call-echo.last
-# the telephony layer: once a day (lib.sh); on later runs that day, the day's result is told again
-if ! once_a_day call-echo; then
-	[ -f "$last" ] || { say call-echo modem-calls skip "ran today"; exit 0; }
-	set -- $(cat "$last"); outcome=$1; shift; say call-echo modem-calls "$outcome" "today's call (one a day): $*"; exit 0
-fi
+# the telephony layer: once a day (lib.sh); other runs that day measure nothing and say so
+once_a_day call-echo || { say call-echo modem-calls skip "ran today"; exit 0; }
 [ -n "$(session_user)" ] || { say call-echo modem-calls skip "no graphical session: no sound server"; exit 0; }
 state=$(mmcli -m any 2>/dev/null | awk -F': ' '/ state:/{gsub(/\033\[[0-9;]*m/,"",$2); print $2; exit}')
 case $state in registered|connected) ;; *) say call-echo modem-calls skip "modem state ${state:-unknown}"; exit 0 ;; esac
@@ -52,5 +48,4 @@ else
 	outcome=fail
 fi
 rm -f "$raw"
-echo "$outcome $detail" > "$last"
 say call-echo modem-calls "$outcome" "$detail"
