@@ -1030,3 +1030,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-17-2135-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-17
+
+Done
+: Kept kernel 7.1.0-sm7150-calls+ and kept dtb, stock services as before, booted 20:25 healthy after r2's fuse reset; r2 closed unscored (its stalled Bluetooth retry loop outlasted the 30 s fuse); suite as at 20:26: pass, with known gaps and no SIM skips
+
+Considered
+: next: the surya coordinator picks how r3 treats Bluetooth (decision 2026-11-17-r3-waits-on-the-bluetooth-choice), then the author unplugs again; meanwhile sensors-without-crash, sleep-fastrpc-helpers
+
+About
+: deep-sleep

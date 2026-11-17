@@ -3,11 +3,11 @@
 # Index
 
 - [Backlog](backlog.md): 50
-- [Decisions](decisions.md): 23
+- [Decisions](decisions.md): 24
 - [Devices](devices.md): 0
 - [Parts](parts.md): 20
-- [Research](research.md): 34
-- [Session Log](session_log.md): 57
+- [Research](research.md): 35
+- [Session Log](session_log.md): 58
 - [Sources](sources.md): 0
 - [Summaries](summaries.md): 0
 - [Test Results](test_results.md): 5456

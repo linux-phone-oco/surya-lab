@@ -1366,10 +1366,10 @@ Proof
 ### Standby current measured beside Android's
 
 Status
-: in-progress
+: open
 
 Note
-: r2 armed 2026-11-17 20:08Z (unit standby-r2, /var/tmp/standby-r2): waits for the cable to be pulled, then 10 min settle + 60 min measure; then a keeper reads samples.tsv and records the figure
+: r2 ended unscored 2026-11-17 (its own fuse reset the phone after Bluetooth's retry loop stalled a cycle; research 2026-11-17-r2-reboot-was-the-fuse). r3 needs the author's unplugging and a settled Bluetooth treatment first (decision 2026-11-17-r3-waits-on-the-bluetooth-choice) - sent to the surya coordinator
 
 About
 : deep-sleep
@@ -1410,10 +1410,10 @@ Needs
 ### Why surya rebooted by itself during standby run r2
 
 Status
-: open
+: done
 
 Note
-: The author: surya rebooted without anyone touching it, ~15-20 min after he unplugged, during r2. Suspect: the 30 s watchdog firing in/around suspend (the mechanism that caps sleeps at 15 s) - find out, do not assume. Read (USB is plugged back in): pstore/ramoops, the previous boot's journal (journalctl -b -1), the boot reason, r2's own log (/var/tmp/standby-r2/) up to the reboot, the watchdog state (way-back.sh) and suspend_stats. Then: do r2's samples before the reboot count (only charger_online=0 ones, unscored if the run did not complete the 60 min), and how r3 avoids it (watchdog petted/disarmed correctly across suspend, or the unit surviving a reboot). Record as research + decision; make r3 ready ('ready to unplug' to the coordinator: a new run needs the author to unplug again). One change at a time.
+: proven by research 2026-11-17-r2-reboot-was-the-fuse (pstore console, journal, r2 logs read); r3 waits on decision 2026-11-17-r3-waits-on-the-bluetooth-choice, which the surya coordinator takes
 
 About
 : deep-sleep

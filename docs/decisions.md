@@ -524,3 +524,28 @@ About
 
 Research
 : mic-zeros-meant-no-input
+
+
+<a id="2026-11-17-r3-waits-on-the-bluetooth-choice"></a>
+### 2026-11-17-r3-waits-on-the-bluetooth-choice
+
+Date
+: 2026-11-17
+
+Brief
+: r3 does not start until the lane coordinator picks how the run treats Bluetooth; r2's samples are not scored
+
+Decision
+: r2 is closed unscored. r3 (a run that needs the author to unplug again) is not armed yet: the run must survive Bluetooth's failure, and that has three ways, a turning point sent to the surya coordinator: (a) bt-on as now, but the loop stops itself and writes BAD when a cycle sleeps 0 s twice in a row or hci0 reports a hardware error, so it ends with an honest 'not measured' instead of a reset; (b) Bluetooth rfkill-blocked for the run (it hung the phone hard in cycle 15 with BT blocked, research 2026-11-17-surya-s2idle-bt-blocked-hang, so only with the watchdog fuse and the UART wake irq handled); (c) the QCA UART irq 157 quieted first (research 2026-11-17-qca-uart-wake-across-suspend: the serial's power/wakeup switch).
+
+Why
+: The cause is in the run's own design, not the phone: a stalled cycle past the 30 s fuse resets it, so any r3 on the same script meets the same end once BT fails, and each try costs the author an unplugging.
+
+Rejected
+: Re-arm r3 unchanged: the same stall resets it again and costs the author's hands. A longer fuse: the qcom watchdog counts 32 s at most.
+
+About
+: deep-sleep
+
+Research
+: 2026-11-17-r2-reboot-was-the-fuse
