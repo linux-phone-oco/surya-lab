@@ -1,0 +1,3 @@
+# Alpine edge's community repository under the tag @edge, for single packages the stable branch has too old:
+# tqftpserv >= 1.2 (see provision/packages.txt). Only packages named name@edge come from here.
+@edge http://dl-cdn.alpinelinux.org/alpine/edge/community

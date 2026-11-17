@@ -4,3 +4,7 @@ firefox
 # libada.so.3 while ada is 4.0, so it cannot install and would fail the whole list.
 # Uncomment when `apk add --simulate telegram-desktop` passes on the phone.
 i2c-tools
+# the modem needs tqftpserv >= 1.2: 1.1.1 never writes the modem's short state files (/readwrite/*.tmp), so
+# the modem never leaves 'shutting-down' and the SIM reads as missing (pmaports #4441; fixed upstream in
+# tqftpserv 9ef11c0). Alpine v3.24 has 1.1.1; edge has 1.3. From edge until stable carries it.
+tqftpserv@edge
