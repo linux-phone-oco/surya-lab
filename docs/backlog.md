@@ -1344,10 +1344,10 @@ Proof
 ### Sensors kept: hexagonrpcd with a served version marker made lasting, three boots without an ADSP crash
 
 Status
-: open
+: done
 
 Note
-: Re-shaped 2026-11-17 by the fallback's success (research 2026-11-17-sns-reg-version-served): the mtime route alone left the DSP writing (probe), but hexagonrpcd of PR #27 plus the 62-line patch surya-lab/patches/hexagonrpcd-sns-reg-version.patch ran sensorspd 150 s with 0 crashes and gave accelerometer, light, proximity and compass through iio-sensor-proxy. To do: build that daemon as a package or a flash step (static aarch64 by hand so far, meson is not on the lab), a state root made from the package tree (config, registry, sns_reg.conf, dsp, acdb, socinfo; registry also copied to sensors/persist/registry/registry; owner fastrpc), a drop-in for hexagonrpcd-adsp-sensorspd with -R STATE and the unit unmasked in device.toml (rootpd stays masked), the helper across suspend (sensors-across-suspend), 'sensors' out of [health] gaps. One try per boot: a restart loop can leave the sensor PD unusable until reboot. Proven by three boots in a row with motion-and-light and proximity-reads passing, no-processor-crashes passing and the microphone and call checks unchanged. Then upstream (sensors-upstream; the patch to shape for hexagonrpc #19/#29).
+: proven by three boots, 0 ADSP crashes, motion-and-light and proximity-reads pass (research 2026-11-17-sensors-lasting-install-three-boots); suspend with the helper left to sensors-across-suspend (1 crash after a 10 s freeze, n=1)
 
 About
 : sensors
@@ -1366,13 +1366,16 @@ Proof
 ### Standby current measured beside Android's
 
 Status
-: in-progress
+: open
 
 Note
-: r3 partial (63 min, median 31 mA, 63% asleep; 15/9 mA not met; Android not known yet); r4 = decision 2026-11-17-r4-quiets-irq-157-and-stops-bluetooth-retries, waits on the author's unplug
+: r4 waits on devlab-kernel-try-cmdline (noirqdebug one-shot), then the author's unplug
 
 Waits
 : author unplug; coordinator confirms noirqdebug
+
+Blocked by
+: devlab-kernel-try-cmdline
 
 About
 : deep-sleep
@@ -1457,3 +1460,47 @@ Proof
 
 Rank
 : 3
+
+
+<a id="devlab-kernel-try-cmdline"></a>
+### devlab kernel try NAME --cmdline: a one-shot kernel command line
+
+Status
+: open
+
+Note
+: lab-tools change (coordinator routing it): one-shot entry NAME-cmd falling back by itself like --dtb; needed for noirqdebug in r4
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-17
+
+Needs
+: build
+
+Proof
+: devlab kernel try NAME --cmdline noirqdebug boots with it in /proc/cmdline once, then stock/kept
+
+
+<a id="sensors-proximity-cover-witnessed"></a>
+### Witnessed: cover the proximity sensor at the ear, see the reading go near
+
+Status
+: open
+
+Note
+: Expect: monitor-sensor --proximity prints near: 1 when a hand covers the top bezel and near: 0 when removed; ask the author for go before running it
+
+Waits
+: the author: hand over the top of the phone
+
+About
+: sensors-proximity-in-calls
+
+Opened
+: 2026-11-17
+
+Needs
+: phone

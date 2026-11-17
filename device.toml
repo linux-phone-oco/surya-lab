@@ -27,7 +27,9 @@ when = "command -v sxmo_init.sh"
 sector_size = 4096
 dtb = "esp:dtbs/qcom/sm7150-xiaomi-surya-huaxing.dtb"
 # masked services:
-#  - sensorspd: the ADSP crash-looped with the sensors service on (its registry init needs writes hexagonrpcd refuses)
+#  - sensorspd: the ADSP crash-looped with the sensors service on (its registry init needs writes stock hexagonrpcd refuses);
+#    a flashed phone keeps it masked until lab/sensors-install.sh (patched daemon + writable state root) has run on it,
+#    which unmasks it (backlog sensors-without-crash)
 #  - rootpd: with this FastRPC helper attached, the ADSP died on every suspend attempt (24 of 24; 0 of 9 without it);
 #    sound does not need it
 mask = ["hexagonrpcd-adsp-sensorspd.service", "hexagonrpcd-adsp-rootpd.service"]
@@ -107,7 +109,6 @@ data_budget_mb = 250       # mobile data the checks may spend a month (the telep
                           # the author gave a SIM with 3 GB for tests; ~150 kB a boot and 5 MB a week stay under it
 gaps = [                  # never had working on surya: measured every run, not ill health
   "fingerprint",          # no reader exposed by the kernel
-  "sensors",              # the ADSP sensors service is masked: it crash-looped the audio DSP
   "camera-rear",          # no driver exists for any of the 5 sensors
   "camera-front",
 ]
