@@ -7,7 +7,9 @@
 . /usr/lib/devlab/health/lib.sh
 num=${CALL_ECHO_NUMBER:-+498972101099701}
 last=/var/lib/devlab/call-echo.last
-if [ -f "$last" ] && [ $(( $(date +%s) - $(stat -c %Y "$last") )) -lt 72000 ]; then
+# the telephony layer: once a day (lib.sh); on later runs that day, the day's result is told again
+if ! once_a_day call-echo; then
+	[ -f "$last" ] || { say call-echo modem-calls skip "ran today"; exit 0; }
 	set -- $(cat "$last"); outcome=$1; shift; say call-echo modem-calls "$outcome" "today's call (one a day): $*"; exit 0
 fi
 [ -n "$(session_user)" ] || { say call-echo modem-calls skip "no graphical session: no sound server"; exit 0; }
