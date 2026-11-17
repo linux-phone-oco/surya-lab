@@ -5,6 +5,7 @@
 . /usr/lib/devlab/health/lib.sh
 num=$(cat /etc/devlab/private/own-number 2>/dev/null)
 [ -n "$num" ] || { say sms-loopback modem-sms skip "no own number on the phone (/etc/devlab/private/own-number)"; exit 0; }
+no_sim && { say sms-loopback modem-sms skip "no SIM card"; exit 0; }
 state=$(mmcli -m any 2>/dev/null | awk -F': ' '/ state:/{gsub(/\033\[[0-9;]*m/,"",$2); print $2; exit}')
 case $state in registered|connected|connecting) ;; *) say sms-loopback modem-sms skip "modem state ${state:-unknown}"; exit 0 ;; esac
 # the telephony layer: once a day (lib.sh); other runs that day measure nothing and say so

@@ -6,6 +6,7 @@
 # day; other runs that day skip ("ran today"). Skipped without registration or a sound server.
 . /usr/lib/devlab/health/lib.sh
 num=${CALL_ECHO_NUMBER:-+498972101099701}
+no_sim && { say call-echo modem-calls skip "no SIM card"; exit 0; }   # before the day is marked: a skip costs nothing
 # the telephony layer: once a day (lib.sh); other runs that day measure nothing and say so
 once_a_day call-echo || { say call-echo modem-calls skip "ran today"; exit 0; }
 [ -n "$(session_user)" ] || { say call-echo modem-calls skip "no graphical session: no sound server"; exit 0; }
