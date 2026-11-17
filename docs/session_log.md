@@ -1132,3 +1132,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-0058-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-17
+
+Done
+: Kept kernel 7.1.0-sm7150-calls+ and kept dtb, booted 00:56 CET, health 37 pass / 3 known gaps / 0 fail, nothing armed; the only queue item (sleep-standby-current, r4) needs the author's unplug, nothing else waits on nothing
+
+Considered
+: next: arm r4 per the coordinator's plan (no noirqdebug, sensorspd stopped, Bluetooth on) when the author can unplug; step 1 (cmdline-only install) no longer needed under that plan; sensors-across-suspend; proximity cover witnessed test
+
+About
+: deep-sleep
