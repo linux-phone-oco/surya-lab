@@ -102,6 +102,16 @@ interfaces: TX (device `sdw:3:0:0217:010a:00:3`, which also carries the codec's 
    maps from 0x62b52000 and reads were fine during a capture. Never dump LPI pins on a kernel whose LPI
    driver maps the SSC range.
 
+16. **Which reset question each note answered.** Three different questions about the codec's reset
+   were asked, and the record reads consistently only when they are kept apart:
+   - *The active level* (2026-11-11, before the pin-mux fix, in the draft to sm7150-mainline): driving
+     the reset pin high or holding it as a GPIO low gave the same failure - "not the reset pin" meant
+     only this; the failure then was the TX bus clash, fixed by the pin mux.
+   - *The sleep state* (2026-11-17, step 7): ASoC selects the codec's sleep pin state whenever it is
+     idle, and that state drove the reset low - the cause of the drop at card registration.
+   - *The polarity and mux on the branch* (2026-11-17, step 12): the pushed device tree declared the
+     reset active-high and muxed it to `cdc_pdm_rx`. Fixed together with the sleep state in PR #4.
+
 ## What the vendor's GPL sources say
 
 - The pin functions of the SoundWire pins agree with mainline's corrected table (gpio19 func3, gpio20
