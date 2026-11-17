@@ -59,12 +59,13 @@ freq = 1000
 # what the phone's own health suite expects (devlab suite put now; lab-tools/health)
 [health]
 sound_cards = ["POCO X3"]
-checks = "tests/health"   # surya's own: the speaker amplifiers
+checks = "tests/health"   # surya's own: the speaker amplifiers, the main microphone
 gaps = [                  # never had working on surya: measured every run, not ill health
   "fingerprint",          # no reader exposed by the kernel
   "sensors",              # the ADSP sensors service is masked: it crash-looped the audio DSP
   "camera-rear",          # no driver exists for any of the 5 sensors
   "camera-front",
+  "audio-mic",            # the WCD9375 capture path: the TX SoundWire bus reads nothing back (bring-up, 2026-11-17)
 ]
 known_failed_units = [
   "qbootctl.service",     # marks an A/B slot good; surya has no A/B slots ("No slots found"), so it always fails
