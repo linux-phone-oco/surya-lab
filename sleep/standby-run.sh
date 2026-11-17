@@ -9,7 +9,7 @@
 # against voltage_ocv): charge_counter is logged as 'na'. Samples with the charger online are to be discarded.
 # Armed first: with USB power present it waits (file ARMED), never cycles or scores; phase "usb" samples are never scored.
 set -u
-id=${1:?run id}; settle=${2:-600}; measure=${3:-3600}
+id=${1:?run id}; settle=${2:-600}; measure=${3:-4500}
 d=/var/tmp/standby-$id; mkdir -p "$d"; t=$d/samples.tsv; c=$d/cycles.log
 b=/sys/class/power_supply/qcom_qg; ch=/sys/class/power_supply/pm8150b-charger
 rd() { cat "$1" 2>/dev/null || echo na; }
@@ -20,18 +20,19 @@ mono() { cut -d' ' -f1 /proc/uptime; }
   echo "screen: $(cat /sys/class/backlight/*/brightness 2>/dev/null | tr '\n' ' ')"; } > "$d/header.txt"
 printf 'mono_s\tphase\tbat_status\tcharger_online\tcurrent_now_uA\tcurrent_avg_uA\tcharge_counter\tcapacity\tvoltage_now_uV\tvoltage_ocv_uV\ttemp\tsuspends\tsuspended_s_cum\twake_events\n' > "$t"
 # USB guard (r1 was invalid: the cable stayed in). While any USB source is online the run REFUSES to start
-# scoring: it only waits ("ARMED" file, no suspend cycles, no samples) until the cable is out for 3 polls in a row,
-# at most ARM_S (default 10800) seconds, then ends with REFUSED. Samples with the charger online are marked phase
+# scoring: it only waits ("ARMED" file, no suspend cycles, no samples) until the cable is out for 60 s (12 polls),
+# at most ARM_S (default 1800) seconds, then ends with REFUSED. Samples with the charger online are marked phase
 # 'usb' and are never scored (a re-plugged cable mid-run shows up so, not as standby).
 usb_in() { for p in /sys/class/power_supply/*; do [ "$(rd $p/type)" = USB ] && [ "$(rd $p/online)" = 1 ] && return 0; done; return 1; }
-arm=${ARM_S:-10800}
+arm=${ARM_S:-1800}
 if usb_in; then
 	echo "USB power is present since $(date -u +%FT%TZ): NOT scoring; waiting for the cable to be pulled (up to ${arm}s)" > "$d/ARMED"
+	echo "REFUSED-TO-SCORE: USB power present at start $(date -u +%FT%TZ); scoring only after 60 s without it" >> "$d/header.txt"
 	echo "standby-run $id: USB power present, refusing to score until it is pulled" | systemd-cat -p warning -t standby-run 2>/dev/null
 	a0=$(mono); gone=0
-	while [ "$gone" -lt 3 ]; do
+	while [ "$gone" -lt 12 ]; do
 		usb_in && gone=0 || gone=$((gone + 1))
-		[ "$(awk -v a="$(mono)" -v b="$a0" 'BEGIN{printf "%d", a-b}')" -ge "$arm" ] && { echo "REFUSED: USB power still present after ${arm}s, nothing scored" > "$d/REFUSED"; exit 1; }
+		[ "$(awk -v a="$(mono)" -v b="$a0" 'BEGIN{printf "%d", a-b}')" -ge "$arm" ] && { echo "REFUSED: never unplugged - USB power still present after ${arm}s, nothing scored" > "$d/REFUSED"; exit 1; }
 		sleep 5
 	done
 	echo "USB power gone at $(date -u +%FT%TZ): scoring starts" >> "$d/ARMED"
