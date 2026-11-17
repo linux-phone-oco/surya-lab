@@ -5,6 +5,11 @@ Measured on the phone on 2026-11-17 by the bring-up session, in one-off test ker
 device tree and the LPASS pin-mux fix, plus experiment switches). Records of the earlier work:
 `~/Projects/surya-audio/wcd-boots/` on the lab machine.
 
+> **Read with step 17.** Steps 10, 11 and 14 treat surya's built-in microphones as digital mics, from the
+> vendor's QRD reference board; that is wrong for surya. They are analog: WCD9375 ADC1 (bottom) and ADC2
+> via INP3 (top), both proven by mic-hears-speaker. The DMIC path is dropped (docs decision
+> 2026-11-17-microphones-analog-wcd-path).
+
 ## The chain
 
 Main microphone -> WCD9375 (ADC1) -> TX SoundWire bus (controller `62ed0000`, v1.5) -> LPASS TX macro
