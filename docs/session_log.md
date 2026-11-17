@@ -13,3 +13,966 @@ Done
 
 Considered
 : Recording this in docs as before; the base is the place from now on, so its first row is its own making.
+
+---
+
+
+<a id="2026-11-11-cameras-understood"></a>
+### The cameras' fault, understood
+
+Entry date
+: 2026-11-11
+
+Done
+: Both cameras stay broken, but for a stated reason and with a way in: nothing describes the sensors; the wiring of seven slots is known from the vendor's kernel; the models are not.
+
+Considered
+: Naming sensor models from reports.
+
+Rejected
+: That: hearsay until a chip answers.
+
+About
+: camera-rear
+
+---
+
+
+<a id="2026-11-11-microphone-nearly"></a>
+### The microphone's chain, nearly whole
+
+Entry date
+: 2026-11-11
+
+Done
+: For the first time the test kernel brought the whole microphone chain up to the codec; one timeout stands between it and a sound card. Measured: the right channel is the bottom speaker.
+
+Considered
+: Booting again without reading the bootloader's record.
+
+Rejected
+: That: three wrong theories cost three reboots.
+
+About
+: audio-mic
+
+---
+
+
+<a id="2026-11-11-recording-tries"></a>
+### The microphone: the route is set, the stream does not start
+
+Entry date
+: 2026-11-11
+
+Done
+: In the test kernel the main-microphone route sets cleanly; starting a recording fails as the TX SoundWire bus loses the codec when it is reshaped for the stream. Power management ruled out. Next: the bus and port parameters, against the phone's Android kernel.
+
+Considered
+: Keeping the bus awake.
+
+Rejected
+: That as the answer.
+
+About
+: audio-mic
+
+---
+
+
+<a id="2026-11-17-deep-sleep-researched"></a>
+### Deep sleep researched: the path chosen and measured where it starts
+
+Entry date
+: 2026-11-17
+
+Done
+: The first feature research (prompts/feature-research.md), signed research-deep-sleep. surya read without a change: s2idle only, OS-initiated PSCI, the SoC's sleep counters readable, no suspend yet in a measured boot, CX collapse and AOSS sleep at 0, the audio DSP never asleep, the deepest cluster state never entered. Six research rows (how Qualcomm reaches its floor, what blocks it, the SM7150 cluster parameters against surya's own tables, waking for calls, the other ways, surya measured), the decision with four ways rejected, six steps on the backlog each with its proof, a deep-sleep part with surya's row unknown, and the check soc-sleeps in lab-tools' suite. docs now shares its research and sources tables.
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-10-flashed-by-devlab"></a>
+### Flashed by devlab; the shell flash script retired
+
+Entry date
+: 2026-11-10
+
+Done
+: surya flashed from the pristine stock image by devlab flash and brought back by devlab provision, all 20 checks passing; flash.sh removed, as planned once devlab had done a real flash. A new check, root-fills-its-partition: the first boot had left the system at 2 GB on a 104 GB partition.
+
+Considered
+: Keeping flash.sh as a fallback.
+
+Rejected
+: That: two ways to flash drift apart; the shell original stays in git history.
+
+---
+
+
+<a id="2026-11-10-heard"></a>
+### Both speakers heard - then withdrawn
+
+Entry date
+: 2026-11-10
+
+Done
+: With the author's EarPods as the lab's microphone, devlab hear played a 1000 Hz tone on each speaker and heard both: left at -24.0 dBFS, right at -29.2 dBFS, each over 70 dB above the silent room. The tones are in the manifest. Observed, not judged: the right read 5 dB quieter - the microphone's place or the speakers themselves; one measurement cannot say. WITHDRAWN the same day: the microphone was worn by the author and moved; neither the levels nor the 5 dB difference can be relied on.
+
+Considered
+: Calling the 5 dB a fault.
+
+Rejected
+: That, on one measurement from one position.
+
+About
+: audio-speaker
+
+---
+
+
+<a id="2026-11-10-its-idea"></a>
+### The lab's idea, told for anyone
+
+Entry date
+: 2026-11-10
+
+Done
+: What this lab is - one particular phone, everything true of it written down, experiments that fall back by themselves - as a piece of writing for a reader who knows nothing of it.
+
+Rejected
+: A list of files.
+
+---
+
+
+<a id="2026-11-10-suspend-crash-found"></a>
+### The suspend crash found: a FastRPC helper attached at suspend
+
+Entry date
+: 2026-11-10
+
+Done
+: After the flash the audio DSP died on every suspend attempt (the attempts abort at once: the USB link cannot go idle). Found by experiment, one change at a time: not a first-boot effect (9 of 9 on the second boot), not the sensor proxy (15 of 15 without it), but hexagonrpcd's RootPD helper - 0 of 8 without it, and 0 of 9 on a clean boot with it masked, all 21 checks passing. Masked in the manifest, so every flash has it. The check's resume counter, which always said 0, rewritten in awk and checked against a boot with 24.
+
+Considered
+: A hand-made change the manifest lacked; a first-boot effect; the sensor proxy; a stream left open.
+
+Rejected
+: All four, each by its own measurement. The old 'rare' crash was the same one: there the helper died with the first crashes and stayed down.
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-10-the-ear-withdrawn"></a>
+### What the ear heard is withdrawn
+
+Entry date
+: 2026-11-10
+
+Done
+: The microphone was the author's earphones, worn on his head: its distance from the phone changed as he moved. The levels measured, the difference seen between the two speakers, and the passes themselves cannot be relied on. The heard checks are out of the baseline and the lab's microphone is un-named until one is fixed in place; the tool stays, proven to work mechanically.
+
+Considered
+: Keeping the results with a caveat.
+
+Rejected
+: That: evidence from an instrument that moves is not evidence, and a later failure would have looked like the phone getting worse.
+
+---
+
+
+<a id="2026-11-10-usb-flapping"></a>
+### The USB link no longer flaps
+
+Entry date
+: 2026-11-10
+
+Done
+: Reported by the author: the phone kept reconnecting on his PC (26 USB disconnects in 5 minutes on the lab machine). On USB a suspend cannot complete, and the shell retried every 12 seconds, each attempt dropping the link. A small service holds a kernel wake lock while the port is connected to a host - independent of any shell - baked in by the manifest, with a check. Known before, never written down: it is now.
+
+Considered
+: Changing the shell's suspend hook.
+
+Rejected
+: That: a fix inside one shell does not hold under another, or under none.
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-11-more-measured"></a>
+### More of the phone, measured
+
+Entry date
+: 2026-11-11
+
+Done
+: Eight of the phone's twenty parts stood as unknown. The checks now also ask: is Wi-Fi joined and does the gateway answer; is Bluetooth powered and does it hear anything; is there a SIM and is the modem ready; does the kernel expose a headset-jack detector, a fingerprint reader, any motion or light sensor, any image sensor behind the camera pipeline. All read-only.
+
+Considered
+: Marking parts as working from a device node alone.
+
+Rejected
+: That: there and set up is what a machine can prove; the rest are witnessed tests.
+
+---
+
+
+<a id="2026-11-11-port-table-cleared"></a>
+### The port table cleared; a boot spent on a missing tool
+
+Entry date
+: 2026-11-11
+
+Done
+: The TX bus's port layout and timings match mainline sm8250 and the vendor's layout for the ports in use - not the cause. A boot to dump the SoundWire registers found this kernel has no SoundWire debugfs.
+
+Considered
+: Seven ports against the vendor's five as the cause.
+
+Rejected
+: That, after comparing the ports actually used. And booting before checking the tool exists - a lesson: check the instrument first.
+
+---
+
+
+<a id="2026-11-11-the-cameras-understood"></a>
+### Why the cameras are dark, and the way in
+
+Entry date
+: 2026-11-11
+
+Done
+: Read from the phone and from sources, changing nothing: the camera pipeline and its control buses work; the phone's description lists no sensor. The vendor's kernel yields the wiring of seven sensor slots but no model names. Written up with the wiring table and a four-step way in (research/cameras.md).
+
+Considered
+: Describing the sensors from the models reported for this phone elsewhere.
+
+Rejected
+: That: hearsay. A chip should say what it is, on its own bus, before a driver is bound to it.
+
+About
+: camera-rear
+
+---
+
+
+<a id="2026-11-11-the-codec-comes-up"></a>
+### The microphone codec comes up
+
+Entry date
+: 2026-11-11
+
+Done
+: Traced the codec's timeout to a bus clash on the microphone-side SoundWire bus, and that to one pin muxed to the wrong function in the audio pin driver (and one more on the receive side), read against the phone's own Android kernel. Corrected and rebuilt: the codec initialises and the sound card is made with it. Recording through it is next.
+
+Considered
+: The macros' autosuspend; the upstream revert (it gives no reason).
+
+Rejected
+: Guessing at clock fixes.
+
+About
+: audio-mic
+
+---
+
+
+<a id="2026-11-11-the-microphone-frontier"></a>
+### The microphone's chain, nearly whole
+
+Entry date
+: 2026-11-11
+
+Done
+: Booted the microphone test kernel (after finding the earlier tries had been given a gzip kernel): for the first time everything up to the codec came up; the card fails on one timeout. Measured which speaker is the bottom one. Saw a boot with no sound card and recorded it.
+
+Considered
+: Theories about the bootloader.
+
+Rejected
+: Acting before reading the bootloader's own record.
+
+About
+: audio-mic
+
+---
+
+
+<a id="2026-11-11-the-modem-with-a-sim"></a>
+### The modem with a SIM
+
+Entry date
+: 2026-11-11
+
+Done
+: The SIM is seen and ready (1&1). The modem stays shutting-down and refuses to go online, even after a reboot; it loops on one file through tqftpserv, ending each read itself. One theory - a missing read-write directory - was checked and is wrong: the directory exists.
+
+Considered
+: A missing directory.
+
+Rejected
+: That: the program's own paths showed it exists.
+
+About
+: modem-data
+
+---
+
+
+<a id="2026-11-11-the-recording-map"></a>
+### The map to a first recording
+
+Entry date
+: 2026-11-11
+
+Done
+: Listed the codec's recording side in the test kernel and read how the phone's own Android build routes its main microphone; the names match closely. Found that the kernel branch's pin driver differs from the tested tree - the fix is to be ported, not pasted.
+
+Considered
+: Pasting the table change into the branch.
+
+Rejected
+: That: the branch's driver is not the one that was tested.
+
+About
+: audio-mic
+
+---
+
+
+<a id="2026-11-11-two-recording-tries"></a>
+### Two recording tries
+
+Entry date
+: 2026-11-11
+
+Done
+: The main-microphone route from the phone's Android build sets cleanly in the test kernel; the capture stream fails when it starts - the TX bus loses the codec exactly when it is reshaped for the stream. Ruled out power management. Measured the audio processor's once-a-second handover signal.
+
+Considered
+: Keeping the bus awake.
+
+Rejected
+: That as the answer: it changed nothing.
+
+About
+: audio-mic
+
+---
+
+
+<a id="2026-11-17-health-on-the-phone"></a>
+### surya checks its own health after every boot
+
+Entry date
+: 2026-11-17
+
+Done
+: The manifest says what surya is expected to have ([health]: its sound card, three signal processors and what rests on each, the known boot warnings and failed unit with their reasons, and four known gaps - fingerprint, sensors, both cameras); its amplifier checks moved to tests/health/base. devlab suite put the suite on the phone; after a reboot it ran by itself and said healthy: 29 pass, 4 in known gaps, 1 not measured (no SIM card seen: the modem reports sim-missing).
+
+---
+
+
+<a id="2026-11-17-telegram-provision"></a>
+### Telegram at provisioning: telegram-desktop, held by Alpine v3.24
+
+Entry date
+: 2026-11-17
+
+Done
+: The author asked for a Telegram client at provisioning as firefox is. Alpine ships one Telegram client for aarch64, the official telegram-desktop (no tdlib, no libpurple Telegram plugin for chatty, no Kotatogram); it went into provision/packages.txt (surya-lab #108). Installing it on the phone failed: v3.24 community ships 6.8.5-r0 linked to libada.so.3 while ada is now 4.0, so apk cannot resolve it even after apk update. devlab provision installs the list in one apk add, so the line would have failed firefox and i2c-tools too; it now waits there as a comment (surya-lab fix right after #108). Edge has 7.4.4-r0 rebuilt against libada.so.4. Nothing was installed or changed on the phone.
+
+Considered
+: Installing telegram-desktop from the edge repository for one package: it would pull edge libraries into a v3.24 system that another session is testing audio on.
+
+Rejected
+: chatty with a Telegram plugin: no such plugin is packaged. Keeping the line live: it breaks the whole package list.
+
+---
+
+
+<a id="2026-11-17-1000-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-17
+
+Done
+: Hand-over from the bring-up session (2026-11-17, ~10:00 UTC) to the phone keeper. RUNS: kernel 7.1.0-sm7150-calls+ is the KEPT default (boot entry pmos-calls.conf, blessed); built from linux-phone-oco/linux branch test/surya-calls = tas2562 fixes + PR3 (LPI SoundWire pin mux) + PR5 (SoundWire controllers at 0x62ed/0x62ef, no DCODEC vote) + PR4 (WCD9375 reset: active-low, gpio mux, no sleep state) + PR6 (capture through swr2 DAI 1) + PR7 (q6voice from pulpoff/linux-surya). The proven microphone-only kernel (pmos-mic, 7.1.0-sm7150-mic+) is still installed as a fallback; stock (7.1.0-rc3-sm7150) boots after 3 bad boots. The old /lib/modules/7.1.0-rc3-sm7150-wcd belongs to a removed experiment and can go. HEALTHY: the last runs say healthy, 37-39 pass, 4 known gaps (fingerprint, sensors, both cameras). WORKS, proven by the phone itself: speakers (stereo), earpiece (= the top TAS2564 speaker; the WCD9375 EAR amplifier is silent), both microphones (bottom ADC1, top ADC2 at INP3) through the UCM profile, mobile data (Vodafone.de LTE; tqftpserv 1.3 from Alpine edge, a gsm connection with no APN), SMS (texts its own number, telephony layer, daily), calls both ways (q6voice, Voice Call UCM verb, q6voiced on PCM 0,6, devlab-call-uplink, daily call-echo to blueSIP's echo line +49 89 721010 99701 - its announcement lasts ~19 s). MUST NOT BE UNDONE: the VoiceMMode1 TX Topology 69488 set in the HiFi verb at boot (the DSP builds its voice processor once, at the first call of a boot; a call set up with the default 0x10F71 keeps the uplink silent until a reboot); the codec node has no sleep pin state (ASoC holds it in reset otherwise); /etc/modprobe.d/devlab-pd-mapper.conf (loads qcom_pd_mapper before the ADSP; without it ~1 boot in 5 has no sound card); tqftpserv@edge (1.1.1 keeps the modem in shutting-down); the SIM's own number lives only in ~/.config/devlab/xiaomi-surya/own-number and /etc/devlab/private/own-number - never in a repository. Test sounds are -6 dBFS at 20% (the author: soft). The SIM is in slot 2 (slot 1: no ATR). Never read /sys/kernel/debug/gpio or the LPI pinctrl at 62b40000 (manifest hazards).
+
+Considered
+: next: (1) headphones and the headset mic: need a headset plugged in and the author listening (verify-headphone-mic-earpiece; the jack detector exists since the WCD fixes). (2) upstream, waiting for the author to send: upstream-queue linux/sm7150-wcd 0001-0004 (sm7150-mainline), the tas2562 pair, upstream-alpine-tqftpserv, upstream-pd-mapper-order; q6voice is out of tree (sdm845-mainline) - its upstreaming is not ours yet. (3) the kernel is not yet a package: the kept kernel lives only on the phone's boot partition; a reflash returns stock until it goes through the package conveyor (device.toml carries the userspace side: UCM, q6voiced conf, call-uplink, pd-mapper, tqftpserv@edge, the mobile connection). (4) the deep-sleep steps, sensors, off-state charging, as the queue orders.
+
+---
+
+
+<a id="2026-11-17-1145-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-17
+
+Done
+: Keeper phone-keeper-20261117-1135: ran sensors-and-the-mask on the kept kernel 7.1.0-sm7150-calls+ (stays the kept default). Result: DSP still writes (temp.json, sns_reg_version) and crashes with only sensorspd unmasked; undone, rebooted, healthy 37 pass 0 fail. Sleep items need the devlab suspend verb (lab-tools health-suspend-cycle, not yet built) so they were not taken; no suspend was tried by hand.
+
+Considered
+: next: sleep-measured-once needs the devlab suspend-cycle verb first (lab-tools, soft_connect + wake locks released + rtcwake, counters read before and after); sensors-registry-writes needs a hexagonrpcd build with state-copy writes (a package, then one probe). Must not be undone: sensorspd and rootpd stay masked; configs mtimes restored.
+
+---
+
+
+<a id="2026-11-17-1225-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-17
+
+Done
+: Keeper surya-keeper, 2026-11-17. Phone runs the kept kernel 7.1.0-sm7150-calls+ (default; the one-shot dtb with cluster parameters 0x41002244/0x4100c244 was tried once and is gone), healthy 37 pass 0 fail after a reboot. Deep sleep: the first measured suspend cycles (5, by hand: research/deep-sleep/2026-11-17/) show soc-sleeps = fail and the real cause of no sleep so far: the suspend ends at once on the wake-armed, storming serial IRQ 157 (qcom_geni_serial 88c000); and Bluetooth dies across a suspend and hangs the resume, a reboot recovers. sleep-measured-once and sleep-wake-source are done.
+
+Considered
+: next: sleep-wake-uart (disable the serial's wakeup and find why it storms), with sleep-bt-resume (rfkill/stop bluetooth before suspend) in the same cycle; then repeat the cycle on the kept kernel for a real number, then sleep-cluster-params on the prepared dtb (decompile /boot/dtbs-calls/qcom/sm7150-xiaomi-surya-huaxing.dtb, sed the two values, dtc, devlab kernel try calls --dtb). Must not be undone: sensorspd and rootpd stay masked. Cycle method: put the script on the phone and run it with systemd-run, never nohup; never read /sys/power/wakeup_count with a wake lock held (it blocks); read sleep length from the RTC, not date or dmesg.
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-17-sim-removed-skips"></a>
+### SIM out: the four SIM checks skip
+
+Entry date
+: 2026-11-17
+
+Done
+: Added no_sim to the health suite's lib.sh (ModemManager: sim-missing or no SIM object); modem-registered and mobile-data (lab-tools #73, released as devlab-health 0.1.6) and call-echo and sms-loopback (surya-lab #123) now say 'skip: no SIM card'. The SIM check sits before once_a_day, so a skip does not use up the day. Put the suite, rebooted once: modem-registered, mobile-data, call-echo, sms-loopback all skip; 35 pass, 5 fail (only the known gaps), 5 skip. The support status of calls, SMS and data stays 'works'.
+
+Considered
+: Detecting the missing SIM per check (the checks already skipped on 'modem state failed', but under that wording and, for the echo call, after the day was marked).
+
+Rejected
+: A manifest flag 'sim = false' (a state to keep true by hand; the modem says it itself).
+
+About
+: sim-removed-skips
+
+---
+
+
+<a id="2026-11-17-way-back-decided"></a>
+### Deep sleep's way back: decided before the next suspend
+
+Entry date
+: 2026-11-17
+
+Done
+: Looked around (research 2026-11-17-surya-way-back-inventory): the stock qcom_wdt is stopped in late suspend, so it would not have rescued the first hang; ramoops (4 MiB) and a settable RTC exist. Decided (2026-11-17-deep-sleep-way-back): a patched qcom_wdt module that stays armed through sleep, the RTC set, the log from ramoops; built it for the running kernel (vermagic matches), wrote sleep/way-back.sh and sleep/build-wdt.sh.
+
+Considered
+: Timed reboot, USB awake, pstore alone, a kernel rebuild, serial console.
+
+Rejected
+: See the decision.
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-17-way-back-proven"></a>
+### The way back proven; the Bluetooth-blocked hang reproduced and recovered
+
+Entry date
+: 2026-11-17
+
+Done
+: Built and installed the patched qcom_wdt (updates/, stock behaviour until enabled); sleep/way-back.sh verbs check/install/enable/fuse/defuse/collect/cycle. Idle fuse, a probe through a real s2idle entry and the one measured cycle (BT blocked, 15 s) all ended with the watchdog resetting the phone and the phone booting by itself; the cycle hung at suspend entry as before. pstore is empty after a bite; the journal keeps the marker.
+
+Considered
+: A longer fuse (the watchdog counts 32 s at most), setting the RTC (not settable).
+
+Rejected
+: ramoops as the log (does not survive the reset).
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-17-1350-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-17
+
+Done
+: Keeper surya-keeper-3, 2026-11-17. Phone on the kept kernel 7.1.0-sm7150-calls+, healthy after a clean reboot (only the 5 known gaps fail; the SIM is out: modem-registered, mobile-data, call-echo, sms-loopback skip 'no SIM card'; calls/SMS/data stay 'works'). Deep sleep's way back is built and proven (decision 2026-11-17-deep-sleep-way-back, research 2026-11-17-way-back-measured): sleep/way-back.sh in surya-lab (verbs check/install/enable/fuse/defuse/collect/cycle) with the patched qcom_wdt in updates/ (acts as stock until enabled; keep_armed_in_suspend, enable per cycle); the watchdog is 30 s at most, so a cycle sleeps at most 15 s. Idle fuse, probe through a suspend entry and the one measured cycle all reset the phone by the watchdog and it came back with no hands. The cycle (Bluetooth rfkill-blocked) hung at suspend entry again: no 'PM: suspend entry' line, suspend_stats 0/0; with Bluetooth on s2idle ends in 2-3 s on IRQ 157. pstore is empty after a bite, the persistent journal (synced before the arm) is the log. The PMIC RTC cannot be set. After a bite the amp 0x4c read silent: reboot once cleanly after a bite.
+
+Considered
+: next: sleep-wake-uart as one change, with way-back.sh cycle SLEEP as the way back: Bluetooth unblocked but the wakeup of serial@88c000 off (or hci_uart/btqca unbound before the suspend) so IRQ 157 cannot end s2idle and the BT UART is not half-powered; then 'cycle 15' (the script blocks Bluetooth itself: add a verb or a flag for the unblocked variant first). Put the script on the phone with devlab phone put and run it with systemd-run (never nohup). After any try that ends in a bite: one clean reboot, read the health. Must not be undone: sensorspd and rootpd stay masked.
+
+---
+
+
+<a id="2026-11-17-1500-sleep-wake-uart"></a>
+### sleep-wake-uart: the wake found (irq 158) and turned off; a cycle of 15 s that lasts, the SoC still not asleep
+
+Entry date
+: 2026-11-17
+
+Done
+: Looked first: mainline serial_core/qcom_geni_serial/hci_qca read (research 2026-11-17-qca-uart-wake-across-suspend). Traced one short cycle with Bluetooth up: the wake is irq 158 (GPIO 41, the UART RX wake pin, '88c000.serial:wakeup'), not 157. Added way-back.sh cycle SLEEP bt-on (serial power/wakeup off for the cycle, restored after; qcom_stats before/after, RTC-measured sleep, hci0 check). Tests: cycle 5 bt-on twice and cycle 15 bt-on once, all three woke by the RTC alarm (RTC 7, 7, 17 s), the watchdog defused each time, hci0 scanning after, no bite, no reboot needed. Counters from the SoC after the 15 s cycle: cxsd 0, aosd 0, ddr 0, adsp 0 (as before); soc-sleeps fails: 'suspended, yet the SoC never reached its lowest state: cxsd 0, aosd 0; suspends this boot: 7; processors never asleep: adsp; wake locks: devlab-usb'. Whether the cluster low-power states were entered in these cycles: not known yet (cpuidle residency not read in way-back).
+
+Considered
+: Rejected for the wake: rfkill block, unbinding hci_uart/btqca, a device-tree change, a udev rule now (decision 2026-11-17-serial-wakeup-off).
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-17-1500-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-17
+
+Done
+: Keeper surya-keeper-4, 2026-11-17. Phone on the kept kernel 7.1.0-sm7150-calls+, booted once (up since about 13:45), 7 s2idle suspends this boot, no watchdog bite, no reboot after them; Bluetooth up and scanning; the serial's power/wakeup is back to enabled. Suite after: 35 pass, 6 fail, 4 not measured - the fails are the known ones (fingerprint reader, two image sensors, sensors, proximity) and soc-sleeps; SIM checks skip. Deep sleep: the wake is solved (irq 158, the UART RX pin; way-back.sh cycle SLEEP bt-on), the SoC still does not collapse CX or AOSS: qcom_stats cxsd 0 and aosd 0 after a 15 s cycle, adsp 0 against about 200 for the compute DSP and the modem. sleep-wake-uart and sleep-bt-resume are done (bt-resume: not seen in 3 cycles of at most 15 s). Sensorspd and rootpd stay masked.
+
+Considered
+: next: sleep-adsp-awake (rank 1 now): reboot without soundwire_qcom.stay_awake=1 (a one-shot test kernel cmdline through devlab kernel try), then cycle 15 bt-on and read qcom_stats adsp, cxsd, aosd; then find the LPASS vote that holds the audio DSP up. After that sleep-cluster-params on the prepared dtb (decompile /boot/dtbs-calls/qcom/sm7150-xiaomi-surya-huaxing.dtb, sed 0x41002244 and 0x4100c244, dtc, devlab kernel try calls --dtb) and a cycle 15 bt-on. Cycle method: sh /var/tmp/way-back.sh cycle 15 bt-on as a systemd-run unit with StandardOutput=file:, after devlab phone put sleep/way-back.sh; read the RTC, not date or dmesg; a bt-on cycle also records qcom_stats. Not read yet: cpuidle residency per state across a cycle (add to way-back.sh stats if the cluster question needs it).
+
+---
+
+
+<a id="2026-11-17-1530-lpoco-health-on-the-phone"></a>
+### lpoco-health put on the phone
+
+Entry date
+: 2026-11-17
+
+Done
+: Built devlab from lab-tools main (the installed binary predated #75), ran suite put now, run, list and gather now. Found and fixed the old lib.sh path in 8 device checks; moved one empty report aside; gathered 19 reports into tests/results and filed 6 runs. Health reads as before: 35 pass, 6 fail, 4 not measured, SIM checks skip. The installed devlab (/home/mll/.local/bin/devlab, 14:13) is older than main: not replaced here; runs used wt-k4-labtools/target/release/devlab.
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-17-1540-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-17
+
+Done
+: Keeper surya-keeper-4, 2026-11-17 (end). Phone on the kept kernel 7.1.0-sm7150-calls+, one boot (up since about 13:45), 7 s2idle suspends this boot, no watchdog bite. The suite is now lpoco-health on the phone (put 14:10, 21 checks, /usr/bin/devlab-health kept as an alias, old reports moved to /var/lib/lpoco-health): 35 pass, 6 fail, 4 not measured - SIM checks skip; the fails are fingerprint, two image sensors, motion-and-light, proximity-reads and soc-sleeps (cxsd 0, aosd 0, adsp never asleep). Deep sleep: the wake is solved (irq 158, the UART RX pin; way-back.sh cycle SLEEP bt-on keeps Bluetooth up with the serial's wakeup off for the cycle; 3 cycles ended by the RTC alarm, hci0 up); the SoC does not yet collapse CX or AOSS. Sensorspd and rootpd stay masked. The installed devlab in /home/mll/.local/bin (14:13) is older than lab-tools main: use a build of main (cargo build --release -p devlab in a lab-tools worktree) for suite put, list, off, on.
+
+Considered
+: next: sleep-adsp-awake (rank 1): reboot without soundwire_qcom.stay_awake=1 (devlab kernel try, one-shot cmdline), then sh /var/tmp/way-back.sh cycle 15 bt-on as a systemd-run unit with StandardOutput=file: (devlab phone put sleep/way-back.sh first; it is on the phone now), read adsp, cxsd, aosd. Then sleep-cluster-params on the prepared dtb. Note: devlab suite put uses the lab as main has it, so a change to the checks must land before put. Open: gather stops on a 0-byte report (one was moved to /var/lib/lpoco-health/empty-reports/).
+
+---
+
+
+<a id="2026-11-17-1550-lpoco-health-v017"></a>
+### lpoco-health v0.1.7 put on the phone
+
+Entry date
+: 2026-11-17
+
+Done
+: Built devlab from lab-tools main (v0.1.7), suite put now, suite run: 35 pass, 6 fail, 4 not measured as before, the SIM checks skip 'no SIM card', the eight audio and call checks pass again with the old and new lib.sh paths both present; gather now filed 20 runs. soc-sleeps is the one failing check that matters (cxsd 0, aosd 0).
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-17-sleep-adsp-awake-first-try"></a>
+### sleep-adsp-awake: first try
+
+Entry date
+: 2026-11-17
+
+Done
+: Baseline cycle without stay_awake (the kept kernel has none): adsp 0. Built the macros' hw-vote release (rx, tx, va), tried once as 7.1.0-sm7150-calls-idle with the patched qcom_wdt: healthy, cycle adsp 0. Stopped services live: no change. Phone back on the kept kernel, healthy.
+
+Considered
+: Linux holds CX through the UARTs (pm_genpd_summary); the LPI pinctrl also votes LPASS_HW_MACRO.
+
+Rejected
+: Polling the phone during a cycle: it hung the phone once (author reset it).
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-17-1620-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-17
+
+Done
+: Keeper surya-keeper-5, 2026-11-17 (end). Phone on the kept kernel 7.1.0-sm7150-calls+, healthy (35 pass, 0 fail, 5 known gaps, 5 not measured, no SIM), after one clean reboot from the try kernel 7.1.0-sm7150-calls-idle (installed as pmos-idle; remove with devlab kernel remove idle if not wanted). sleep-adsp-awake: the kept kernel has no stay_awake; the macros' hw-vote release did not change adsp (0), cxsd 0, aosd 0; patch and notes in research/deep-sleep/2026-11-17/. A cycle polled over ssh hung the phone once (author reset it): start the cycle as a systemd-run unit with StandardOutput=file: and leave the phone alone for 3 minutes (ssh answers slowly for about a minute after resume). Linux itself holds CX through the active UARTs (pm_genpd_summary: 88c000.serial, a88000.serial).
+
+Considered
+: next: sleep-adsp-awake stays in-progress: read the DSP side before more LPASS code (the ADSP's sensors PD, call audio q6voiced/pd-mapper, remoteproc glink channels, what other subsystem votes for it); a useful awake-idle probe is qcom_stats adsp count without suspending. Also sleep-cluster-params on the prepared dtb. Open: a try kernel needs its own release name (make LOCALVERSION=-NAME, no autoconf rebuild) and the patched qcom_wdt built as module name qcom_wdt in updates/ (way-back.sh refuses otherwise); ocoeco manual wrote rows without project (fixed by hand in PR 218): a gap in ocoeco for repositories whose tables require project.
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-17-keeper-6-adsp-floor"></a>
+### sleep-adsp-awake: the DSP side read, two floor tests
+
+Entry date
+: 2026-11-17
+
+Done
+: Read the DSP and the others' votes awake; two measured cycles with adsp stopped, then adsp+cdsp+modem stopped (adsp-floor.sh): cxsd/aosd/ddr 0 both times. Phone rebooted once cleanly, suite 35 pass 0 fail. Recorded research, decision 2026-11-17-adsp-is-not-the-floor, backlog.
+
+Considered
+: A trace of the rpmh sleep set: no rpmh trace events in this kernel.
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-17-1650-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-17
+
+Done
+: Keeper surya-keeper-7: phone on the kept kernel 7.1.0-sm7150-calls+ (the cp.dtb try booted once, healthy 35 pass 0 fail; since then the kept dtb again after the next reboot). 8 cycles 15 bt-on on cp.dtb: real 15 s s2idle, cluster S2 0x4100c244 used, cxsd/aosd/ddr 0. Tracing was left on in ftrace (reset by reboot).
+
+Considered
+: next: sleep-cluster-params waits on a deeper decision (what holds AOSS/CX/DDR is unknown); candidates: owner of the SH0 x=1,y=3 sleep vote, qcom_aoss prevent_* knobs, XO/VRM votes, USB gadget, display RSC. Then sleep-wake items.
+
+---
+
+
+<a id="2026-11-17-floor-research"></a>
+### Why the SoC floor is not reached: researched
+
+Entry date
+: 2026-11-17
+
+Done
+: Read the recorded cycles, qcom_stats and apps_rsc in the tree; two researchers on mainline/other SoCs and downstream/observed SM7150; ranked six holders; chose subtraction; nine backlog items with proofs.
+
+Considered
+: S2RAM, other cluster values, a smp2p sleepstate port, a downstream power-mode port.
+
+Rejected
+: Anything touching the phone: it is the keeper's.
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-17-1800-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-17
+
+Done
+: Keeper-8: phone on the kept kernel 7.1.0-sm7150-calls+, rebooted after the sensors probe, healthy 35 pass 0 fail (5 known gaps). sensorspd and rootpd masked as before, config mtimes restored, nothing kept from the probe. sleep-fastrpc-helpers could not be measured: the probe (research 2026-11-17-sensorspd-probe-still-writes) shows the DSP still writes temp.json and sns_reg_version with the configs current, 7 ADSP crashes in 25 s and the audio card gone until reboot.
+
+Considered
+: next: sensors-registry-writes (rank 3, needs phone): build hexagonrpcd with write support limited to a state copy of the registry (hexagonrpc PR #27 commits 40e5041, or the -S state dir of #19, or the #29 patch) for aarch64 musl, seed the copy from the package, serve sns_reg_version, one try per boot; reboot after any try that crashes the ADSP. No hexagonrpc source tree is on the lab yet. Then sleep-fastrpc-helpers (measure sensors after a resume with sensorspd stopped). Also: sleep-cluster-params waits on a deeper decision (research session).
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-17-1730-keeper9-floor-read-holders"></a>
+### floor-read-holders: what is on before a cycle
+
+Entry date
+: 2026-11-17
+
+Done
+: Read cmdline, clk, regulator, icc, genpd, cpuidle, wakeup_sources, qcom_stats at idle and before way-back.sh cycle 15 bt-on (baseline: cxsd/aosd/ddr 0, modem moves 2137->2147, cdsp 60 fixed). No clk_ignore_unused/pd_ignore_unused (floor-no-ignore-unused closed). remoteprocs hold bi_tcxo xo; cx/mx at 256 from the two serials; usb, ufs, wcn3998 rails on; rpmh bb/rf, camera, gpu, video not held. Late-suspend contents not known yet.
+
+Considered
+: next: floor-dsps-never-started (module_blacklist=qcom_q6v5_pas, one try, cycle 15 bt-on). Sensors item skipped: helper crash-loops the ADSP.
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-17-1810-keeper9-dsps-never-started"></a>
+### floor-dsps-never-started: the DSPs are not the holder
+
+Entry date
+: 2026-11-17
+
+Done
+: One-shot dtb with adsp/cdsp/modem remoteprocs disabled on the kept kernel: cycle 15 bt-on cxsd/aosd/ddr 0 -> 0; soc-sleeps fail (wake lock devlab-usb); no-processor-crashes pass. DSP-vote hypothesis retired. Phone falls back to the kept dtb at the next boot.
+
+Considered
+: next: floor-wlan-off, then floor-udc-unbound (devlab-usb wake lock), floor-sh0-owner, floor-aoss-knobs.
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-17-1840-keeper9-wlan-off"></a>
+### floor-wlan-off: WLAN is not the holder
+
+Entry date
+: 2026-11-17
+
+Done
+: Phone back on the kept dtb after the no-DSP try. ath10k unloaded, cycle 15 bt-on: cxsd/aosd/ddr 0 -> 0, cdsp 60 -> 60. Phone on the kept kernel, healthy as before (wlan returns at the next boot).
+
+Considered
+: next: floor-udc-unbound, floor-sh0-owner, floor-aoss-knobs.
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-17-1900-keeper9-udc-unbound-stuck"></a>
+### floor-udc-unbound stalled the phone: a step that can drop USB keeps the watchdog armed
+
+Entry date
+: 2026-11-17
+
+Done
+: Unbound a6f8800.usb from dwc3-qcom-legacy, ran way-back.sh cycle 15 bt-on, rebound: the lab link did not return (no usb interface, 172.16.42.1 silent 10+ min), WLAN still unloaded from the previous item. The cycle defuses the watchdog on return, so nothing reset the phone: the author's hands (hold power) are needed. Cycle result unread in /var/tmp/k9u.out on the phone: not known yet.
+
+Considered
+: Lesson: any step that can drop the only link (UDC unbind, WLAN unload) must leave the watchdog ARMED (way-back.sh fuse 30, not defused) so the phone resets itself, and must not rely on a rebind to bring the gadget back. Next after the reboot: read /var/tmp/k9u.out first, then floor-sh0-owner / floor-aoss-knobs; floor-udc-unbound stays open until measured.
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-17-1950-keeper9-udc-and-aoss"></a>
+### floor-udc-unbound and floor-aoss-knobs measured
+
+Entry date
+: 2026-11-17
+
+Done
+: UDC unbound: cxsd/aosd/ddr 0 -> 0 (result survived in /var/tmp/k9u.out, phone healthy after the hard reboot: 35 pass 0 fail). aoss knobs: cx/ddr writes time out, 'ucore did not ack channel': the QMP link to the AOP is dead, counters 0 -> 0. Holders subtracted so far with no change: DSPs, WLAN, USB.
+
+Considered
+: next: floor-aop-qmp-no-ack (new, read only first), floor-sh0-owner, floor-suspend-late-dump.
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-17-surya-research-sh0-aop"></a>
+### SH0 and AOP QMP researched
+
+Entry date
+: 2026-11-17
+
+Done
+: Read bcm-voter, sm7150/sm8150/sc7180/sdm845 icc tables, qcom_aoss and the three DTs in the kernel-rc3 tree; found SH0 is keepalive-by-design and the sleep residual a consumer tag; chose DT subtraction; queued phone items.
+
+Considered
+: QMP-first, late-suspend dump kernel, keepalive patch, firmware-latch reading
+
+Rejected
+: QMP-first and the dump kernel: more build for what one dtb answers; keepalive patch: hides the consumer. Nothing on the phone was touched.
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-17-1815-keeper10-sh0-owner"></a>
+### floor-sh0-owner: uart8 is not the SH0 owner
+
+Entry date
+: 2026-11-17
+
+Done
+: Read icc_summary; two one-shot dtbs on the kept kernel. Tags ACTIVE_ONLY: ignored (geni-se forces ALWAYS). uart8 disabled: cycle 15 bt-on, sleep flush still has SH0 x=1,y=3; counters 0 -> 0. Phone rebooted to the kept dtb, healthy 35 pass 0 fail.
+
+Considered
+: next: floor-sh0-qup-tags by driver unbind not DT tag (BT UART 88c000 with bt off; i2c/spi QUPs; crypto), or a late-suspend dump (floor-suspend-late-dump) to see who holds SH0; SH0 may not come from an icc consumer.
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-17-1820-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-17
+
+Done
+: Kept kernel 7.1.0-sm7150-calls+ on the kept dtb, rebooted after the uart8 tries, healthy 35 pass 0 fail (5 known gaps). Nothing kept from the tries.
+
+Considered
+: next: floor-sh0-qup-tags (by driver unbind, BT-off cycle), sensors-registry-writes (rank 3), sleep-fastrpc-helpers. sleep-cluster-params waits on a deeper decision.
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-17-1940-surya-keeper-sh0-bt"></a>
+### floor-sh0-owner: BT-blocked cycle
+
+Entry date
+: 2026-11-17
+
+Done
+: One cycle 15 with BT blocked on the kept kernel: phone reset by the watchdog, no reading; rebooted, healthy except Wi-Fi (saved SSID out of range, lab AP renamed). Nothing kept.
+
+Considered
+: next: SH0 looks by-design; a deeper decision on holders (clocks/GDSC/counter validity) or floor-suspend-late-dump
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-17-1945-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-17
+
+Done
+: Kept kernel 7.1.0-sm7150-calls+ on the kept dtb, rebooted by the watchdog after a BT-blocked cycle; suite 33 pass 6 fail (5 known gaps + Wi-Fi: the saved SSID is out of range, the lab AP shows another name). Nothing kept from the try.
+
+Considered
+: next: floor-sh0-owner is at a turning point (deeper decision), sensors-registry-writes, sleep-fastrpc-helpers
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-17-2010-surya-research-validity"></a>
+### floor-research-validity answered
+
+Entry date
+: 2026-11-17
+
+Done
+: Read qcom_stats.c, bcm-voter.c, dwc3-qcom.c, the Qualcomm sleep-current guide, the Odin 2 s2idle report; recorded research, decision, 3 backlog items. Nothing on the phone touched.
+
+Considered
+: ranked: read entry (trace, IRQ rate) before more subtraction
+
+Rejected
+: more SH0 owner-hunting, debug kernel first, calling counters broken
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-17-1900-floor-entry-trace"></a>
+### Floor: the suspend entry read
+
+Entry date
+: 2026-11-17
+
+Done
+: floor-entry-trace: one way-back cycle 15 bt-on traced; the sleep set is flushed by the last CPU (7) just before cluster-sleep-2 (0x4100b244); one wake IRQ (RTC alarm); floor-irq-quiet dropped; soc-sleeps still fails (cxsd/aosd/ddr 0)
+
+Considered
+: next: the holder is not the entry; look at what the AOP or a master holds (floor-sh0-owner stays paused, standby current as arbiter); deeper decision for the coordinator
+
+---
+
+
+<a id="2026-11-17-1905-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-17
+
+Done
+: Nothing changed on the phone: kept kernel 7.1.0-sm7150-calls+, last suite (18:51) as at the previous hand-over. The only queue item, sleep-standby-current, needs the author to unplug USB for an hour (and Android booted for its number); marked as waiting for him.
+
+Considered
+: next: floor-sh0-owner (turning point), sensors-registry-writes, sleep-fastrpc-helpers; standby current once he can unplug
+
+---
+
+
+<a id="2026-11-17-2010-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-17
+
+Done
+: Kept kernel 7.1.0-sm7150-calls+ and kept dtb, stock services as before (sensorspd and rootpd still masked); one try of a patched hexagonrpcd ran sensorspd 150 s with 0 ADSP crashes and showed accelerometer, light, proximity, compass; transient units stopped, suite 35 pass 6 fail 4 not measured (known gaps, deep-sleep soc-sleeps lists adsp never asleep).
+
+Considered
+: next: sensors-without-crash (make the patched daemon lasting: build, state root, drop-in, unmask, across suspend), sleep-fastrpc-helpers, floor-sh0-owner (turning point)
+
+---
+
+
+<a id="2026-11-17-rows-moved-from-docs"></a>
+### Surya's rows moved here from docs
+
+Entry date
+: 2026-11-17
+
+Done
+: Under the lease orchestration-move, in the standby window: all 143 test runs (5456 results) replayed from tests/results through test-run, identical row for row to docs' (runs from before audio-mic left the gaps filed with it); 20 parts seeded from docs' support_status of xiaomi-surya; 48 backlog items (device xiaomi-surya except lab-tools' own, or project surya-lab), 34 research, 23 decisions and 52 log entries (the lab's, those about a moved item, and docs-project ones about surya's own parts and measurements - deep sleep's floor, the sensor registry, the microphone path, standby drain) replayed through ikb, waits '' as none, ranks kept. Abouts naming a milestone or a component docs has but surya claims nothing of (charging, proximity) are left empty; a research or decision without a brief takes its question or decision; a decision's research list keeps its first moved research and names the whole list in why. Method and family research (qcom sleep path, microphones are analog, the echo call's design) stays in docs. Added queries/phone-stands.sql (the keeper's last hand-over). From now on surya records here; devlab gather files runs here (lab-tools #82).
+
+Considered
+: Rule of the move: docs decision 2026-11-17-moving-a-lane.

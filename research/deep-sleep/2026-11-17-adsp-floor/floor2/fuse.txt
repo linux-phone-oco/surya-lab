@@ -1,0 +1,5 @@
+armed: the phone resets in about 30 s unless defused
+stop rproc0 rc 0 offline
+stop rproc1 rc 0 offline
+stop rproc2 rc 0 offline
+watchdog stopped

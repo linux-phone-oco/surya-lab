@@ -1,0 +1,150 @@
+diff --git a/sound/soc/codecs/lpass-rx-macro.c b/sound/soc/codecs/lpass-rx-macro.c
+index 6233aa9f5..4c827305e 100644
+--- a/sound/soc/codecs/lpass-rx-macro.c
++++ b/sound/soc/codecs/lpass-rx-macro.c
+@@ -3976,6 +3976,9 @@ static int rx_macro_runtime_suspend(struct device *dev)
+ 	clk_disable_unprepare(rx->fsgen);
+ 	clk_disable_unprepare(rx->npl);
+ 	clk_disable_unprepare(rx->mclk);
++	/* the DSP votes too: with them held the audio DSP never sleeps */
++	clk_disable_unprepare(rx->dcodec);
++	clk_disable_unprepare(rx->macro);
+ 
+ 	return 0;
+ }
+@@ -3985,10 +3988,18 @@ static int rx_macro_runtime_resume(struct device *dev)
+ 	struct rx_macro *rx = dev_get_drvdata(dev);
+ 	int ret;
+ 
++	ret = clk_prepare_enable(rx->macro);
++	if (ret)
++		return ret;
++
++	ret = clk_prepare_enable(rx->dcodec);
++	if (ret)
++		goto err_dcodec;
++
+ 	ret = clk_prepare_enable(rx->mclk);
+ 	if (ret) {
+ 		dev_err(dev, "unable to prepare mclk\n");
+-		return ret;
++		goto err_mclk;
+ 	}
+ 
+ 	ret = clk_prepare_enable(rx->npl);
+@@ -4010,6 +4021,10 @@ static int rx_macro_runtime_resume(struct device *dev)
+ 	clk_disable_unprepare(rx->npl);
+ err_npl:
+ 	clk_disable_unprepare(rx->mclk);
++err_mclk:
++	clk_disable_unprepare(rx->dcodec);
++err_dcodec:
++	clk_disable_unprepare(rx->macro);
+ 
+ 	return ret;
+ }
+diff --git a/sound/soc/codecs/lpass-tx-macro.c b/sound/soc/codecs/lpass-tx-macro.c
+index f7d168f55..d106ec6f1 100644
+--- a/sound/soc/codecs/lpass-tx-macro.c
++++ b/sound/soc/codecs/lpass-tx-macro.c
+@@ -2409,6 +2409,9 @@ static int tx_macro_runtime_suspend(struct device *dev)
+ 	clk_disable_unprepare(tx->fsgen);
+ 	clk_disable_unprepare(tx->npl);
+ 	clk_disable_unprepare(tx->mclk);
++	/* the DSP votes too: with them held the audio DSP never sleeps */
++	clk_disable_unprepare(tx->dcodec);
++	clk_disable_unprepare(tx->macro);
+ 
+ 	return 0;
+ }
+@@ -2418,10 +2421,18 @@ static int tx_macro_runtime_resume(struct device *dev)
+ 	struct tx_macro *tx = dev_get_drvdata(dev);
+ 	int ret;
+ 
++	ret = clk_prepare_enable(tx->macro);
++	if (ret)
++		return ret;
++
++	ret = clk_prepare_enable(tx->dcodec);
++	if (ret)
++		goto err_dcodec;
++
+ 	ret = clk_prepare_enable(tx->mclk);
+ 	if (ret) {
+ 		dev_err(dev, "unable to prepare mclk\n");
+-		return ret;
++		goto err_mclk;
+ 	}
+ 
+ 	ret = clk_prepare_enable(tx->npl);
+@@ -2444,6 +2455,10 @@ static int tx_macro_runtime_resume(struct device *dev)
+ 	clk_disable_unprepare(tx->npl);
+ err_npl:
+ 	clk_disable_unprepare(tx->mclk);
++err_mclk:
++	clk_disable_unprepare(tx->dcodec);
++err_dcodec:
++	clk_disable_unprepare(tx->macro);
+ 
+ 	return ret;
+ }
+diff --git a/sound/soc/codecs/lpass-va-macro.c b/sound/soc/codecs/lpass-va-macro.c
+index 528d5b167..ba5518624 100644
+--- a/sound/soc/codecs/lpass-va-macro.c
++++ b/sound/soc/codecs/lpass-va-macro.c
+@@ -1719,6 +1719,9 @@ static int va_macro_runtime_suspend(struct device *dev)
+ 		clk_disable_unprepare(va->npl);
+ 
+ 	clk_disable_unprepare(va->mclk);
++	/* the DSP votes too: with them held the audio DSP never sleeps */
++	clk_disable_unprepare(va->dcodec);
++	clk_disable_unprepare(va->macro);
+ 
+ 	return 0;
+ }
+@@ -1728,18 +1731,25 @@ static int va_macro_runtime_resume(struct device *dev)
+ 	struct va_macro *va = dev_get_drvdata(dev);
+ 	int ret;
+ 
++	ret = clk_prepare_enable(va->macro);
++	if (ret)
++		return ret;
++
++	ret = clk_prepare_enable(va->dcodec);
++	if (ret)
++		goto err_macro;
++
+ 	ret = clk_prepare_enable(va->mclk);
+ 	if (ret) {
+ 		dev_err(va->dev, "unable to prepare mclk\n");
+-		return ret;
++		goto err_dcodec;
+ 	}
+ 
+ 	if (va->has_npl_clk) {
+ 		ret = clk_prepare_enable(va->npl);
+ 		if (ret) {
+-			clk_disable_unprepare(va->mclk);
+ 			dev_err(va->dev, "unable to prepare npl\n");
+-			return ret;
++			goto err_mclk;
+ 		}
+ 	}
+ 
+@@ -1747,8 +1757,15 @@ static int va_macro_runtime_resume(struct device *dev)
+ 	regcache_sync(va->regmap);
+ 
+ 	return 0;
+-}
++err_mclk:
++	clk_disable_unprepare(va->mclk);
++err_dcodec:
++	clk_disable_unprepare(va->dcodec);
++err_macro:
++	clk_disable_unprepare(va->macro);
+ 
++	return ret;
++}
+ 
+ static const struct dev_pm_ops va_macro_pm_ops = {
+ 	RUNTIME_PM_OPS(va_macro_runtime_suspend, va_macro_runtime_resume, NULL)

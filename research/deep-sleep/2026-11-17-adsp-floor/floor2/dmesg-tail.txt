@@ -1,0 +1,150 @@
+[ 1382.711165]  cfg80211_mlme_down+0x64/0x90 [cfg80211]
+[ 1382.711237]  cfg80211_disconnect+0x14c/0x2c0 [cfg80211]
+[ 1382.711307]  cfg80211_leave_locked+0x90/0x154 [cfg80211]
+[ 1382.711375]  cfg80211_leave+0x90/0x11c [cfg80211]
+[ 1382.711441]  wiphy_suspend+0xd8/0x164 [cfg80211]
+[ 1382.711507]  device_suspend+0x258/0x4d0
+[ 1382.711512]  async_suspend+0x2c/0x48
+[ 1382.711515]  async_run_entry_fn+0x54/0x198
+[ 1382.711517]  process_scheduled_works+0x1c0/0x594
+[ 1382.711522]  worker_thread+0x28c/0x420
+[ 1382.711525]  kthread+0x128/0x178
+[ 1382.711528]  ret_from_fork+0x10/0x20
+[ 1382.711532] ---[ end trace 0000000000000000 ]---
+[ 1382.711594] ath10k_snoc 18800000.wifi: failed to recalculate rts/cts prot for vdev 0: -108
+[ 1382.733548] dwc3-qcom-legacy a6f8800.usb: port-1 HS-PHY not in L2
+[ 1382.771333] failed to send QMI message
+[ 1382.771364] ath10k_snoc 18800000.wifi: failed to send config request: -104
+[ 1382.771381] ath10k_snoc 18800000.wifi: failed to send qmi config: -104
+[ 1382.771393] ath10k_snoc 18800000.wifi: failed to enable wcn3990: -104
+[ 1382.771441] ath10k_snoc 18800000.wifi: Could not init hif: -104
+[ 1382.771453] ------------[ cut here ]------------
+[ 1382.771458] Hardware became unavailable upon resume. This could be a software issue prior to suspend or a hardware issue.
+[ 1382.771604] WARNING: net/mac80211/util.c:1954 at ieee80211_reconfig+0x3a0/0x1e54 [mac80211], CPU#3: kworker/u32:16/20965
+[ 1382.772124] Modules linked in: rfcomm algif_hash algif_skcipher bnep q6asm_dai q6afe_dai q6afe_clocks q6routing q6voice_dai q6voice q6adm q6cvp q6cvs q6asm q6afe q6mvm q6core snd_q6dsp_common q6voice_common fastrpc snd_soc_sm8250 snd_soc_qcom_offload_utils snd_soc_qcom_sdw qrtr_smd snd_soc_qcom_common rpmsg_ctrl soc_usb rpmsg_char hci_uart btqca btbcm snd_usb_audio bluetooth snd_ump leds_qcom_lpg led_class_multicolor snd_hwdep qcom_pbs ecdh_generic snd_usbmidi_lib ecc snd_rawmidi pwrseq_qcom_wcn qcom_camss videobuf2_dma_sg videobuf2_memops snd_soc_tas2562 qcom_qg videobuf2_v4l2 qcom_spmi_temp_alarm videobuf2_common v4l2_fwnode v4l2_async nxp_nci_i2c nxp_nci nci videodev nfc ath10k_snoc qcom_spmi_adc5 nvmem_qcom_spmi_sdam qcom_stats mc qcom_smbx ath10k_core i2c_qcom_cci aw8695_haptics icc_bwmon ff_memless ath snd_soc_wcd937x snd_soc_wcd937x_sdw mac80211 snd_soc_wcd_common qcom_q6v5_pas regmap_sdw qcom_pd_mapper snd_soc_wcd_classh snd_soc_lpass_rx_macro snd_soc_lpass_tx_macro qcom_pil_info snd_soc_lpass_va_macro
+[ 1382.772562]  snd_soc_wcd_mbhc soundwire_qcom snd_soc_lpass_macro_common qcom_q6v5 cfg80211 ipa qcom_sysmon qcom_rng qcom_common snd_soc_core qcom_glink_smem snd_compress rfkill libarc4 qcom_wdt qcomtee soundwire_bus joydev binfmt_misc tun nft_reject_inet nf_reject_ipv6 nf_reject_ipv4 nft_reject nft_ct nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 nf_tables snd_aloop snd_pcm snd_timer snd soundcore uhid fuse efivarfs usb_f_ncm u_ether evdev libcomposite
+[ 1382.772807] CPU: 3 UID: 0 PID: 20965 Comm: kworker/u32:16 Tainted: G        W           7.1.0-sm7150-calls+ #5 PREEMPT 
+[ 1382.772826] Tainted: [W]=WARN
+[ 1382.772832] Hardware name: xiaomi Xiaomi POCO X3 NFC (Huaxing)/Xiaomi POCO X3 NFC (Huaxing), BIOS 2026.01-rc3-gf8c04469e828 01/01/2026
+[ 1382.772845] Workqueue: async async_run_entry_fn
+[ 1382.772868] pstate: 60400005 (nZCv daif +PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+[ 1382.772882] pc : ieee80211_reconfig+0x3a0/0x1e54 [mac80211]
+[ 1382.773369] lr : ieee80211_reconfig+0x3a0/0x1e54 [mac80211]
+[ 1382.773856] sp : ffff80008f7e3ba0
+[ 1382.773862] x29: ffff80008f7e3c40 x28: ffffae8f2dbe5000 x27: ffff000090181e88
+[ 1382.773883] x26: 0000000000000001 x25: ffff000086e93bc0 x24: 0000000000000001
+[ 1382.773902] x23: 0000000000000010 x22: 0000000000000000 x21: 00000000ffffff98
+[ 1382.773921] x20: ffff000093c203e0 x19: ffff000093c209c0 x18: ffff80008bc45048
+[ 1382.773941] x17: 72617774666f7320 x16: 6120656220646c75 x15: 0000000000000003
+[ 1382.773960] x14: ffffae8f2dc1d320 x13: 0000000000000001 x12: 0000000000000003
+[ 1382.773978] x11: 00000000ffffffff x10: 0000000100000002 x9 : 6f17c5290c2cf900
+[ 1382.773997] x8 : 6f17c5290c2cf900 x7 : 20656d6163656220 x6 : 6572617764726148
+[ 1382.774015] x5 : ffffae8f2de65606 x4 : 20726f6972702065 x3 : 0000000000000000
+[ 1382.774034] x2 : ffff80008f7e399c x1 : 00000000000000c0 x0 : 000000000000006d
+[ 1382.774054] Call trace:
+[ 1382.774060]  ieee80211_reconfig+0x3a0/0x1e54 [mac80211] (P)
+[ 1382.774551]  ieee80211_resume+0x34/0x78 [mac80211]
+[ 1382.775039]  wiphy_resume+0xb0/0x244 [cfg80211]
+[ 1382.775613]  device_resume+0x1e4/0x308
+[ 1382.775634]  async_resume+0x2c/0x48
+[ 1382.775648]  async_run_entry_fn+0x54/0x198
+[ 1382.775662]  process_scheduled_works+0x1c0/0x594
+[ 1382.775681]  worker_thread+0x28c/0x420
+[ 1382.775697]  kthread+0x128/0x178
+[ 1382.775712]  ret_from_fork+0x10/0x20
+[ 1382.775731] ---[ end trace 0000000000000000 ]---
+[ 1382.777067] ------------[ cut here ]------------
+[ 1382.777081] WARNING: net/mac80211/driver-ops.c:41 at drv_stop+0xac/0x234 [mac80211], CPU#3: kworker/u32:16/20965
+[ 1382.777594] Modules linked in: rfcomm algif_hash algif_skcipher bnep q6asm_dai q6afe_dai q6afe_clocks q6routing q6voice_dai q6voice q6adm q6cvp q6cvs q6asm q6afe q6mvm q6core snd_q6dsp_common q6voice_common fastrpc snd_soc_sm8250 snd_soc_qcom_offload_utils snd_soc_qcom_sdw qrtr_smd snd_soc_qcom_common rpmsg_ctrl soc_usb rpmsg_char hci_uart btqca btbcm snd_usb_audio bluetooth snd_ump leds_qcom_lpg led_class_multicolor snd_hwdep qcom_pbs ecdh_generic snd_usbmidi_lib ecc snd_rawmidi pwrseq_qcom_wcn qcom_camss videobuf2_dma_sg videobuf2_memops snd_soc_tas2562 qcom_qg videobuf2_v4l2 qcom_spmi_temp_alarm videobuf2_common v4l2_fwnode v4l2_async nxp_nci_i2c nxp_nci nci videodev nfc ath10k_snoc qcom_spmi_adc5 nvmem_qcom_spmi_sdam qcom_stats mc qcom_smbx ath10k_core i2c_qcom_cci aw8695_haptics icc_bwmon ff_memless ath snd_soc_wcd937x snd_soc_wcd937x_sdw mac80211 snd_soc_wcd_common qcom_q6v5_pas regmap_sdw qcom_pd_mapper snd_soc_wcd_classh snd_soc_lpass_rx_macro snd_soc_lpass_tx_macro qcom_pil_info snd_soc_lpass_va_macro
+[ 1382.778002]  snd_soc_wcd_mbhc soundwire_qcom snd_soc_lpass_macro_common qcom_q6v5 cfg80211 ipa qcom_sysmon qcom_rng qcom_common snd_soc_core qcom_glink_smem snd_compress rfkill libarc4 qcom_wdt qcomtee soundwire_bus joydev binfmt_misc tun nft_reject_inet nf_reject_ipv6 nf_reject_ipv4 nft_reject nft_ct nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 nf_tables snd_aloop snd_pcm snd_timer snd soundcore uhid fuse efivarfs usb_f_ncm u_ether evdev libcomposite
+[ 1382.778227] CPU: 3 UID: 0 PID: 20965 Comm: kworker/u32:16 Tainted: G        W           7.1.0-sm7150-calls+ #5 PREEMPT 
+[ 1382.778245] Tainted: [W]=WARN
+[ 1382.778251] Hardware name: xiaomi Xiaomi POCO X3 NFC (Huaxing)/Xiaomi POCO X3 NFC (Huaxing), BIOS 2026.01-rc3-gf8c04469e828 01/01/2026
+[ 1382.778264] Workqueue: async async_run_entry_fn
+[ 1382.778284] pstate: 20400005 (nzCv daif +PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+[ 1382.778298] pc : drv_stop+0xac/0x234 [mac80211]
+[ 1382.778785] lr : ieee80211_stop_device+0x90/0xa8 [mac80211]
+[ 1382.779273] sp : ffff80008f7e3a30
+[ 1382.779278] x29: ffff80008f7e3a30 x28: ffffae8f2dbe5000 x27: ffffae8f2dec1f00
+[ 1382.779301] x26: ffff80008f7e3a90 x25: ffff00008f9e9e60 x24: 0000000000000000
+[ 1382.779322] x23: ffff80008f7e3a90 x22: 0000000000000000 x21: 0000000000000001
+[ 1382.779343] x20: ffff000093c209c0 x19: 0000000000000000 x18: ffff80008bc45078
+[ 1382.779363] x17: 00000000c006287d x16: ffffae8f2d231760 x15: 0000000000016252
+[ 1382.779384] x14: ffffae8f2dbeb1d8 x13: 000001416a1b9000 x12: ffff000093c21308
+[ 1382.779404] x11: ffff000093c21308 x10: 0000000100000000 x9 : ffffae8ed0e9cab4
+[ 1382.779425] x8 : 0000000000000000 x7 : 0000000000000000 x6 : 000000000000003f
+[ 1382.779444] x5 : 0000000000000040 x4 : ffffffffffffffd0 x3 : 0000000000000010
+[ 1382.779465] x2 : 0000000000000007 x1 : 0000000000000000 x0 : ffff000093c209c0
+[ 1382.779485] Call trace:
+[ 1382.779494]  drv_stop+0xac/0x234 [mac80211] (P)
+[ 1382.779982]  ieee80211_do_stop+0x780/0x8d0 [mac80211]
+[ 1382.780469]  ieee80211_stop+0x9c/0xc0 [mac80211]
+[ 1382.780955]  __dev_close_many+0x1c4/0x2ac
+[ 1382.780976]  netif_close_many+0x54/0x1b4
+[ 1382.780992]  netif_close+0x4c/0x84
+[ 1382.781008]  dev_close+0x3c/0x68
+[ 1382.781025]  cfg80211_shutdown_all_interfaces+0x50/0x118 [cfg80211]
+[ 1382.781599]  wiphy_resume+0xf8/0x244 [cfg80211]
+[ 1382.782159]  device_resume+0x1e4/0x308
+[ 1382.782177]  async_resume+0x2c/0x48
+[ 1382.782190]  async_run_entry_fn+0x54/0x198
+[ 1382.782204]  process_scheduled_works+0x1c0/0x594
+[ 1382.782222]  worker_thread+0x28c/0x420
+[ 1382.782237]  kthread+0x128/0x178
+[ 1382.782251]  ret_from_fork+0x10/0x20
+[ 1382.782270] ---[ end trace 0000000000000000 ]---
+[ 1382.783019] ieee80211 phy0: PM: dpm_run_callback(): wiphy_resume [cfg80211] returns -104
+[ 1382.783620] ieee80211 phy0: PM: failed to resume async: error -104
+[ 1382.850210] OOM killer enabled.
+[ 1382.850220] Restarting tasks: Starting
+[ 1382.852364] Restarting tasks: Done
+[ 1382.857883] PM: suspend exit
+[ 1382.866500] IPv6: ipv6_create_tempaddr: regeneration time exceeded - disabled temporary address support
+[ 1385.987019] clk: Failed to runtime PM get '62ee0000.rxmacro' for clk 'lpass-rx-mclk'
+[ 1385.998374] remoteproc remoteproc0: powering up adsp
+[ 1386.038383] remoteproc remoteproc0: Booting fw image qcom/sm7150/xiaomi/surya/adsp.mbn, size 14934572
+[ 1386.182012] remoteproc remoteproc0: remote processor adsp is now up
+[ 1386.182098] remoteproc remoteproc1: powering up cdsp
+[ 1386.184904] remoteproc remoteproc1: Booting fw image qcom/sm7150/xiaomi/surya/cdsp.mbn, size 2922004
+[ 1386.189608] qcom,fastrpc 62400000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1: no reserved DMA memory for FASTRPC
+[ 1386.190498] platform 62400000.remoteproc:glink-edge:fastrpc:compute-cb@3: Adding to iommu group 14
+[ 1386.192129] platform 62400000.remoteproc:glink-edge:fastrpc:compute-cb@4: Adding to iommu group 15
+[ 1386.193973] platform 62400000.remoteproc:glink-edge:fastrpc:compute-cb@5: Adding to iommu group 16
+[ 1386.195793] platform 62400000.remoteproc:glink-edge:fastrpc:compute-cb@6: Adding to iommu group 17
+[ 1386.198516] platform 62400000.remoteproc:glink-edge:fastrpc:compute-cb@7: Adding to iommu group 18
+[ 1386.199943] platform 62400000.remoteproc:glink-edge:fastrpc:compute-cb@8: Adding to iommu group 19
+[ 1386.204355] PDR: Indication received from msm/adsp/audio_pd, state: 0x1fffffff, trans-id: 1
+[ 1386.204421] qcom,apr 62400000.remoteproc:glink-edge.apr_audio_svc.-1.-1: Adding APR/GPR dev: aprsvc:service:4:3
+[ 1386.204593] qcom,apr 62400000.remoteproc:glink-edge.apr_audio_svc.-1.-1: Adding APR/GPR dev: aprsvc:service:4:4
+[ 1386.204672] q6afe_probe:1954 DBG
+[ 1386.208561] q6afe_probe:1970 DBG
+[ 1386.217044] qcom,apr 62400000.remoteproc:glink-edge.apr_audio_svc.-1.-1: Adding APR/GPR dev: aprsvc:service:4:7
+[ 1386.217439] platform 62400000.remoteproc:glink-edge:apr:service@7:dais: Adding to iommu group 20
+[ 1386.218874] qcom,apr 62400000.remoteproc:glink-edge.apr_audio_svc.-1.-1: Adding APR/GPR dev: aprsvc:service:4:8
+[ 1386.220691] qcom,apr 62400000.remoteproc:glink-edge.apr_audio_svc.-1.-1: Adding APR/GPR dev: aprsvc:service:4:9
+[ 1386.221652] qcom,apr 62400000.remoteproc:glink-edge.apr_audio_svc.-1.-1: Adding APR/GPR dev: aprsvc:service:4:a
+[ 1386.221802] qcom,apr 62400000.remoteproc:glink-edge.apr_audio_svc.-1.-1: Adding APR/GPR dev: aprsvc:service:4:b
+[ 1386.238299] remoteproc remoteproc1: remote processor cdsp is now up
+[ 1386.246346] remoteproc remoteproc2: powering up modem
+[ 1386.255095] qcom,fastrpc 8300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1: no reserved DMA memory for FASTRPC
+[ 1386.255709] platform 8300000.remoteproc:glink-edge:fastrpc:compute-cb@1: Adding to iommu group 21
+[ 1386.257194] platform 8300000.remoteproc:glink-edge:fastrpc:compute-cb@2: Adding to iommu group 22
+[ 1386.258956] platform 8300000.remoteproc:glink-edge:fastrpc:compute-cb@3: Adding to iommu group 23
+[ 1386.260320] platform 8300000.remoteproc:glink-edge:fastrpc:compute-cb@4: Adding to iommu group 24
+[ 1386.261638] platform 8300000.remoteproc:glink-edge:fastrpc:compute-cb@5: Adding to iommu group 25
+[ 1386.262986] platform 8300000.remoteproc:glink-edge:fastrpc:compute-cb@6: Adding to iommu group 26
+[ 1386.291880] remoteproc remoteproc2: Booting fw image qcom/sm7150/xiaomi/surya/modem.mbn, size 60827184
+[ 1386.307172] ipa 1e40000.ipa: received modem starting event
+[ 1386.438689] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[ 1386.627303] ipa 1e40000.ipa: received modem running event
+[ 1386.627315] remoteproc remoteproc2: remote processor modem is now up
+[ 1387.441300] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[ 1388.443531] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[ 1389.445705] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[ 1390.448014] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[ 1391.449235] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[ 1392.450790] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[ 1393.452712] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[ 1393.687129] ath10k_warn: 16 callbacks suppressed
+[ 1393.687165] ath10k_snoc 18800000.wifi: cannot restart a device that hasn't been started
+[ 1394.463817] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened

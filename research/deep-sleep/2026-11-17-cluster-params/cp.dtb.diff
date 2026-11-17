@@ -1,0 +1,8 @@
+396c396
+< 				arm,psci-suspend-param = <0x41001244>;
+---
+> 				arm,psci-suspend-param = <0x41002244>;
+405c405
+< 				arm,psci-suspend-param = <0x4100b244>;
+---
+> 				arm,psci-suspend-param = <0x4100c244>;
