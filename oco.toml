@@ -8,15 +8,8 @@ name = "The lab of the Xiaomi POCO X3 NFC (surya)"
 kind = "device-lab"
 parent = "linux-phone-oco"
 
+# Its records - backlog, decisions, research, log, milestones and the rest - are kept in linux-phone-oco/docs,
+# the project's one database, each row naming this place (project = "linux-phone-oco/surya-lab"), and written there
+# through tad's named records (tad r NAME --project surya-lab ...). The record of its work is its commits and pull
+# requests. Decided 2026-11-17: docs' decision 2026-11-17-one-database.
 [exports]
-glimpses = "oco/glimpses.json"
-sources = "oco/sources.json"
-research = "oco/research.json"
-manual_work = "oco/manual_work.json"
-manual_events = "oco/manual_events.json"
-backlog = "oco/backlog.json"
-decisions = "oco/decisions.json"
-concepts = "oco/concepts.json"
-translations = "oco/translations.json"
-idea = "oco/idea.json"
-session_log = "oco/session_log.json"
