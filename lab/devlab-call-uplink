@@ -1,0 +1,15 @@
+#!/bin/sh
+# Keep a 1-channel capture running on MultiMedia3 (the mic's TX_CODEC_DMA_TX_3 port) for as long as
+# ModemManager has a call up: the DSP's call uplink carries nothing without a running capture on that port
+# (pulpoff/linux-surya). The samples go nowhere, unless /run/devlab/call-uplink.raw is asked for (a test).
+pid=""
+while sleep 1; do
+	if mmcli -m any --voice-list-calls 2>/dev/null | grep -qE '\((active|held|ringing-out|dialing)\)'; then
+		if [ -z "$pid" ] || ! kill -0 "$pid" 2>/dev/null; then
+			out=/dev/null; [ -e /run/devlab/call-uplink.want ] && out=/run/devlab/call-uplink.raw
+			arecord -q -D hw:0,2 -f S16_LE -r 48000 -c 1 -t raw "$out" & pid=$!
+		fi
+	elif [ -n "$pid" ]; then
+		kill "$pid" 2>/dev/null; pid=""
+	fi
+done

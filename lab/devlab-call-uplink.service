@@ -1,0 +1,10 @@
+[Unit]
+Description=Keep the call uplink capture running while a call is up (surya)
+After=ModemManager.service
+
+[Service]
+ExecStart=/usr/local/bin/devlab-call-uplink
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
