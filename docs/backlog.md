@@ -376,31 +376,6 @@ Rank
 : 60
 
 
-<a id="sleep-wakes-for-calls"></a>
-### Waking from deep sleep for calls and messages
-
-Status
-: open
-
-Note
-: On the floor reached above: the modem's IPCRTR glink wakeup enabled (/sys/bus/rpmsg/devices/4080000.remoteproc:glink-edge.IPCRTR.-1.-1/power/wakeup), ModemManager's quick suspend/resume quieting the modem before suspend, and Sxmo's post-wake hook putting the phone back to sleep when the wake was not a call or a message (as postmarketOS does on the OnePlus 6; still reported unreliable there, pmaports 4989). Needs a SIM card - the author's hands. Proven by: a witnessed test wakes-for-call, to be entered in tests (a call to the sleeping phone rings within 5 s; an SMS sent to it arrives), and soc-sleeps passing in the same boot.
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-17
-
-Needs
-: phone
-
-Proof
-: wakes-for-call
-
-Rank
-: 6
-
-
 <a id="camera-identify-slots"></a>
 ### Ask each camera slot what it is
 
@@ -1504,3 +1479,31 @@ Opened
 
 Needs
 : phone
+
+
+<a id="sleep-wakes-for-calls"></a>
+### Waking from deep sleep for calls and messages
+
+Status
+: open
+
+Note
+: On the floor reached above: the modem's IPCRTR glink wakeup enabled (/sys/bus/rpmsg/devices/4080000.remoteproc:glink-edge.IPCRTR.-1.-1/power/wakeup), ModemManager's quick suspend/resume quieting the modem before suspend, and Sxmo's post-wake hook putting the phone back to sleep when the wake was not a call or a message (as postmarketOS does on the OnePlus 6; still reported unreliable there, pmaports 4989). Needs a SIM card - the author's hands. Proven by: a witnessed test wakes-for-call, to be entered in tests (a call to the sleeping phone rings within 5 s; an SMS sent to it arrives), and soc-sleeps passing in the same boot.
+
+Waits
+: the SIM back in surya (the author took it out 2026-11-17) and a witness for the call
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-17
+
+Needs
+: phone
+
+Proof
+: wakes-for-call
+
+Rank
+: 6
