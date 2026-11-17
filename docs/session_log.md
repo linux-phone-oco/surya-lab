@@ -1099,3 +1099,18 @@ Done
 
 Considered
 : next: stop sensorspd/sensor clients around suspend (or fix sensor_process across suspend) before the r4 standby run; r4 with the author's unplug
+
+---
+
+
+<a id="2026-11-17-2330-r4-blocked-on-noirqdebug-entry"></a>
+### r4: Bluetooth stop landed, noirqdebug entry refused
+
+Entry date
+: 2026-11-17
+
+Done
+: standby-run.sh now stops bluetooth.service and blocks it when Bluetooth fails; devlab kernel install of the kept kernel with --cmdline noirqdebug refused (running release); half-made entry removed, phone unchanged, kept kernel healthy
+
+Considered
+: next: lab-tools lets a cmdline-only entry reuse the running release (or a differently-named build of the same kernel); then install, try, confirm noirqdebug in /proc/cmdline, arm r4. Rejected: hand-editing boot entries (forbidden), faking a release name (modules would not match)
