@@ -1084,3 +1084,18 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-17-2230-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-17
+
+Done
+: Kept kernel 7.1.0-sm7150-calls+, healthy after a reboot (37 pass, 0 fail); irq 157 quiet over 4 bt-on cycles; ADSP crashes after every suspend with sensorspd running (4 of 4)
+
+Considered
+: next: stop sensorspd/sensor clients around suspend (or fix sensor_process across suspend) before the r4 standby run; r4 with the author's unplug

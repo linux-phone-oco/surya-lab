@@ -827,3 +827,22 @@ Found
 
 About
 : sensors-without-crash
+
+
+<a id="2026-11-17-irq157-quiet-with-wakeup-off"></a>
+### 2026-11-17-irq157-quiet-with-wakeup-off
+
+Date
+: 2026-11-17
+
+Brief
+: Four bt-on 15 s cycles (serial wakeup off): no 'nobody cared', irq 157 stays registered, hci0 up each time; each cycle crashes the ADSP (sensor_process)
+
+Question
+: Does way-back bt-on (serial power/wakeup off for the cycle) keep irq 157 quiet so Bluetooth-on standby is representative?
+
+Found
+: On 7.1.0-sm7150-calls+, USB-powered, 4 consecutive way-back.sh cycle 15 bt-on: dmesg 'nobody cared' count 0, irq 157 still listed, hci0 present after every resume, RTC 17 s asleep of 15, suspend entries and exits clean. cxsd/aosd/ddr stay 0 (soc-sleeps not met, as before). Side finding: every cycle ended with the ADSP fatal 'err_qdi.c EX:sensor_process frpc_dsp' (crashes #2-#5 in the boot; sound card gone, health UNHEALTHY) - the sensors-across-suspend crash is 4 of 4 with the sensorspd helper running, not n=1. A reboot restored healthy (37 pass, 0 fail). So the wakeup-off switch alone already quiets irq 157; r2/r3's 'nobody cared' needs a longer or off-USB run to recur.
+
+About
+: deep-sleep
