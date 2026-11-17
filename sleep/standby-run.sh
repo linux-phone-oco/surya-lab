@@ -60,5 +60,8 @@ while :; do
 	sleep 2
 done
 printf V > /dev/watchdog0 2>/dev/null; echo 0 > /sys/module/qcom_wdt/parameters/keep_armed_in_suspend 2>/dev/null
-rfkill unblock bluetooth
+if grep -q "Bluetooth failed" "$d/STOPPED" 2>/dev/null; then
+	# decision 2026-11-17-r4-quiets-irq-157-and-stops-bluetooth-retries: no QCA retry loop left behind
+	systemctl stop bluetooth.service 2>/dev/null; rfkill block bluetooth; echo "bluetooth stopped and blocked at $(date -u +%FT%TZ)" >> "$d/STOPPED"
+else rfkill unblock bluetooth; fi
 echo "ended $(date -u +%FT%TZ) after $(awk -v a="$(mono)" -v b="$t0" 'BEGIN{printf "%d", a-b}') s, asleep (RTC) ${asleep} s, failed cycles ${fails}" > "$d/DONE"

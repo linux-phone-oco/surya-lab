@@ -1366,10 +1366,10 @@ Proof
 ### Standby current measured beside Android's
 
 Status
-: open
+: in-progress
 
 Note
-: r4 waits on devlab-kernel-try-cmdline (noirqdebug one-shot), then the author's unplug
+: r4 step 2 landed (standby-run.sh stops and blocks Bluetooth on an hci failure). Step 1 blocked: devlab kernel install refuses a noirqdebug entry of the kept kernel (same release 7.1.0-sm7150-calls+ as the running one: its modules would replace the live ones). Needs lab-tools: an install with cmdline only, or a kernel built with a distinct release. Not armed.
 
 Waits
 : author unplug; coordinator confirms noirqdebug
