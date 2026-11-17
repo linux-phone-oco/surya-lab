@@ -808,3 +808,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-17-sensors-lasting-install-three-boots"></a>
+### 2026-11-17-sensors-lasting-install-three-boots
+
+Date
+: 2026-11-17
+
+Brief
+: The patched hexagonrpcd is lasting on surya: three boots, 0 ADSP crashes, four sensors each boot; a 10 s freeze with the helper running crashed the ADSP once (it came back in 0.5 s)
+
+Question
+: Does the patched hexagonrpcd, installed lasting, keep the sensors without crashing the audio DSP?
+
+Found
+: lab/build-hexagonrpcd-sns.sh builds the daemon (hexagonrpc 40e5041 + the patch, static aarch64, aarch64-linux-gnu-gcc, no meson); lab/sensors-install.sh on the phone put it at /usr/local/bin/hexagonrpcd-sns, made the state root /var/lib/hexagonrpcd-sensors from the package tree (registry also under sensors/persist/registry/registry, owner fastrpc), a drop-in 10-state-root.conf (-R) and unmasked sensorspd (rootpd masked). First start: 150 s, 0 crashes; monitor-sensor needed iio-sensor-proxy restarted once (it had started with no sensors), then accelerometer, light, proximity, compass. Three reboots in a row (devlab phone reboot): helper and proxy active, 0 crashes, 4 sensors each time, no ordering fix needed; the watch's health: 37 pass, 0 fail, sensors/motion-and-light and sensors/proximity-reads now pass (known gaps no more). The DSP writes sns_reg_version into the state root (sensors/persist). Across suspend: one way-back cycle 10 bt-on (rtcwake freeze, helper left running): the ADSP logged 'crash detected in adsp: type fatal error' 0.03 s after the suspend exit and was up again 0.5 s later; sensors came back (4); a real systemctl suspend would stop the helper (Conflicts=suspend.target, no restart): unmeasured. n=1.
+
+About
+: sensors-without-crash

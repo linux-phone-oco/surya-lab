@@ -624,3 +624,28 @@ About
 
 Research
 : 2026-11-17-r3-partial-and-the-reset-after
+
+
+<a id="2026-11-17-sensors-install-by-script-not-by-flash"></a>
+### 2026-11-17-sensors-install-by-script-not-by-flash
+
+Date
+: 2026-11-17
+
+Brief
+: The lasting sensors helper is a lab script run on the phone (build + install), the stock mask stays in device.toml until it has run
+
+Decision
+: lab/build-hexagonrpcd-sns.sh builds the patched daemon on the lab; lab/sensors-install.sh installs it on the phone. device.toml keeps sensorspd masked (a fresh flash has no patched daemon: the stock one would crash-loop the audio DSP); the health gap 'sensors' is removed because the suite now passes it.
+
+Why
+: Three boots with 0 crashes (research 2026-11-17-sensors-lasting-install-three-boots).
+
+Rejected
+: A binary committed to the repo: 0.7 MB of build output. Unmasking in device.toml: breaks a fresh flash. A package: no pmaports route yet (sensors-upstream).
+
+About
+: sensors-without-crash
+
+Research
+: 2026-11-17-sensors-lasting-install-three-boots
