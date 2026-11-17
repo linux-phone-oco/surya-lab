@@ -16,17 +16,29 @@
 #                     is doing - the dry run, nothing suspends. A marker goes to the kernel log first
 #   defuse            stop an armed watchdog by the magic close
 #   collect DIR       copy what pstore kept (the last boot's console and panic log) into DIR, then clear it
-#   cycle SLEEP [probe]
+#   cycle SLEEP [probe|bt-on]
 #                     ONE s2idle cycle with Bluetooth blocked (its UART is the wake source that ended s2idle at once):
 #                     fuse 30 s, rtcwake -m freeze -s SLEEP (5 to 15: the fuse is the watchdog's longest), defuse and
 #                     unblock on return; refuses unless `check` passes and the patched parameter is there. With `probe`
 #                     Bluetooth stays on (s2idle ends in 2 s) and the fuse is NOT defused: the phone must reset 30 s
-#                     after arming - the proof that the watchdog lives through a real suspend entry
+#                     after arming - the proof that the watchdog lives through a real suspend entry. With `bt-on`
+#                     Bluetooth stays UNBLOCKED and the serial's wakeup is off for the cycle (the RX line, GPIO 41, irq 158
+#                     "88c000.serial:wakeup", is what ended s2idle at once; decision 2026-11-17-serial-wakeup-off): the
+#                     watchdog is defused on return, the wakeup put back, and what the SoC counted is printed (qcom_stats
+#                     before and after, the wake irq, hci0 still there)
 set -eu
 wd=/dev/watchdog0
 param=/sys/module/qcom_wdt/parameters/keep_armed_in_suspend
 say() { printf '%s\n' "$*"; }
 usage() { sed -n '2,/^set -eu/p' "$0" | sed '$d;s/^# \{0,1\}//'; }
+serw=/sys/bus/platform/devices/88c000.serial/power/wakeup   # Bluetooth's UART (hci0): its RX line is a wake source
+# what the SoC counted: qcom_stats for the sleep states (count, accumulated duration as the SoC counts it)
+stats() {
+	say "qcom_stats $1:"
+	for s in cxsd aosd ddr adsp cdsp modem; do
+		[ -r /sys/kernel/debug/qcom_stats/$s ] && say "  $s $(tr '\n' ' ' < /sys/kernel/debug/qcom_stats/$s | sed 's/Last Entered At: [0-9]* Last Exited At: [0-9]* //')"
+	done
+}
 need() { [ "$1" -ge "$2" ] 2>/dev/null || { say "way-back: $3" >&2; exit 2; }; }
 
 do_check() {
@@ -62,17 +74,32 @@ case ${1:-} in
 		mkdir -p "$2"; n=0; for f in /sys/fs/pstore/*; do [ -f "$f" ] || continue; cp "$f" "$2/"; rm -f "$f"; n=$((n + 1)); done
 		say "collected $n pstore record(s) into $2" ;;
 	cycle) need "${2:-0}" 5 "cycle needs SLEEP >= 5"; need 15 "${2:-0}" "cycle needs SLEEP <= 15 (the fuse is 30 s)"
+		case ${3:-} in ""|probe|bt-on) ;; *) say "way-back: cycle: the flag is probe or bt-on" >&2; exit 2 ;; esac
 		do_check >/dev/null || { do_check || true; say "way-back: the way back is not in place" >&2; exit 1; }
 		[ -f "$param" ] || { say "way-back: the stock qcom_wdt stops the watchdog in suspend: install the patched module first" >&2; exit 1; }
+		if [ "${3:-}" = bt-on ]; then
+			[ -e /sys/class/bluetooth/hci0 ] || { say "way-back: bt-on needs hci0 (Bluetooth up, unblocked)" >&2; exit 1; }
+			rfkill unblock bluetooth; [ -w "$serw" ] || { say "way-back: no $serw" >&2; exit 1; }
+			sw0=$(cat "$serw"); echo disabled > "$serw"
+		fi
 		echo 1 > "$param"; sync
-		[ "${3:-}" = probe ] || rfkill block bluetooth
+		[ "${3:-}" = probe ] || [ "${3:-}" = bt-on ] || rfkill block bluetooth
+		stats before
 		say "way-back: cycle: sleep $2 s, fuse 30 s${3:+, $3}" > /dev/kmsg; sync
 		arm_and_release 30
 		u=/sys/class/udc/a600000.usb/soft_connect   # as in the first cycles: the gadget let go, then back
 		[ -w "$u" ] && echo disconnect > "$u"
+		r0=$(cat /sys/class/rtc/rtc0/since_epoch)
 		rtcwake -m freeze -s "$2" || say "rtcwake returned $?"
 		[ -w "$u" ] && echo connect > "$u"
 		if [ "${3:-}" = probe ]; then say "back from the suspend; the fuse stays lit: the phone resets about 30 s after arming"; else
-			printf V > "$wd"; echo 0 > "$param"; rfkill unblock bluetooth; say "back: watchdog stopped; RTC $(cat /sys/class/rtc/rtc0/since_epoch)"; fi ;;
+			printf V > "$wd"; echo 0 > "$param"
+			r1=$(cat /sys/class/rtc/rtc0/since_epoch)
+			if [ "${3:-}" = bt-on ]; then echo "$sw0" > "$serw"; else rfkill unblock bluetooth; fi
+			say "back: watchdog stopped; RTC $r1, asleep (RTC) $((r1 - r0)) s of $2 asked"
+			stats after
+			say "dmesg since the suspend:"; dmesg | sed -n '/way-back: cycle/,$p' | grep -E "PM: suspend|nobody cared|Disabling IRQ|Bluetooth|hci0|qca|Wakeup|wake" | tail -15
+			[ "${3:-}" = bt-on ] && { sleep 3; [ -e /sys/class/bluetooth/hci0 ] && say "hci0 present after resume, rfkill: $(rfkill list bluetooth | tr '\n' ' ')" || say "hci0 GONE after resume"; }
+		fi ;;
 	*) usage ;;
 esac
