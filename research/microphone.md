@@ -71,6 +71,20 @@ interfaces: TX (device `sdw:3:0:0217:010a:00:3`, which also carries the codec's 
    DMIC0-3 - as it did for ADC1. The zeros therefore sit between the TX decimators and the DSP's
    TX DMA (or in the decimator enable), not only at the microphones. That is the next step.
 
+12. **What was pushed was not what ran.** Building the fixes on the real branches showed that the WCD
+   device tree on `feat/surya-wcd937x-mic-headphone` (as pushed on 2026-11-05/09) was never the tree
+   proven on the phone: its SoundWire controllers sat at 0x62630000/0x62610000 (the hardware, and the
+   vendor's `swrm-io-base`, say 0x62ed0000/0x62ef0000), its port tables differed, its macros asked
+   for a DCODEC vote that this DSP rejects (`AFE_CMD_REMOTE_LPASS_CORE_HW_VOTE_REQUEST` error 3 -> the
+   VA macro fails, the card defers), and the reset was declared active-high and muxed to
+   `cdc_pdm_rx`. The tree that ran lived only in `~/Projects/surya-audio/kernel-rc3/src-wcd`. Now
+   committed: PR #5 (`dt/sm7150-lpass-soundwire-nodes`: addresses, ports, no DCODEC vote) and PR #4
+   (`dt/surya-wcd9375-reset-no-sleep`: polarity, mux, no sleep state), with PR #3 (pin mux).
+13. **The branch kernel is healthy.** `test/surya-mic` = the tas2562 fixes + PRs #3, #5, #4, tried on
+   2026-11-17 03:52 UTC: healthy (29 pass, the known gaps), the sound card with the WCD9375, the headset
+   jack detector present for the first time, stereo speakers as before, 0 UNATTACHED, no SoundWire or
+   vote errors. `mic-records` fails honestly (exact zeros) - the next fault.
+
 ## What the vendor's GPL sources say
 
 - The pin functions of the SoundWire pins agree with mainline's corrected table (gpio19 func3, gpio20
