@@ -2,8 +2,8 @@
 # the LPASS TX macro (DEC0) and the DSP's TX_CODEC_DMA_TX_3 into the MultiMedia2 PCM. Two seconds are
 # recorded; anything but digital silence in its last half second proves samples come back from the
 # microphone (a real ADC is never exactly 0).
-# Caution: the vendor routes surya's built-in microphones as digital mics (TX DMIC1-3), not ADC1 - the
-# route below is to be corrected once the DMIC path is brought up (research/microphone.md).
+# This is the bottom mic (AMIC1); the top mic (AMIC3 on ADC2) is heard by mic-top-hears-speaker. surya has
+# no digital mics: the TX DMIC routes in Xiaomi's tree are its QRD reference board's (research-microphones).
 # The route is set for the recording only and the mixer is put back as it was.
 . /usr/lib/devlab/health/lib.sh
 amixer -c 0 cget name='TX DEC0 MUX' >/dev/null 2>&1 ||
