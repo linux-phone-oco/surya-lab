@@ -1366,14 +1366,10 @@ Proof
 ### Standby current measured beside Android's
 
 Status
-: open
+: in-progress
 
 Note
-: How much the floor saves, in milliamps: the fuel gauge's current over an hour asleep off USB (current_now and the charge counter, since they can disagree), on mainline and, as the number to match, on the phone's own Android or Ubuntu Touch - observed behaviour only. Proven by: a test standby-current entered in tests, passing under a threshold set from Android's measured number. Keeper 2026-11-17: cannot be taken without hands (the hour off USB); soc-sleeps also still fails, so a mainline number now is the not-at-floor one.
-
-2026-11-17, the author agreed to unplug USB for about an hour (via the coordinators). Mainline figure only (Android's number skipped for now). How: the keeper prepares ONE run - a loop of short way-back.sh suspend cycles (the watchdog is 30 s at most, so one long sleep cannot be used: it is petted between cycles) with the RTC wake and the fuel gauge (current_now and charge counter) logged to /var/tmp, started by systemd-run so it survives the USB cut and ends by itself after about 60 min. Then the keeper sends the surya coordinator ONE line 'unplug now' (SendMessage to local_0ecf107e-d955-49ff-aefb-b0ecaa3bcbdd), releases the lease and ends. When the coordinator says 'plugged back', a keeper reads the log and records the figure honestly (not at the SoC floor yet).
-
-2026-11-17 (later): run r1 was INVALID - USB was connected the whole time (the author's unplug did not happen), so its current readings are USB/charger-fed, not standby; never score it. Next: re-arm as r2, same shape as decision 2026-11-17-standby-drain-test, with a start check that USB power is absent (charger/usb online = 0 in /sys/class/power_supply) - if present, the run REFUSES to start scoring and says so loudly; samples with charger_online=1 are never scored. Then send the surya coordinator 'ready to unplug'. Findings kept: qcom_qg has no charge_counter; the 30 s watchdog caps sleeps at 15 s (suspended fraction ~55 %).
+: r2 armed 2026-11-17 20:08Z (unit standby-r2, /var/tmp/standby-r2): waits for the cable to be pulled, then 10 min settle + 60 min measure; then a keeper reads samples.tsv and records the figure
 
 About
 : deep-sleep

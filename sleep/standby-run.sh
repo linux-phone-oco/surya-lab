@@ -7,6 +7,7 @@
 # Wi-Fi and Bluetooth stay on, screen off, SIM out. The fuel gauge (qcom_qg) has NO charge_counter: capacity is whole
 # percent (1 % = 52 mAh, too coarse for 60 min at ~10 mA), so the figure is current_now/current_avg (cross-checked
 # against voltage_ocv): charge_counter is logged as 'na'. Samples with the charger online are to be discarded.
+# Armed first: with USB power present it waits (file ARMED), never cycles or scores; phase "usb" samples are never scored.
 set -u
 id=${1:?run id}; settle=${2:-600}; measure=${3:-3600}
 d=/var/tmp/standby-$id; mkdir -p "$d"; t=$d/samples.tsv; c=$d/cycles.log
@@ -18,11 +19,29 @@ mono() { cut -d' ' -f1 /proc/uptime; }
   echo "modem: $(mmcli -m 0 2>&1 | grep -E 'state|failed reason|power state' | tr -s ' |' ' ' | tr '\n' ';')"
   echo "screen: $(cat /sys/class/backlight/*/brightness 2>/dev/null | tr '\n' ' ')"; } > "$d/header.txt"
 printf 'mono_s\tphase\tbat_status\tcharger_online\tcurrent_now_uA\tcurrent_avg_uA\tcharge_counter\tcapacity\tvoltage_now_uV\tvoltage_ocv_uV\ttemp\tsuspends\tsuspended_s_cum\twake_events\n' > "$t"
+# USB guard (r1 was invalid: the cable stayed in). While any USB source is online the run REFUSES to start
+# scoring: it only waits ("ARMED" file, no suspend cycles, no samples) until the cable is out for 3 polls in a row,
+# at most ARM_S (default 10800) seconds, then ends with REFUSED. Samples with the charger online are marked phase
+# 'usb' and are never scored (a re-plugged cable mid-run shows up so, not as standby).
+usb_in() { for p in /sys/class/power_supply/*; do [ "$(rd $p/type)" = USB ] && [ "$(rd $p/online)" = 1 ] && return 0; done; return 1; }
+arm=${ARM_S:-10800}
+if usb_in; then
+	echo "USB power is present since $(date -u +%FT%TZ): NOT scoring; waiting for the cable to be pulled (up to ${arm}s)" > "$d/ARMED"
+	echo "standby-run $id: USB power present, refusing to score until it is pulled" | systemd-cat -p warning -t standby-run 2>/dev/null
+	a0=$(mono); gone=0
+	while [ "$gone" -lt 3 ]; do
+		usb_in && gone=0 || gone=$((gone + 1))
+		[ "$(awk -v a="$(mono)" -v b="$a0" 'BEGIN{printf "%d", a-b}')" -ge "$arm" ] && { echo "REFUSED: USB power still present after ${arm}s, nothing scored" > "$d/REFUSED"; exit 1; }
+		sleep 5
+	done
+	echo "USB power gone at $(date -u +%FT%TZ): scoring starts" >> "$d/ARMED"
+fi
 t0=$(mono); asleep=0; fails=0
 while :; do
 	now=$(mono); el=$(awk -v a="$now" -v b="$t0" 'BEGIN{printf "%d", a-b}')
 	[ "$el" -ge $((settle + measure)) ] && break
 	ph=settle; [ "$el" -ge "$settle" ] && ph=measure
+	usb_in && ph=usb
 	printf '%s\t%s\t%s\t%s\t%s\t%s\tna\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' "$now" "$ph" "$(rd $b/status)" "$(rd $ch/online)" "$(rd $b/current_now)" "$(rd $b/current_avg)" \
 		"$(rd $b/capacity)" "$(rd $b/voltage_now)" "$(rd $b/voltage_ocv)" "$(rd $b/temp)" "$(rd /sys/power/suspend_stats/success)" "$asleep" \
 		"$(awk 'NR>1{s+=$3}END{print s+0}' /sys/kernel/debug/wakeup_sources 2>/dev/null)" >> "$t"
