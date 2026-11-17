@@ -1404,3 +1404,28 @@ Opened
 
 Needs
 : build
+
+
+<a id="standby-r2-reboot-why"></a>
+### Why surya rebooted by itself during standby run r2
+
+Status
+: open
+
+Note
+: The author: surya rebooted without anyone touching it, ~15-20 min after he unplugged, during r2. Suspect: the 30 s watchdog firing in/around suspend (the mechanism that caps sleeps at 15 s) - find out, do not assume. Read (USB is plugged back in): pstore/ramoops, the previous boot's journal (journalctl -b -1), the boot reason, r2's own log (/var/tmp/standby-r2/) up to the reboot, the watchdog state (way-back.sh) and suspend_stats. Then: do r2's samples before the reboot count (only charger_online=0 ones, unscored if the run did not complete the 60 min), and how r3 avoids it (watchdog petted/disarmed correctly across suspend, or the unit surviving a reboot). Record as research + decision; make r3 ready ('ready to unplug' to the coordinator: a new run needs the author to unplug again). One change at a time.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-17
+
+Needs
+: phone
+
+Proof
+: soc-sleeps
+
+Rank
+: 0
