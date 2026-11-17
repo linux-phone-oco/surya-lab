@@ -1337,37 +1337,6 @@ Proof
 : motion-and-light
 
 
-<a id="sleep-standby-current"></a>
-### Standby current measured beside Android's
-
-Status
-: in-progress
-
-Note
-: r4 step 2 landed (standby-run.sh stops and blocks Bluetooth on an hci failure). Step 1 blocked: devlab kernel install refuses a noirqdebug entry of the kept kernel (same release 7.1.0-sm7150-calls+ as the running one: its modules would replace the live ones). Needs lab-tools: an install with cmdline only, or a kernel built with a distinct release. Not armed.
-
-Waits
-: author unplug; coordinator confirms noirqdebug
-
-Blocked by
-: devlab-kernel-try-cmdline
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-17
-
-Needs
-: phone
-
-Proof
-: soc-sleeps
-
-Rank
-: 1
-
-
 <a id="standby-test-in-lpoco-health"></a>
 ### The standby drain test lives in the health suite (lpoco-health) as a switchable test
 
@@ -1507,3 +1476,30 @@ Proof
 
 Rank
 : 6
+
+
+<a id="sleep-standby-current"></a>
+### Standby current measured beside Android's
+
+Status
+: open
+
+Note
+: r4 step 2 landed (standby-run.sh stops and blocks Bluetooth on an hci failure). Step 1 blocked: devlab kernel install refuses a noirqdebug entry of the kept kernel (same release 7.1.0-sm7150-calls+ as the running one: its modules would replace the live ones). Needs lab-tools: an install with cmdline only, or a kernel built with a distinct release. Not armed.
+
+2026-11-17 coordinator: r4 plan = NO noirqdebug (irq 157 stays enabled with the serial's wakeup off), Bluetooth on + stop-bluetooth-on-hci-failure (landed), sensorspd STOPPED for the whole run and restored after (it crashed the ADSP on every suspend, 4/4), spec 60 s/30 min/75 min, never scored while USB present. Arm it, then 'r4 armed, ready to unplug' to the coordinator.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-17
+
+Needs
+: phone
+
+Proof
+: soc-sleeps
+
+Rank
+: 1
