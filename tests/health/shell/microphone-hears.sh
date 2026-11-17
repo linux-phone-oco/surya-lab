@@ -5,7 +5,7 @@
 # (lab-tools' tone crate: a Goertzel at 1 kHz against six frequencies beside it). PulseAudio makes the two conflicting UCM devices two
 # card profiles, so the top mic is reached by switching the card to "HiFi (Speaker, TopMic)" and back. No mixer is set by hand: a pass proves the
 # microphone and its UCM capture profile work (20 dB above the noise). The phone decides; nobody listens.
-. /usr/lib/devlab/health/lib.sh
+. /usr/lib/lpoco-health/lib.sh
 [ -n "$(session_user)" ] || { say mic-hears-speaker audio-mic skip "no graphical session: no sound server"; exit 0; }
 src=$(as_user pactl get-default-source)
 case $src in

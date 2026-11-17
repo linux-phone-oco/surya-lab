@@ -4,7 +4,7 @@
 # call on the speaker's TERT_MI2S_RX and take the uplink from the microphones' TX_CODEC_DMA_TX_3, the
 # way pulpoff/linux-surya carries calls on this phone. A pass proves the path is there, not that a
 # call carries sound: that is the echo call's (call-echo). Reads only; changes nothing.
-. /usr/lib/devlab/health/lib.sh
+. /usr/lib/lpoco-health/lib.sh
 miss=""
 grep -q ': VoiceMMode1 ' /proc/asound/pcm 2>/dev/null || miss="$miss, no VoiceMMode1 PCM"
 for c in 'TERT_MI2S_RX Voice Mixer VoiceMMode1' 'VoiceMMode1 Capture Mixer TX_CODEC_DMA_TX_3'; do

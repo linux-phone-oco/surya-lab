@@ -4,7 +4,7 @@
 # back from the echo line, plays again, is heard again: 1 to 2 s after the tone ended it is still there,
 # which only the echo can make. devlab-health tone find decides (20 dB above the noise). ~30 s of a call a
 # day; other runs that day skip ("ran today"). Skipped without registration or a sound server.
-. /usr/lib/devlab/health/lib.sh
+. /usr/lib/lpoco-health/lib.sh
 num=${CALL_ECHO_NUMBER:-+498972101099701}
 no_sim && { say call-echo modem-calls skip "no SIM card"; exit 0; }   # before the day is marked: a skip costs nothing
 # the telephony layer: once a day (lib.sh); other runs that day measure nothing and say so
