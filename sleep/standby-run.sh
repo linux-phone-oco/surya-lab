@@ -47,8 +47,8 @@ while :; do
 	usb_in && ph=usb
 	# r2 (2026-11-17) was reset by its own 30 s fuse when Bluetooth (UART irq 157 disabled, QCA retry loop of ~70 s) stalled a cycle:
 	# never start a cycle after Bluetooth has failed, nor after 4 cycles in a row that did not sleep; end honestly, unscored.
-	[ "$(bt_bad)" -gt "$bt0" ] && { echo "stopped: Bluetooth failed (hci hardware error / irq 157 / freeze refused) at $(date -u +%FT%TZ), no more cycles: NOT a complete run" > "$d/STOPPED"; break; }
-	[ "$zero" -ge 4 ] && { echo "stopped: 4 cycles in a row did not sleep at $(date -u +%FT%TZ): NOT a complete run" > "$d/STOPPED"; break; }
+	[ "$(bt_bad)" -gt "$bt0" ] && { echo "stopped: Bluetooth failed (hci hardware error / irq 157 / freeze refused) at $(date -u +%FT%TZ), no more cycles: aborted, partial: samples before it count (charger_online 0 only)" > "$d/STOPPED"; break; }
+	[ "$zero" -ge 4 ] && { echo "stopped: 4 cycles in a row did not sleep at $(date -u +%FT%TZ): aborted, partial: samples before it count (charger_online 0 only)" > "$d/STOPPED"; break; }
 	printf '%s\t%s\t%s\t%s\t%s\t%s\tna\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' "$now" "$ph" "$(rd $b/status)" "$(rd $ch/online)" "$(rd $b/current_now)" "$(rd $b/current_avg)" \
 		"$(rd $b/capacity)" "$(rd $b/voltage_now)" "$(rd $b/voltage_ocv)" "$(rd $b/temp)" "$(rd /sys/power/suspend_stats/success)" "$asleep" \
 		"$(awk 'NR>1{s+=$3}END{print s+0}' /sys/kernel/debug/wakeup_sources 2>/dev/null)" >> "$t"
