@@ -1012,3 +1012,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-17-2145-standby-r2-spec"></a>
+### Standby run spec: 60 s absence, 30 min wait, 75 min measure
+
+Entry date
+: 2026-11-17
+
+Done
+: standby-run.sh on main now waits for 60 s without USB power (poll up to 1800 s, else REFUSED 'never unplugged'), writes REFUSED-TO-SCORE into the header, measures 4500 s by default. NOT yet on the phone: the phone left USB (author unplugged) before it could be pushed, so the running standby-r2 is the first guard version (3 polls of 5 s, 3600 s measure, 10800 s wait); r1 was not stopped or marked INVALID on the phone (it was not running then; mark /var/tmp/standby-r1/INVALID when reachable).
+
+Considered
+: next: on 'plugged back', score r2's measure rows with charger_online 0 only; check header.txt and ARMED for when scoring began; r2 measures 60 min, not 75
+
+About
+: deep-sleep
