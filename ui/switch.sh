@@ -5,14 +5,14 @@
 #
 # Uses postmarketOS's own UI packages: installs the shell's package (replacing the current shell's
 # when they cannot coexist), points tinydm at the shell's session, reboots, and checks the shell, the audio DSP and the speaker.
-# Environment: PHONE (default user@172.16.42.1), PHONE_PASS (default 147147).
+# The phone is reached through devlab (linux-phone-oco/lab-tools), by this lab's device.toml: it holds the
+# phone for each change, and its reboot waits for the phone and ends with the new boot's health.
 set -eu
 SHELL_NAME=${1:?usage: ui/switch.sh phosh|plasma-mobile|gnome-mobile|sxmo}
 D=$(cd "$(dirname "$0")" && pwd)
-. "$D/../lib/phone.sh"
-phone_find
-s() { echo "$*" | phone_sh; }
-r() { echo "$*" | phone_root; }
+devlab() { command devlab --device "$D/../device.toml" "$@"; }
+s() { echo "$*" | devlab phone sh; }
+r() { echo "$*" | devlab phone root; }
 case $SHELL_NAME in
   phosh)         pkg=postmarketos-ui-phosh;         session=phosh;         proc=phosh ;;
   plasma-mobile) pkg=postmarketos-ui-plasma-mobile; session=plasma-mobile; proc=plasmashell ;;
@@ -46,8 +46,7 @@ if [ "$dm" = tinydm.service ]; then
   [ -n "$f" ] || { echo "no session file for $session in /usr/share/wayland-sessions" >&2; exit 1; }
   r "tinydm-set-session -f -s /usr/share/wayland-sessions/$f" && echo "tinydm session: $f"
 fi
-echo "rebooting"; phone_reboot
-while [ "$(phone_uptime)" -lt 60 ]; do sleep 3; done
+echo "rebooting"; devlab phone reboot || true   # its verdict on the new boot is said; the shell is checked below
 echo "== $SHELL_NAME after boot =="
 # a shell finishes starting a little after login: give it up to 90 s
 for _ in $(seq 1 30); do s "pgrep -x $proc >/dev/null" && break; sleep 3; done
