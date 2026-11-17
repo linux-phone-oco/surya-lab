@@ -1429,3 +1429,28 @@ Proof
 
 Rank
 : 0
+
+
+<a id="sleep-irq157-quiet"></a>
+### Quiet the Bluetooth UART wake irq 157 so Bluetooth-on standby is representative
+
+Status
+: open
+
+Note
+: After r3. irq 157 (qcom_geni_serial_isr, the BT UART RX wake) was disabled as 'nobody cared' in r2 and Bluetooth's QCA retry loop followed (research 2026-11-17-r2-reboot-was-the-fuse, 2026-11-17-qca-uart-wake-across-suspend). Try the serial's power/wakeup switch, one change per cycle, watchdog armed. Proof: a 15 s cycle bt-on with no 'nobody cared', hci0 stays up, soc-sleeps read.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-17
+
+Needs
+: phone
+
+Proof
+: soc-sleeps
+
+Rank
+: 3

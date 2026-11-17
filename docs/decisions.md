@@ -574,3 +574,28 @@ About
 
 Research
 : 2026-11-17-r2-reboot-was-the-fuse
+
+
+<a id="2026-11-17-r3-bluetooth-on-aborts-partial"></a>
+### 2026-11-17-r3-bluetooth-on-aborts-partial
+
+Date
+: 2026-11-17
+
+Brief
+: r3: Bluetooth stays on; the loop aborts itself 'aborted, partial' on a Bluetooth failure or 4 non-sleeping cycles; irq 157 quieting queued after
+
+Decision
+: Coordinator's choice (a) taken (supersedes 2026-11-17-r3-waits-on-the-bluetooth-choice). The abort is on 4 zero-sleep cycles in a row, not 2: 24 of r2's 47 cycles slept 0 s with Bluetooth healthy, so 2 would abort on noise. The abort writes STOPPED 'aborted, partial'; samples before it with charger_online 0 still count. No cycle starts after a Bluetooth failure, so the 30 s fuse cannot meet the retry loop; only the first stalled cycle can still reset the phone. (c) is backlog sleep-irq157-quiet, after r3.
+
+Why
+: Same evidence as the research; the zero-sleep rate is r2's cycles.log.
+
+Rejected
+: 2 zero-sleep cycles (noise); BT blocked (hung hard).
+
+About
+: deep-sleep
+
+Research
+: 2026-11-17-r2-reboot-was-the-fuse
