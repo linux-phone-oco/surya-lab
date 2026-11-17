@@ -2,7 +2,7 @@
 # /etc/devlab/private/own-number, never in a repository) a unique token, and finds it among the received
 # messages within 90 s (or in Sxmo's own log, if the shell took it first); both copies and the pop-up are cleared.
 # One SMS a day at most: other runs that day skip ("ran today"). Skipped without the number or a registration.
-. /usr/lib/devlab/health/lib.sh
+. /usr/lib/lpoco-health/lib.sh
 num=$(cat /etc/devlab/private/own-number 2>/dev/null)
 [ -n "$num" ] || { say sms-loopback modem-sms skip "no own number on the phone (/etc/devlab/private/own-number)"; exit 0; }
 no_sim && { say sms-loopback modem-sms skip "no SIM card"; exit 0; }

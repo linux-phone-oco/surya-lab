@@ -3,7 +3,7 @@
 # 1 kHz tone (TEST_TONE_DBFS, at twice TEST_VOLUME to make up the earpiece's -18 dB) is played as a mono stream, as a call would be, and the top
 # microphone beside the earpiece finds it with devlab-health tone find, 20 dB above the noise beside it.
 # The author heard the top speaker as the earpiece (2026-11-17); the phone decides, nobody listens.
-. /usr/lib/devlab/health/lib.sh
+. /usr/lib/lpoco-health/lib.sh
 [ -n "$(session_user)" ] || { say earpiece-heard audio-earpiece skip "no graphical session: no sound server"; exit 0; }
 card=alsa_card.platform-sound
 # as_user runs its words through su -c, so a profile name is quoted once more for that shell

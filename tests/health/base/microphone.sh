@@ -5,7 +5,7 @@
 # This is the bottom mic (AMIC1); the top mic (AMIC3 on ADC2) is heard by mic-top-hears-speaker. surya has
 # no digital mics: the TX DMIC routes in Xiaomi's tree are its QRD reference board's (research-microphones).
 # The route is set for the recording only and the mixer is put back as it was.
-. /usr/lib/devlab/health/lib.sh
+. /usr/lib/lpoco-health/lib.sh
 amixer -c 0 cget name='TX DEC0 MUX' >/dev/null 2>&1 ||
 	{ say mic-records audio-mic fail "no microphone route: the codec's TX controls (TX DEC0 MUX) are missing"; exit 0; }
 pcm=$(grep -m1 ': MultiMedia2 ' /proc/asound/pcm | cut -d: -f1)
