@@ -1,0 +1,127 @@
+diff --git a/hexagonrpcd/hexagonfs.h b/hexagonrpcd/hexagonfs.h
+index e24b4b5..d63478c 100644
+--- a/hexagonrpcd/hexagonfs.h
++++ b/hexagonrpcd/hexagonfs.h
+@@ -79,6 +79,8 @@ extern struct hexagonfs_file_ops hexagonfs_mapped_sysfs_ops;
+ extern struct hexagonfs_file_ops hexagonfs_plat_subtype_name_ops;
+ extern struct hexagonfs_file_ops hexagonfs_virt_dir_ops;
+ 
++int hexagonfs_mapped_open_file(const char *path, int flags, struct hexagonfs_fd **out);
++
+ int hexagonfs_open_root(struct hexagonfs_fd **fds, struct hexagonfs_dirent *root);
+ int hexagonfs_openat(struct hexagonfs_fd **fds, int rootfd, int dirfd, const char *name);
+ int hexagonfs_close(struct hexagonfs_fd **fds, int fileno);
+diff --git a/hexagonrpcd/hexagonfs_mapped.c b/hexagonrpcd/hexagonfs_mapped.c
+index 400800f..290bcf5 100644
+--- a/hexagonrpcd/hexagonfs_mapped.c
++++ b/hexagonrpcd/hexagonfs_mapped.c
+@@ -542,3 +542,42 @@ struct hexagonfs_file_ops hexagonfs_mapped_sysfs_ops = {
+ 	.seek = mapped_seek,
+ 	.stat = mapped_sysfs_stat,
+ };
++
++/*
++ * Open (and with O_CREAT create) the physical file behind a mapped entry of a
++ * virtual directory, for writing: the sensor framework writes a version
++ * marker next to the registry, outside every mapped directory.
++ */
++int hexagonfs_mapped_open_file(const char *path, int flags, struct hexagonfs_fd **out)
++{
++	struct hexagonfs_fd *fd;
++	struct mapped_ctx *ctx;
++	int ret;
++
++	ctx = malloc(sizeof(struct mapped_ctx));
++	if (ctx == NULL)
++		return -ENOMEM;
++
++	fd = malloc(sizeof(struct hexagonfs_fd));
++	if (fd == NULL) {
++		free(ctx);
++		return -ENOMEM;
++	}
++
++	ctx->fd = open(path, O_RDWR | O_CLOEXEC | (flags & (O_CREAT | O_TRUNC | O_APPEND)), 0644);
++	if (ctx->fd == -1) {
++		ret = -errno;
++		free(fd);
++		free(ctx);
++		return ret;
++	}
++
++	ctx->dir = NULL;
++	fd->is_assigned = false;
++	fd->up = NULL;
++	fd->ops = &hexagonfs_mapped_ops;
++	fd->data = ctx;
++	*out = fd;
++
++	return 0;
++}
+diff --git a/hexagonrpcd/hexagonfs_virt_dir.c b/hexagonrpcd/hexagonfs_virt_dir.c
+index eaba520..867b21a 100644
+--- a/hexagonrpcd/hexagonfs_virt_dir.c
++++ b/hexagonrpcd/hexagonfs_virt_dir.c
+@@ -124,7 +124,20 @@ static int virt_dir_stat(struct hexagonfs_fd *fd, struct stat *stats)
+ 	return 0;
+ }
+ 
++/* Only a mapped file entry of the directory can be written: nothing is created in a virtual directory. */
++static int virt_dir_create(struct hexagonfs_fd *dir, const char *name, int flags, struct hexagonfs_fd **out)
++{
++	const struct hexagonfs_dirent *const **dirlist = dir->data;
++	const struct hexagonfs_dirent *ent = walk_dir(*dirlist, name);
++
++	if (ent == NULL || ent->ops != &hexagonfs_mapped_ops)
++		return -EACCES;
++
++	return hexagonfs_mapped_open_file(ent->u.phys, flags, out);
++}
++
+ struct hexagonfs_file_ops hexagonfs_virt_dir_ops = {
++	.create = virt_dir_create,
+ 	.close = virt_dir_close,
+ 	.from_dirent = virt_dir_from_dirent,
+ 	.openat = virt_dir_openat,
+diff --git a/hexagonrpcd/rpcd_builder.c b/hexagonrpcd/rpcd_builder.c
+index 58a4fad..df5e8f7 100644
+--- a/hexagonrpcd/rpcd_builder.c
++++ b/hexagonrpcd/rpcd_builder.c
+@@ -164,7 +164,7 @@ static struct hexagonfs_dirent *build_persist_dir(const char *prefix,
+ 
+ struct hexagonfs_dirent *construct_root_dir(const char *prefix, const char *dsp)
+ {
+-	char *acdbdata, *dsp_libs, *sns_cfg, *sns_reg, *sns_reg_config, *socinfo;
++	char *acdbdata, *dsp_libs, *sns_cfg, *sns_reg, *sns_reg_config, *socinfo, *sns_reg_version;
+ 	size_t n_prefix;
+ 	struct hexagonfs_dirent *persist_dir, *vendor_dir;
+ 
+@@ -174,6 +174,11 @@ struct hexagonfs_dirent *construct_root_dir(const char *prefix, const char *dsp)
+ 	sns_cfg = malloc(n_prefix + strlen(SENSORS_CONFIG) + 1);
+ 	sns_reg = malloc(n_prefix + strlen(SENSORS_REGISTRY) + 1);
+ 	sns_reg_config = malloc(n_prefix + strlen(SNS_REG_CONFIG) + 1);
++	sns_reg_version = malloc(n_prefix + strlen("/sensors/sns_reg_version") + 1);
++	if (sns_reg_version != NULL) {
++		strcpy(sns_reg_version, prefix);
++		strcat(sns_reg_version, "/sensors/sns_reg_version");
++	}
+ 	socinfo = malloc(n_prefix + strlen(SYSFS_SOCINFO) + 1);
+ 
+ 	dsp_libs = malloc(n_prefix + strlen(DSP_LIBS) + strlen(dsp) + 1);
+@@ -229,7 +234,7 @@ struct hexagonfs_dirent *construct_root_dir(const char *prefix, const char *dsp)
+ 				)
+ 			);
+ 
+-	return hfs_mkdir("/", 6,
++	return hfs_mkdir("/", 7,
+ 			hfs_mkdir("mnt", 1,
+ 				hfs_mkdir("vendor", 1,
+ 					persist_dir
+@@ -251,6 +256,7 @@ struct hexagonfs_dirent *construct_root_dir(const char *prefix, const char *dsp)
+ 					)
+ 				)
+ 			),
++			hfs_map("sns_reg_version", sns_reg_version),
+ 			vendor_dir
+ 		);
+ }
