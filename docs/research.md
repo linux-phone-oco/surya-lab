@@ -789,3 +789,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-17-r3-partial-and-the-reset-after"></a>
+### 2026-11-17-r3-partial-and-the-reset-after
+
+Date
+: 2026-11-17
+
+Brief
+: r3 scored PARTIAL: 63 min on battery, median 31 mA (mean 55), gauge avg 26-35 mA, 63% asleep; its own abort rule fired first (irq 157, Bluetooth), the reset came 3 min later
+
+Question
+: Why did surya reboot mid-r3, and what did r3 measure before it?
+
+Found
+: Order from r3's STOPPED/DONE and journalctl -b -1: scoring began 20:36:44Z (charger_online 0 in all 141 measure samples, post-settle). 21:41:39Z after 3893 s: suspend cycle 'irq 157: nobody cared', IRQ 157 (BT UART) disabled, hci0 command 0x0c01 tx timeout, controller crash dump; r3 stopped itself 'aborted, partial' - the abort rule fired FIRST, run ended on its own, not the phone. Afterwards (r3 over) hci0 setup failed three times (Reading QCA version -110, Retry BT power ON 0,1,2 at 21:42:23, 21:43:34, 21:44:45); journal ends 21:45:00Z with no panic or oops in it, the boot -1 ended 21:45:00 and boot 0 began 21:46:41Z. So the reset happened after r3, in Bluetooth's retry loop, ~15 s after retry 2: fuse or hang, not proven (pstore not readable as user; ramoops empty after boot). Figures, measure phase 792.9-4574.9 s mono, 141 samples, 0 on charger: instantaneous current mean 55.0 mA, median 31.1 mA, p10 22.7 mA, min 21.5, max 143.4 (instantaneous snapshots include wake bursts); fuel gauge current_avg 25.9-35.4 mA (28.7 at end); suspended 2380 s of 3782 s = 63% (suspended_s_cum 51 -> 2431), 289 suspends, 735 wake events. charge_counter is na on this gauge, so no charge-delta score. Against targets: 15 mA and 9 mA NOT met; Android's figure not known yet. A partial: 63 min, not the 75 min the run asks for.
+
+About
+: deep-sleep

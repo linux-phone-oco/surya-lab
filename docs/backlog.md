@@ -1366,10 +1366,13 @@ Proof
 ### Standby current measured beside Android's
 
 Status
-: open
+: in-progress
 
 Note
-: r3 ready to arm once the author unplugs: sleep/standby-run.sh (landed, also on the phone in /var/tmp) ends itself on a Bluetooth failure (decision 2026-11-17-r3-stops-itself-when-bluetooth-fails); r1 INVALID, r2 UNSCORED. A reset in the first stalled cycle still ends a run unscored.
+: r3 partial (63 min, median 31 mA, 63% asleep; 15/9 mA not met; Android not known yet); r4 = decision 2026-11-17-r4-quiets-irq-157-and-stops-bluetooth-retries, waits on the author's unplug
+
+Waits
+: author unplug; coordinator confirms noirqdebug
 
 About
 : deep-sleep

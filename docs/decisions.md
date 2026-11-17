@@ -599,3 +599,28 @@ About
 
 Research
 : 2026-11-17-r2-reboot-was-the-fuse
+
+
+<a id="2026-11-17-r4-quiets-irq-157-and-stops-bluetooth-retries"></a>
+### 2026-11-17-r4-quiets-irq-157-and-stops-bluetooth-retries
+
+Date
+: 2026-11-17
+
+Brief
+: r4 must outlast the irq 157 storm: boot once with noirqdebug so irq 157 is never auto-disabled, and end the run if hci0 fails, leaving no retry loop behind
+
+Decision
+: r4 repeats r3 (Bluetooth on, 75 min, waits for unplug) with two changes: (1) a once-tried boot with noirqdebug on the cmdline (boot-counted, falls back by itself) so the kernel does not disable IRQ 157 after 'nobody cared' and BT does not die at ~65 min; (2) on any Bluetooth failure r4 ends scored as partial AND stops bluetooth.service / blocks hci0 with the phone awake and plugged-in-agnostic so the QCA retry loop (which preceded a reset) is not left running. Needs the author to unplug again. Lane coordinator to confirm (1) is a kernel-cmdline change.
+
+Why
+: r3 ran 63 min clean and died exactly when 'irq 157: nobody cared' disabled the Bluetooth UART line (research 2026-11-17-r3-partial-and-the-reset-after); the retry loop that followed ended in a reset.
+
+Rejected
+: Bluetooth blocked or unbound: hangs s2idle hard (earlier research). Treating the 63-min partial as the score: below the 75 min asked, and 31 mA median is not Android-comparable. Assuming the fuse caused the reset: the journal has no sign of it.
+
+About
+: deep-sleep
+
+Research
+: 2026-11-17-r3-partial-and-the-reset-after
