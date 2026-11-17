@@ -112,6 +112,23 @@ interfaces: TX (device `sdw:3:0:0217:010a:00:3`, which also carries the codec's 
    - *The polarity and mux on the branch* (2026-11-17, step 12): the pushed device tree declared the
      reset active-high and muxed it to `cdc_pdm_rx`. Fixed together with the sleep state in PR #4.
 
+17. **The microphone works (2026-11-17, ~04:35 UTC).** The last fault: the capture link named the TX
+   SoundWire controller's DAI 0, which is its playback DAI (one data-out port), so the capture ports
+   were never programmed and every recording was silence although the stream ran. Capture through
+   `<&swr2 1>` (PR #6, `dt/surya-wcd-capture-swr-dai`) - found in **pulpoff/linux-surya**, a mainline
+   7.2.15 tree for surya on Mobian that already records both microphones and carries call audio. Its
+   device tree also confirmed tonight's other fixes independently (controllers at 0x62ed0000/0x62ef0000,
+   reset on LPI gpio6 active-low, no pin states on the codec).
+   - surya's microphones are **analog**: ADC1 the bottom mic, ADC2 the top mic (tx-port-mapping
+     `<2 3 4 5>`), per pulpoff. The QRD routing read in step 10 is the reference board, not surya.
+   - Proof, decided by the phone: `mic-hears-speaker` (tests/health/shell/microphone-hears.sh) plays a
+     1 kHz tone at the manifest's level (-6 dBFS at 20% volume - the author heard it as "nice and
+     soft"), records it through ADC1 (ADC1 Volume 18, TX_DEC0 Volume 104), and finds it with a Goertzel
+     filter: heard at -19.4 dBFS against -76.3 dBFS of noise beside it - pass. At -20 dBFS and 20% the
+     tone was inaudible to the author and below the microphone's noise.
+   - Lesson: the commons first, outside as well as inside: a whole night of narrowing ended in a
+     one-number fix that another surya port had written down beside its reason.
+
 ## What the vendor's GPL sources say
 
 - The pin functions of the SoundWire pins agree with mainline's corrected table (gpio19 func3, gpio20
@@ -138,4 +155,4 @@ each time. See the docs backlog item `audio-cold-boot-race`.
 
 ## Next
 
-Find why the TX decimators deliver zeros: compare the TX macro register writes during a capture with the vendor tx-macro sequence (decimator enable, HPF, TX path control, codec DMA channel), then the DMIC route (pins at function 1, VA DMIC clocks, mic bias 1/3).
+The proven kernel (test/surya-mic) as the phone's default (lab-tools backlog kernel-promote), then audio-mic out of the known gaps; the top mic (ADC2), the headset mic and a UCM capture profile (pulpoff's routes and gains as reference); the earpiece through the WCD EAR PA; upstream the four patches (sm7150-mainline).
