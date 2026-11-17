@@ -71,7 +71,7 @@ freq = 1000
 # what the phone's own health suite expects (devlab suite put now; lab-tools/health)
 [health]
 sound_cards = ["POCO X3"]
-checks = "tests/health"   # surya's own: the speaker amplifiers, the main microphone
+checks = "tests/health"   # surya's own: the speaker amplifiers, the microphones, the earpiece, the call audio path
 gaps = [                  # never had working on surya: measured every run, not ill health
   "fingerprint",          # no reader exposed by the kernel
   "sensors",              # the ADSP sensors service is masked: it crash-looped the audio DSP
