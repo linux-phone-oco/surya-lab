@@ -770,3 +770,22 @@ Sources
 
 About
 : sensors
+
+
+<a id="2026-11-17-r2-reboot-was-the-fuse"></a>
+### 2026-11-17-r2-reboot-was-the-fuse
+
+Date
+: 2026-11-17
+
+Brief
+: r2's reboot was its own 30 s fuse: after UART irq 157 was disabled, Bluetooth's retry loop stalled a cycle past 30 s; the 25 measure samples average 40 mA, unscored
+
+Question
+: Why did surya reboot by itself during standby run r2?
+
+Found
+: Read from the pstore console of the dead boot (console-ramoops-0), the journal and r2's logs. r2 (armed 20:08Z, cable out) ran 47 way-back bt-on cycles; 24 slept 0 s, 23 slept 17-19 s. At dmesg 3379 s 'irq 157: nobody cared' (qcom_geni_serial_isr, the BT UART) disabled the IRQ; then hci0 'Injecting HCI hardware error event', 'Freezing user space processes aborted ... 149 tasks refusing to freeze', and the QCA setup retried (command tx timeout, Reading QCA version failed -110, Retry BT power ON 0..2, each about 70 s). The loop kept cycling (a fuse armed every 10 s, 'watchdog did not stop!' each time is normal: busybox watchdog is killed hard by design) until a cycle's arm to defuse took over 30 s while Bluetooth was stuck, and the SoC watchdog reset the phone (console ends at 3646 s, no panic, no oops). So it was no spontaneous fault: the fuse did its job, and r2's loop does not survive a stuck Bluetooth. Scoring: r2 reached 25 measure samples (about 4.5 min of the 60 asked), all charger_online 0, current_now mean -39.6 mA, current_avg -33.8 mA (settle samples -45 mA): not a standby figure, since Bluetooth was in its retry loop and half the cycles did not sleep; unscored. Phone after: boot 20:25 healthy, stock services, kept kernel 7.1.0-sm7150-calls+.
+
+About
+: deep-sleep
