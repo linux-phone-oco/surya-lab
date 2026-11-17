@@ -1373,6 +1373,8 @@ Note
 
 2026-11-17, the author agreed to unplug USB for about an hour (via the coordinators). Mainline figure only (Android's number skipped for now). How: the keeper prepares ONE run - a loop of short way-back.sh suspend cycles (the watchdog is 30 s at most, so one long sleep cannot be used: it is petted between cycles) with the RTC wake and the fuel gauge (current_now and charge counter) logged to /var/tmp, started by systemd-run so it survives the USB cut and ends by itself after about 60 min. Then the keeper sends the surya coordinator ONE line 'unplug now' (SendMessage to local_0ecf107e-d955-49ff-aefb-b0ecaa3bcbdd), releases the lease and ends. When the coordinator says 'plugged back', a keeper reads the log and records the figure honestly (not at the SoC floor yet).
 
+2026-11-17 (later): run r1 was INVALID - USB was connected the whole time (the author's unplug did not happen), so its current readings are USB/charger-fed, not standby; never score it. Next: re-arm as r2, same shape as decision 2026-11-17-standby-drain-test, with a start check that USB power is absent (charger/usb online = 0 in /sys/class/power_supply) - if present, the run REFUSES to start scoring and says so loudly; samples with charger_online=1 are never scored. Then send the surya coordinator 'ready to unplug'. Findings kept: qcom_qg has no charge_counter; the 30 s watchdog caps sleeps at 15 s (suspended fraction ~55 %).
+
 About
 : deep-sleep
 
@@ -1387,3 +1389,22 @@ Proof
 
 Rank
 : 1
+
+
+<a id="standby-test-in-lpoco-health"></a>
+### The standby drain test lives in the health suite (lpoco-health) as a switchable test
+
+Status
+: open
+
+Note
+: The author (2026-11-17): the standby test belongs in the health suite under the lpoco roof, switchable (lpoco-health on/off), not a one-off script. Move sleep/standby-run.sh's measurement into a lpoco-health test: witness step 'unplug USB', start check that USB power is absent (refuse to score), >=60 min after a 10 min settle, logs per decision 2026-11-17-standby-drain-test. For the lpoco-health owner (lab-tools). Does not block r2.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-17
+
+Needs
+: build
