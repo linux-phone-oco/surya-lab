@@ -994,3 +994,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-17-2115-standby-r2-armed"></a>
+### Standby run r2 armed, waiting for the unplug
+
+Entry date
+: 2026-11-17
+
+Done
+: standby-run.sh now refuses to score while any USB source is online (ARMED file, no cycles; phase usb never scored; REFUSED after 10800 s). r2 started as unit standby-r2 on the phone, armed (USB present); coordinator told ready to unplug. Phone kept: kernel 7.1.0-sm7150-calls+, stock otherwise, USB link flaky but up.
+
+Considered
+: next: on 'plugged back', read /var/tmp/standby-r2/samples.tsv (measure rows with charger_online 0) and record the mainline figure, honestly not at the SoC floor
+
+About
+: deep-sleep
