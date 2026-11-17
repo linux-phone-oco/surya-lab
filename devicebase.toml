@@ -1,0 +1,6 @@
+# A device base made from linux-phone-oco/device-template: the template it was made from (a release when it has them, else a date), and the
+# version of the parts contract (the parts table: component, status, evidence, notes, updated, judged,
+# measured, measured_run) that docs validates what it pulls against. docs reads this file first. The files this
+# template gives a device base are listed in `generic`; the places general changes come from and go to are in the upstreams table.
+template = "2026-11-17"   # the template has no releases yet: the day of the commit it was made from
+parts = 1

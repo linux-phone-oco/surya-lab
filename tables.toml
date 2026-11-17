@@ -1,0 +1,598 @@
+# The tables of this device's base, declared as data: the authority on what data/ may hold, checked by tad
+# (https://github.com/creation-guidelines/tad-engine) on every change. The standing tables follow
+# grenudi/ideal-knowledge-base (idealkb.toml names the release); this file is the device's own, so what is
+# added for a device - the queue's needs, proof and rank, the device itself, its parts, its test runs - stays here.
+# Named statements are kept beside it: queries/NAME.sql read, records/NAME.sql write.
+[tables]
+
+# idealkb:begin - the standing tables of a knowledge base, kept by grenudi/ideal-knowledge-base at the
+# release idealkb.toml names (change them there). Every record names what it is about in about; the base
+# says what about may name in its own [[rules.references]] (field = "TABLE.about", to = its subject tables).
+[tables.backlog]
+key = ["id"]
+
+[[tables.backlog.fields]]
+name = "id"
+type = "string"
+required = true
+pattern = "^[a-z0-9]+(-[a-z0-9]+)*$"
+
+[[tables.backlog.fields]]
+name = "title"
+type = "string"
+required = true
+
+[[tables.backlog.fields]]
+name = "status"
+type = "string"
+required = true
+enum = ["open", "in-progress", "done"]
+
+[[tables.backlog.fields]]
+name = "note"
+type = "string"
+
+[[tables.backlog.fields]]
+name = "waits"
+type = "string"
+
+[[tables.backlog.fields]]
+name = "about"
+type = "string"
+
+[[tables.backlog.fields]]
+name = "opened"
+type = "date"
+required = true
+
+# a device base's queue: what the item needs (the phone's keeper, a research lane, a build lane), the test whose pass proves it done, and the author's order
+[[tables.backlog.fields]]
+name = "needs"
+type = "string"
+enum = ["phone", "research", "build"]
+
+[[tables.backlog.fields]]
+name = "proof"
+type = "string"
+
+[[tables.backlog.fields]]
+name = "rank"
+type = "integer"
+
+[tables.session_log]
+key = ["id"]
+
+[[tables.session_log.fields]]
+name = "id"
+type = "string"
+required = true
+pattern = "^[0-9]{4}-[0-9]{2}-[0-9]{2}-[a-z0-9]+(-[a-z0-9]+)*$"
+
+[[tables.session_log.fields]]
+name = "entry_date"
+type = "date"
+required = true
+
+[[tables.session_log.fields]]
+name = "title"
+type = "string"
+required = true
+
+[[tables.session_log.fields]]
+name = "done"
+type = "string"
+required = true
+
+[[tables.session_log.fields]]
+name = "considered"
+type = "string"
+
+[[tables.session_log.fields]]
+name = "rejected"
+type = "string"
+
+[[tables.session_log.fields]]
+name = "about"
+type = "string"
+
+[tables.decisions]
+key = ["id"]
+
+[[tables.decisions.fields]]
+name = "id"
+type = "string"
+required = true
+pattern = "^[0-9]{4}-[0-9]{2}-[0-9]{2}-[a-z0-9]+(-[a-z0-9]+)*$"
+
+[[tables.decisions.fields]]
+name = "date"
+type = "date"
+required = true
+
+# its brief: the record in one line, at most 200 characters - what an answer shows unless the whole is asked
+[[tables.decisions.fields]]
+name = "brief"
+type = "string"
+
+[[tables.decisions.fields]]
+name = "decision"
+type = "string"
+required = true
+
+[[tables.decisions.fields]]
+name = "why"
+type = "string"
+required = true
+
+[[tables.decisions.fields]]
+name = "rejected"
+type = "string"
+
+[[tables.decisions.fields]]
+name = "about"
+type = "string"
+
+[[tables.decisions.fields]]
+name = "research"
+type = "string"
+
+[tables.research]
+key = ["id"]
+
+[[tables.research.fields]]
+name = "id"
+type = "string"
+required = true
+pattern = "^[a-z0-9]+(-[a-z0-9]+)*$"
+
+[[tables.research.fields]]
+name = "date"
+type = "date"
+required = true
+
+# its brief: the record in one line, at most 200 characters - what an answer shows unless the whole is asked
+[[tables.research.fields]]
+name = "brief"
+type = "string"
+
+[[tables.research.fields]]
+name = "question"
+type = "string"
+required = true
+
+[[tables.research.fields]]
+name = "found"
+type = "string"
+required = true
+
+[[tables.research.fields]]
+name = "sources"
+type = "string"
+
+[[tables.research.fields]]
+name = "about"
+type = "string"
+
+# Where the research's own material is kept - its notes, excerpts, measurements - out of every reader's way:
+# a dated folder, research/SUBJECT/YYYY-MM-DD/. The row says the finding; the folder is read only when needed.
+[[tables.research.fields]]
+name = "material"
+type = "string"
+pattern = "^research/[a-z0-9]+(-[a-z0-9]+)*/[0-9]{4}-[0-9]{2}-[0-9]{2}(-[a-z0-9]+)*/$"
+
+# The research this one is a later version of: redone research is a new row that supersedes the old, which
+# stays, reachable by find and row, but leaves about's answer.
+[[tables.research.fields]]
+name = "supersedes"
+type = "string"
+
+# How a subject stands, in short, on top of its records: one per subject, renewed in place when the records
+# move on (the earlier versions are in git). Its records stay as they are: a summary condenses, it holds
+# nothing of its own. condenses is filled by the record from the records about the subject when written.
+[tables.summaries]
+key = ["about"]
+
+[[tables.summaries.fields]]
+name = "about"
+type = "string"
+required = true
+
+[[tables.summaries.fields]]
+name = "date"
+type = "date"
+required = true
+
+[[tables.summaries.fields]]
+name = "says"
+type = "string"
+required = true
+pattern = "^(?s).{1,1500}$"
+
+[[tables.summaries.fields]]
+name = "condenses"
+type = "string"
+required = true
+
+[[rules.references]]
+field = "research.supersedes"
+to = ["research"]
+
+[tables.sources]
+key = ["id"]
+
+[[tables.sources.fields]]
+name = "id"
+type = "string"
+required = true
+pattern = "^[a-z0-9]+(-[a-z0-9]+)*$"
+
+[[tables.sources.fields]]
+name = "title"
+type = "string"
+required = true
+
+[[tables.sources.fields]]
+name = "url"
+type = "string"
+required = true
+starts_with = "https://"
+
+[[tables.sources.fields]]
+name = "author"
+type = "string"
+
+[[tables.sources.fields]]
+name = "year"
+type = "integer"
+
+[[tables.sources.fields]]
+name = "by"
+type = "string"
+
+[[tables.sources.fields]]
+name = "takes"
+type = "string"
+
+# Where knowledge can flow: any external resource - a project, a mailing list, a tracker, a wiki, a standard, a
+# person or team, another knowledge base's instance. One row each; what is headed there is an upstream_items row.
+[tables.upstreams]
+key = ["id"]
+
+[[tables.upstreams.fields]]
+name = "id"
+type = "string"
+required = true
+pattern = "^[a-z0-9]+(-[a-z0-9]+)*$"
+
+[[tables.upstreams.fields]]
+name = "kind"
+type = "string"
+required = true
+enum = ["code-project", "list", "tracker", "wiki", "standard", "person-team", "kb-instance", "distro"]
+
+[[tables.upstreams.fields]]
+name = "name"
+type = "string"
+required = true
+
+[[tables.upstreams.fields]]
+name = "address"
+type = "string"
+required = true
+
+[[tables.upstreams.fields]]
+name = "how"
+type = "string"
+required = true
+
+[[tables.upstreams.fields]]
+name = "contacts"
+type = "string"
+
+[[tables.upstreams.fields]]
+name = "notes"
+type = "string"
+
+# What was headed to an upstream: a patch, a piece of information, a correction, a question, a finding. It
+# links back to the work here it comes from (from_work: a backlog item, decision or research id) and may be a
+# row, a file in upstream/UPSTREAM/ID/ (file), or both. The state only moves forward; the person's word that
+# a draft may go is a state (ready), never a flag an agent sets.
+[tables.upstream_items]
+key = ["id"]
+
+[[tables.upstream_items.fields]]
+name = "id"
+type = "string"
+required = true
+pattern = "^[a-z0-9]+(-[a-z0-9]+)*$"
+
+[[tables.upstream_items.fields]]
+name = "upstream"
+type = "string"
+required = true
+
+[[tables.upstream_items.fields]]
+name = "title"
+type = "string"
+required = true
+
+[[tables.upstream_items.fields]]
+name = "form"
+type = "string"
+required = true
+enum = ["patch", "information", "correction", "question", "finding"]
+
+[[tables.upstream_items.fields]]
+name = "state"
+type = "string"
+required = true
+enum = ["draft", "ready", "sent", "under-review", "changes-requested", "accepted", "landed", "held", "rejected", "superseded", "not-needed", "withdrawn"]
+
+[[tables.upstream_items.fields]]
+name = "from_work"
+type = "string"
+required = true
+
+[[tables.upstream_items.fields]]
+name = "domain"
+type = "string"
+
+[[tables.upstream_items.fields]]
+name = "tags"
+type = "string"
+
+[[tables.upstream_items.fields]]
+name = "about"
+type = "string"
+
+[[tables.upstream_items.fields]]
+name = "local_ref"
+type = "string"
+
+[[tables.upstream_items.fields]]
+name = "file"
+type = "string"
+
+[[tables.upstream_items.fields]]
+name = "sent_on"
+type = "date"
+
+[[tables.upstream_items.fields]]
+name = "forwarded"
+type = "string"
+
+[[tables.upstream_items.fields]]
+name = "bug"
+type = "string"
+
+[[tables.upstream_items.fields]]
+name = "version"
+type = "string"
+
+[[tables.upstream_items.fields]]
+name = "supersedes"
+type = "string"
+
+[[tables.upstream_items.fields]]
+name = "applied_upstream"
+type = "string"
+
+[[tables.upstream_items.fields]]
+name = "waits"
+type = "string"
+
+[[tables.upstream_items.fields]]
+name = "note"
+type = "string"
+
+[[tables.upstream_items.fields]]
+name = "last_update"
+type = "date"
+required = true
+
+[[rules.references]]
+field = "upstream_items.upstream"
+to = ["upstreams"]
+
+[[rules.references]]
+field = "upstream_items.supersedes"
+to = ["upstream_items"]
+# idealkb:end
+
+# What this base is about, besides its work items: the device itself, then its parts. Each record names one
+# of them (or a backlog item) in about.
+[[rules.references]]
+field = "decisions.about"
+to = ["backlog", "parts"]
+
+[[rules.references]]
+field = "research.about"
+to = ["backlog", "parts"]
+
+[[rules.references]]
+field = "backlog.about"
+to = ["backlog", "parts"]
+
+[[rules.references]]
+field = "session_log.about"
+to = ["backlog", "parts"]
+
+[[rules.references]]
+field = "summaries.about"
+to = ["backlog", "parts"]
+
+[[rules.references]]
+field = "decisions.research"
+to = ["research"]
+
+# The device: one row. The same fields as docs' devices table, so the row is the registry's row.
+[tables.devices]
+key = ["id"]
+
+[[tables.devices.fields]]
+name = "id"
+type = "string"
+required = true
+pattern = "^[a-z0-9]+(-[a-z0-9]+)*$"
+
+[[tables.devices.fields]]
+name = "name"
+type = "string"
+required = true
+
+[[tables.devices.fields]]
+name = "codename"
+type = "string"
+required = true
+
+[[tables.devices.fields]]
+name = "soc"
+type = "string"
+required = true
+
+[[tables.devices.fields]]
+name = "notes"
+type = "string"
+
+# THE PARTS CONTRACT (parts = 1, named in devicebase.toml). One row per part of the device: what is claimed
+# of it, the evidence for the claim, and when. docs pulls this table (data/parts.json) and derives the
+# support status of the device from it; it types nothing of its own. A part nobody has declared is not
+# known yet, never broken. A claim without evidence is a claim: say judged, not works, until a run shows it.
+[tables.parts]
+key = ["component"]
+
+[[tables.parts.fields]]
+name = "component"
+type = "string"
+required = true
+pattern = "^[a-z0-9]+(-[a-z0-9]+)*$"
+
+[[tables.parts.fields]]
+name = "status"
+type = "string"
+required = true
+enum = ["works", "partial", "broken", "unknown", "not-applicable"]
+
+[[tables.parts.fields]]
+name = "evidence"
+type = "string"
+
+[[tables.parts.fields]]
+name = "notes"
+type = "string"
+
+[[tables.parts.fields]]
+name = "updated"
+type = "date"
+required = true
+
+[[tables.parts.fields]]
+name = "judged"
+type = "string"
+enum = ["works", "partial", "broken", "unknown", "not-applicable"]
+
+[[tables.parts.fields]]
+name = "measured"
+type = "string"
+
+[[tables.parts.fields]]
+name = "measured_run"
+type = "string"
+
+# One run of the phone's own health suite, filed by devlab (the test-run record), and each line of its report.
+[tables.test_runs]
+key = ["id"]
+
+[[tables.test_runs.fields]]
+name = "id"
+type = "string"
+required = true
+
+[[tables.test_runs.fields]]
+name = "device_id"
+type = "string"
+required = true
+
+[[tables.test_runs.fields]]
+name = "run_at"
+type = "datetime"
+required = true
+
+[[tables.test_runs.fields]]
+name = "kernel"
+type = "string"
+
+[[tables.test_runs.fields]]
+name = "shell"
+type = "string"
+
+[[tables.test_runs.fields]]
+name = "passed"
+type = "integer"
+required = true
+
+[[tables.test_runs.fields]]
+name = "failed"
+type = "integer"
+required = true
+
+[[tables.test_runs.fields]]
+name = "gaps"
+type = "integer"
+required = true
+
+[[tables.test_runs.fields]]
+name = "skipped"
+type = "integer"
+required = true
+
+[tables.test_results]
+key = ["id"]
+
+[[tables.test_results.fields]]
+name = "id"
+type = "string"
+required = true
+
+[[tables.test_results.fields]]
+name = "run"
+type = "string"
+required = true
+
+[[tables.test_results.fields]]
+name = "device_id"
+type = "string"
+required = true
+
+[[tables.test_results.fields]]
+name = "component_id"
+type = "string"
+required = true
+
+[[tables.test_results.fields]]
+name = "test"
+type = "string"
+required = true
+
+[[tables.test_results.fields]]
+name = "outcome"
+type = "string"
+required = true
+enum = ["pass", "fail", "skip"]
+
+[[tables.test_results.fields]]
+name = "detail"
+type = "string"
+
+[[tables.test_results.fields]]
+name = "run_at"
+type = "datetime"
+required = true
+
+[[tables.test_results.fields]]
+name = "kernel"
+type = "string"
+
+[[tables.test_results.fields]]
+name = "shell"
+type = "string"

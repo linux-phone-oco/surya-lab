@@ -34,6 +34,17 @@ warnings, voting clocks match SM8250. Prime suspect: the `aoncc` window at `0x03
 SM8250-pattern address with nothing else near it in the SM7150 tree. Details and the next
 hardware test are in the PR comment. Nothing is confirmed on hardware yet.
 
+## The base
+
+A device made from this template has its own open base (tad, `data/`): its queue, tries, measurements, decisions,
+research and parts. `make setup` installs tad and `ikb`; `ikb --help` lists what can be recorded, `ikb help RECORD`
+how. The standing tables follow [grenudi/ideal-knowledge-base](https://github.com/grenudi/ideal-knowledge-base)
+(`idealkb.toml`); the device's own are in `tables.toml`. Fill the device (`ikb device ...`) and declare what is
+claimed of each part (`ikb part`: status, evidence, date) - [linux-phone-oco/docs](https://github.com/linux-phone-oco/docs)
+pulls `parts` (contract in `devicebase.toml`) and derives the device's support status from them; it types nothing of
+its own. The phone's queue is `tad q phone-queue`, its keeper's next item `tad q phone-next`; `devlab gather` files runs
+with the `test-run` record.
+
 ## Rules
 
 - A tool is not done until it has been run from a fresh clone: the first versions of these each had
