@@ -43,6 +43,12 @@ name = "blocked_by"
 type = "string"
 pattern = "^[a-z0-9]+(-[a-z0-9]+)*(, ?[a-z0-9]+(-[a-z0-9]+)*)*$"
 
+# the hardware (ids of this base's hardware table) the item cannot be done without: it waits until each is owned and none refuted
+[[tables.backlog.fields]]
+name = "hardware"
+type = "string"
+pattern = "^[a-z0-9]+(-[a-z0-9]+)*(, ?[a-z0-9]+(-[a-z0-9]+)*)*$"
+
 [[tables.backlog.fields]]
 name = "about"
 type = "string"
@@ -603,3 +609,98 @@ type = "string"
 [[tables.test_results.fields]]
 name = "shell"
 type = "string"
+
+# The hardware this device's work needs beyond the phone: cables, adapters, breakouts, meters, and the setups made of
+# them. One shape in docs (the general catalogue: status = general, what a thing is, its wiring, sources) and in each
+# device base (what this lab has or wants for this phone, and whether it is CONFIRMED to work on it). Stock lives in
+# the base of the lab that holds the thing; a device row that is an instance of a catalogue entry names it in
+# `general`. A price carries the day it was quoted, a source the day it was read (checked_on): both go stale.
+[tables.hardware]
+key = ["id"]
+requires = [["price", "price_on"], ["fit_ref", "fit"]]
+
+[[tables.hardware.fields]]
+name = "id"
+type = "string"
+required = true
+pattern = "^[a-z0-9]+(-[a-z0-9]+)*$"
+
+[[tables.hardware.fields]]
+name = "kind"
+type = "string"
+required = true
+enum = ["cable", "adapter", "breakout", "meter", "tool", "part", "setup"]
+
+[[tables.hardware.fields]]
+name = "name"
+type = "string"
+required = true
+
+[[tables.hardware.fields]]
+name = "status"
+type = "string"
+required = true
+enum = ["general", "wanted", "ordered", "owned", "lent", "broken", "retired"]
+
+[[tables.hardware.fields]]
+name = "fit"
+type = "string"
+enum = ["claimed", "confirmed", "refuted"]
+
+[[tables.hardware.fields]]
+name = "fit_ref"
+type = "string"
+
+[[tables.hardware.fields]]
+name = "spec"
+type = "string"
+
+[[tables.hardware.fields]]
+name = "wiring"
+type = "string"
+
+[[tables.hardware.fields]]
+name = "serves"
+type = "string"
+
+[[tables.hardware.fields]]
+name = "about"
+type = "string"
+
+[[tables.hardware.fields]]
+name = "general"
+type = "string"
+
+[[tables.hardware.fields]]
+name = "qty"
+type = "integer"
+minimum = 0
+
+[[tables.hardware.fields]]
+name = "price"
+type = "string"
+
+[[tables.hardware.fields]]
+name = "price_on"
+type = "date"
+
+[[tables.hardware.fields]]
+name = "sources"
+type = "string"
+
+[[tables.hardware.fields]]
+name = "file"
+type = "string"
+
+[[tables.hardware.fields]]
+name = "note"
+type = "string"
+
+[[tables.hardware.fields]]
+name = "checked_on"
+type = "date"
+required = true
+
+[[rules.references]]
+field = "hardware.about"
+to = ["backlog", "parts"]
