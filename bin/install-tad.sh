@@ -2,7 +2,7 @@
 # Installs tad, the data engine, from its pinned release (creation-guidelines/tad-engine): the binary
 # for this machine, checked against the release's own checksums before it is installed.
 set -eu
-version="${TAD_VERSION:-0.7.0}"
+version="${TAD_VERSION:-0.7.1}"
 arch=$(uname -m)
 case "$arch" in x86_64 | aarch64) ;; *) echo "install-tad: no tad build for $arch" >&2; exit 1 ;; esac
 target="$arch-unknown-linux-musl"; name="tad-v$version-$target"
