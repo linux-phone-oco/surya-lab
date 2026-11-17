@@ -1,0 +1,13 @@
+# What a device base takes from device-template: the device layer on top of idealkb (the parts contract's records and
+# the phone's queries). Listed so that a base can follow them like idealkb's generic files (bin/follow.sh, run from a
+# clone of this repository that holds the release tag). The template has no releases yet, so nothing follows this list
+# yet: idealkb's backlog follow-source-from-pin (update-pins reading its source from the pin file) and releases here
+# come first. A base keeps a file as its own by naming it in its idealkb.toml, as for idealkb's.
+queries/phone-queue.sql
+queries/phone-next.sql
+queries/parts.sql
+records/part.sql
+records/device.sql
+records/backlog-status.sql
+records/backlog-needs.sql
+records/test-run.sql
