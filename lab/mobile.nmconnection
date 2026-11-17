@@ -1,0 +1,19 @@
+# The phone's mobile data (NetworkManager), put by devlab provision. No APN: the modem's default profile
+# attaches with the network's own APN, and asking for it again ("web.vodafone.de") is refused as a second
+# connection to the same APN (2026-11-17, Vodafone.de). Routes rank below Wi-Fi.
+[connection]
+id=mobile
+uuid=5c1e9a2e-7d1b-4f0e-9b6a-6a3f2d0c1e11
+type=gsm
+autoconnect=true
+
+[gsm]
+
+[ipv4]
+method=auto
+route-metric=700
+
+[ipv6]
+addr-gen-mode=default
+method=auto
+route-metric=700

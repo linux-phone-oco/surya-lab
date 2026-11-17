@@ -10,6 +10,12 @@ addresses = ["172.16.42.1"]   # USB networking; the Wi-Fi address is remembered 
 [provision]
 packages = "provision/packages.txt"
 
+# mobile data: the connection, with no APN (see the file)
+[[provision.install]]
+from = "lab/mobile.nmconnection"
+to = "/etc/NetworkManager/system-connections/mobile.nmconnection"
+mode = "600"
+
 # the Sxmo device profile, until sxmo-utils ships it - where Sxmo is installed
 [[provision.install]]
 from = "../sxmo-deviceprofiles/profiles/sxmo_deviceprofile_{compatible}.sh"
@@ -39,6 +45,10 @@ to = "root:/etc/systemd/system/devlab-usb-awake.service"
 [[flash.overlay]]   # the PD mapper before the ADSP: without it the audio PD sometimes never comes up and there is no
 from = "lab/devlab-pd-mapper.conf"                 # sound card (8 of 42 runs before; 21 of 21 boots with it, 2026-11-17)
 to = "root:/etc/modprobe.d/devlab-pd-mapper.conf"
+
+[[flash.overlay]]   # Alpine edge community, tagged @edge, for the few packages stable has too old (tqftpserv)
+from = "lab/devlab-edge.list"
+to = "root:/etc/apk/repositories.d/devlab-edge.list"
 
 [[flash.overlay]]   # the stereo speaker profile
 from = "ucm/Xiaomi/surya/HiFi.conf"
