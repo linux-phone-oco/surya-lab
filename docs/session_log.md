@@ -1066,3 +1066,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-17-2330-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-17
+
+Done
+: Kept kernel 7.1.0-sm7150-calls+ and kept dtb; sensorspd unmasked with the patched hexagonrpcd (lab/sensors-install.sh), three boots healthy, 4 sensors, 0 ADSP crashes; r3 scored partial; nothing armed
+
+Considered
+: next: devlab-kernel-try-cmdline (lab-tools), then r4 with noirqdebug and the author's unplug; sensors-across-suspend (1 ADSP crash after a freeze with the helper, n=1); the proximity cover witnessed test (author)
+
+About
+: deep-sleep
