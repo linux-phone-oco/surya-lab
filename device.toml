@@ -36,6 +36,10 @@ mode = "755"
 from = "lab/devlab-usb-awake.service"
 to = "root:/etc/systemd/system/devlab-usb-awake.service"
 
+[[flash.overlay]]   # the PD mapper before the ADSP: without it the audio PD sometimes never comes up and there is no
+from = "lab/devlab-pd-mapper.conf"                 # sound card (8 of 42 runs before; 21 of 21 boots with it, 2026-11-17)
+to = "root:/etc/modprobe.d/devlab-pd-mapper.conf"
+
 [[flash.overlay]]   # the stereo speaker profile
 from = "ucm/Xiaomi/surya/HiFi.conf"
 to = "root:/usr/share/alsa/ucm2/Xiaomi/surya/HiFi.conf"
