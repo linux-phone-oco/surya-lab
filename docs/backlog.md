@@ -1482,12 +1482,14 @@ Rank
 ### Standby current measured beside Android's
 
 Status
-: open
+: in-progress
 
 Note
 : r4 step 2 landed (standby-run.sh stops and blocks Bluetooth on an hci failure). Step 1 blocked: devlab kernel install refuses a noirqdebug entry of the kept kernel (same release 7.1.0-sm7150-calls+ as the running one: its modules would replace the live ones). Needs lab-tools: an install with cmdline only, or a kernel built with a distinct release. Not armed.
 
 2026-11-17 coordinator: r4 plan = NO noirqdebug (irq 157 stays enabled with the serial's wakeup off), Bluetooth on + stop-bluetooth-on-hci-failure (landed), sensorspd STOPPED for the whole run and restored after (it crashed the ADSP on every suspend, 4/4), spec 60 s/30 min/75 min, never scored while USB present. Arm it, then 'r4 armed, ready to unplug' to the coordinator.
+
+2026-11-18 SCORE r4 FIRST (nothing to arm): r4 RAN - the author had the cable out about 80 min, plugged back, then surya did not enumerate on USB (hung after the run) until his forced reboot. The log survived on the phone: /var/tmp/standby-r4/ (ARMED, STOPPED, header.txt, cycles.log, samples.tsv, DONE.sns?). Do: (1) score it - scored/partial/aborted, clean samples (charger_online=0, post-settle), median/mean mA, gauge avg, suspended fraction vs 15 and 9 mA, Android not known yet, sensorspd restore result; (2) find why it hung after the run (pstore/ramoops, journalctl -b -1, last cycle logged, the watchdog, the run's trap/end); (3) record research + log in this base, land, send the surya coordinator two lines with the figure and the cause. Then arm r5 only if r4 is unscorable.
 
 About
 : deep-sleep
