@@ -2318,10 +2318,10 @@ Rank
 ### Drop the stale root file 'generic' (device-template's old 'What a device base takes' header)
 
 Status
-: open
+: done
 
 Note
-: From orchestration: surya-lab still carries device-template's old root file 'generic' (header 'What a device base takes from device-template ... The template has no releases yet'). surya-lab follows docs now (surya-follows-template, PR 258) so it is stale; walleye removed its copy in PR 267. REPO-ONLY, one small change in a worktree of your own: git rm generic (check nothing in the repo references it: grep), tad check green, land.
+: git rm generic; tad check green
 
 About
 : deep-sleep
