@@ -1708,6 +1708,8 @@ Note
 
 2026-11-18 coordinator, first: the pull-down dtb try came back BY ITSELF with no power hold (the author saw the screen on; up since ~08:21Z, later than the 30 s fuse should allow; ping 172.16.42.1 fails but the lab finds the phone at another address). Before the gate: read how it came back - journalctl -b -1 (last lines, suspend entry?), pstore, the boot reason, which address/interface devlab uses now (and why 172.16.42.1 no longer answers) - record it as research (the pull-down try's end) and update the keeper notes if the address changed. Then the gate.
 
+2026-11-18 coordinator, FIRST (confirmed with the author): the phone was not hung - sxmo's autosleep SUSPENDED it (idle -> rtcwake -m mem), which drops USB and Wi-Fi; the author's power press woke it (up since ~08:20Z, same boot). So: (1) stop sxmo autosleep on the phone now (the phone is awake and answering - do it before anything else, and keep the phone awake: no idle suspend between your steps); (2) make it a LASTING setting through the device's own provisioning (device.toml [flash]/service step or sxmo's config for this device - no manual step, so a fresh flash keeps it) with its test (the health suite should report 'autosleep off' as a pass; a lab phone must not idle-suspend: only the measured cycles suspend it); (3) record how the pull-down try ended: it was asleep, not hung (cts-pulldown stays parked, its 'hang' was autosleep: say so in research 2026-11-18-cts-pulldown-dtb-hangs). Then the gate (it still matters for real use) and the queue.
+
 About
 : deep-sleep
 
