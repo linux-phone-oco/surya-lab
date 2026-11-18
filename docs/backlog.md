@@ -2030,7 +2030,7 @@ Status
 : open
 
 Note
-: RUN 2026-11-18 13:57 with the author's go: the phone did not reset in 35 s nor return in 5+ min; the fuse did not bite (research 2026-11-18-health-cycle-probe-phone-did-not-return). Waits on the author's power hold, then: read pstore/journal, why keep_armed_in_suspend=N
+: RUN 2026-11-18 13:57 with the author's go: phone dropped off USB ~35 s after arming (same boot until 13:58:14) and did not return in 6+ min; reset vs hang unread (research 2026-11-18-health-cycle-probe-phone-did-not-return). Waits on the author's power hold, then pstore and previous journal
 
 About
 : deep-sleep
