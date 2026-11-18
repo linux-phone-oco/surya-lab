@@ -1738,3 +1738,39 @@ Done
 
 Considered
 : next: surya-kernel-pmic-wdt (build + one-shot try only; never arm the PMIC bite until reset type proven to restart, author present - walleye power-off caution). Findings for the upstreams coordinator: (1) packaging ok on phone, ModemManager present (2) no apk-time restart of NM/tinydm seen.
+
+---
+
+
+<a id="2026-11-18-1820-pmic-wdt-kernel-tried"></a>
+### PMIC watchdog kernel built and tried once
+
+Entry date
+: 2026-11-18
+
+Done
+: Built surya's calls branch (test/surya-calls) + the 4 pmic-wdt commits (cherry-picked clean, pm6150 hunk merged by itself) + &pm6150_wdt okay/wakeup-source in sm7150-xiaomi-common.dtsi (surya-audio/wt-pmic-wdt, uncommitted-upstream; CONFIG_PM8916_WATCHDOG=y, LOCALVERSION -sm7150-pmicwdt so the kept kernel's modules are not overwritten). Installed as pmicwdt, one try: booted in 71 s, healthy 44 pass 0 fail. Read-only probe: pm8916-wdt bound at pon@800 as /dev/watchdog0 (qcom_wdt is watchdog1), power/wakeup 'disabled' until opened. Returned to kept kernel 7.1.0-sm7150-calls+, health healthy, way-back check passes. The PMIC watchdog was not opened or armed: reset type (restart vs power-off, walleye caution) is unproven.
+
+Considered
+: next: the author present to arm a PMIC bite and read the reset type (walleye decision 2026-11-18-walleye-pmic-bite-read-then-warm); item surya-kernel-pmic-wdt stays open (proof pmic-wdt-bites). Image.gz is refused by kernel install: use the EFI-stub Image. Build tree ~/Projects/surya-audio/obj-pmic-wdt
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-18-1830-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Runs the kept kernel 7.1.0-sm7150-calls+, healthy (44 pass, 0 fail, no-sim), way-back check passes, qcom_wdt not keep-armed (N) as usual. Test kernel pmicwdt stays installed (not kept), not booted. Done this run: pmic-wdt kernel built+tried read-only; drop-stale-generic-file.
+
+Considered
+: next: author's hands for a PMIC bite try; otherwise no phone item is ready
+
+About
+: deep-sleep
