@@ -2393,7 +2393,7 @@ Status
 : open
 
 Note
-: 2026-11-18 20:30 keeper: nothing left unattended; the bite waits for the author at the phone (the witness of 18:55Z is void). Phone known-working on calls+, watchdog check unchanged.
+: 2026-11-18 20:40 keeper: taken first in the queue, left: its last step (the bite) is attended only (never defuse on an unattended try); phone unchanged on calls+.
 
 About
 : deep-sleep
@@ -2490,11 +2490,7 @@ Status
 : open
 
 Note
-: ADDED (top coordinator, the author): (1) the 12 failing: recheck against a FRESH suite run on the current kept kernel (stale-run suspicion) - run the suite first (put, run), claim from that run id. (2) the 82 unknown: MAP each step's proof to an existing health-suite check, claim from that one run id; where no check exists leave it unknown, and queue a new check (backlog, repo item) only if the step is on goal daily-usable-phone. Phone time allowed (a suite run is safe: no suspend; wake lock held, watchdog as is). Report the new counts to the surya coordinator (orchestration reruns feeds); 'surya runs sxmo, makes calls and has a health suite' should show in the claims.
-
-FIRST (orchestration, feeds ran; docs now reads 11 done / 2 partial / 12 failing / 6 open / 82 unknown): CHECK THE 12 FAILING CLAIMS before they stand: 12 failing is a lot for steps surya has proven before (e.g. audio-codec-attached). Was run 20261118-191339 on a kernel/boot WITHOUT the piece (a one-shot pmicwdt kernel, the kept calls+ right after a power cycle with audio not yet up, the SIM out, a suite run mid-boot)? For each failing step: read the test's result in that run and the previous passing runs; if the failure is a skip/not-measured/another kernel, the claim is wrong: set it to open/unknown (practice 12: not measured is never broken) and re-claim from a good run (cite run id and kernel); if it really fails now, keep failing and say why in the notes. Also run the suite once more first if the phone answers and the last run is old (put the suite). Then the mapping pass below.
-
-surya-steps-claimed (PR 288) claimed all 113 steps from ONE suite run (20261118-191339): done 11, partial 2, failing 12, open 6, unknown 82. Orchestration says surya's history covers about 50 steps (kernel, console, audio, calls, mic, suspend, sensors). A mapping pass, REPO/RECORDS ONLY (no phone): for each unknown step, look in tests/results (older runs), the research rows and the session log for a passing proof; claim done with test + run id only where one exists (the step's own test, not a neighbour's); partial/open where the history says so; never invent a proof. Skip steps that need a fresh phone check: list them. Land in batches; send the new counts to the surya coordinator (orchestration reruns docs' feeds). Also: daily-phone.sh errors 'bringup_steps does not exist' in the docs checkout - tell orchestration if it persists after the next follow.
+: 2026-11-18 20:40 keeper: fresh suite run 20261118-203254 on kept calls+ (72 pass, 5 fail, 6 not measured; the 12 failing were already re-claimed in PR 293: 20 done / 4 partial / 1 failing / 6 open / 82 unknown). MAPPING: of the 82 unknown, 30 name a phone-suite proof and 52 a host-check / witness / build-check / research proof; NONE of those proof tests has a result in any of the 180 stored runs (checked by name), so nothing was claimed - no neighbour's test used. The 30 phone-suite steps (suspend, update, upkeep, gnss, camera, sim...) need a CHECK first (suspend-cycle, bt-suspend, sensors-after-suspend are on the deep-sleep items, parked to the attended window). Next: a builder item for suite checks of steps on goal daily-usable-phone with no check yet (sim-ready, shell-up, standby-current, pon-reason, suspend-cycle); witness steps wait for the author. Also seen: awake-wakelock-held/awake-service-active fail (lpoco-awake inactive, devlab-usb holds the lock: backlog surya-awake-from-package).
 
 About
 : deep-sleep
