@@ -2217,12 +2217,13 @@ Rank
 ### surya runs sxmo-utils from our fork (sxmo-utils@lab): suspend retries back off, the sensors daemon is stopped and started around each suspend
 
 Status
-: open
+: in-progress
 
 Note
-: With the gadget configured surya's suspend aborts (the original symptom): sxmo.log must show 'next try in' 1 2 4 .. 64 s and the host count at most 8 reconnects in 5 minutes (26 before); after one real suspend hexagonrpcd-adsp-sensorspd was stopped before and runs after, and proximity reads. Proves docs upstream items sxmo-autosuspend-backoff, sxmo-suspend-stop-by-profile, sxmo-surya-sensors-suspend (decision 2026-11-18-upstream-forks).
+: 2026-11-18 package part DONE (no suspend): sxmo-utils 1.18.1_p20261118-r0 @lab installed on surya (all 8 sxmo-utils* subpackages; modemmanager, mmsd-tng, vvmd pinned in world first - the new -common no longer pulls them and apk would have purged them; world backup /root/world.before-sxmo-lab). Wake lock devlab-usb held throughout; suite healthy 44 pass 0 fail. Left: the two suspend tests (suspend-retry-backs-off, sensors-after-suspend), attended window only, fuse armed, after ramoops-reserved-dt. Packaging note for lab-tools: sxmo-utils-common should depend on modemmanager (or keep the deps of -r4).
 
-2026-11-18 UNBLOCKED (orchestration): the lab apk is published - https://linux-phone-oco.github.io/lab-tools/ has sxmo-utils 1.18.1_p20261118-r0 (backoff, stop-by-profile, surya sensors), signed with the lab key. Do: add the repository (signed key already on the lab) and install it as sxmo-utils@lab - a package change, NO suspend; keep the wake lock held through the install (an sxmo restart must not let autosuspend act: check the lock after); health after. The two suspend tests (suspend-retry-backs-off, sensors-after-suspend) run ONLY in an attended window with the fuse armed and the resume-stall way back in place (resume-stall-way-back landed; ramoops-reserved-dt first). Result (pass/fail with run id) goes to the upstreams coordinator via the surya coordinator.
+Waits
+: attended window with the author
 
 About
 : sensors

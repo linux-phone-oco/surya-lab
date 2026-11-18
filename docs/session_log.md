@@ -1651,3 +1651,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-1435-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Installed sxmo-utils@lab 1.18.1_p20261118-r0 (repo tagged @lab in /etc/apk/repositories; modemmanager/mmsd-tng/vvmd pinned in world so apk did not purge them). Awake, kernel 7.1.0-sm7150-calls+ kept, wake lock held, suite 44 pass 0 fail, no suspend, watchdog untouched.
+
+Considered
+: next: ramoops dtb try then the two suspend tests, both attended with the fuse armed; lab-tools: sxmo-utils-common drops the modemmanager dependency
+
+About
+: sensors
