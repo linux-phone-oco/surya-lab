@@ -1396,3 +1396,18 @@ Done
 
 Considered
 : next: when surya answers, provision the new devlab-usb-awake (overlay) and run the suite for autosleep-off; then the pending pstore/journal read after the power hold, and the dtb repeat. Rejected: stopping sxmo_autosuspend by superctl - the wake lock needs no sxmo knowledge
+
+---
+
+
+<a id="2026-11-18-1700-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Phone still silent (no known address); changed nothing on it. Kernel kept 7.1.0-sm7150-calls+ unchanged as last known.
+
+Considered
+: next: when surya answers, provision devlab-usb-awake overlay, run suite for autosleep-off, then the screen-turns-off-by-itself question read-only (journal, sxmo idle hooks, pwrkey events)
