@@ -1946,34 +1946,6 @@ Rank
 : 0
 
 
-<a id="surya-awake-from-package"></a>
-### The wake lock comes from the lpoco-awake package, not a hand-put script
-
-Status
-: open
-
-Note
-: From orchestration: lpoco-awake is released in lpoco 0.12.1+. Then: enable lpoco-awake.service, retire the hand-put /usr/local/bin/devlab-usb-awake and its unit, move /etc/devlab-allow-autosleep to /etc/lpoco/allow-autosleep. Keep the wake lock held through the swap (no gap: the sxmo autosuspend rtcwake -m mem -s 99999999 loop comes back otherwise), watchdog armed, no suspend, health after.
-
-Waits
-: orchestration: the lab at lpoco 0.12.2 (lpoco host prepare now in the next free-lease window; they say when)
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-18
-
-Needs
-: phone
-
-Proof
-: soc-sleeps
-
-Rank
-: 6
-
-
 <a id="surya-lab-owner-and-watch"></a>
 ### surya-lab: an **Owner** line in AGENTS.md and [host] watch = true in device.toml
 
@@ -2528,3 +2500,52 @@ Proof
 
 Rank
 : 3
+
+
+<a id="surya-awake-from-package"></a>
+### The wake lock comes from the lpoco-awake package, not a hand-put script
+
+Status
+: open
+
+Note
+: From orchestration: lpoco-awake is released in lpoco 0.12.1+. Then: enable lpoco-awake.service, retire the hand-put /usr/local/bin/devlab-usb-awake and its unit, move /etc/devlab-allow-autosleep to /etc/lpoco/allow-autosleep. Keep the wake lock held through the swap (no gap: the sxmo autosuspend rtcwake -m mem -s 99999999 loop comes back otherwise), watchdog armed, no suspend, health after.
+
+2026-11-18 UNBLOCKED: the lab is at lpoco 0.12.2+ (orchestration). The fresh suite shows awake-service-active FAILING (lpoco-awake inactive; devlab-usb holds the wake lock): this item is the fix. Do exactly the note above; hold the lock through the swap (no gap).
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: soc-sleeps
+
+Rank
+: 1
+
+
+<a id="surya-step-checks"></a>
+### Write health-suite checks for surya's daily-usable-phone steps that have no proof test
+
+Status
+: open
+
+Note
+: surya-steps-map-history (PR 294): none of the 82 unknown steps has its own proof test with a result in any stored run; 30 of them are phone-suite steps that need NEW checks first. Do: list the unknown steps on goal daily-usable-phone (tad q bringup-chain in docs, and the base's step_status), group by what a check needs (a shell test in tests/health/ - read how an existing one is built: tests/health/base/*.sh, the manifest), write the cheap ones first (read-only checks of a running thing: wifi connected, battery gauge reads, backlight, usb gadget, time sync, modem present, sxmo running...), put the suite, run it once, claim from that run id (done only with test + run). Skip the steps that need a human (witnessed tests) and record them as such (open + notes). One landing per group; no suspend, no risky state; wake lock held.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Rank
+: 8
