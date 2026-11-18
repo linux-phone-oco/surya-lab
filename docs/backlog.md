@@ -1672,3 +1672,28 @@ Needs
 
 Proof
 : bt-hci0-up
+
+
+<a id="health-suspend-cycle-proof"></a>
+### Proof of the health suite's suspend cycle on surya (lpoco-health suspend cycle --seconds 15)
+
+Status
+: open
+
+Note
+: Cites docs backlog health-suspend-cycle (lab-tools lpoco-v0.4.1, PR 125, done): the way-back cycle as a verb of the health suite. On surya: device.toml [health] suspend_guard = the kept-armed watchdog (way-back.sh fuse), suspend_quiet = the serial wakeup file (88c000.serial power/wakeup); then 'lpoco lab suite put now' and 'lpoco-health suspend cycle --seconds 15' (watchdog armed, sxmo autosleep stopped first, sensorspd stopped around it, USB attached, no unplug). Proof: soc-sleeps in that boot's report turns from skip to pass or fail (an honest number, not a skip). Window: the first keeper idle window after lab-machine #47 (lpoco host prepare now, family 0.4.1) is done - orchestration restarts devlab-watch@surya-lab and says so.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: soc-sleeps
+
+Rank
+: 4
