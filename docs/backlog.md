@@ -1815,10 +1815,10 @@ Proof
 ### The screen turns off by itself and back on - is it ours? (the author's question)
 
 Status
-: open
+: done
 
 Note
-: The author (2026-11-18): something turns the screen off as if the power button were tapped, and some time later turns it on with no touch; earlier a 5-10 s lock-screen on/off loop with USB flapping (that was the 2026-11-10 devlab-usb-awake script, now replaced - PR 205). The wake lock now reads as held. FIRST: lpoco lab suite put now (so the autosleep-off check from tests/health/base/autosleep-off.sh runs; the item proof name autosleep-wakelock-held is not in the latest run) and run the suite. THEN read-only: does the screen still blank/unblank by itself? journalctl around those moments, sxmo's idle/blanking hooks (sxmo_screenoff, the idle daemon: the idle blanking is NOT autosleep: blanking after idle is normal sxmo behaviour; what is not normal is blanking and waking with no touch), spurious power-key input events (libinput/evtest on the pmic pwrkey, volume keys), any lpoco-health suspend cycle or way-back run that woke it. Report the cause in plain words as research; if ours, fix it through the queue; if sxmo's, record it. Never defuse the watchdog.
+: proven by autosleep-wakelock-held + autosleep-service-active pass (suite 2026-11-18); no suspend entry since 11:17:41 (20+ min, wake lock devlab-usb held); cause per research 2026-11-18-screen-blanks-by-itself: sxmo autosleep loop on USB, stopped by the wake lock
 
 About
 : deep-sleep
