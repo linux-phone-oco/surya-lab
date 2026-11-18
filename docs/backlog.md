@@ -2365,7 +2365,7 @@ Status
 : open
 
 Note
-: 2026-11-18 20:40 keeper: taken first in the queue, left: its last step (the bite) is attended only (never defuse on an unattended try); phone unchanged on calls+.
+: 2026-11-18 keeper (again): its last step (the bite) is attended only; not tried unattended; waits for the author at the phone.
 
 About
 : deep-sleep
@@ -2506,12 +2506,10 @@ Rank
 ### The wake lock comes from the lpoco-awake package, not a hand-put script
 
 Status
-: open
+: done
 
 Note
-: From orchestration: lpoco-awake is released in lpoco 0.12.1+. Then: enable lpoco-awake.service, retire the hand-put /usr/local/bin/devlab-usb-awake and its unit, move /etc/devlab-allow-autosleep to /etc/lpoco/allow-autosleep. Keep the wake lock held through the swap (no gap: the sxmo autosuspend rtcwake -m mem -s 99999999 loop comes back otherwise), watchdog armed, no suspend, health after.
-
-2026-11-18 UNBLOCKED: the lab is at lpoco 0.12.2+ (orchestration). The fresh suite shows awake-service-active FAILING (lpoco-awake inactive; devlab-usb holds the wake lock): this item is the fix. Do exactly the note above; hold the lock through the swap (no gap).
+: proven by soc-sleeps precondition + suite 20261118-203654 on kept calls+: lpoco-awake.service enabled and active (awake-wakelock-held, awake-service-active pass), wake lock never dropped through the swap (both locks held, then lpoco-awake alone), devlab-usb-awake disabled and its script/unit removed (lab-pieces pass 'missing'); /etc/devlab-allow-autosleep never existed so nothing to move. Retired the stale autosleep-off check (repo and phone). No suspend, watchdog untouched.
 
 About
 : deep-sleep

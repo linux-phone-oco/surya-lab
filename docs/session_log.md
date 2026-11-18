@@ -1954,3 +1954,18 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-2359-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: kept kernel 7.1.0-sm7150-calls+ with stock fallback, healthy (suite 20261118-203654: 71 pass, 0 fail beyond known gaps). Done: surya-awake-from-package - wake lock now from lpoco-awake.service, hand-put devlab-usb-awake removed, no gap, stale autosleep-off check retired.
+
+Considered
+: next: surya-kernel-pmic-wdt and kept-kernel-with-pmic-wdt need the attended window; unattended next: sxmo-config-migration, surya-adsp-audio-boot-race, surya-step-checks. Rejected: taking surya-kernel-pmic-wdt unattended (never defuse).
