@@ -6,5 +6,5 @@ p=$(cat /proc/sys/kernel/panic_on_rcu_stall 2>/dev/null)
 check way-back-panic-on-rcu-stall sleep "$([ "$p" = 1 ] && echo true)" "kernel.panic_on_rcu_stall=${p:-unread} (must be 1: a stalled CPU1 ends in a panic, not minutes of silence)"
 k=$(cat /proc/sys/kernel/panic 2>/dev/null)
 check way-back-panic-reboots-soon sleep "$([ -n "$k" ] && [ "$k" -ge 1 ] && [ "$k" -le 10 ] && echo true)" "kernel.panic=${k:-unread} s (1..10: the panic reboots by itself; 120 is no way back)"
-r=$(ls /sys/fs/pstore 2>/dev/null | wc -l); m=$(grep -c ramoops /proc/iomem 2>/dev/null)
-check way-back-ramoops-present sleep "$([ "$m" -ge 1 ] && echo true)" "ramoops reserved: $m iomem line(s); pstore files now: $r"
+r=$(ls /sys/fs/pstore 2>/dev/null | wc -l); m=$(ls -d /sys/bus/platform/devices/*.ramoops 2>/dev/null | wc -l)
+check way-back-ramoops-present sleep "$([ "$m" -ge 1 ] && echo true)" "ramoops platform device bound (the region shows in /proc/iomem only as 'reserved'): $m; pstore files now: $r"

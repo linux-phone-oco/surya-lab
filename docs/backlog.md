@@ -2244,12 +2244,10 @@ Rank
 ### Reserve ramoops in the device tree so a way-back panic is kept (way-back-ramoops-present)
 
 Status
-: open
+: done
 
 Note
-: Keeper 2026-11-18 (unattended run): not taken. A dt change on a one-shot dtb try reboots the phone; the 2026-11-18-cts-pulldown-dtb-hangs try left it off USB past the 30 s fuse, and the brief forbids an unattended try without the fuse. Waits for an attended window (author present) and the lane coordinator's go.
-
-GO GIVEN 2026-11-18 by the author ('Go'), at the lab, having read the plain-words description (what happens: one-shot dtb with a reserved crash-log region booted once by boot counting; sees: reboot, USB back in 1-2 min; checks: way-back-ramoops-present passes, /sys/fs/pstore, suite healthy; way back: boot counting makes the next boot the kept kernel; if no return in ~5 min the author holds power ~10 s). Watchdog armed. Take it NOW. REPORT AT ONCE: if the phone is not back within ~5 min of the reboot, message the surya coordinator (local_0ecf107e-d955-49ff-aefb-b0ecaa3bcbdd) immediately - do not wait for your turn to end. After it passes: install the kept dtb with the region only if proven; record; land.
+: Proven by the phone, no dtb try needed: the ramoops node (4 MiB at 0x9d800000) is already in the live device tree and bound (pstore 'Registered ramoops', platform device 9d800000.ramoops). The test wrongly grepped /proc/iomem for 'ramoops'; iomem shows the region as 'reserved'. Test fixed to read the bound platform device; way-back-ramoops-present passes on 7.1.0-sm7150-calls+. NOT exercised: a panic actually kept across a reboot (pstore empty now) - that waits for resume-stall-repro-attended.
 
 About
 : deep-sleep

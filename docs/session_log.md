@@ -1633,3 +1633,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-1530-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Took ramoops-reserved-dt with the author's go. Read first: ramoops is already in the live dtb and bound, so no reboot/dtb try was made; the proof test grepped iomem for a word it never prints, fixed to the bound platform device, passes. Phone untouched: kernel 7.1.0-sm7150-calls+ kept, awake, watchdog as before.
+
+Considered
+: next: resume-stall-repro-attended (the panic kept in pstore, attended); the dtb try was rejected as pointless. The go for it is spent unused.
+
+About
+: deep-sleep
