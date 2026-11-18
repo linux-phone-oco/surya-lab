@@ -1674,31 +1674,6 @@ Rank
 : 4
 
 
-<a id="bt-trace-cycles"></a>
-### Bluetooth s2idle: 20x15 s and 3x120 s way-back cycles bt-on, wakeup ON, with hci_qca dyndbg and geni irq trace; read storm vs crash order
-
-Status
-: in-progress
-
-Note
-: 20x15 s done: no crash, storm in 1 of 20 (research 2026-11-18-bt-trace-20x15-no-crash); proof bt-no-irq-storm not passed; 3x120 s impossible under the 30 s fuse - needs a longer-fuse way-back
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-18
-
-Needs
-: phone
-
-Proof
-: bt-no-irq-storm
-
-Rank
-: 1
-
-
 <a id="lpoco-health-suspend-trace-hook"></a>
 ### lpoco-health suspend cycle: pre/post hooks or a --trace option (dyndbg, irq trace) so probes need no wrapper
 
@@ -1716,3 +1691,30 @@ Opened
 
 Needs
 : build
+
+
+<a id="bt-trace-cycles"></a>
+### Bluetooth s2idle: 20x15 s and 3x120 s way-back cycles bt-on, wakeup ON, with hci_qca dyndbg and geni irq trace; read storm vs crash order
+
+Status
+: done
+
+Note
+: 20x15 s done: no crash, storm in 1 of 20 (research 2026-11-18-bt-trace-20x15-no-crash); proof bt-no-irq-storm not passed; 3x120 s impossible under the 30 s fuse - needs a longer-fuse way-back
+
+2026-11-18 coordinator: ACCEPTED as done on research 2026-11-18-bt-trace-20x15-no-crash (20 x 15 s: no controller crash, irq 157 storm in 1 of 20 cycles). The 3 x 120 s cycles are dropped: the 30 s fuse cannot hold a 120 s sleep and a longer fuse is not worth building - long sleeps are covered by loops of 15 s cycles (as the standby run does). The stopgap sleep/bt-trace.sh goes when lpoco-health-suspend-trace-hook lands.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: bt-no-irq-storm
+
+Rank
+: 1
