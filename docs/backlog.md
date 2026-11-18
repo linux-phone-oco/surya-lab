@@ -2052,10 +2052,10 @@ Rank
 ### Read how the 13:58 probe drop ended (read only): reset that failed to boot, or a hang?
 
 Status
-: open
+: done
 
 Note
-: The attended cycle probe (13:57Z, author's go): phone left USB 13:58:14, ~35 s after arming, and did not return for 6+ min; the author power-held it. READ ONLY, no suspend: pstore/ramoops, the crash/last-reset reason (kernel cmdline 'androidboot.bootreason', /sys/... restart reason, the previous boot's journal end), journalctl -b -1: did the previous boot end at ~13:58:14 with a suspend entry? Was the drop a watchdog RESET that then failed to boot (stuck in the bootloader, Android recovery or crashdump/download mode - the screen the author saw) or a HANG (no reset)? Tie it to: (a) PR 225 research (sxmo_suspend.sh runs rtcwake -m mem -s 99999999 when no wake lock is held: was the lock held for the probe?), (b) orchestration's research that qcom_wdt stops in deep sleep (the PMIC watchdog patch series in the upstreams lane) - read their research/decision in docs, do not duplicate it. Report in plain words; record research; land. No suspend try of any kind until this is read.
+: proven by research 2026-11-18-probe-drop-1358-read: a hang after clean resume, pretimeout without reset; read only, no suspend
 
 About
 : deep-sleep

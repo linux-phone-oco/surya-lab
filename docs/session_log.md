@@ -1564,3 +1564,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-1310-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Read the 13:58 probe drop (read only): hang after a clean resume, pretimeout fired, no reset; recorded. Phone awake, kernel 7.1.0-sm7150-calls+ kept, wake locks devlab-usb sxmo_modem_warming_up sxmo_not_suspendable held, suite 12:18Z healthy (known skips/fails: fingerprint, cameras, no SIM). way-back check not run
+
+Considered
+: next: no suspend try of any kind until the coordinator decides the way back from a hang with CPU1 stalled (pretimeout without bite); health-cycle-probe-attended stays waiting for the author
+
+About
+: deep-sleep

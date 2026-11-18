@@ -1121,3 +1121,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-18-probe-drop-1358-read"></a>
+### 2026-11-18-probe-drop-1358-read
+
+Date
+: 2026-11-18
+
+Brief
+: 13:58 probe drop was a HANG after a clean resume (CPU1 RCU stall, pretimeout fired, no reset); not a reset that failed to boot; no wake lock gap
+
+Question
+: How did the 13:58 attended cycle probe drop end: a watchdog reset that failed to boot, or a hang?
+
+Found
+: Read only, from the phone (booted 13:09 after the author's power hold). Previous boot (12:16:06-12:58:15Z; local 13:xx = Z+1): way-back cycle at 12:57:41 (sleep 10 s, fuse 30 s); 'watchdog did not stop!' 12:57:44.7, PM: suspend entry (s2idle) 12:57:44.77, suspend exit 12:57:47.29 - the phone RESUMED cleanly after ~2.5 s. Then ssh sessions kept opening until 12:58:14.6 (the probe's last link); the journal's last line is 12:58:15.25 'watchdog0: pretimeout event' (kernel time 2538 s). The pstore console (console-ramoops-0, saved by systemd-pstore at 13:09:33) shows: after resume wcd9370 'IRQ sync failed to resume -16', ASoC card failed (-16), q6v5_pas 'Handover signaled, but it already happened' x5, pretimeout at 2538 s, then RCU stalls on CPU 1 (idle, 1 GP behind, 'rcu_preempt kthread starved') repeated at 2560, 2633, 2716, 2789 s, i.e. the console kept printing for 4+ minutes: the kernel was alive on other CPUs, CPU 1 never ran its timers, and nothing reset the phone. No Oops/panic/BUG line. So: a HANG (a CPU stuck after the suspend/resume, ADSP/codec resume failing), the watchdog's pretimeout fired but the bite/reset never came (fuse never bit - same as try 4), and the screen the author saw was the hung phone, not a bootloader or crashdump. The phone was stuck until his power hold; ramoops survived it. (a) PR 225: wake locks devlab-usb, sxmo_modem_warming_up, sxmo_not_suspendable are held on this boot; the last boot's suspend entry was the way-back cycle's own, not sxmo_suspend.sh's rtcwake (journal -b -1 shows the cycle line right before PM: suspend entry). (b) docs' research 2026-11-17-surya-way-back-inventory: qcom_wdt is stopped in late suspend; here the watchdog was armed (pretimeout printed) yet could not reset a half-alive system - a pretimeout without a bite means the watchdog cannot be the way back from this hang. Next: no suspend try unattended; the PMIC-watchdog or hardware-reset way stays a decision for the lane coordinator.
+
+About
+: deep-sleep
