@@ -1,7 +1,8 @@
 -- What a session may take now, and why the rest may not: every item not done, ready or skipped, the ready ones
 -- first in the queue's order - in progress, the author's rank, a proof named, oldest. An item is ready when it
 -- waits on nothing outside this base (no `waits`), every item in `blocked_by` is done (a done blocker is clear),
--- and every piece of `hardware` is owned and not refuted. A blocker this base no longer holds is not clear: the
+-- and every piece of `hardware` is owned and not refuted. An item that needs a witness (`witness`)
+-- is ready only while a person's go is open (`go_until` still ahead). A blocker this base no longer holds is not clear: the
 -- item is skipped and says so. Each skipped item names why. The one query every base shares: a brief names it
 -- and carries no picking SQL of its own.
 -- --for    string?          keeper (needs phone), builder (needs build) or research (needs research); every lane when not given
@@ -11,6 +12,7 @@ WITH w AS (
     SELECT b.id,
         concat_ws('; ',
             CASE WHEN b.waits IS NOT NULL THEN 'waits: ' || b.waits END,
+            CASE WHEN b.witness IS NOT NULL AND NOT coalesce(try_cast(b.go_until AS TIMESTAMPTZ) > now(), false) THEN 'needs a witness (no go open: a person says go, then ikb backlog-go)' END,
             (SELECT 'blocked by ' || string_agg(trim(t.x) || CASE WHEN NOT EXISTS (SELECT 1 FROM backlog d WHERE d.id = trim(t.x)) THEN ' (not in this base)' ELSE ' (' || (SELECT status FROM backlog d WHERE d.id = trim(t.x)) || ')' END, ', ')
                FROM unnest(string_split(b.blocked_by, ',')) AS t(x)
               WHERE trim(t.x) <> '' AND NOT EXISTS (SELECT 1 FROM backlog d WHERE d.id = trim(t.x) AND d.status = 'done')),
