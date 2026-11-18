@@ -2667,3 +2667,25 @@ Needs
 
 Rank
 : 1
+
+
+<a id="surya-audio-cleanup"></a>
+### Careful, read-first cleanup of ~/Projects/surya-audio (56 GB; /home is at 94%)
+
+Status
+: open
+
+Note
+: From orchestration (patrol): /home 94%, about 65 GB free; ~/Projects/surya-audio is 56 GB, the largest tree. ORDER: (1) MEASURE: du by top-level dir and by worktree/obj dir (du -sh, sorted), list git worktrees (git -C ~/Projects/surya-audio/linux worktree list) with status (clean?), branch, merged/pushed?, last use; list the kernel entries installed on the phone/ESP and which obj dir/release each came from (kept calls+, pmicwdt+, calls2+ ...). (2) PLAN in a research row BEFORE deleting: every path, its size, the proof it is unused (what references it: none/entry/keeper), and what regenerates it. (3) REMOVE ONLY what is provably unused: (a) build output dirs (obj-*) of kernel builds no installed entry, try, or kept kernel references, AND not needed to promote calls2+ (keep calls+'s and calls2+'s trees and objs until kept-kernel-with-pmic-wdt is done); (b) worktrees that are CLEAN (git status empty), whose branch is landed or pushed - use 'git worktree remove' (it refuses a dirty one; never rm -rf a worktree, never --force), then 'git worktree prune'; (c) regenerable caches (ccache/pip-less caches) if they exist and the next build only gets slower. NEVER: the kept kernel's and calls2+'s source+obj, the current try, any tree a running keeper uses (wt-surya-keeper-*, a lease held), the .git dirs, the dtb/vmlinuz/modules the entries were installed from (keep the artefacts needed to reinstall the kept kernel), anything with uncommitted work or an unpushed branch. Doubt = keep and list it. (4) Report what was freed (GB per category) and the free space of /home before and after to the surya coordinator; land the research row (the deletion list).
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Rank
+: 2
