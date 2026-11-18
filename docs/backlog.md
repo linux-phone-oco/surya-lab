@@ -1574,31 +1574,6 @@ Rank
 : 3
 
 
-<a id="bt-suspend-gate"></a>
-### sxmo autosleep gate: no rtcwake while hci0 is not UP or an rfkill is in D state
-
-Status
-: open
-
-Note
-: Step 4, independent of the others: removes the r4 wedge whatever the controller does.
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-18
-
-Needs
-: phone
-
-Proof
-: bt-rfkill-not-stuck
-
-Rank
-: 2
-
-
 <a id="bt-suspend-test-land"></a>
 ### tests/health/base/bt-suspend.sh in the suite, pushed to the phone with the runner
 
@@ -1717,6 +1692,33 @@ Needs
 
 Proof
 : bt-no-controller-crash
+
+Rank
+: 2
+
+
+<a id="bt-suspend-gate"></a>
+### sxmo autosleep gate: no rtcwake while hci0 is not UP or an rfkill is in D state
+
+Status
+: open
+
+Note
+: Step 4, independent of the others: removes the r4 wedge whatever the controller does.
+
+2026-11-18 coordinator, first: the pull-down dtb try came back BY ITSELF with no power hold (the author saw the screen on; up since ~08:21Z, later than the 30 s fuse should allow; ping 172.16.42.1 fails but the lab finds the phone at another address). Before the gate: read how it came back - journalctl -b -1 (last lines, suspend entry?), pstore, the boot reason, which address/interface devlab uses now (and why 172.16.42.1 no longer answers) - record it as research (the pull-down try's end) and update the keeper notes if the address changed. Then the gate.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: bt-rfkill-not-stuck
 
 Rank
 : 2
