@@ -72,6 +72,15 @@ type = "string"
 name = "rank"
 type = "integer"
 
+[[tables.backlog.fields]]
+name = "witness"
+type = "string"
+enum = ["person"]
+
+[[tables.backlog.fields]]
+name = "go_until"
+type = "string"
+
 [tables.session_log]
 key = ["id"]
 

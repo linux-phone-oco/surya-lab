@@ -11,10 +11,11 @@
 -- --needs       string?       phone, research or build: the lane's queue of that kind (tad q phone-queue for the phone's)
 -- --proof       string?       the test whose pass proves it done (a test id, or the test still to write)
 -- --rank        integer?      where it stands in the queue, by the author's order: 1 first
+-- --witness     string?       person: a step the author must see or hear - not ready for an unattended session unless a go is open (ikb backlog-go)
 SELECT CASE WHEN $hardware IS NOT NULL AND EXISTS (SELECT 1 FROM unnest(string_split($hardware, ',')) AS t(x) WHERE trim(t.x) NOT IN (SELECT id FROM hardware))
     THEN error('hardware names none of this base: ' || (SELECT string_agg(trim(t.x), ', ') FROM unnest(string_split($hardware, ',')) AS t(x) WHERE trim(t.x) NOT IN (SELECT id FROM hardware)) || ' (ikb hardware records one)') END;
 SELECT CASE WHEN $blocked_by IS NOT NULL AND EXISTS (SELECT 1 FROM unnest(string_split($blocked_by, ',')) AS t(x) WHERE trim(t.x) NOT IN (SELECT id FROM backlog))
     THEN error('blocked-by names no item of this base: ' || (SELECT string_agg(trim(t.x), ', ') FROM unnest(string_split($blocked_by, ',')) AS t(x) WHERE trim(t.x) NOT IN (SELECT id FROM backlog)) || ' (tad q next lists the items)') END;
 DELETE FROM backlog WHERE id = $id;
-INSERT INTO backlog (id, title, status, note, waits, blocked_by, hardware, about, opened, needs, proof, rank)
-VALUES ($id, $title, $status, $note, $waits, $blocked_by, $hardware, $about, $opened, $needs, $proof, $rank);
+INSERT INTO backlog (id, title, status, note, waits, blocked_by, hardware, about, opened, needs, proof, rank, witness)
+VALUES ($id, $title, $status, $note, $waits, $blocked_by, $hardware, $about, $opened, $needs, $proof, $rank, $witness);
