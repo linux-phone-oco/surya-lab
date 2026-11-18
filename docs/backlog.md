@@ -1812,11 +1812,7 @@ Status
 : open
 
 Note
-: 2026-11-18 keeper: stop/start around suspend measured 3/3 crash-free with sensors back (research 2026-11-18-sensorspd-stopped-no-adsp-crash). Left: same via sxmo/systemctl suspend, then done.
-
-2026-11-18 coordinator, next step: the phone vanished after the 3rd real suspend because sxmo autosleep ran rtcwake -m mem -s 99999999 (a ~3-year alarm) right after systemctl suspend - it slept, no crash proof (research 2026-11-18-unreachable-after-suspend-journal). Before any real suspend: stop sxmo autosleep, arm the fuse (watchdog stays armed through the suspend, way-back.sh), use a short RTC alarm (<=15 s). Then finish this item: the sensorspd restore across a real systemctl suspend (a delayed start; research 2026-11-18-systemctl-suspend-leaves-sensors-stopped) and prove sensors back after it. The author is at hand now (attended window).
-
-2026-11-18 coordinator: GO on the real systemctl suspend, now that the two causes of tries 1-2 are gone: (a) sxmo autosleep's 99999999 s alarm and the usb-awake loop (replaced: always-held lock, PR 205, gate PR 208), (b) the fuse defused. Rules: watchdog ARMED through the suspend (way-back.sh fuse), a short RTC alarm (15 s) set by YOU before 'systemctl suspend' (the lock is dropped only for this try, then held again: record exactly how), sensorspd restored by the delayed-start unit after resume; if the phone does not return it resets itself within 30 s - that is the way back (the author is away: do NOT retry a try that did not come back by itself; record and end). Prove: after the suspend, sensors back (monitor-sensor), no ADSP crash, the health suite green. Close the item on one clean try, or record the weak link.
+: 2026-11-18 keeper try 4 (unattended per coordinator GO, fuse armed): phone did not return, no watchdog reset; needs the author's power cycle (attended window), then read /var/tmp/sus-try, pstore, journal. Not retried.
 
 About
 : deep-sleep

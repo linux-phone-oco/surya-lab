@@ -1474,3 +1474,21 @@ Done
 
 Considered
 : next: coordinator decides how the sensorspd restore across a real suspend is tried (the phone may need hands to come back); else take the next queue item
+
+---
+
+
+<a id="2026-11-18-1250-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Real systemctl suspend try 4 with fuse armed: the phone left USB at ~11:46 and had not returned or reset after an hour. It is unreachable (kernel 7.1.0-sm7150-calls+ was kept, health was green before the try).
+
+Considered
+: next: author power-cycles surya; then read /var/tmp/sus-try/*, pstore (way-back collect) and the previous boot's journal to see whether the fuse armed; do not run another real suspend before that
+
+About
+: deep-sleep
