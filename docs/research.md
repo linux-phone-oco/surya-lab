@@ -1121,3 +1121,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-18-probe-drop-1358-read"></a>
+### 2026-11-18-probe-drop-1358-read
+
+Date
+: 2026-11-18
+
+Brief
+: 13:58 probe drop was a HANG after a clean resume (CPU1 RCU stall, pretimeout fired, no reset); not a reset that failed to boot
+
+Question
+: How did the 13:58 attended cycle probe drop end: a watchdog reset that failed to boot, or a hang?
+
+Found
+: Read only, from the phone (booted 13:09 after the author's power hold). Previous boot 12:16:06-12:58:15Z (local = Z+1): way-back cycle 12:57:41 (sleep 10 s, fuse 30 s); PM: suspend entry (s2idle) 12:57:44.77, suspend exit 12:57:47.29: the phone RESUMED cleanly. ssh sessions kept opening until 12:58:14.6; the journal's last line 12:58:15.25 is 'watchdog0: pretimeout event' (kernel 2538 s). Pstore console (console-ramoops-0, saved 13:09:33): after resume wcd9370 'IRQ sync failed to resume -16', ASoC card failed, q6v5_pas 'Handover signaled, but it already happened' x5, pretimeout, then RCU stalls on CPU 1 (rcu_preempt kthread starved) at 2560, 2633, 2716, 2789 s: the console kept printing 4+ minutes, so the kernel lived on other CPUs, CPU 1 never ran its timers, nothing reset the phone. No Oops/panic/BUG. So a HANG with the watchdog's pretimeout fired but no bite/reset (as in try 4); the author saw the hung phone, not a bootloader or crashdump. ramoops survived his power hold. (a) PR 225: the suspend entry was the way-back cycle's own (cycle line right before it), not sxmo_suspend.sh's rtcwake; wake locks devlab-usb, sxmo_modem_warming_up, sxmo_not_suspendable are held now. (b) way-back-inventory: qcom_wdt is stopped in late suspend; here it was armed yet could not reset a half-alive system, so it cannot be the way back from this hang. No suspend try unattended; the PMIC-watchdog/hardware-reset way is the coordinator's decision.
+
+About
+: deep-sleep
