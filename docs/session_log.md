@@ -1297,3 +1297,21 @@ Rejected
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-0850-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Unattended scheduled run: took the lease, phone reachable on kept kernel 7.1.0-sm7150-calls+ (up 24 min), suite latest unchanged (fingerprint and cameras fail as before, no SIM skips). Changed nothing; bt-trace-cycles (20x15 s + 3x120 s real s2idle with hci_qca dyndbg) not started: it needs an attended window and the trace script is not written
+
+Considered
+: next: bt-trace-cycles in an attended window, with a cycle wrapper adding dyndbg and trace_geni_serial_irq to way-back.sh; the other open items need the author or research
+
+About
+: deep-sleep
