@@ -1017,34 +1017,6 @@ Proof
 : soc-sleeps
 
 
-<a id="sleep-fastrpc-helpers"></a>
-### FastRPC helpers stopped across suspend; the sensors back
-
-Status
-: open
-
-Note
-: 2026-11-17 keeper-8: the probe of sensors-and-the-mask (research 2026-11-17-sensorspd-probe-still-writes) shows the DSP still writes the registry with the configs current - crash-loop at start, so there is nothing to measure across a suspend until hexagonrpcd serves writes (sensors-registry-writes). Plan when sensors are up: measure whether they keep streaming after a resume with sensorspd stopped by its Conflicts=suspend.target; restart it after resume (unit WantedBy=suspend.target, After=) only if not; rootpd stays masked; way-back.sh cycle 15 bt-on, one change at a time. Proof: after a measured sleep in one boot, motion-and-light, soc-sleeps and no-processor-crashes pass.
-
-Waits
-: sensors-registry-writes: with the helper unmasked the DSP crash-loops at start (probe 2026-11-17), so the sensors cannot be up to measure across a suspend
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-17
-
-Needs
-: phone
-
-Proof
-: motion-and-light
-
-Rank
-: 4
-
-
 <a id="floor-research-sh0-aop"></a>
 ### Research: who holds the SH0 x=1,y=3 sleep vote, and why the AOP does not ack QMP
 
@@ -1506,3 +1478,30 @@ Proof
 
 Rank
 : 1
+
+
+<a id="sleep-fastrpc-helpers"></a>
+### FastRPC helpers stopped across suspend; the sensors back
+
+Status
+: open
+
+Note
+: 2026-11-17 keeper-8: the probe of sensors-and-the-mask (research 2026-11-17-sensorspd-probe-still-writes) shows the DSP still writes the registry with the configs current - crash-loop at start, so there is nothing to measure across a suspend until hexagonrpcd serves writes (sensors-registry-writes). Plan when sensors are up: measure whether they keep streaming after a resume with sensorspd stopped by its Conflicts=suspend.target; restart it after resume (unit WantedBy=suspend.target, After=) only if not; rootpd stays masked; way-back.sh cycle 15 bt-on, one change at a time. Proof: after a measured sleep in one boot, motion-and-light, soc-sleeps and no-processor-crashes pass.
+
+2026-11-18: sensors are up and lasting (sensors-without-crash landed); the daemon crashed the ADSP on every suspend (4/4) so now do the sleep hook: stop sensorspd before suspend, restart after, measured on way-back.sh cycles (watchdog armed, USB attached, no hands).
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-17
+
+Needs
+: phone
+
+Proof
+: motion-and-light
+
+Rank
+: 4
