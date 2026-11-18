@@ -1225,3 +1225,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-18-sxmo-migration-diff-read"></a>
+### 2026-11-18-sxmo-migration-diff-read
+
+Date
+: 2026-11-18
+
+Brief
+: The 4 migrated sxmo configs: the phone's live copies equal the package defaults (package NEWER); the .needs-migration files are the OLD ones; no lab change lost
+
+Question
+: For conky.conf, foot.ini, profile, bonsai_tree.json: is the package newer or ours, and did ours carry a deliberate lab change?
+
+Found
+: Read on the phone (read only): /home/user/migration-backup-20261118 holds each file twice. The plain copy (conky.conf, foot.ini, profile, bonsai_tree.json) is byte-identical to the package default (/usr/share/sxmo/appcfg, lab-20261118.1; profile vs profile_template) and, for conky/profile/bonsai, to the live ~/.config/sxmo copy (foot.ini: no live copy, package default is used). The .needs-migration copies are the OLD 1.18.1-era ones: older configversion hashes, conky own_window_colour instead of own_window_argb_value, foot [colors] with no key-bindings, profile with the 'countryu' typo, bonsai delay_duration 400000000 and power_released events instead of 400 + delay_unit millisecond and power_pressed. So the package is NEWER and the phone already runs it; ours carried no deliberate lab change in these four (nothing sleep-specific; no ~/.config/sxmo/hooks dir exists, so postwake/lock/screenoff hooks are the package defaults). Nothing to take, nothing to queue for upstreams. Note the older readings: the 'keep ours' of PR 297 kept the package-equal files, harmless.
+
+About
+: deep-sleep
