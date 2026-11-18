@@ -2008,3 +2008,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-2045-audio-heal-unit"></a>
+### A boot unit restarts the ADSP when the sound card is missing
+
+Entry date
+: 2026-11-18
+
+Done
+: lab/devlab-audio-heal (+ .service, oneshot after multi-user): waits 40 s for the POCO X3 card, else stops/starts the adsp remoteproc (twice at most). In device.toml as overlays and enabled. Put on the phone and run: card present path passes (journal 'sound card present'), card still there. The restart path is NOT run by the script: only done by hand earlier (log 2026-11-18-2035-adsp-audio-restart); reproducing needs a boot that races, which cannot be forced.
+
+Considered
+: next: the root cause (why lpass-lpi pinctrl did not bind on that boot) is still unread; a health check that the unit ended 0. Item left open: self-heal in place, cause unknown.
+
+About
+: audio-speaker

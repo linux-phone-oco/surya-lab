@@ -36,7 +36,7 @@ dtb = "esp:dtbs/qcom/sm7150-xiaomi-surya-huaxing.dtb"
 #  - rootpd: with this FastRPC helper attached, the ADSP died on every suspend attempt (24 of 24; 0 of 9 without it);
 #    sound does not need it
 mask = ["hexagonrpcd-adsp-sensorspd.service", "hexagonrpcd-adsp-rootpd.service"]
-enable = ["sshd.service", "devlab-usb-awake.service", "devlab-call-uplink.service", "q6voiced.service"]                         # the image disables sshd by preset
+enable = ["sshd.service", "devlab-usb-awake.service", "devlab-call-uplink.service", "devlab-audio-heal.service", "q6voiced.service"]                         # the image disables sshd by preset
 
 [[flash.overlay]]   # awake while on USB to a host: no suspend attempts that drop the link, under any shell
 from = "lab/devlab-usb-awake"
@@ -75,6 +75,15 @@ to = "root:/etc/conf.d/q6voiced"
 from = "lab/devlab-call-uplink"
 to = "root:/usr/local/bin/devlab-call-uplink"
 mode = "755"
+
+[[flash.overlay]]   # a boot whose ADSP lacks the sound card: restart the ADSP (surya-adsp-audio-boot-race)
+from = "lab/devlab-audio-heal"
+to = "root:/usr/local/bin/devlab-audio-heal"
+mode = "755"
+
+[[flash.overlay]]
+from = "lab/devlab-audio-heal.service"
+to = "root:/etc/systemd/system/devlab-audio-heal.service"
 
 [[flash.overlay]]
 from = "lab/devlab-call-uplink.service"

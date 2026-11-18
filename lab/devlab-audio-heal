@@ -1,0 +1,19 @@
+#!/bin/sh
+# A boot can come up with the ADSP lacking its audio services: lpass-lpi pinctrl never binds, no q6 audio
+# modules, no sound card (surya-adsp-audio-boot-race; log 2026-11-18-2035-adsp-audio-restart). Stopping and
+# starting the ADSP through its remoteproc cured it. Runs once after boot: wait for the card, and if it is
+# not there, restart the ADSP (at most twice), then wait again.
+card() { grep -q 'POCO X3' /proc/asound/cards 2>/dev/null; }
+wait_card() { n=0; while [ $n -lt "$1" ]; do card && return 0; sleep 1; n=$((n+1)); done; return 1; }
+adsp=
+for r in /sys/class/remoteproc/remoteproc*; do
+	[ "$(cat "$r/name" 2>/dev/null)" = adsp ] && adsp=$r
+done
+[ -n "$adsp" ] || { echo "no adsp remoteproc"; exit 0; }
+wait_card 40 && { echo "sound card present"; exit 0; }
+for try in 1 2; do
+	echo "no sound card after boot: restarting the ADSP (try $try)"
+	echo stop > "$adsp/state"; sleep 3; echo start > "$adsp/state"
+	wait_card 30 && { echo "sound card present after restart $try"; exit 0; }
+done
+echo "no sound card after two ADSP restarts"; exit 1

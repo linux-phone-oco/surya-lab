@@ -1,0 +1,10 @@
+[Unit]
+Description=Restart the ADSP when a boot left it without the sound card (surya)
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/devlab-audio-heal
+
+[Install]
+WantedBy=multi-user.target
