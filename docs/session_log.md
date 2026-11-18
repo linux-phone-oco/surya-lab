@@ -1705,3 +1705,21 @@ Considered
 
 About
 : surya-follows-template
+
+---
+
+
+<a id="2026-11-18-2100-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Keeper took the lease; surya still answers at no address (lpoco lab keeper take ok, phone sh: does not answer). Phone untouched. Landed repo-only item surya-follows-template (PR 258): devicebase pin docs 0.17.0, device markers, tad check green. Last known kept kernel 7.1.0-sm7150-calls+.
+
+Considered
+: next: author's hands (cable/power) for surya; then surya-kernel-pmic-wdt; no phone item is ready
+
+About
+: deep-sleep
