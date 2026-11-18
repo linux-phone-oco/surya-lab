@@ -1864,3 +1864,39 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-2330-steps-claimed"></a>
+### Surya's bring-up steps claimed
+
+Entry date
+: 2026-11-18
+
+Done
+: steps=1 in devicebase.toml; all 113 chain steps claimed from suite run 20261118-191339 (kernel 7.1.0-sm7150-calls+): done 11, partial 2, failing 12, open 6, unknown 82. Records only; no phone change; pmic-wdt item left for an attended window (no witness now)
+
+Considered
+: next: coordinator runs docs feeds; way-back-pick-watchdog-by-identity
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-18-2335-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: unchanged: kept kernel 7.1.0-sm7150-calls+ and stock fallback; no phone change this run; the steps claimed in the base
+
+Considered
+: next: surya-kernel-pmic-wdt last step is attended (needs author at phone, fuse/power-cycle warning); way-back-pick-watchdog-by-identity next unattended
+
+About
+: deep-sleep
