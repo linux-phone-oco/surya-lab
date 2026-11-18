@@ -2,22 +2,6 @@
 
 # Backlog
 
-<a id="first-real-boot"></a>
-### Boot the current sm7150-mainline kernel on the phone via lab-agent and record dmesg + audio card list
-
-Status
-: open
-
-Note
-: The first real job: proves the whole lab-agent loop end to end on real hardware, and gives a verified baseline instead of secondhand notes.
-
-Opened
-: 2026-11-04
-
-Needs
-: phone
-
-
 <a id="off-state-charging"></a>
 ### The phone cannot stay off: shutdown and a charger both boot pmOS
 
@@ -38,72 +22,6 @@ Needs
 
 Rank
 : 20
-
-
-<a id="try-shells"></a>
-### Try every mobile shell with working sound
-
-Status
-: open
-
-Note
-: Switched in place with surya-lab ui/switch.sh (postmarketOS UI packages, tinydm for all; no reflash, the sound fixes stay). Phosh: runs, stereo verified by ear 2026-11-09. Next: Plasma Mobile, GNOME Mobile; Sxmo was the starting shell. Settled 2026-11-11: parked until the shells are cut and sound is complete.
-
-Opened
-: 2026-11-09
-
-Needs
-: phone
-
-
-<a id="phosh-usb"></a>
-### Under Phosh the PC loses the phone over USB
-
-Status
-: open
-
-Note
-: After switching to Phosh (2026-11-09) the PC showed no USB device for the phone, so no SSH over USB; the user saw the same before, in an earlier Phosh try. Unclear yet: Phosh changing the USB gadget, or the cable (EarPods were being plugged in that evening). To check: lsusb on the PC and the gadget state on the phone (via wifi or the console) while in Phosh.
-
-Opened
-: 2026-11-09
-
-Needs
-: phone
-
-
-<a id="shell-free-base"></a>
-### A shell-free base for hardware tests
-
-Status
-: open
-
-Note
-: Proposed by the author after a day of faults that a shell's policy turned into loops: test the base - sound, modem, suspend, storage - on a console-only system, with no desktop or shell deciding when things happen, as the reference; then test each shell as a layer on top, so a failure points at one or the other. The lab's checks already run without a display; the image and the conveyor are to follow. 
-
-2026-11-17: the phone's health suite is layered - base checks first (hardware and system, no shell in the way), then the shell's - and each report line says its layer; on surya the base passes whole (29 of 29 outside the known gaps) under Sxmo. The console-only image is still to come.
-
-Opened
-: 2026-11-10
-
-Needs
-: phone
-
-
-<a id="adsp-handover-loop"></a>
-### The audio processor signalling handover every second
-
-Status
-: open
-
-Note
-: Measured in the test kernel: 'Handover signaled, but it already happened' once a second from 11 s after boot (54 by 65 s), with or without audio. Also seen in a stock boot's crash memory. Likely an interrupt wired to the wrong signal of the audio processor; compare its interrupt mapping with the Android kernel.
-
-Opened
-: 2026-11-11
-
-Needs
-: phone
 
 
 <a id="no-sound-card-boots"></a>
@@ -199,22 +117,6 @@ Proof
 : sound-card
 
 
-<a id="surya-hand-check"></a>
-### Checked by hand
-
-Status
-: open
-
-Note
-: Buttons verified by a person; vibration still to check (the first half-manual test). Settled 2026-11-11: checked by hand once; next: checked by the conveyor as scenes (agent access).
-
-Opened
-: 2026-11-10
-
-Needs
-: phone
-
-
 <a id="telegram-at-provisioning"></a>
 ### Telegram client at provisioning: uncomment telegram-desktop in provision/packages.txt
 
@@ -256,72 +158,6 @@ Rank
 : 30
 
 
-<a id="bt-pairing"></a>
-### Bluetooth pairs and carries audio: from partial to works
-
-Status
-: open
-
-Note
-: The author, 2026-11-17: bluetooth is partial (controller and powered pass). A works test: pair with a device the lab keeps, carry audio or a file; witnessed where a person must confirm.
-
-Opened
-: 2026-11-17
-
-Needs
-: phone
-
-Proof
-: bt-pairs
-
-Rank
-: 40
-
-
-<a id="volte-and-emergency"></a>
-### VoLTE and emergency calls, to finish calls and messages
-
-Status
-: open
-
-Note
-: The author, 2026-11-17: confirm first whether today's working calls go over VoLTE (Germany has switched 3G off; read the modem's call and IMS state during the daily echo call). Emergency calls are proven without dialling an emergency number: the modem's emergency number list and its readiness, never a real 112 call.
-
-Opened
-: 2026-11-17
-
-Needs
-: phone
-
-Proof
-: volte-call
-
-Rank
-: 50
-
-
-<a id="sensors-proximity-in-calls"></a>
-### Proximity blanks the screen at the ear in a call
-
-Status
-: open
-
-Note
-: Decided 2026-11-17 (research-sensor-hub, decision 2026-11-17-sensors-registry-kept-current). After sensors-without-crash. The sensor is surya's stk3a5x infrared one (not ultrasonic: nothing in the microphones or earpiece). Read it through iio-sensor-proxy (monitor-sensor --proximity) near and far; find how the shell on the phone (Sxmo) does its in-call proximity lock and make it read iio-sensor-proxy rather than an IIO sysfs file - a sxmo-deviceprofiles or sxmo-utils change for SSC phones; check the panel's calibration (huaxing 2.0, tianma 1.0 in the configs). Proven by proximity-reads after every boot, and once witnessed: in a call (call-echo), the author's hand over the top of the screen blanks it and lifting it brings it back.
-
-Opened
-: 2026-11-17
-
-Needs
-: phone
-
-Proof
-: proximity-reads
-
-Rank
-: 12
-
-
 <a id="sim-removed-skips"></a>
 ### Checks that need the SIM skip, not fail, while it is out
 
@@ -330,22 +166,6 @@ Status
 
 Note
 : Done 2026-11-17 (lab-tools #73 no_sim helper, surya-lab #123): with the SIM out, modem-registered, mobile-data, call-echo and sms-loopback say 'skip: no SIM card' (before the once-a-day stamp, so a skip costs nothing). After one reboot on devlab-health 0.1.6: 35 pass, 5 fail (the known gaps: fingerprint, sensors, cameras), 5 skip; calls, SMS and data stay 'works' at their last real measurement.
-
-Opened
-: 2026-11-17
-
-Needs
-: phone
-
-
-<a id="surya-fastboot-serial"></a>
-### surya's fastboot serial in its manifest, read from fastboot
-
-Status
-: open
-
-Note
-: devlab flash now refuses surya until surya-lab device.toml says [fastboot] serial and writes = true (lab-tools PR 79, decision 2026-11-17-fastboot-by-serial-writes-by-manifest). Next time surya sits in its bootloader, read fastboot devices (likely dc21014b, its soc0 serial 3693150539 in hex - not yet read from fastboot), then add [fastboot] serial and writes = true with the decision that allows flashing surya.
 
 Opened
 : 2026-11-17
@@ -964,56 +784,6 @@ Needs
 : research
 
 
-<a id="floor-sh0-qup-tags"></a>
-### If SH0 stays: the other TAG_ALWAYS QUP and crypto consumers, one per cycle
-
-Status
-: open
-
-Note
-: One-shot dtb per change: the serial toward SLAVE_LLCC (sm7150.dtsi ~1259), then the crypto engine (~460), then the rest of the QUP ALWAYS paths; each judged by the sleep-set flush and soc-sleeps. Skip when floor-sh0-owner removes SH0.
-
-Blocked by
-: floor-sh0-owner
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-17
-
-Needs
-: phone
-
-Proof
-: soc-sleeps
-
-
-<a id="floor-aop-qmp-no-ack"></a>
-### Why the AOP does not ack QMP sends (qcom_aoss_qmp c300000)
-
-Status
-: open
-
-Note
-: Lower rank (research 2026-11-17-sh0-and-aop-research: node equals sm8150/sc7180, serves only the aoss knobs, hypothesis 5). Read only: dump msgram descriptor and mailbox words (magic, version, mcore/ucore states, offset/size) before and after a send; count the AOP irq 389; trace aoss_send/aoss_send_done; whether the AOP changes the length word. Then one change at most. Not known yet: downstream irq-reg-base.
-
-Blocked by
-: floor-sh0-owner
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-17
-
-Needs
-: phone
-
-Proof
-: soc-sleeps
-
-
 <a id="floor-research-validity"></a>
 ### Research: is SH0 x=1,y=3 the blocker at all - counter validity, clocks/GDSC, late-suspend state
 
@@ -1058,31 +828,6 @@ Rank
 : 1
 
 
-<a id="floor-irq-quiet"></a>
-### Silence what wakes the CPUs in suspend, one source per cycle
-
-Status
-: open
-
-Note
-: Only if floor-entry-trace shows interrupts through the cycle (Odin 2 was held by an SD-controller IRQ storm of ~30/s, armada#274). Take the top source from the delta, quiet it by a runtime step (driver unbind with the watchdog armed, or irq mask), one per cycle, judged by way-back.sh cycle 15 bt-on: the interrupt count falls and soc-sleeps is read again. Proven by: suspend-irq-quiet (below 50 interrupts in the suspended 15 s) passing, then soc-sleeps read.
-
-Blocked by
-: floor-entry-trace
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-17
-
-Needs
-: phone
-
-Proof
-: suspend-irq-quiet
-
-
 <a id="suspend-irq-quiet-check"></a>
 ### Suite check suspend-irq-quiet: interrupts across one suspended cycle stay under a threshold (lab-tools)
 
@@ -1122,72 +867,6 @@ Opened
 
 Needs
 : research
-
-
-<a id="floor-genpd-rows-and-regulators"></a>
-### Read all power-domain idle_states rows and regulator_summary users across one way-back cycle 15 bt-on (read-only)
-
-Status
-: open
-
-Note
-: Settles why the cluster S2idle column is 0 (wrong row/domain or a path that did not count) and lists the rails that stay on in suspend. Write the output into the cycle log. Watchdog armed.
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-17
-
-Needs
-: phone
-
-Proof
-: soc-sleeps
-
-
-<a id="floor-usb-runtime-pm"></a>
-### Allow USB runtime PM (power/control auto on the HS PHY and the dwc3 controller) for one cycle and read counters and current
-
-Status
-: open
-
-Note
-: pmaports#4846: lowers draw slightly and keeps USB from holding CX. Needs the lab link to survive: keep the watchdog armed, one change per cycle.
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-17
-
-Needs
-: phone
-
-Proof
-: soc-sleeps
-
-
-<a id="floor-standby-current-cycle"></a>
-### Standby current: battery-only suspended cycle of 10 minutes, charge_counter delta over time
-
-Status
-: open
-
-Note
-: Needs the cable out for the window (the witness's hands) or the fuel gauge's discharge read while charging is held off; the RTC wakes the phone and the cycle log is read after. Pass: under 15 mA average; the number is recorded beside Droidian miatoll 9 mA. Same measure as sleep-standby-current.
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-17
-
-Needs
-: phone
-
-Proof
-: standby-current
 
 
 <a id="sensors-without-crash"></a>
@@ -1464,34 +1143,6 @@ Rank
 : 15
 
 
-<a id="verify-headphone-mic-earpiece"></a>
-### Verify headphone, mic and earpiece status directly on hardware instead of relying on the secondhand pmaports note
-
-Status
-: open
-
-Note
-: The source only confirms mic/earpiece are broken as a group; headphone output specifically was never separately confirmed one way or the other.
-
-Waits
-: surya answering again (parked after a real suspend; the author's power cycle - backlog surya-unreachable-after-suspend)
-
-About
-: audio-mic
-
-Opened
-: 2026-11-04
-
-Needs
-: phone
-
-Proof
-: null
-
-Rank
-: 60
-
-
 <a id="camera-identify-slots"></a>
 ### Ask each camera slot what it is
 
@@ -1546,3 +1197,388 @@ Proof
 
 Rank
 : 71
+
+
+<a id="sensors-proximity-in-calls"></a>
+### Proximity blanks the screen at the ear in a call
+
+Status
+: open
+
+Note
+: Decided 2026-11-17 (research-sensor-hub, decision 2026-11-17-sensors-registry-kept-current). After sensors-without-crash. The sensor is surya's stk3a5x infrared one (not ultrasonic: nothing in the microphones or earpiece). Read it through iio-sensor-proxy (monitor-sensor --proximity) near and far; find how the shell on the phone (Sxmo) does its in-call proximity lock and make it read iio-sensor-proxy rather than an IIO sysfs file - a sxmo-deviceprofiles or sxmo-utils change for SSC phones; check the panel's calibration (huaxing 2.0, tianma 1.0 in the configs). Proven by proximity-reads after every boot, and once witnessed: in a call (call-echo), the author's hand over the top of the screen blanks it and lifting it brings it back.
+
+Waits
+: surya answering again (parked after a real suspend; the author's power cycle - backlog surya-unreachable-after-suspend)
+
+Opened
+: 2026-11-17
+
+Needs
+: phone
+
+Proof
+: proximity-reads
+
+Rank
+: 12
+
+
+<a id="bt-pairing"></a>
+### Bluetooth pairs and carries audio: from partial to works
+
+Status
+: open
+
+Note
+: The author, 2026-11-17: bluetooth is partial (controller and powered pass). A works test: pair with a device the lab keeps, carry audio or a file; witnessed where a person must confirm.
+
+Waits
+: surya answering again (parked after a real suspend; the author's power cycle - backlog surya-unreachable-after-suspend)
+
+Opened
+: 2026-11-17
+
+Needs
+: phone
+
+Proof
+: bt-pairs
+
+Rank
+: 40
+
+
+<a id="volte-and-emergency"></a>
+### VoLTE and emergency calls, to finish calls and messages
+
+Status
+: open
+
+Note
+: The author, 2026-11-17: confirm first whether today's working calls go over VoLTE (Germany has switched 3G off; read the modem's call and IMS state during the daily echo call). Emergency calls are proven without dialling an emergency number: the modem's emergency number list and its readiness, never a real 112 call.
+
+Waits
+: surya answering again (parked after a real suspend; the author's power cycle - backlog surya-unreachable-after-suspend)
+
+Opened
+: 2026-11-17
+
+Needs
+: phone
+
+Proof
+: volte-call
+
+Rank
+: 50
+
+
+<a id="floor-genpd-rows-and-regulators"></a>
+### Read all power-domain idle_states rows and regulator_summary users across one way-back cycle 15 bt-on (read-only)
+
+Status
+: open
+
+Note
+: Settles why the cluster S2idle column is 0 (wrong row/domain or a path that did not count) and lists the rails that stay on in suspend. Write the output into the cycle log. Watchdog armed.
+
+Waits
+: surya answering again (parked after a real suspend; the author's power cycle - backlog surya-unreachable-after-suspend)
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-17
+
+Needs
+: phone
+
+Proof
+: soc-sleeps
+
+
+<a id="floor-irq-quiet"></a>
+### Silence what wakes the CPUs in suspend, one source per cycle
+
+Status
+: open
+
+Note
+: Only if floor-entry-trace shows interrupts through the cycle (Odin 2 was held by an SD-controller IRQ storm of ~30/s, armada#274). Take the top source from the delta, quiet it by a runtime step (driver unbind with the watchdog armed, or irq mask), one per cycle, judged by way-back.sh cycle 15 bt-on: the interrupt count falls and soc-sleeps is read again. Proven by: suspend-irq-quiet (below 50 interrupts in the suspended 15 s) passing, then soc-sleeps read.
+
+Waits
+: surya answering again (parked after a real suspend; the author's power cycle - backlog surya-unreachable-after-suspend)
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-17
+
+Needs
+: phone
+
+Proof
+: suspend-irq-quiet
+
+
+<a id="floor-standby-current-cycle"></a>
+### Standby current: battery-only suspended cycle of 10 minutes, charge_counter delta over time
+
+Status
+: open
+
+Note
+: Needs the cable out for the window (the witness's hands) or the fuel gauge's discharge read while charging is held off; the RTC wakes the phone and the cycle log is read after. Pass: under 15 mA average; the number is recorded beside Droidian miatoll 9 mA. Same measure as sleep-standby-current.
+
+Waits
+: surya answering again (parked after a real suspend; the author's power cycle - backlog surya-unreachable-after-suspend)
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-17
+
+Needs
+: phone
+
+Proof
+: standby-current
+
+
+<a id="floor-usb-runtime-pm"></a>
+### Allow USB runtime PM (power/control auto on the HS PHY and the dwc3 controller) for one cycle and read counters and current
+
+Status
+: open
+
+Note
+: pmaports#4846: lowers draw slightly and keeps USB from holding CX. Needs the lab link to survive: keep the watchdog armed, one change per cycle.
+
+Waits
+: surya answering again (parked after a real suspend; the author's power cycle - backlog surya-unreachable-after-suspend)
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-17
+
+Needs
+: phone
+
+Proof
+: soc-sleeps
+
+
+<a id="first-real-boot"></a>
+### Boot the current sm7150-mainline kernel on the phone via lab-agent and record dmesg + audio card list
+
+Status
+: open
+
+Note
+: The first real job: proves the whole lab-agent loop end to end on real hardware, and gives a verified baseline instead of secondhand notes.
+
+Waits
+: surya answering again (parked after a real suspend; the author's power cycle - backlog surya-unreachable-after-suspend)
+
+Opened
+: 2026-11-04
+
+Needs
+: phone
+
+
+<a id="phosh-usb"></a>
+### Under Phosh the PC loses the phone over USB
+
+Status
+: open
+
+Note
+: After switching to Phosh (2026-11-09) the PC showed no USB device for the phone, so no SSH over USB; the user saw the same before, in an earlier Phosh try. Unclear yet: Phosh changing the USB gadget, or the cable (EarPods were being plugged in that evening). To check: lsusb on the PC and the gadget state on the phone (via wifi or the console) while in Phosh.
+
+Waits
+: surya answering again (parked after a real suspend; the author's power cycle - backlog surya-unreachable-after-suspend)
+
+Opened
+: 2026-11-09
+
+Needs
+: phone
+
+
+<a id="try-shells"></a>
+### Try every mobile shell with working sound
+
+Status
+: open
+
+Note
+: Switched in place with surya-lab ui/switch.sh (postmarketOS UI packages, tinydm for all; no reflash, the sound fixes stay). Phosh: runs, stereo verified by ear 2026-11-09. Next: Plasma Mobile, GNOME Mobile; Sxmo was the starting shell. Settled 2026-11-11: parked until the shells are cut and sound is complete.
+
+Waits
+: surya answering again (parked after a real suspend; the author's power cycle - backlog surya-unreachable-after-suspend)
+
+Opened
+: 2026-11-09
+
+Needs
+: phone
+
+
+<a id="shell-free-base"></a>
+### A shell-free base for hardware tests
+
+Status
+: open
+
+Note
+: Proposed by the author after a day of faults that a shell's policy turned into loops: test the base - sound, modem, suspend, storage - on a console-only system, with no desktop or shell deciding when things happen, as the reference; then test each shell as a layer on top, so a failure points at one or the other. The lab's checks already run without a display; the image and the conveyor are to follow. 
+
+2026-11-17: the phone's health suite is layered - base checks first (hardware and system, no shell in the way), then the shell's - and each report line says its layer; on surya the base passes whole (29 of 29 outside the known gaps) under Sxmo. The console-only image is still to come.
+
+Waits
+: surya answering again (parked after a real suspend; the author's power cycle - backlog surya-unreachable-after-suspend)
+
+Opened
+: 2026-11-10
+
+Needs
+: phone
+
+
+<a id="surya-hand-check"></a>
+### Checked by hand
+
+Status
+: open
+
+Note
+: Buttons verified by a person; vibration still to check (the first half-manual test). Settled 2026-11-11: checked by hand once; next: checked by the conveyor as scenes (agent access).
+
+Waits
+: surya answering again (parked after a real suspend; the author's power cycle - backlog surya-unreachable-after-suspend)
+
+Opened
+: 2026-11-10
+
+Needs
+: phone
+
+
+<a id="adsp-handover-loop"></a>
+### The audio processor signalling handover every second
+
+Status
+: open
+
+Note
+: Measured in the test kernel: 'Handover signaled, but it already happened' once a second from 11 s after boot (54 by 65 s), with or without audio. Also seen in a stock boot's crash memory. Likely an interrupt wired to the wrong signal of the audio processor; compare its interrupt mapping with the Android kernel.
+
+Waits
+: surya answering again (parked after a real suspend; the author's power cycle - backlog surya-unreachable-after-suspend)
+
+Opened
+: 2026-11-11
+
+Needs
+: phone
+
+
+<a id="surya-fastboot-serial"></a>
+### surya's fastboot serial in its manifest, read from fastboot
+
+Status
+: open
+
+Note
+: devlab flash now refuses surya until surya-lab device.toml says [fastboot] serial and writes = true (lab-tools PR 79, decision 2026-11-17-fastboot-by-serial-writes-by-manifest). Next time surya sits in its bootloader, read fastboot devices (likely dc21014b, its soc0 serial 3693150539 in hex - not yet read from fastboot), then add [fastboot] serial and writes = true with the decision that allows flashing surya.
+
+Waits
+: surya answering again (parked after a real suspend; the author's power cycle - backlog surya-unreachable-after-suspend)
+
+Opened
+: 2026-11-17
+
+Needs
+: phone
+
+
+<a id="floor-aop-qmp-no-ack"></a>
+### Why the AOP does not ack QMP sends (qcom_aoss_qmp c300000)
+
+Status
+: open
+
+Note
+: Lower rank (research 2026-11-17-sh0-and-aop-research: node equals sm8150/sc7180, serves only the aoss knobs, hypothesis 5). Read only: dump msgram descriptor and mailbox words (magic, version, mcore/ucore states, offset/size) before and after a send; count the AOP irq 389; trace aoss_send/aoss_send_done; whether the AOP changes the length word. Then one change at most. Not known yet: downstream irq-reg-base.
+
+Waits
+: surya answering again (parked after a real suspend; the author's power cycle - backlog surya-unreachable-after-suspend)
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-17
+
+Needs
+: phone
+
+Proof
+: soc-sleeps
+
+
+<a id="floor-sh0-qup-tags"></a>
+### If SH0 stays: the other TAG_ALWAYS QUP and crypto consumers, one per cycle
+
+Status
+: open
+
+Note
+: One-shot dtb per change: the serial toward SLAVE_LLCC (sm7150.dtsi ~1259), then the crypto engine (~460), then the rest of the QUP ALWAYS paths; each judged by the sleep-set flush and soc-sleeps. Skip when floor-sh0-owner removes SH0.
+
+Waits
+: surya answering again (parked after a real suspend; the author's power cycle - backlog surya-unreachable-after-suspend)
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-17
+
+Needs
+: phone
+
+Proof
+: soc-sleeps
+
+
+<a id="verify-headphone-mic-earpiece"></a>
+### Verify headphone, mic and earpiece status directly on hardware instead of relying on the secondhand pmaports note
+
+Status
+: open
+
+Note
+: The source only confirms mic/earpiece are broken as a group; headphone output specifically was never separately confirmed one way or the other.
+
+Waits
+: surya answering again (parked after a real suspend; the author's power cycle - backlog surya-unreachable-after-suspend)
+
+About
+: audio-mic
+
+Opened
+: 2026-11-04
+
+Needs
+: phone
+
+Rank
+: 60
