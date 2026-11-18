@@ -1969,3 +1969,42 @@ Done
 
 Considered
 : next: surya-kernel-pmic-wdt and kept-kernel-with-pmic-wdt need the attended window; unattended next: sxmo-config-migration, surya-adsp-audio-boot-race, surya-step-checks. Rejected: taking surya-kernel-pmic-wdt unattended (never defuse).
+
+---
+
+
+<a id="2026-11-18-2100-sxmo-config-migration"></a>
+### sxmo config migration cleared
+
+Entry date
+: 2026-11-18
+
+Done
+: The 4 .needs-migration files (foot.ini, sxmo/conky.conf, profile, bonsai_tree.json) were the package's defaults for sxmo-utils 1.18.1_p20261118@lab; diffed each: the defaults are OLDER than the files on the phone (profile: typo 'countryu'; bonsai: delay_duration in ns without delay_unit, power_released not power_pressed; foot: [colors] without [key-bindings]; conky: own_window_argb_value). Kept ours (no lab edits in them; taking the defaults would downgrade). Backed up all 8 files to /home/user/migration-backup-20261118 on surya, removed the markers; sxmo_migrate.sh state says all up to date. No restart, wake lock untouched.
+
+Considered
+: THE CLASS: a user-config copy drifted from its source when the package upgraded; here the fork's defaults lag the configs, so the next sxmo-utils install may flag them again. Our configs carry no deliberate lab change, so nothing to move into the fork or device.toml; the upstreams lane should check the fork's configversion hashes against upstream 1.18.1 (open item if it recurs).
+
+Rejected
+: taking the new defaults (older, would revert fixes); running interactive sxmo_migrate.sh (needless, risks sxmo restart)
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-19-0000-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: kept kernel 7.1.0-sm7150-calls+ with stock fallback, unchanged, healthy (last suite 20261118-203654). Done: sxmo-config-migration (markers cleared, configs kept, backup on phone).
+
+Considered
+: next: surya-kernel-pmic-wdt and kept-kernel-with-pmic-wdt need the attended window (never defuse unattended); unattended next: surya-adsp-audio-boot-race, surya-step-checks. 
+
+About
+: deep-sleep
