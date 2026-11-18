@@ -218674,3 +218674,4901 @@ Kernel
 
 Shell
 : swmo
+
+
+<a id="20261118-184720-kernel-root-fills-its-partition"></a>
+### 20261118-184720-kernel-root-fills-its-partition
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: kernel
+
+Test
+: root-fills-its-partition
+
+Outcome
+: pass
+
+Detail
+: the system is 101 GB on a partition of 104 GB
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-kernel-root-has-room"></a>
+### 20261118-184720-kernel-root-has-room
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: kernel
+
+Test
+: root-has-room
+
+Outcome
+: pass
+
+Detail
+: / is 3% full
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-kernel-root-writable"></a>
+### 20261118-184720-kernel-root-writable
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: kernel
+
+Test
+: root-writable
+
+Outcome
+: pass
+
+Detail
+: writing a file under /var
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-kernel-no-oops"></a>
+### 20261118-184720-kernel-no-oops
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: kernel
+
+Test
+: no-oops
+
+Outcome
+: pass
+
+Detail
+: 0 oops, BUG or panic lines this boot
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-kernel-boot-warnings"></a>
+### 20261118-184720-kernel-boot-warnings
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: kernel
+
+Test
+: boot-warnings
+
+Outcome
+: fail
+
+Detail
+: 3 warnings, new: drivers/clk/clk.c:1047 drivers/clk/clk.c:1047
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-kernel-no-processor-crashes"></a>
+### 20261118-184720-kernel-no-processor-crashes
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: kernel
+
+Test
+: no-processor-crashes
+
+Outcome
+: pass
+
+Detail
+: no signal processor crashed this boot
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-kernel-no-failed-units"></a>
+### 20261118-184720-kernel-no-failed-units
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: kernel
+
+Test
+: no-failed-units
+
+Outcome
+: pass
+
+Detail
+: no unit failed but the known: qbootctl.service
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-audio-speaker-adsp-running"></a>
+### 20261118-184720-audio-speaker-adsp-running
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-speaker
+
+Test
+: adsp-running
+
+Outcome
+: pass
+
+Detail
+: adsp: running
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-kernel-cdsp-running"></a>
+### 20261118-184720-kernel-cdsp-running
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: kernel
+
+Test
+: cdsp-running
+
+Outcome
+: pass
+
+Detail
+: cdsp: running
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-modem-data-modem-running"></a>
+### 20261118-184720-modem-data-modem-running
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: modem-data
+
+Test
+: modem-running
+
+Outcome
+: pass
+
+Detail
+: modem: running
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-audio-speaker-sound-card"></a>
+### 20261118-184720-audio-speaker-sound-card
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-speaker
+
+Test
+: sound-card
+
+Outcome
+: pass
+
+Detail
+: 'POCO X3' in /proc/asound/cards: 2 cards registered
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-wifi-wifi-interface"></a>
+### 20261118-184720-wifi-wifi-interface
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: wifi
+
+Test
+: wifi-interface
+
+Outcome
+: pass
+
+Detail
+: interface wlan0
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-wifi-wifi-connected"></a>
+### 20261118-184720-wifi-wifi-connected
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: wifi
+
+Test
+: wifi-connected
+
+Outcome
+: pass
+
+Detail
+: wlan0 up, address 192.168.178.182/24
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-wifi-wifi-reaches-gateway"></a>
+### 20261118-184720-wifi-wifi-reaches-gateway
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: wifi
+
+Test
+: wifi-reaches-gateway
+
+Outcome
+: pass
+
+Detail
+: gateway 192.168.178.1
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-modem-data-modem-seen"></a>
+### 20261118-184720-modem-data-modem-seen
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: modem-data
+
+Test
+: modem-seen
+
+Outcome
+: pass
+
+Detail
+: ModemManager: /Modem/0
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-modem-data-modem-registered"></a>
+### 20261118-184720-modem-data-modem-registered
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: modem-data
+
+Test
+: modem-registered
+
+Outcome
+: skip
+
+Detail
+: no SIM card (modem state: failed, sim-missing)
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-bluetooth-bt-controller"></a>
+### 20261118-184720-bluetooth-bt-controller
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: bluetooth
+
+Test
+: bt-controller
+
+Outcome
+: pass
+
+Detail
+: hci0
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-bluetooth-bt-powered"></a>
+### 20261118-184720-bluetooth-bt-powered
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: bluetooth
+
+Test
+: bt-powered
+
+Outcome
+: pass
+
+Detail
+: adapter powered: yes
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-display-panel-panel-connected"></a>
+### 20261118-184720-display-panel-panel-connected
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: display-panel
+
+Test
+: panel-connected
+
+Outcome
+: pass
+
+Detail
+: panel: connected
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-display-panel-backlight"></a>
+### 20261118-184720-display-panel-backlight
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: display-panel
+
+Test
+: backlight
+
+Outcome
+: pass
+
+Detail
+: brightness 2048
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-touchscreen-touch-device"></a>
+### 20261118-184720-touchscreen-touch-device
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: touchscreen
+
+Test
+: touch-device
+
+Outcome
+: pass
+
+Detail
+: "Novatek NT36XXX Touchscreen"
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-haptics-vibrator"></a>
+### 20261118-184720-haptics-vibrator
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: haptics
+
+Test
+: vibrator
+
+Outcome
+: pass
+
+Detail
+: "aw8695-haptics"
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-nfc-nfc-device"></a>
+### 20261118-184720-nfc-nfc-device
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: nfc
+
+Test
+: nfc-device
+
+Outcome
+: pass
+
+Detail
+: nfc0
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-usb-otg-usb-role"></a>
+### 20261118-184720-usb-otg-usb-role
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: usb-otg
+
+Test
+: usb-role
+
+Outcome
+: pass
+
+Detail
+: a600000.usb-role-switch
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-audio-headphone-jack-detector"></a>
+### 20261118-184720-audio-headphone-jack-detector
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-headphone
+
+Test
+: jack-detector
+
+Outcome
+: pass
+
+Detail
+: headset jack detectors: 1 (sound through it is a witnessed test)
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-fingerprint-reader-exposed"></a>
+### 20261118-184720-fingerprint-reader-exposed
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: fingerprint
+
+Test
+: reader-exposed
+
+Outcome
+: fail
+
+Detail
+: fingerprint reader devices: 0
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-camera-rear-image-sensor"></a>
+### 20261118-184720-camera-rear-image-sensor
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: camera-rear
+
+Test
+: image-sensor
+
+Outcome
+: fail
+
+Detail
+: image sensors bound: 0
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-camera-front-image-sensor"></a>
+### 20261118-184720-camera-front-image-sensor
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: camera-front
+
+Test
+: image-sensor
+
+Outcome
+: fail
+
+Detail
+: image sensors bound: 0
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-usb-otg-usb-awake"></a>
+### 20261118-184720-usb-otg-usb-awake
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: usb-otg
+
+Test
+: usb-awake
+
+Outcome
+: pass
+
+Detail
+: on USB to a host; wake locks: devlab-usb sxmo_modem_warming_up sxmo_not_suspendable
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-sensors-motion-and-light"></a>
+### 20261118-184720-sensors-motion-and-light
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: sensors
+
+Test
+: motion-and-light
+
+Outcome
+: pass
+
+Detail
+: IIO sensors: 0 (voltage meters not counted); through iio-sensor-proxy: Accelerometer AmbientLight Proximity
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-sensors-proximity-reads"></a>
+### 20261118-184720-sensors-proximity-reads
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: sensors
+
+Test
+: proximity-reads
+
+Outcome
+: pass
+
+Detail
+: proximity sensor through iio-sensor-proxy: near: 0
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-deep-sleep-soc-sleeps"></a>
+### 20261118-184720-deep-sleep-soc-sleeps
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: deep-sleep
+
+Test
+: soc-sleeps
+
+Outcome
+: skip
+
+Detail
+: not measured: the phone has not suspended this boot; cxsd 0, aosd 0; suspends this boot: 0; processors never asleep: adsp; wake locks: devlab-usb sxmo_modem_warming_up sxmo_not_suspendable
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-deep-sleep-suspend-irq-quiet"></a>
+### 20261118-184720-deep-sleep-suspend-irq-quiet
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: deep-sleep
+
+Test
+: suspend-irq-quiet
+
+Outcome
+: skip
+
+Detail
+: not measured: no threshold in the manifest ([health] suspend_irq_max), and none is guessed
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-audio-speaker-amp-channels"></a>
+### 20261118-184720-audio-speaker-amp-channels
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-speaker
+
+Test
+: amp-channels
+
+Outcome
+: pass
+
+Detail
+: Item0: 'Left' / Item0: 'Right'
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-audio-speaker-amp-volume-0x4c"></a>
+### 20261118-184720-audio-speaker-amp-volume-0x4c
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-speaker
+
+Test
+: amp-volume-0x4c
+
+Outcome
+: pass
+
+Detail
+: chip 0x4c digital volume high byte 0x40 (0x00: -110 dB, silent)
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-audio-speaker-amp-volume-0x4d"></a>
+### 20261118-184720-audio-speaker-amp-volume-0x4d
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-speaker
+
+Test
+: amp-volume-0x4d
+
+Outcome
+: pass
+
+Detail
+: chip 0x4d digital volume high byte 0x40 (0x00: -110 dB, silent)
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-deep-sleep-autosleep-wakelock-held"></a>
+### 20261118-184720-deep-sleep-autosleep-wakelock-held
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: deep-sleep
+
+Test
+: autosleep-wakelock-held
+
+Outcome
+: pass
+
+Detail
+: wake lock devlab-usb in /sys/power/wake_lock: devlab-usb sxmo_modem_warming_up sxmo_not_suspendable
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-deep-sleep-autosleep-service-active"></a>
+### 20261118-184720-deep-sleep-autosleep-service-active
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: deep-sleep
+
+Test
+: autosleep-service-active
+
+Outcome
+: pass
+
+Detail
+: devlab-usb-awake.service: active
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-bluetooth-bt-no-irq-storm"></a>
+### 20261118-184720-bluetooth-bt-no-irq-storm
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: bluetooth
+
+Test
+: bt-no-irq-storm
+
+Outcome
+: pass
+
+Detail
+: irq 157 'nobody cared' 0 time(s) since boot
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-bluetooth-bt-no-controller-crash"></a>
+### 20261118-184720-bluetooth-bt-no-controller-crash
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: bluetooth
+
+Test
+: bt-no-controller-crash
+
+Outcome
+: pass
+
+Detail
+: controller crash or qca_suspend timeout lines: 0
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-bluetooth-bt-hci0-up"></a>
+### 20261118-184720-bluetooth-bt-hci0-up
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: bluetooth
+
+Test
+: bt-hci0-up
+
+Outcome
+: pass
+
+Detail
+: BD Address: 02:00:91:49:D6:81  ACL MTU: 1024:7  SCO MTU: 60:8
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-bluetooth-bt-rfkill-not-stuck"></a>
+### 20261118-184720-bluetooth-bt-rfkill-not-stuck
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: bluetooth
+
+Test
+: bt-rfkill-not-stuck
+
+Outcome
+: pass
+
+Detail
+: rfkill processes in D state: 0
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-bluetooth-bt-serial-wakeup-on"></a>
+### 20261118-184720-bluetooth-bt-serial-wakeup-on
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: bluetooth
+
+Test
+: bt-serial-wakeup-on
+
+Outcome
+: pass
+
+Detail
+: 88c000.serial power/wakeup: enabled (the way-back test switch must not be left off)
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-modem-calls-call-audio-path"></a>
+### 20261118-184720-modem-calls-call-audio-path
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: modem-calls
+
+Test
+: call-audio-path
+
+Outcome
+: pass
+
+Detail
+: the VoiceMMode1 PCM, its routing controls and q6voiced are there
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-audio-mic-mic-records"></a>
+### 20261118-184720-audio-mic-mic-records
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-mic
+
+Test
+: mic-records
+
+Outcome
+: pass
+
+Detail
+: 24000 samples of the last 0.5 s from 00-01, from -717 to 794 (digital silence: 0 to 0)
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-audio-speaker-default-output"></a>
+### 20261118-184720-audio-speaker-default-output
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-speaker
+
+Test
+: default-output
+
+Outcome
+: pass
+
+Detail
+: alsa_output.platform-sound.HiFi__Speaker__sink
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-audio-earpiece-earpiece-heard"></a>
+### 20261118-184720-audio-earpiece-earpiece-heard
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-earpiece
+
+Test
+: earpiece-heard
+
+Outcome
+: pass
+
+Detail
+: 1 kHz at -6 dBFS, volume 40%, mono through the Earpiece (played: yes): the top mic heard it at -24.4 dBFS against -79.4 dBFS of noise beside it, 43200 samples
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-audio-mic-mic-hears-speaker"></a>
+### 20261118-184720-audio-mic-mic-hears-speaker
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-mic
+
+Test
+: mic-hears-speaker
+
+Outcome
+: pass
+
+Detail
+: bottom mic through the sound server; 1 kHz at -6 dBFS, volume 20% (played: yes): heard at -18.0 dBFS against -80.7 dBFS of noise beside it, 141119 samples
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-audio-mic-mic-top-hears-speaker"></a>
+### 20261118-184720-audio-mic-mic-top-hears-speaker
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-mic
+
+Test
+: mic-top-hears-speaker
+
+Outcome
+: pass
+
+Detail
+: top mic through the sound server; 1 kHz at -6 dBFS, volume 20% (played: yes): heard at -29.6 dBFS against -81.5 dBFS of noise beside it, 141119 samples
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-audio-speaker-speaker-stereo"></a>
+### 20261118-184720-audio-speaker-speaker-stereo
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-speaker
+
+Test
+: speaker-stereo
+
+Outcome
+: pass
+
+Detail
+: alsa_output.platform-sound.HiFi__Speaker__sink: s16le 2ch 48000Hz
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-modem-data-mobile-data"></a>
+### 20261118-184720-modem-data-mobile-data
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: modem-data
+
+Test
+: mobile-data
+
+Outcome
+: skip
+
+Detail
+: no SIM card
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-modem-calls-call-echo"></a>
+### 20261118-184720-modem-calls-call-echo
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: modem-calls
+
+Test
+: call-echo
+
+Outcome
+: skip
+
+Detail
+: no SIM card
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-184720-modem-sms-sms-loopback"></a>
+### 20261118-184720-modem-sms-sms-loopback
+
+Run
+: 20261118-184720
+
+Device id
+: xiaomi-surya
+
+Component id
+: modem-sms
+
+Test
+: sms-loopback
+
+Outcome
+: skip
+
+Detail
+: no SIM card
+
+Run at
+: 2026-11-18 18:47:20
+
+Kernel
+: 7.1.0-sm7150-pmicwdt
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-kernel-root-fills-its-partition"></a>
+### 20261118-185106-kernel-root-fills-its-partition
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: kernel
+
+Test
+: root-fills-its-partition
+
+Outcome
+: pass
+
+Detail
+: the system is 101 GB on a partition of 104 GB
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-kernel-root-has-room"></a>
+### 20261118-185106-kernel-root-has-room
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: kernel
+
+Test
+: root-has-room
+
+Outcome
+: pass
+
+Detail
+: / is 3% full
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-kernel-root-writable"></a>
+### 20261118-185106-kernel-root-writable
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: kernel
+
+Test
+: root-writable
+
+Outcome
+: pass
+
+Detail
+: writing a file under /var
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-kernel-no-oops"></a>
+### 20261118-185106-kernel-no-oops
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: kernel
+
+Test
+: no-oops
+
+Outcome
+: pass
+
+Detail
+: 0 oops, BUG or panic lines this boot
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-kernel-boot-warnings"></a>
+### 20261118-185106-kernel-boot-warnings
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: kernel
+
+Test
+: boot-warnings
+
+Outcome
+: pass
+
+Detail
+: 3 warnings, all known
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-kernel-no-processor-crashes"></a>
+### 20261118-185106-kernel-no-processor-crashes
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: kernel
+
+Test
+: no-processor-crashes
+
+Outcome
+: pass
+
+Detail
+: no signal processor crashed this boot
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-kernel-no-failed-units"></a>
+### 20261118-185106-kernel-no-failed-units
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: kernel
+
+Test
+: no-failed-units
+
+Outcome
+: pass
+
+Detail
+: no unit failed but the known: qbootctl.service
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-audio-speaker-adsp-running"></a>
+### 20261118-185106-audio-speaker-adsp-running
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-speaker
+
+Test
+: adsp-running
+
+Outcome
+: pass
+
+Detail
+: adsp: running
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-kernel-cdsp-running"></a>
+### 20261118-185106-kernel-cdsp-running
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: kernel
+
+Test
+: cdsp-running
+
+Outcome
+: pass
+
+Detail
+: cdsp: running
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-modem-data-modem-running"></a>
+### 20261118-185106-modem-data-modem-running
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: modem-data
+
+Test
+: modem-running
+
+Outcome
+: pass
+
+Detail
+: modem: running
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-audio-speaker-sound-card"></a>
+### 20261118-185106-audio-speaker-sound-card
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-speaker
+
+Test
+: sound-card
+
+Outcome
+: pass
+
+Detail
+: 'POCO X3' in /proc/asound/cards: 2 cards registered
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-wifi-wifi-interface"></a>
+### 20261118-185106-wifi-wifi-interface
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: wifi
+
+Test
+: wifi-interface
+
+Outcome
+: pass
+
+Detail
+: interface wlan0
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-wifi-wifi-connected"></a>
+### 20261118-185106-wifi-wifi-connected
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: wifi
+
+Test
+: wifi-connected
+
+Outcome
+: pass
+
+Detail
+: wlan0 up, address 192.168.178.182/24
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-wifi-wifi-reaches-gateway"></a>
+### 20261118-185106-wifi-wifi-reaches-gateway
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: wifi
+
+Test
+: wifi-reaches-gateway
+
+Outcome
+: pass
+
+Detail
+: gateway 192.168.178.1
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-modem-data-modem-seen"></a>
+### 20261118-185106-modem-data-modem-seen
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: modem-data
+
+Test
+: modem-seen
+
+Outcome
+: pass
+
+Detail
+: ModemManager: /Modem/0
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-modem-data-modem-registered"></a>
+### 20261118-185106-modem-data-modem-registered
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: modem-data
+
+Test
+: modem-registered
+
+Outcome
+: skip
+
+Detail
+: no SIM card (modem state: failed, sim-missing)
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-bluetooth-bt-controller"></a>
+### 20261118-185106-bluetooth-bt-controller
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: bluetooth
+
+Test
+: bt-controller
+
+Outcome
+: pass
+
+Detail
+: hci0
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-bluetooth-bt-powered"></a>
+### 20261118-185106-bluetooth-bt-powered
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: bluetooth
+
+Test
+: bt-powered
+
+Outcome
+: pass
+
+Detail
+: adapter powered: yes
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-display-panel-panel-connected"></a>
+### 20261118-185106-display-panel-panel-connected
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: display-panel
+
+Test
+: panel-connected
+
+Outcome
+: pass
+
+Detail
+: panel: connected
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-display-panel-backlight"></a>
+### 20261118-185106-display-panel-backlight
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: display-panel
+
+Test
+: backlight
+
+Outcome
+: pass
+
+Detail
+: brightness 2048
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-touchscreen-touch-device"></a>
+### 20261118-185106-touchscreen-touch-device
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: touchscreen
+
+Test
+: touch-device
+
+Outcome
+: pass
+
+Detail
+: "Novatek NT36XXX Touchscreen"
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-haptics-vibrator"></a>
+### 20261118-185106-haptics-vibrator
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: haptics
+
+Test
+: vibrator
+
+Outcome
+: pass
+
+Detail
+: "aw8695-haptics"
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-nfc-nfc-device"></a>
+### 20261118-185106-nfc-nfc-device
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: nfc
+
+Test
+: nfc-device
+
+Outcome
+: pass
+
+Detail
+: nfc0
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-usb-otg-usb-role"></a>
+### 20261118-185106-usb-otg-usb-role
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: usb-otg
+
+Test
+: usb-role
+
+Outcome
+: pass
+
+Detail
+: a600000.usb-role-switch
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-audio-headphone-jack-detector"></a>
+### 20261118-185106-audio-headphone-jack-detector
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-headphone
+
+Test
+: jack-detector
+
+Outcome
+: pass
+
+Detail
+: headset jack detectors: 1 (sound through it is a witnessed test)
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-fingerprint-reader-exposed"></a>
+### 20261118-185106-fingerprint-reader-exposed
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: fingerprint
+
+Test
+: reader-exposed
+
+Outcome
+: fail
+
+Detail
+: fingerprint reader devices: 0
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-camera-rear-image-sensor"></a>
+### 20261118-185106-camera-rear-image-sensor
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: camera-rear
+
+Test
+: image-sensor
+
+Outcome
+: fail
+
+Detail
+: image sensors bound: 0
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-camera-front-image-sensor"></a>
+### 20261118-185106-camera-front-image-sensor
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: camera-front
+
+Test
+: image-sensor
+
+Outcome
+: fail
+
+Detail
+: image sensors bound: 0
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-usb-otg-usb-awake"></a>
+### 20261118-185106-usb-otg-usb-awake
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: usb-otg
+
+Test
+: usb-awake
+
+Outcome
+: pass
+
+Detail
+: on USB to a host; wake locks: devlab-usb sxmo_modem_warming_up sxmo_not_suspendable
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-sensors-motion-and-light"></a>
+### 20261118-185106-sensors-motion-and-light
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: sensors
+
+Test
+: motion-and-light
+
+Outcome
+: pass
+
+Detail
+: IIO sensors: 0 (voltage meters not counted); through iio-sensor-proxy: Accelerometer AmbientLight Proximity
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-sensors-proximity-reads"></a>
+### 20261118-185106-sensors-proximity-reads
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: sensors
+
+Test
+: proximity-reads
+
+Outcome
+: pass
+
+Detail
+: proximity sensor through iio-sensor-proxy: near: 0
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-deep-sleep-soc-sleeps"></a>
+### 20261118-185106-deep-sleep-soc-sleeps
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: deep-sleep
+
+Test
+: soc-sleeps
+
+Outcome
+: skip
+
+Detail
+: not measured: the phone has not suspended this boot; cxsd 0, aosd 0; suspends this boot: 0; processors never asleep: adsp; wake locks: devlab-usb sxmo_modem_warming_up sxmo_not_suspendable
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-deep-sleep-suspend-irq-quiet"></a>
+### 20261118-185106-deep-sleep-suspend-irq-quiet
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: deep-sleep
+
+Test
+: suspend-irq-quiet
+
+Outcome
+: skip
+
+Detail
+: not measured: no threshold in the manifest ([health] suspend_irq_max), and none is guessed
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-audio-speaker-amp-channels"></a>
+### 20261118-185106-audio-speaker-amp-channels
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-speaker
+
+Test
+: amp-channels
+
+Outcome
+: pass
+
+Detail
+: Item0: 'Left' / Item0: 'Right'
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-audio-speaker-amp-volume-0x4c"></a>
+### 20261118-185106-audio-speaker-amp-volume-0x4c
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-speaker
+
+Test
+: amp-volume-0x4c
+
+Outcome
+: pass
+
+Detail
+: chip 0x4c digital volume high byte 0x40 (0x00: -110 dB, silent)
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-audio-speaker-amp-volume-0x4d"></a>
+### 20261118-185106-audio-speaker-amp-volume-0x4d
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-speaker
+
+Test
+: amp-volume-0x4d
+
+Outcome
+: pass
+
+Detail
+: chip 0x4d digital volume high byte 0x40 (0x00: -110 dB, silent)
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-deep-sleep-autosleep-wakelock-held"></a>
+### 20261118-185106-deep-sleep-autosleep-wakelock-held
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: deep-sleep
+
+Test
+: autosleep-wakelock-held
+
+Outcome
+: pass
+
+Detail
+: wake lock devlab-usb in /sys/power/wake_lock: devlab-usb sxmo_modem_warming_up sxmo_not_suspendable
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-deep-sleep-autosleep-service-active"></a>
+### 20261118-185106-deep-sleep-autosleep-service-active
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: deep-sleep
+
+Test
+: autosleep-service-active
+
+Outcome
+: pass
+
+Detail
+: devlab-usb-awake.service: active
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-bluetooth-bt-no-irq-storm"></a>
+### 20261118-185106-bluetooth-bt-no-irq-storm
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: bluetooth
+
+Test
+: bt-no-irq-storm
+
+Outcome
+: pass
+
+Detail
+: irq 157 'nobody cared' 0 time(s) since boot
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-bluetooth-bt-no-controller-crash"></a>
+### 20261118-185106-bluetooth-bt-no-controller-crash
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: bluetooth
+
+Test
+: bt-no-controller-crash
+
+Outcome
+: pass
+
+Detail
+: controller crash or qca_suspend timeout lines: 0
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-bluetooth-bt-hci0-up"></a>
+### 20261118-185106-bluetooth-bt-hci0-up
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: bluetooth
+
+Test
+: bt-hci0-up
+
+Outcome
+: pass
+
+Detail
+: BD Address: 02:00:91:49:D6:81  ACL MTU: 1024:7  SCO MTU: 60:8
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-bluetooth-bt-rfkill-not-stuck"></a>
+### 20261118-185106-bluetooth-bt-rfkill-not-stuck
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: bluetooth
+
+Test
+: bt-rfkill-not-stuck
+
+Outcome
+: pass
+
+Detail
+: rfkill processes in D state: 0
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-bluetooth-bt-serial-wakeup-on"></a>
+### 20261118-185106-bluetooth-bt-serial-wakeup-on
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: bluetooth
+
+Test
+: bt-serial-wakeup-on
+
+Outcome
+: pass
+
+Detail
+: 88c000.serial power/wakeup: enabled (the way-back test switch must not be left off)
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-modem-calls-call-audio-path"></a>
+### 20261118-185106-modem-calls-call-audio-path
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: modem-calls
+
+Test
+: call-audio-path
+
+Outcome
+: pass
+
+Detail
+: the VoiceMMode1 PCM, its routing controls and q6voiced are there
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-audio-mic-mic-records"></a>
+### 20261118-185106-audio-mic-mic-records
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-mic
+
+Test
+: mic-records
+
+Outcome
+: pass
+
+Detail
+: 24000 samples of the last 0.5 s from 00-01, from -1183 to 629 (digital silence: 0 to 0)
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-audio-speaker-default-output"></a>
+### 20261118-185106-audio-speaker-default-output
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-speaker
+
+Test
+: default-output
+
+Outcome
+: pass
+
+Detail
+: alsa_output.platform-sound.HiFi__Speaker__sink
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-audio-earpiece-earpiece-heard"></a>
+### 20261118-185106-audio-earpiece-earpiece-heard
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-earpiece
+
+Test
+: earpiece-heard
+
+Outcome
+: pass
+
+Detail
+: 1 kHz at -6 dBFS, volume 40%, mono through the Earpiece (played: yes): the top mic heard it at -24.9 dBFS against -77.0 dBFS of noise beside it, 43200 samples
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-audio-mic-mic-hears-speaker"></a>
+### 20261118-185106-audio-mic-mic-hears-speaker
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-mic
+
+Test
+: mic-hears-speaker
+
+Outcome
+: pass
+
+Detail
+: bottom mic through the sound server; 1 kHz at -6 dBFS, volume 20% (played: yes): heard at -18.3 dBFS against -84.6 dBFS of noise beside it, 141119 samples
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-audio-mic-mic-top-hears-speaker"></a>
+### 20261118-185106-audio-mic-mic-top-hears-speaker
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-mic
+
+Test
+: mic-top-hears-speaker
+
+Outcome
+: pass
+
+Detail
+: top mic through the sound server; 1 kHz at -6 dBFS, volume 20% (played: yes): heard at -29.9 dBFS against -83.5 dBFS of noise beside it, 141119 samples
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-audio-speaker-speaker-stereo"></a>
+### 20261118-185106-audio-speaker-speaker-stereo
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-speaker
+
+Test
+: speaker-stereo
+
+Outcome
+: pass
+
+Detail
+: alsa_output.platform-sound.HiFi__Speaker__sink: s16le 2ch 48000Hz
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-modem-data-mobile-data"></a>
+### 20261118-185106-modem-data-mobile-data
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: modem-data
+
+Test
+: mobile-data
+
+Outcome
+: skip
+
+Detail
+: no SIM card
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-modem-calls-call-echo"></a>
+### 20261118-185106-modem-calls-call-echo
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: modem-calls
+
+Test
+: call-echo
+
+Outcome
+: skip
+
+Detail
+: no SIM card
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-185106-modem-sms-sms-loopback"></a>
+### 20261118-185106-modem-sms-sms-loopback
+
+Run
+: 20261118-185106
+
+Device id
+: xiaomi-surya
+
+Component id
+: modem-sms
+
+Test
+: sms-loopback
+
+Outcome
+: skip
+
+Detail
+: no SIM card
+
+Run at
+: 2026-11-18 18:51:06
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-kernel-root-fills-its-partition"></a>
+### 20261118-191339-kernel-root-fills-its-partition
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: kernel
+
+Test
+: root-fills-its-partition
+
+Outcome
+: pass
+
+Detail
+: the system is 101 GB on a partition of 104 GB
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-kernel-root-has-room"></a>
+### 20261118-191339-kernel-root-has-room
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: kernel
+
+Test
+: root-has-room
+
+Outcome
+: pass
+
+Detail
+: / is 4% full
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-kernel-root-writable"></a>
+### 20261118-191339-kernel-root-writable
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: kernel
+
+Test
+: root-writable
+
+Outcome
+: pass
+
+Detail
+: writing a file under /var
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-kernel-no-oops"></a>
+### 20261118-191339-kernel-no-oops
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: kernel
+
+Test
+: no-oops
+
+Outcome
+: pass
+
+Detail
+: 0 oops, BUG or panic lines this boot
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-kernel-boot-warnings"></a>
+### 20261118-191339-kernel-boot-warnings
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: kernel
+
+Test
+: boot-warnings
+
+Outcome
+: pass
+
+Detail
+: 3 warnings, all known
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-kernel-no-processor-crashes"></a>
+### 20261118-191339-kernel-no-processor-crashes
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: kernel
+
+Test
+: no-processor-crashes
+
+Outcome
+: pass
+
+Detail
+: no signal processor crashed this boot
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-kernel-no-failed-units"></a>
+### 20261118-191339-kernel-no-failed-units
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: kernel
+
+Test
+: no-failed-units
+
+Outcome
+: pass
+
+Detail
+: no unit failed but the known: qbootctl.service
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-audio-speaker-adsp-running"></a>
+### 20261118-191339-audio-speaker-adsp-running
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-speaker
+
+Test
+: adsp-running
+
+Outcome
+: pass
+
+Detail
+: adsp: running
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-kernel-cdsp-running"></a>
+### 20261118-191339-kernel-cdsp-running
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: kernel
+
+Test
+: cdsp-running
+
+Outcome
+: pass
+
+Detail
+: cdsp: running
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-modem-data-modem-running"></a>
+### 20261118-191339-modem-data-modem-running
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: modem-data
+
+Test
+: modem-running
+
+Outcome
+: pass
+
+Detail
+: modem: running
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-audio-speaker-sound-card"></a>
+### 20261118-191339-audio-speaker-sound-card
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-speaker
+
+Test
+: sound-card
+
+Outcome
+: fail
+
+Detail
+: 'POCO X3' in /proc/asound/cards: 1 cards registered
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-wifi-wifi-interface"></a>
+### 20261118-191339-wifi-wifi-interface
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: wifi
+
+Test
+: wifi-interface
+
+Outcome
+: pass
+
+Detail
+: interface wlan0
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-wifi-wifi-connected"></a>
+### 20261118-191339-wifi-wifi-connected
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: wifi
+
+Test
+: wifi-connected
+
+Outcome
+: pass
+
+Detail
+: wlan0 up, address 192.168.178.182/24
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-wifi-wifi-reaches-gateway"></a>
+### 20261118-191339-wifi-wifi-reaches-gateway
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: wifi
+
+Test
+: wifi-reaches-gateway
+
+Outcome
+: pass
+
+Detail
+: gateway 192.168.178.1
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-modem-data-modem-seen"></a>
+### 20261118-191339-modem-data-modem-seen
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: modem-data
+
+Test
+: modem-seen
+
+Outcome
+: pass
+
+Detail
+: ModemManager: /Modem/0
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-modem-data-modem-registered"></a>
+### 20261118-191339-modem-data-modem-registered
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: modem-data
+
+Test
+: modem-registered
+
+Outcome
+: skip
+
+Detail
+: no SIM card (modem state: failed, sim-missing)
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-bluetooth-bt-controller"></a>
+### 20261118-191339-bluetooth-bt-controller
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: bluetooth
+
+Test
+: bt-controller
+
+Outcome
+: pass
+
+Detail
+: hci0
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-bluetooth-bt-powered"></a>
+### 20261118-191339-bluetooth-bt-powered
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: bluetooth
+
+Test
+: bt-powered
+
+Outcome
+: pass
+
+Detail
+: adapter powered: yes
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-display-panel-panel-connected"></a>
+### 20261118-191339-display-panel-panel-connected
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: display-panel
+
+Test
+: panel-connected
+
+Outcome
+: pass
+
+Detail
+: panel: connected
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-display-panel-backlight"></a>
+### 20261118-191339-display-panel-backlight
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: display-panel
+
+Test
+: backlight
+
+Outcome
+: pass
+
+Detail
+: brightness 2048
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-touchscreen-touch-device"></a>
+### 20261118-191339-touchscreen-touch-device
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: touchscreen
+
+Test
+: touch-device
+
+Outcome
+: pass
+
+Detail
+: "Novatek NT36XXX Touchscreen"
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-haptics-vibrator"></a>
+### 20261118-191339-haptics-vibrator
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: haptics
+
+Test
+: vibrator
+
+Outcome
+: pass
+
+Detail
+: "aw8695-haptics"
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-nfc-nfc-device"></a>
+### 20261118-191339-nfc-nfc-device
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: nfc
+
+Test
+: nfc-device
+
+Outcome
+: pass
+
+Detail
+: nfc0
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-usb-otg-usb-role"></a>
+### 20261118-191339-usb-otg-usb-role
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: usb-otg
+
+Test
+: usb-role
+
+Outcome
+: pass
+
+Detail
+: a600000.usb-role-switch
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-audio-headphone-jack-detector"></a>
+### 20261118-191339-audio-headphone-jack-detector
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-headphone
+
+Test
+: jack-detector
+
+Outcome
+: fail
+
+Detail
+: headset jack detectors: 0 (sound through it is a witnessed test)
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-fingerprint-reader-exposed"></a>
+### 20261118-191339-fingerprint-reader-exposed
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: fingerprint
+
+Test
+: reader-exposed
+
+Outcome
+: fail
+
+Detail
+: fingerprint reader devices: 0
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-camera-rear-image-sensor"></a>
+### 20261118-191339-camera-rear-image-sensor
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: camera-rear
+
+Test
+: image-sensor
+
+Outcome
+: fail
+
+Detail
+: image sensors bound: 0
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-camera-front-image-sensor"></a>
+### 20261118-191339-camera-front-image-sensor
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: camera-front
+
+Test
+: image-sensor
+
+Outcome
+: fail
+
+Detail
+: image sensors bound: 0
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-usb-otg-usb-awake"></a>
+### 20261118-191339-usb-otg-usb-awake
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: usb-otg
+
+Test
+: usb-awake
+
+Outcome
+: pass
+
+Detail
+: on USB to a host; wake locks: devlab-usb sxmo_modem_warming_up sxmo_not_suspendable
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-sensors-motion-and-light"></a>
+### 20261118-191339-sensors-motion-and-light
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: sensors
+
+Test
+: motion-and-light
+
+Outcome
+: fail
+
+Detail
+: IIO sensors: 0 (voltage meters not counted); through iio-sensor-proxy: none
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-sensors-proximity-reads"></a>
+### 20261118-191339-sensors-proximity-reads
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: sensors
+
+Test
+: proximity-reads
+
+Outcome
+: fail
+
+Detail
+: no proximity sensor exposed (iio-sensor-proxy has none)
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-deep-sleep-soc-sleeps"></a>
+### 20261118-191339-deep-sleep-soc-sleeps
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: deep-sleep
+
+Test
+: soc-sleeps
+
+Outcome
+: skip
+
+Detail
+: not measured: the phone has not suspended this boot; cxsd 0, aosd 0; suspends this boot: 0; processors never asleep: none; wake locks: devlab-usb sxmo_modem_warming_up sxmo_not_suspendable
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-deep-sleep-suspend-irq-quiet"></a>
+### 20261118-191339-deep-sleep-suspend-irq-quiet
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: deep-sleep
+
+Test
+: suspend-irq-quiet
+
+Outcome
+: skip
+
+Detail
+: not measured: no threshold in the manifest ([health] suspend_irq_max), and none is guessed
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-audio-speaker-amp-channels"></a>
+### 20261118-191339-audio-speaker-amp-channels
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-speaker
+
+Test
+: amp-channels
+
+Outcome
+: fail
+
+Detail
+: /
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-audio-speaker-amp-volume-0x4c"></a>
+### 20261118-191339-audio-speaker-amp-volume-0x4c
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-speaker
+
+Test
+: amp-volume-0x4c
+
+Outcome
+: pass
+
+Detail
+: chip 0x4c digital volume high byte 0x40 (0x00: -110 dB, silent)
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-audio-speaker-amp-volume-0x4d"></a>
+### 20261118-191339-audio-speaker-amp-volume-0x4d
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-speaker
+
+Test
+: amp-volume-0x4d
+
+Outcome
+: pass
+
+Detail
+: chip 0x4d digital volume high byte 0x40 (0x00: -110 dB, silent)
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-deep-sleep-autosleep-wakelock-held"></a>
+### 20261118-191339-deep-sleep-autosleep-wakelock-held
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: deep-sleep
+
+Test
+: autosleep-wakelock-held
+
+Outcome
+: pass
+
+Detail
+: wake lock devlab-usb in /sys/power/wake_lock: devlab-usb sxmo_modem_warming_up sxmo_not_suspendable
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-deep-sleep-autosleep-service-active"></a>
+### 20261118-191339-deep-sleep-autosleep-service-active
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: deep-sleep
+
+Test
+: autosleep-service-active
+
+Outcome
+: pass
+
+Detail
+: devlab-usb-awake.service: active
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-bluetooth-bt-no-irq-storm"></a>
+### 20261118-191339-bluetooth-bt-no-irq-storm
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: bluetooth
+
+Test
+: bt-no-irq-storm
+
+Outcome
+: pass
+
+Detail
+: irq 157 'nobody cared' 0 time(s) since boot
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-bluetooth-bt-no-controller-crash"></a>
+### 20261118-191339-bluetooth-bt-no-controller-crash
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: bluetooth
+
+Test
+: bt-no-controller-crash
+
+Outcome
+: pass
+
+Detail
+: controller crash or qca_suspend timeout lines: 0
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-bluetooth-bt-hci0-up"></a>
+### 20261118-191339-bluetooth-bt-hci0-up
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: bluetooth
+
+Test
+: bt-hci0-up
+
+Outcome
+: pass
+
+Detail
+: BD Address: 02:00:91:49:D6:81  ACL MTU: 1024:7  SCO MTU: 60:8
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-bluetooth-bt-rfkill-not-stuck"></a>
+### 20261118-191339-bluetooth-bt-rfkill-not-stuck
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: bluetooth
+
+Test
+: bt-rfkill-not-stuck
+
+Outcome
+: pass
+
+Detail
+: rfkill processes in D state: 0
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-bluetooth-bt-serial-wakeup-on"></a>
+### 20261118-191339-bluetooth-bt-serial-wakeup-on
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: bluetooth
+
+Test
+: bt-serial-wakeup-on
+
+Outcome
+: pass
+
+Detail
+: 88c000.serial power/wakeup: enabled (the way-back test switch must not be left off)
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-modem-calls-call-audio-path"></a>
+### 20261118-191339-modem-calls-call-audio-path
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: modem-calls
+
+Test
+: call-audio-path
+
+Outcome
+: fail
+
+Detail
+: the DSP's voice path is missing (is q6voice in this kernel?), no VoiceMMode1 PCM, no control 'TERT_MI2S_RX Voice Mixer VoiceMMode1', no control 'VoiceMMode1 Capture Mixer TX_CODEC_DMA_TX_3'
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-audio-mic-mic-records"></a>
+### 20261118-191339-audio-mic-mic-records
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-mic
+
+Test
+: mic-records
+
+Outcome
+: fail
+
+Detail
+: no microphone route: the codec's TX controls (TX DEC0 MUX) are missing
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-audio-speaker-default-output"></a>
+### 20261118-191339-audio-speaker-default-output
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-speaker
+
+Test
+: default-output
+
+Outcome
+: fail
+
+Detail
+: the default output is alsa_output.platform-snd_aloop.0.analog-stereo
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-audio-earpiece-earpiece-heard"></a>
+### 20261118-191339-audio-earpiece-earpiece-heard
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-earpiece
+
+Test
+: earpiece-heard
+
+Outcome
+: fail
+
+Detail
+: the card has no HiFi (Earpiece, TopMic) profile: the UCM profile has no Earpiece
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-audio-mic-mic-hears-speaker"></a>
+### 20261118-191339-audio-mic-mic-hears-speaker
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-mic
+
+Test
+: mic-hears-speaker
+
+Outcome
+: fail
+
+Detail
+: the default source is alsa_input.platform-snd_aloop.0.analog-stereo, not the UCM profile's Mic
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-audio-speaker-speaker-stereo"></a>
+### 20261118-191339-audio-speaker-speaker-stereo
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: audio-speaker
+
+Test
+: speaker-stereo
+
+Outcome
+: fail
+
+Detail
+: no HiFi Speaker sink: the UCM profile is not in use
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-modem-data-mobile-data"></a>
+### 20261118-191339-modem-data-mobile-data
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: modem-data
+
+Test
+: mobile-data
+
+Outcome
+: skip
+
+Detail
+: no SIM card
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-modem-calls-call-echo"></a>
+### 20261118-191339-modem-calls-call-echo
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: modem-calls
+
+Test
+: call-echo
+
+Outcome
+: skip
+
+Detail
+: no SIM card
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+
+<a id="20261118-191339-modem-sms-sms-loopback"></a>
+### 20261118-191339-modem-sms-sms-loopback
+
+Run
+: 20261118-191339
+
+Device id
+: xiaomi-surya
+
+Component id
+: modem-sms
+
+Test
+: sms-loopback
+
+Outcome
+: skip
+
+Detail
+: no SIM card
+
+Run at
+: 2026-11-18 19:13:39
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
