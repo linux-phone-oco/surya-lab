@@ -1159,3 +1159,31 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-18-resume-stall-how-it-stands"></a>
+### 2026-11-18-resume-stall-how-it-stands
+
+Date
+: 2026-11-18
+
+Brief
+: The resume stall follows an ADSP crash (sensor_process) 3 s after resume with audio up; the wcd9370 -16 flood is a symptom, CPU1 is stuck, a bite cannot come, an RCU-stall panic can
+
+Question
+: Why does a resume from s2idle stall CPU1 (wcd9370 / ADSP resume errors, RCU stalls for minutes, no reset), and what is the way back and the way past it?
+
+Found
+: Read from the pstore console of the 12:57 cycle (saved in material, console-ramoops-0.txt; a read of the phone, nothing changed).
+ORDER: 2507.9 'watchdog did not stop!' (suspend entry) -> 2510.0 resume, HS-PHY 'not in L2' -> 2510.45 the ADSP CRASHES: 'fatal error ... sensor_process:0x1:frpc_dsp:0xc9:PC=0xb2051d18' -> remoteproc recovers adsp -> q6afe 'packet not transmitted (-5)', va_macro 'unable to prepare mclk' -> wcd9370 'IRQ sync failed to resume: -16' x20 within 150 ms -> ASoC card 'failed to instantiate -16' -> q6v5_pas 'Handover signaled' x5 -> 2538.4 'watchdog0: pretimeout event' (the qcom_wdt bark) -> 2560 RCU: CPU1 '(1 GPs behind) idle=af5c/1/...' i.e. CPU1 is NOT idle and runs nothing, reported by CPUs 5/3/0 every ~75 s, console alive 4+ min, no Oops, no reset.
+READ: (1) The stall is not in the resume of the codec: the resume itself was clean; what breaks it is the ADSP's crash right after, which came because the way-back cycle ran WITHOUT stop-sensors (sensorspd attached; research 2026-11-18-sensorspd-stopped-no-adsp-crash: 3 of 3 cycles with it stopped crashed nothing). (2) '-16' is regmap_irq_sync_unlock's pm_runtime_get_sync failing (source): the codec's parent chain (soundwire controller, LPASS macros, which need the ADSP's clocks) is down during the ADSP's recovery - a symptom, 20 times. (3) CPU1 stuck while others run, not idle, with the LPASS clocks gone: the likely shape is a CPU blocked on an access to an unclocked LPASS register (soundwire controller 62ed0000 / macros 62f20000) - not proven: arm64 has no backtrace of a stuck CPU without pseudo-NMI, and the stall report prints none. (4) Mainline offers nothing for it: wcd937x's runtime resume is a regcache sync only and the pas driver recovers the ADSP while the audio drivers stay bound (sources); no mainline phone with wcd937x was found to report or fix the same, and it is not reported for sm8250/sc7280 either - they are not sleeping with the ADSP crashing. (5) WAY BACK: the SoC watchdog bark came (pretimeout event) but this kernel has no pretimeout governor (CONFIG_WATCHDOG_PRETIMEOUT_GOV not set; read from /proc/config.gz) so nothing acted on it, and qcom_wdt's bite did not come with the system half alive. The kernel itself noticed the stall, 22 s after the bark: kernel.panic_on_rcu_stall=1 makes that notice a panic, and kernel.panic (now 120 s) a reboot; ramoops (4 MiB, survived) keeps the panic. Both are sysctl, no kernel change. Not covered: a hang of ALL CPUs (try 4 left no trace at all): that is the PMIC watchdog's (backlog surya-kernel-pmic-wdt).
+UNKNOWNS: whether the panic path completes with CPU1 stuck (smp_send_stop times out, then PSCI reset); whether try 4's hang was the same shape (no console kept); what exactly CPU1 waits on.
+
+Sources
+: src-regmap-irq-sync-unlock,src-wcd937x-sdw-runtime-pm,src-q6v5-pas-adsp-ssr
+
+About
+: deep-sleep
+
+Material
+: research/deep-sleep/2026-11-18-resume-stall/

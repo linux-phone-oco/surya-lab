@@ -674,3 +674,34 @@ About
 
 Research
 : 2026-11-18-bt-suspend-how-it-stands
+
+
+<a id="2026-11-18-resume-stall-way"></a>
+### 2026-11-18-resume-stall-way
+
+Date
+: 2026-11-18
+
+Brief
+: A stalled resume gets a way back by sysctl (panic_on_rcu_stall, panic=5, ramoops) first; the cause is shut out by stopping the ADSP's clients across a suspend; the PMIC watchdog covers a total hang
+
+Decision
+: Three layers. (1) WAY BACK, no kernel change: kernel.panic_on_rcu_stall=1 and kernel.panic=5 (sysctl.d on the phone), so a stalled CPU1 ends in a panic that ramoops keeps and a reboot in about 30 s; proven by an ATTENDED repro (way-back.sh cycle 15 probe without stop-sensors, the known ADSP-crash cycle) reading back the pstore dmesg: the stall's stack at last. (2) CAUSE SHUT OUT: a suspend never leaves the ADSP a client that crashes it: stop sensorspd and the other FastRPC helpers before, start after (measured 3 of 3 cycles, no crash); the sleep hook must also restart them after a real systemctl suspend. If the repro in (1) shows CPU1 on an LPASS access, also stop the audio stack (card, then macros) before the sleep. (3) TOTAL HANG: the PMIC watchdog (surya-kernel-pmic-wdt, surya-pmic-wdt-proof) stays queued, after (1) is read.
+
+Why
+: Research 2026-11-18-resume-stall-how-it-stands: the console shows the order ADSP crash (sensor_process) -> wcd9370 -16 flood -> stuck CPU1; the kernel's own RCU detector fired 22 s after the SoC bark while the console lived 4+ min, so a panic on that signal is within reach with sysctl only, the cheapest certain progress, and it also yields the stack nobody has. The cause (sensorspd attached) is already measured away. Cost: about 2 agent-hours plus one attended cycle.
+
+Rejected
+: Pretimeout panic governor: needs CONFIG_WATCHDOG_PRETIMEOUT_GOV (not set), a kernel build, for what panic_on_rcu_stall does today; kept as a later hardening. Fix the wcd9370/soundwire resume in the kernel first: the -16 is a symptom of the ADSP's recovery, mainline has no handling and no peer reports it; a large upstream piece with the cause unread. Pseudo-NMI backtrace kernel: would show CPU1 but is a kernel change for one fact the panic path may give free. qcom_wdt bite as the way back: it did not come with the system half alive (try 4, this one). Unbinding the codec around each suspend alone: leaves the ADSP crash, which still hurts sensors.
+
+About
+: deep-sleep
+
+Research
+: 2026-11-18-resume-stall-how-it-stands
+
+Amends
+: 2026-11-17-deep-sleep-way-back
+
+Tracked by
+: resume-stall-way-back
