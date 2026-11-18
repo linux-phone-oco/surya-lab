@@ -1503,3 +1503,28 @@ Proof
 
 Rank
 : 4
+
+
+<a id="surya-unreachable-after-suspend"></a>
+### surya unreachable after a real systemctl suspend: the author's power cycle, then the cause
+
+Status
+: open
+
+Note
+: Phone work is PARKED until it answers. When it does: read pstore/ramoops and journalctl -b -1 first (why it did not return: the 30 s fuse was defused for the try; sxmo autosleep still running?). Rules for any further real-suspend try: the watchdog ARMED through the suspend (way-back.sh fuse), sxmo autosleep stopped first, sensorspd restore via a delayed start (sleep hook start is refused while suspend.target is queued - research 2026-11-18-systemctl-suspend-leaves-sensors-stopped). Meanwhile research and build items go on without the phone.
+
+Waits
+: the author back: power-cycle surya (no USB enumeration since the 3rd real systemctl suspend try, 2026-11-18 ~01:25)
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Rank
+: 0
