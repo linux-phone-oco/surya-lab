@@ -1482,10 +1482,15 @@ Rank
 ### Standby current measured beside Android's
 
 Status
-: in-progress
+: open
 
 Note
 : r4 SCORED: aborted/partial, unscorable (4 samples, median 120 mA, 63% asleep); aborted by irq 157 + BT SSR at 22:40:48; hang after = sxmo suspend loop on stuck BT SSR, rfkill D-state. Next r5: BT off in cycle, sxmo autosleep stopped, needs unplug. See research 2026-11-18-r4-aborted-partial-and-the-hang.
+
+2026-11-18: r4 aborted/partial (unscorable: 4 clean samples). Bluetooth keeps ending the runs: irq 157 'nobody cached' + QCA controller crash (SSR) in a bt-on cycle; after the stop sxmo's autosleep kept rtcwake -m mem looping, rfkill procs stuck on the misc_open mutex, USB gone. r5 needs: BT off in cycles OR a suspend-proof Bluetooth, sxmo autosleep stopped, sensorspd stopped, the author's unplug.
+
+Waits
+: the author back to unplug, and the Bluetooth suspend fix (backlog bt-suspend-proof)
 
 About
 : deep-sleep
