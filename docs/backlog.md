@@ -828,28 +828,6 @@ Rank
 : 1
 
 
-<a id="suspend-irq-quiet-check"></a>
-### Suite check suspend-irq-quiet: interrupts across one suspended cycle stay under a threshold (lab-tools)
-
-Status
-: open
-
-Note
-: A generic check in lab-tools health/suite/checks/ with its row in docs tests (ikb test): reads /proc/interrupts before and after one 15 s s2idle cycle and fails above the threshold, printing the top three sources. Fails today if floor-entry-trace shows a storm; threshold set from that reading, not guessed (not known yet).
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-17
-
-Needs
-: build
-
-Proof
-: suspend-irq-quiet
-
-
 <a id="floor-research-aop-view"></a>
 ### Research: what the AOP sees on the sleep flush; standby current as the arbiter
 
@@ -1585,3 +1563,24 @@ Needs
 
 Proof
 : devlab kernel try NAME --cmdline noirqdebug boots with it in /proc/cmdline once, then stock/kept
+
+
+<a id="suspend-irq-quiet-check"></a>
+### Suite check suspend-irq-quiet: interrupts across one suspended cycle stay under a threshold (lab-tools)
+
+Status
+: done
+
+Note
+: A generic check in lab-tools health/suite/checks/ with its row in docs tests (ikb test): reads /proc/interrupts before and after one 15 s s2idle cycle and fails above the threshold, printing the top three sources. Fails today if floor-entry-trace shows a storm; threshold set from that reading, not guessed (not known yet).
+
+2026-11-18: MOVED to lab-tools (docs backlog lab-tools/suspend-irq-quiet-check, rank 5, the lab-tools builder runs it). Not taken here; the keeper puts the built check on the phone when it lands.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-17
+
+Proof
+: suspend-irq-quiet
