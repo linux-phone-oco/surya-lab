@@ -1492,3 +1492,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-1220-try4-read-back"></a>
+### Try 4 read back (read only)
+
+Entry date
+: 2026-11-18
+
+Done
+: Read /var/tmp/sus-try, pstore, journals, boot list on surya after the author's power hold: fuse never bit, a stray rtcwake -m mem -s 99999999 followed the fuse marker; recorded research 2026-11-18-try4-read-back. Nothing suspended, phone untouched.
+
+Considered
+: next: find who ran rtcwake -m mem -s 99999999; cycle probe attended; no real systemctl suspend unattended
+
+About
+: deep-sleep
