@@ -2231,38 +2231,6 @@ Rank
 : 4
 
 
-<a id="surya-kernel-pmic-wdt"></a>
-### surya's kernel with the PMIC watchdog series (linux-phone-oco/linux topic/pmic-wdt-wake-in-suspend) and &pm6150_wdt enabled, wakeup-source
-
-Status
-: open
-
-Note
-: docs decision 2026-11-18-upstream-forks, research pmic-wdt-way-back. The four commits are on v7.3 (local worktree ~/Projects/linux-phone-oco/linux-topics until the upstreams lane pushes the branch); pick them onto surya's v7.2 test branch (pm8916_wdt.c and its binding are the same in v7.2; pm6150.dtsi differs - apply that hunk by hand), CONFIG_PM8916_WATCHDOG=y, board: &pm6150_wdt { status = "okay"; wakeup-source; }. Built with the lab's kernel route; nothing flashed by this item.
-
-2026-11-18 coordinator (upstreams coordinator's ask): the series is pushed: https://github.com/grenudi/linux branch topic/pmic-wdt-wake-in-suspend, e123d3bff, 4 commits on v7.3 (use this instead of 'local worktree until pushed'; the rest of the note holds). The keeper builds the kernel on the lab as it did before (a one-shot try, boot-counted, falls back by itself; watchdog armed; no real suspend in this item). Result to the surya coordinator: built or not, the install name.
-
-2026-11-18 CAUTION (from the upstreams lane, via the coordinator): on walleye the same PMIC watchdog series BIT, but the bite ended in a POWER-OFF, not a restart, and needed the author's hands (walleye decision 2026-11-18-walleye-pmic-bite-read-then-warm). Suspected: the S2_CTL hard-reset write does not take because the S2 enable is not cleared first. On surya: building, installing and booting the kernel as a one-shot try, and probing the driver read-only (registers? timeout? reset type) is FINE. Do NOT arm the PMIC watchdog to bite until the reset type is proven to RESTART; and then only with the author present and told what to expect (a power-off needing a power press is possible). Read the walleye decision first.
-
-Waits
-: surya answering again (silent since ~17:50Z: not on USB, no address - after the sxmo-utils@lab install? the author's hands: cable/power; backlog surya-silent-after-sxmo-apk)
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-18
-
-Needs
-: phone
-
-Proof
-: pmic-wdt-bites
-
-Rank
-: 4
-
-
 <a id="surya-pmic-wdt-proof"></a>
 ### Prove the PMIC watchdog way back on surya: it bites unpetted, and its bark wakes a suspend with nothing else to wake it
 
@@ -2306,8 +2274,7 @@ Note
 
 From the upstreams coordinator (read of lab-tools packaging/sxmo-utils vs Alpine 3.24 sxmo-utils 1.18.1-r4) - check these when the phone answers, and send the findings to the upstreams coordinator (local_ab8f8562-e34e-4d3d-92ef-a68ecaecaaf5) via the surya coordinator: (1) packaging is Alpine-identical for NM 00-sxmo.conf and the polkit rules; post-install scripts only print. (2) REAL difference: -common no longer depends on modemmanager, mmsd-tng, vvmd (moved to -modem, -modem-mms, -modem-vvm): if they were not in /etc/apk/world, the install REMOVED ModemManager: check 'apk info -e modemmanager' and /var/log/apk.log. (3) the scripts are upstream master 1fd7822 (51 commits past 1.18.1: sxmo_idle refactor, superd restart, SXMO_NO_MODEM dropped); they act when Sxmo or superd starts, not at apk time - so look at what restarted sxmo/superd and when. (4) If surya had no Sxmo stack before this install, it brought dnsmasq, tinydm, superd, NM's ifupdown managed=true drop-in (NM can take usb0 if it is in /etc/network/interfaces on NM's next restart) - read /var/log/apk.log or 'apk audit' for what came in, and whether NM or tinydm restarted: NM taking usb0 would explain the USB link vanishing without a suspend at all. Check this FIRST: journalctl -b -1 for NetworkManager/usb0/gadget lines before the silence.
 
-Waits
-: surya answering again (the author's hands: power press / cable)
+2026-11-18 CORRECTION from the author: surya was physically UNPLUGGED (not asleep); he plugged it back in and 172.16.42.1 answers. So read it as a CABLE event, not the sxmo package: journal for USB disconnect/power events at ~17:50Z (usb gadget, UDC state, charger online), confirm the wake lock is held, confirm sxmo-utils@lab is installed and healthy (the packaging checks above are still worth one look: ModemManager still installed? NM did not take usb0?), then close or correct this item; the health suite after. Then resume the queue.
 
 About
 : deep-sleep
@@ -2320,3 +2287,32 @@ Needs
 
 Rank
 : 0
+
+
+<a id="surya-kernel-pmic-wdt"></a>
+### surya's kernel with the PMIC watchdog series (linux-phone-oco/linux topic/pmic-wdt-wake-in-suspend) and &pm6150_wdt enabled, wakeup-source
+
+Status
+: open
+
+Note
+: docs decision 2026-11-18-upstream-forks, research pmic-wdt-way-back. The four commits are on v7.3 (local worktree ~/Projects/linux-phone-oco/linux-topics until the upstreams lane pushes the branch); pick them onto surya's v7.2 test branch (pm8916_wdt.c and its binding are the same in v7.2; pm6150.dtsi differs - apply that hunk by hand), CONFIG_PM8916_WATCHDOG=y, board: &pm6150_wdt { status = "okay"; wakeup-source; }. Built with the lab's kernel route; nothing flashed by this item.
+
+2026-11-18 coordinator (upstreams coordinator's ask): the series is pushed: https://github.com/grenudi/linux branch topic/pmic-wdt-wake-in-suspend, e123d3bff, 4 commits on v7.3 (use this instead of 'local worktree until pushed'; the rest of the note holds). The keeper builds the kernel on the lab as it did before (a one-shot try, boot-counted, falls back by itself; watchdog armed; no real suspend in this item). Result to the surya coordinator: built or not, the install name.
+
+2026-11-18 CAUTION (from the upstreams lane, via the coordinator): on walleye the same PMIC watchdog series BIT, but the bite ended in a POWER-OFF, not a restart, and needed the author's hands (walleye decision 2026-11-18-walleye-pmic-bite-read-then-warm). Suspected: the S2_CTL hard-reset write does not take because the S2 enable is not cleared first. On surya: building, installing and booting the kernel as a one-shot try, and probing the driver read-only (registers? timeout? reset type) is FINE. Do NOT arm the PMIC watchdog to bite until the reset type is proven to RESTART; and then only with the author present and told what to expect (a power-off needing a power press is possible). Read the walleye decision first.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: pmic-wdt-bites
+
+Rank
+: 4
