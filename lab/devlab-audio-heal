@@ -1,4 +1,5 @@
 #!/bin/sh
+# WORKAROUND(surya-adsp-audio-boot-race): restarts the ADSP when the card is missing - stands in for the unread boot race.
 # A boot can come up with the ADSP lacking its audio services: lpass-lpi pinctrl never binds, no q6 audio
 # modules, no sound card (surya-adsp-audio-boot-race; log 2026-11-18-2035-adsp-audio-restart). Stopping and
 # starting the ADSP through its remoteproc cured it. Runs once after boot: wait for the card, and if it is

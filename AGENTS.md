@@ -32,6 +32,7 @@ shells, tests. Everything runs on the lab machine (via lab-agent), never in an a
   stalled initramfs saves its log to the ESP after 5 minutes and reboots (`log NAME` reads it).
   Never `pmos.debug-shell` on an unattended try: it halts the boot until someone continues it.
   WORKAROUND(kept-kernel-with-pmic-wdt): after any PMIC bite, boot only a kernel with pm8916_wdt - stands in for the kept kernel carrying the driver.
+  WORKAROUND(surya-adsp-audio-boot-race): restarts the ADSP when the card is missing - stands in for the unread boot race (lab/devlab-audio-heal); if the race is upstream's (the ADSP or the audio services) it goes through the fork-first path.
 
 - **Record as you go** in this device's own base (data/, kept by tad): `ikb --help`, then `ikb help RECORD` - decisions with
   what was rejected, research, the backlog (`ikb backlog`; `ikb backlog-needs` for the phone's queue), the log, and
