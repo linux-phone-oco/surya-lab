@@ -2095,3 +2095,18 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-0900-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: kept calls+ with stock fallback, untouched, no change this round. Read only: calls2+ clk.c:1047 warning is NEW vs calls+, bt crash line unconfirmed (research recorded)
+
+Considered
+: next: kept-kernel-with-pmic-wdt must not promote calls2+ before its clk.c:1047 stack is read (save dmesg on the attended try); unattended: surya-step-checks, boot race
