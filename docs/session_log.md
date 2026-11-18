@@ -1600,3 +1600,18 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-1410-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Awake on kept kernel 7.1.0-sm7150-calls+, suite healthy (44 pass, 3 known gaps, 0 fail). resume-stall-way-back done: sysctl panic_on_rcu_stall=1, panic=5 via /etc/sysctl.d/90-lpoco-way-back.conf (also a device.toml overlay); no suspend run, nothing flashed. ramoops is not reserved (way-back-ramoops-present fails) - new item ramoops-reserved-dt
+
+Considered
+: next: coordinator asks the author for the go on health-cycle-probe-attended; ramoops-reserved-dt needs a dt change, coordinator to decide; install tests/health on the phone for autosleep-bt-gate
