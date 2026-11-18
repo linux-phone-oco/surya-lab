@@ -1999,34 +1999,6 @@ Rank
 : 0
 
 
-<a id="health-cycle-probe-attended"></a>
-### Attended: way-back.sh cycle probe with the author present (proves the fuse bites on the real path, nothing suspended for long)
-
-Status
-: open
-
-Note
-: What to say to the author (plain words). WHAT HAPPENS: I run 'way-back.sh cycle 10 probe' on the phone: it arms the 30 s watchdog, suspends the phone to idle for about 2 s (Bluetooth left on, so it wakes at once), and deliberately does NOT disarm the watchdog. The phone then resets itself about 30 s later and reboots. WHAT YOU SEE: USB drops and the screen may blank; about 30 s after the start the phone restarts (logo, boot ~1-2 min) and comes back on USB by itself. NOTHING IS FLASHED, no real long sleep, sxmo's autosleep stays blocked by the devlab-usb lock. WHAT TO CHECK: that it restarted by itself within ~35 s of the start (the proof the watchdog lives through a real suspend entry), and that it is back on USB afterwards. WAY BACK: if it has not returned within ~60 s after the reset, hold the power button ~10 s and boot it. I will not run it until you say go; afterwards I run the suite and report.
-
-Waits
-: the author's go (he is at the lab)
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-18
-
-Needs
-: phone
-
-Proof
-: soc-sleeps
-
-Rank
-: 1
-
-
 <a id="surya-unreachable-after-try4"></a>
 ### surya did not return from real suspend try 4: the author's power cycle, then read /var/tmp/sus-try, pstore, journalctl -b -1
 
@@ -2049,3 +2021,30 @@ Needs
 
 Rank
 : 0
+
+
+<a id="health-cycle-probe-attended"></a>
+### Attended: way-back.sh cycle probe with the author present (proves the fuse bites on the real path, nothing suspended for long)
+
+Status
+: open
+
+Note
+: What to say to the author (plain words). WHAT HAPPENS: I run 'way-back.sh cycle 10 probe' on the phone: it arms the 30 s watchdog, suspends the phone to idle for about 2 s (Bluetooth left on, so it wakes at once), and deliberately does NOT disarm the watchdog. The phone then resets itself about 30 s later and reboots. WHAT YOU SEE: USB drops and the screen may blank; about 30 s after the start the phone restarts (logo, boot ~1-2 min) and comes back on USB by itself. NOTHING IS FLASHED, no real long sleep, sxmo's autosleep stays blocked by the devlab-usb lock. WHAT TO CHECK: that it restarted by itself within ~35 s of the start (the proof the watchdog lives through a real suspend entry), and that it is back on USB afterwards. WAY BACK: if it has not returned within ~60 s after the reset, hold the power button ~10 s and boot it. I will not run it until you say go; afterwards I run the suite and report.
+
+GO GIVEN by the author in the coordinator's chat 2026-11-18 ('k', after reading what to expect and the way back). Run the probe now: the author is at the lab. Do not stop devlab-usb or drop any wake lock around it. After the reset: wait for the phone (up to 60 s past the reset; if it does not return, tell the coordinator: the author holds power), run the suite, record whether it restarted within ~35 s (the fuse bites on a real suspend entry) as research, and say whether a real systemctl suspend try may follow.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: soc-sleeps
+
+Rank
+: 1
