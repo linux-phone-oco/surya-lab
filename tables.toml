@@ -557,6 +557,47 @@ type = "string"
 name = "measured_run"
 type = "string"
 
+# THE STEPS CONTRACT (steps = 1, named in devicebase.toml). One row per bring-up step this device has a claim for: the
+# step is one of docs' generic steps (bringup_steps), the status is where this device stands on it, the proof the
+# check that showed it, the run where it ran. docs pulls this table (data/steps.json) into step_status; a step nobody
+# has claimed is not known yet - unknown, never failing. A claim does not lapse with age: a step proven on an image
+# stays proven for it, and proven_on lets a later kernel be told from it.
+[tables.steps]
+key = ["step"]
+
+[[tables.steps.fields]]
+name = "step"
+type = "string"
+required = true
+pattern = "^[a-z0-9]+(-[a-z0-9]+)*$"
+
+[[tables.steps.fields]]
+name = "status"
+type = "string"
+required = true
+enum = ["done", "partial", "failing", "open", "not-needed", "unknown"]
+
+[[tables.steps.fields]]
+name = "proof"
+type = "string"
+
+[[tables.steps.fields]]
+name = "run"
+type = "string"
+
+[[tables.steps.fields]]
+name = "proven_on"
+type = "string"
+
+[[tables.steps.fields]]
+name = "notes"
+type = "string"
+
+[[tables.steps.fields]]
+name = "updated"
+type = "date"
+required = true
+
 # One run of the phone's own health suite, filed by lpoco lab (the test-run record), and each line of its report.
 [tables.test_runs]
 key = ["id"]

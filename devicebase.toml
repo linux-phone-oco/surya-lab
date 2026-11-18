@@ -3,7 +3,7 @@
 # ideal-knowledge-base lays them; its job moves the pin). own names the files this base keeps as its own, each
 # with its reason under [why]. parts is the version of the parts contract that docs validates what it pulls against.
 source = "linux-phone-oco/docs"
-version = "0.17.0"
+version = "0.18.0"
 own = []
 parts = 1
 
