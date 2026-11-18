@@ -2397,10 +2397,10 @@ Rank
 ### After the PMIC bite: is S2 still enabled and is the reboot loop gone? Stop it, record the way back
 
 Status
-: open
+: done
 
 Note
-: The PMIC bite RESTARTED surya (pass, 18:57:18Z, research 2026-11-18-surya-pmic-bite-restarts) but left a ~35 s reboot loop on the kept kernel (calls+ has no pm8916-wdt driver): the PMIC S2 stage stays enabled across the restart. The author could not power off from pmOS (it reboots); he powered it off from the OLD eOS RECOVERY ('power off' there held), waited 30 s with USB out, then boots it. FIRST UP WINDOW: (1) read S2_CTL2 0x857 via the PMIC regmap: S2 still enabled? and does the phone stay up > 2 min (loop gone)? (2) if S2 is still on or the loop persists: stop it - clear the S2 enable (S2_CTL2 = 0; the PON block may need the secure-access unlock at base+0xd0 = 0xa5 first on gen2: mirror what the pm8916-wdt driver's stop does) from a script that polls the 1 s windows (write it into surya-lab sleep/, with a test), or one-shot the pmicwdt kernel so its driver stops S2 at probe; (3) record the way back from a PMIC loop: power off from the eOS recovery (pmOS has no real power-off: it reboots), wait 30 s with USB out, boot; the S2-stays-enabled finding goes to the upstreams lane (the series must stop S2 on stop/unbind, or a proof must end with S2 cleared). THEN: fix way-back.sh to pick the watchdog by identity (item way-back-pick-watchdog-by-identity) - the fuse must never be armed on the PMIC node by accident. The author is the other way back.
+: proven by the phone 2026-11-18 19:13Z: after the author's full power-off from eOS recovery (30 s, USB out) surya booted calls+ and stayed up >2 min (loop gone); PMIC regmap 0-00: S2_CTL 0x856=0x01, S2_CTL2 0x857=0x00 (S2 disabled). Way back from a PMIC loop: power off from eOS recovery (pmOS reboots instead), wait 30 s USB out, boot; a power cycle clears S2. Open for upstreams: the series must stop S2 on stop/unbind, or a proof ends with S2 cleared. Next: way-back-pick-watchdog-by-identity.
 
 About
 : deep-sleep

@@ -1828,3 +1828,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-1915-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Took the lease; surya answers again on the kept kernel 7.1.0-sm7150-calls+ (qcom_wdt is watchdog0 there). Read PMIC regmap 0-00 read-only: 0x856=01, 0x857=00 (S2 disabled), phone up >2 min, no loop. pmic-loop-recovery done. Nothing flashed, no writes, no suspend.
+
+Considered
+: next: way-back-pick-watchdog-by-identity (repo + dry run, fuse arms the APSS node, nothing suspended), then surya-kernel-pmic-wdt (BITE attended only); way back from a PMIC loop is the eOS-recovery power-off
+
+About
+: deep-sleep
