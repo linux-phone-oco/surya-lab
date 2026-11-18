@@ -1437,7 +1437,7 @@ Entry date
 : 2026-11-18
 
 Done
-: Phone back on USB, kernel 7.1.0-sm7150-calls+ kept. devlab-usb-awake now the repo-main script (always-held lock), service restarted, no reboot; item devlab-usb-awake-hold-through-resume done. Suite: audio/adsp/camera/fingerprint fails as before
+: Kept kernel 7.1.0-sm7150-calls+ unchanged, healthy; devlab-usb wake lock held, autosleep checks pass, no suspend since 11:17:41; screen-by-itself item closed (cause: sxmo autosleep loop, fixed by the lock)
 
 Considered
-: next: screen-turns-off-by-itself read-only (journal, sxmo idle hooks, pwrkey); then phone-next
+: next: phone-next queue; soc-sleeps still fails (cxsd/aosd 0) - deep-sleep research continues
