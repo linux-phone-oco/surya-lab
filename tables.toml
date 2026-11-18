@@ -482,6 +482,7 @@ to = ["backlog", "parts"]
 field = "decisions.research"
 to = ["research"]
 
+# device:begin - the device layer's tables, kept by linux-phone-oco/docs at the release devicebase.toml names (change them there).
 # The device: one row. The same fields as docs' devices table, so the row is the registry's row.
 [tables.devices]
 key = ["id"]
@@ -653,6 +654,7 @@ type = "string"
 [[tables.test_results.fields]]
 name = "shell"
 type = "string"
+# device:end
 
 # The hardware this device's work needs beyond the phone: cables, adapters, breakouts, meters, and the setups made of
 # them. One shape in docs (the general catalogue: status = general, what a thing is, its wiring, sources) and in each
