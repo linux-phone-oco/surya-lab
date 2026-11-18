@@ -1774,3 +1774,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-1855-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Keeper took the lease; surya answers again (author's hands earlier), kept kernel 7.1.0-sm7150-calls+, way-back.sh check passes, watchdog armed state ok, nothing changed this run. The only ready item, surya-kernel-pmic-wdt, needs its bite step (S2_CTL read with /dev/watchdog0 open, then unfed 20-30 s bite) attended: no witness on a scheduled run, so not done.
+
+Considered
+: next: author present at the phone for the PMIC bite (kernel pmicwdt installed; register read S2_CTL=0x07, S2_CTL2=0x00 already recorded); then surya-pmic-wdt-proof. No other phone item is ready.
+
+About
+: deep-sleep
