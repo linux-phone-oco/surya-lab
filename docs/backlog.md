@@ -2104,10 +2104,10 @@ Rank
 ### Stalled-resume way back: sysctl panic_on_rcu_stall=1, kernel.panic=5 on the phone
 
 Status
-: open
+: done
 
 Note
-: Decision 2026-11-18-resume-stall-way step 1. Package or sysctl.d (/etc/sysctl.d/90-lpoco-way-back.conf), not by hand; health check tests/health/base/sleep-way-back.sh must pass. Needs the lab's next free-lease window.
+: proven by way-back-panic-on-rcu-stall and way-back-panic-reboots-soon passing on the phone (kernel.panic_on_rcu_stall=1, kernel.panic=5) via /etc/sysctl.d/90-lpoco-way-back.conf, also in device.toml overlay. way-back-ramoops-present still fails: ramoops is not reserved in the dtb (0 iomem lines), so a panic is not kept across the reboot - a dt item
 
 About
 : deep-sleep
@@ -2236,3 +2236,28 @@ Proof
 
 Rank
 : 1
+
+
+<a id="ramoops-reserved-dt"></a>
+### Reserve ramoops in the device tree so a way-back panic is kept (way-back-ramoops-present)
+
+Status
+: open
+
+Note
+: Found 2026-11-18 by sleep-way-back.sh: 0 ramoops iomem lines. Turning point for the coordinator: a dt change on a one-shot dtb try (fuse armed, attended).
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: way-back-ramoops-present
+
+Rank
+: 2
