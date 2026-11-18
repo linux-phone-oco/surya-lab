@@ -1582,3 +1582,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-1325-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Phone awake, up since 13:09 after the author's power hold, kernel 7.1.0-sm7150-calls+ kept, healthy. Read the previous boot: the fuse bit (pretimeout then reset, pstore empty) but the phone did not boot itself after; recorded.
+
+Considered
+: next: attended window for reset-reason read (health-cycle-probe-attended); surya-kernel-pmic-wdt build is the next unattended item
+
+About
+: deep-sleep

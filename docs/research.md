@@ -1140,3 +1140,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-18-probe-previous-journal-pretimeout-then-silence"></a>
+### 2026-11-18-probe-previous-journal-pretimeout-then-silence
+
+Date
+: 2026-11-18
+
+Brief
+: Previous boot's journal ends 'watchdog0: pretimeout event' at 12:58:15 (31 s after arming); no pstore; the fuse bit, the phone then stayed down until power hold
+
+Question
+: Reset or hang after the attended cycle probe (health-cycle-probe-attended)?
+
+Found
+: Read after the author's power hold (boot 13:09:33). Previous boot b3c48d10 (12:16:06-12:58:15): 'watchdog: watchdog0: watchdog did not stop!' and 'PM: suspend entry (s2idle)' at 12:57:44, 'suspend exit' 12:57:47, then the last line 'kernel: watchdog0: pretimeout event' at 12:58:15 and nothing more; the journal ends there (no shutdown). /sys/fs/pstore is empty. So the kernel was alive and the watchdog ran to its pretimeout, i.e. the fuse was armed through the suspend and counted down as designed; a SoC reset followed the pretimeout, so it bit. What it does not show: why the phone did not boot again on its own after the bite (11 min down, 12:58 to 13:09 power hold): the reset lands in a state that needs a power hold (bootloader/crash-dump hang), so the fuse is a reset but not yet a way back. Next: attended window to read the reset reason (fastboot getvar / bootloader log) and whether qcom_wdt bark sets a download-mode flag; unattended retries are not worth it.
+
+About
+: deep-sleep
