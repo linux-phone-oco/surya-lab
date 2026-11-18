@@ -6,6 +6,7 @@ source = "linux-phone-oco/docs"
 version = "0.18.0"
 own = []
 parts = 1
+steps = 1
 
 # Why each own file is kept (bin/check-own.sh in ideal-knowledge-base reads it): a reason, or upstream:ITEM.
 [why]

@@ -8,9 +8,9 @@
 - [Hardware](hardware.md): 0
 - [Parts](parts.md): 20
 - [Research](research.md): 57
-- [Session Log](session_log.md): 105
+- [Session Log](session_log.md): 107
 - [Sources](sources.md): 8
-- [Steps](steps.md): 0
+- [Steps](steps.md): 113
 - [Summaries](summaries.md): 1
 - [Test Results](test_results.md): 7212
 - [Test Runs](test_runs.md): 179

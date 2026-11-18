@@ -1,0 +1,113 @@
+{"step":"stock-measured","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"stock-facts-read","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"slot-state-known","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"initramfs-gadget-emulated","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"bootloader-unlocked","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"boot-image-packs","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"crash-window","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"kernel-builds","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"control-image-boots","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"dtbo-accepted","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"uart-console","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"stock-kernel-runs-our-init","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"reference-kernel-boots","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"kernel-reaches-init","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"gadget-enumerates","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"firmware-reachable","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"pd-mapper-before-remoteproc","status":"failing","proof":"sound-card","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: sound-card=fail","updated":"2026-11-18"}
+{"step":"panel-lit","status":"done","proof":"panel-connected,backlight","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: panel-connected=pass backlight=pass","updated":"2026-11-18"}
+{"step":"camera-bus-bound","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"banner-on-console","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"usb-network","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"remoteprocs-running","status":"done","proof":"adsp-running,cdsp-running,modem-running,no-processor-crashes","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: adsp-running=pass cdsp-running=pass modem-running=pass no-processor-crashes=pass","updated":"2026-11-18"}
+{"step":"touch-input","status":"done","proof":"touch-device","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: touch-device=pass","updated":"2026-11-18"}
+{"step":"gpu-renders","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"bt-controller-up","status":"done","proof":"bt-controller,bt-powered","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: bt-controller=pass bt-powered=pass","updated":"2026-11-18"}
+{"step":"image-sensor-identified","status":"failing","proof":"image-sensor","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: image-sensor=fail","updated":"2026-11-18"}
+{"step":"shell-on-console","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"lab-link-held-awake","status":"done","proof":"usb-awake","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: usb-awake=pass","updated":"2026-11-18"}
+{"step":"audio-codec-attached","status":"failing","proof":"sound-card,mic-records","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: sound-card=fail mic-records=fail","updated":"2026-11-18"}
+{"step":"wifi-joins","status":"done","proof":"wifi-interface,wifi-connected,wifi-reaches-gateway","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: wifi-interface=pass wifi-connected=pass wifi-reaches-gateway=pass","updated":"2026-11-18"}
+{"step":"raw-frame-captured","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"first-dmesg-mapped","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"shell-autosleep-tamed","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"sound-card-registered","status":"failing","proof":"sound-card","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: sound-card=fail","updated":"2026-11-18"}
+{"step":"camera-stream-viewable","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"dmesg-clean","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"pmic-bound","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"speaker-amps-fed","status":"partial","proof":"amp-channels,amp-volume-0x4c,amp-volume-0x4d","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: amp-channels=fail amp-volume-0x4c=pass amp-volume-0x4d=pass","updated":"2026-11-18"}
+{"step":"mic-captures","status":"failing","proof":"mic-records","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: mic-records=fail","updated":"2026-11-18"}
+{"step":"focus-and-flash","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"charger-online","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"watchdog-way-back","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"battery-gauge-reads","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"pon-reason-read","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"storage-readonly","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"reset-types-right","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"reset-state-survives","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"key-reset-recovers","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"rootfs-boots","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"suspend-way-back","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"power-off-stays-off","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"thermal-zones-sane","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"health-suite-runs","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"fastrpc-helpers-stable","status":"done","proof":"no-processor-crashes","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: no-processor-crashes=pass","updated":"2026-11-18"}
+{"step":"buttons-report","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"haptics-buzz","status":"done","proof":"vibrator","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: vibrator=pass","updated":"2026-11-18"}
+{"step":"ucm-hifi-profile","status":"failing","proof":"default-output,speaker-stereo","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: default-output=fail speaker-stereo=fail","updated":"2026-11-18"}
+{"step":"modem-file-services","status":"done","proof":"modem-running","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: modem-running=pass","updated":"2026-11-18"}
+{"step":"nfc-reads-tag","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"usb-host-works","status":"partial","proof":"usb-role,usb-host-device","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: usb-host-device=- usb-role=pass","updated":"2026-11-18"}
+{"step":"s2idle-cycle-returns","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"charger-mode-entered","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"rtc-alarm-powers-on","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"speaker-heard","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"earpiece-plays","status":"failing","proof":"earpiece-heard","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: earpiece-heard=fail","updated":"2026-11-18"}
+{"step":"headset-jack","status":"failing","proof":"jack-detector,headset-loop","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: headset-loop=- jack-detector=fail","updated":"2026-11-18"}
+{"step":"modem-seen","status":"done","proof":"modem-seen","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: modem-seen=pass","updated":"2026-11-18"}
+{"step":"bt-pairs-carries-audio","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"sensor-hub-stable","status":"done","proof":"no-processor-crashes","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: no-processor-crashes=pass","updated":"2026-11-18"}
+{"step":"suspend-wakes-quiet","status":"open","proof":"suspend-irq-quiet","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: suspend-irq-quiet=skip","updated":"2026-11-18"}
+{"step":"radios-survive-suspend","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"shell-runs-with-hardware","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"update-applies","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"kernel-upgrade-keeps-steps","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"linux-runs","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"off-mode-charging","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"mic-hears-speaker","status":"failing","proof":"mic-hears-speaker,mic-top-hears-speaker","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: mic-top-hears-speaker=- mic-hears-speaker=fail","updated":"2026-11-18"}
+{"step":"sim-ready","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"emergency-numbers-known","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"sensors-exposed","status":"failing","proof":"motion-and-light","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: motion-and-light=fail","updated":"2026-11-18"}
+{"step":"gnss-fix","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"fingerprint-unlocks","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"photo-taken","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"soc-floor-reached","status":"open","proof":"soc-sleeps","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: soc-sleeps=skip","updated":"2026-11-18"}
+{"step":"on-screen-keyboard","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"lock-and-unlock","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"update-rolls-back","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"modem-registered","status":"open","proof":"modem-registered","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: modem-registered=skip","updated":"2026-11-18"}
+{"step":"proximity-reads","status":"failing","proof":"proximity-reads","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: proximity-reads=fail","updated":"2026-11-18"}
+{"step":"auto-rotate-follows","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"brightness-follows-light","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"video-recorded","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"sensors-across-suspend","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"sms-both-ways","status":"open","proof":"sms-loopback","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: sms-loopback=skip","updated":"2026-11-18"}
+{"step":"mobile-data","status":"open","proof":"mobile-data","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: mobile-data=skip","updated":"2026-11-18"}
+{"step":"call-audio-path","status":"failing","proof":"call-audio-path","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: call-audio-path=fail","updated":"2026-11-18"}
+{"step":"resume-without-stall","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"coprocessor-restart-recovers","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"mms-both-ways","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"voice-call-both-ways","status":"open","proof":"call-echo","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: call-echo=skip","updated":"2026-11-18"}
+{"step":"hotspot-shares-data","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"real-suspend-under-shell","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"notifications-arrive","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"cycles-repeat-clean","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"proximity-blanks-in-call","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"volte-call","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"call-wakes-from-sleep","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"standby-current","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"alarm-wakes-from-sleep","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"all-day-battery","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"days-without-reboot","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"daily-usable-phone","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
+{"step":"complete-phone","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
