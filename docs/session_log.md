@@ -1846,3 +1846,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-2200-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: surya answers again (kept kernel 7.1.0-sm7150-calls+, phone sh ok). Took the only ready item surya-kernel-pmic-wdt: its build and one-shot try were done earlier (log 2026-11-18-1820-pmic-wdt-kernel-tried) and the attended bite proved a restart (research 2026-11-18-surya-pmic-bite-restarts), so nothing remained that is safe unattended; no phone change made this run.
+
+Considered
+: next: item stays open for its last step - boot the pmicwdt kernel (driver stops S2) as the kept one, attended, with the author told a power cycle may be needed; then way-back-pick-watchdog-by-identity (sleep/way-back.sh wd=/dev/watchdog0 is the PMIC one on that kernel). way-back.sh check not run: /root/way-back.sh not readable by phone sh, use lpoco lab phone root.
+
+About
+: deep-sleep
