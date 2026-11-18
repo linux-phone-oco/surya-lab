@@ -1319,21 +1319,6 @@ About
 ---
 
 
-<a id="2026-11-18-0905-how-the-phone-stands"></a>
-### How the phone stands
-
-Entry date
-: 2026-11-18
-
-Done
-: Ran bt-trace-cycles: 20 x 15 s bt-on s2idle cycles through stopgap sleep/bt-trace.sh, all clean, hci0 up, no crash; kept kernel 7.1.0-sm7150-calls+ unchanged, suite as before
-
-Considered
-: next: the author or research decides from the storm-without-crash finding; 3x120 s needs a longer fuse; remove sleep/bt-trace.sh when the lpoco-health hook lands
-
----
-
-
 <a id="2026-11-18-1200-how-the-phone-stands"></a>
 ### How the phone stands
 
@@ -1378,3 +1363,21 @@ Done
 
 Considered
 : next: someone with hands checks the phone is on and on Wi-Fi/USB; then read journalctl -b -1, pstore, boot reason, address, record as research, then bt-suspend-gate. Rejected: guessing from the host side
+
+---
+
+
+<a id="2026-11-18-0905-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Took the lease; item bt-suspend-gate, coordinator's first step: stop sxmo autosleep. The phone answered once (up 39 min, kept kernel 7.1.0-sm7150-calls+, sxmo_autosuspend.sh running, wake lock only devlab-usb, which devlab-usb-awake drops whenever the UDC is not 'configured'), then went off USB twice within 5 min (enp10s0f3u1 vanished; 172.16.42.1 and the other address dead). Nothing changed on the phone: it never held long enough for a write.
+
+Considered
+: next: when it answers, make autosleep off lasting through provisioning (device.toml overlay: a wake lock held always, or sxmo's autosuspend off) with a health check 'autosleep off'; hypothesis to test: devlab-usb-awake releases its lock on any non-configured UDC moment, so one USB blip lets sxmo suspend and the link never returns (a deadlock). The phone needs the author's power press now: nobody can reach it. Rejected: writing the provisioning change blind, with no phone to prove it.
+
+About
+: deep-sleep
