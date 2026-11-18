@@ -869,25 +869,6 @@ Proof
 : motion-and-light
 
 
-<a id="standby-test-in-lpoco-health"></a>
-### The standby drain test lives in the health suite (lpoco-health) as a switchable test
-
-Status
-: open
-
-Note
-: The author (2026-11-17): the standby test belongs in the health suite under the lpoco roof, switchable (lpoco-health on/off), not a one-off script. Move sleep/standby-run.sh's measurement into a lpoco-health test: witness step 'unplug USB', start check that USB power is absent (refuse to score), >=60 min after a 10 min settle, logs per decision 2026-11-17-standby-drain-test. For the lpoco-health owner (lab-tools). Does not block r2.
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-17
-
-Needs
-: build
-
-
 <a id="standby-r2-reboot-why"></a>
 ### Why surya rebooted by itself during standby run r2
 
@@ -1584,3 +1565,25 @@ Opened
 
 Proof
 : suspend-irq-quiet
+
+
+<a id="standby-test-in-lpoco-health"></a>
+### The standby drain test lives in the health suite (lpoco-health) as a switchable test
+
+Status
+: open
+
+Note
+: The author (2026-11-17): the standby test belongs in the health suite under the lpoco roof, switchable (lpoco-health on/off), not a one-off script. Move sleep/standby-run.sh's measurement into a lpoco-health test: witness step 'unplug USB', start check that USB power is absent (refuse to score), >=60 min after a 10 min settle, logs per decision 2026-11-17-standby-drain-test. For the lpoco-health owner (lab-tools). Does not block r2.
+
+Waits
+: moved to lab-tools in docs (orchestration records it in the lab-tools build queue); not taken here
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-17
+
+Needs
+: build
