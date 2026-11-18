@@ -10,6 +10,7 @@
 - [Research](research.md): 57
 - [Session Log](session_log.md): 105
 - [Sources](sources.md): 8
+- [Steps](steps.md): 0
 - [Summaries](summaries.md): 1
 - [Test Results](test_results.md): 7212
 - [Test Runs](test_runs.md): 179
