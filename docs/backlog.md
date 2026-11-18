@@ -2547,3 +2547,25 @@ Needs
 
 Rank
 : 8
+
+
+<a id="sxmo-migration-diff"></a>
+### Settle which way the 4 migrated sxmo configs differ: package newer or ours newer?
+
+Status
+: open
+
+Note
+: Two readings disagree (surya-lab PR 297 vs the upstreams lane): the keeper found the package defaults OLDER than the phone's configs and kept ours; upstreams says the lab package ships upstream master 1fd7822 (newer than 1.18.1: 18 config files changed since - battery, lock, screenoff, statusbar, start, contextmenu, icons, postwake hooks, foot.ini, conky.conf) so the phone's copies carried 1.18.1-era hashes and the package is NEWER, which means keeping ours may have kept the phone's OLDER hook logic. Settle it BEFORE the attended suspend proofs (postwake/lock/screenoff matter there): diff /home/user/migration-backup-20261118 against the package defaults (/usr/share/sxmo/... and the fork's configs/) file by file; for each, say which side is newer and what differs (read it: a deliberate lab change of ours (e.g. a hook modified for sleep) vs an older upstream copy). Where the package is newer and ours has no deliberate change: take the package default (back up ours first); where ours carries a deliberate lab change: keep it and say why - and then it belongs in the fork's package (queue it for the upstreams lane). Record research; land; tell the surya coordinator what changed. Watchdog/wake lock as is, no suspend; an sxmo restart only with the lock held.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Rank
+: 3
