@@ -1553,7 +1553,7 @@ Status
 : open
 
 Note
-: Step 2. Keep the dtb out of the kept kernel until it measures better.
+: 2026-11-18 tried once: dtb booted healthy, then the phone hung in the first 15 s bt-on cycle and did not return (research 2026-11-18-cts-pulldown-dtb-hangs); needs a power hold; then decide: read pstore/journal, or repeat once to tell a one-off from the dtb
 
 Blocked by
 : bt-trace-cycles
