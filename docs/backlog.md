@@ -354,78 +354,6 @@ Needs
 : phone
 
 
-<a id="verify-headphone-mic-earpiece"></a>
-### Verify headphone, mic and earpiece status directly on hardware instead of relying on the secondhand pmaports note
-
-Status
-: open
-
-Note
-: The source only confirms mic/earpiece are broken as a group; headphone output specifically was never separately confirmed one way or the other.
-
-About
-: audio-mic
-
-Opened
-: 2026-11-04
-
-Needs
-: phone
-
-Rank
-: 60
-
-
-<a id="camera-identify-slots"></a>
-### Ask each camera slot what it is
-
-Status
-: open
-
-Note
-: The first step of the cameras: a test device tree that only powers a slot (supplies, clock, reset), booted once as the second entry; then the chip's identity register read over its control bus. Turns reported sensor models into facts.
-
-About
-: camera-rear
-
-Opened
-: 2026-11-11
-
-Needs
-: phone
-
-Proof
-: image-sensor
-
-Rank
-: 70
-
-
-<a id="image-sensors"></a>
-### Image sensors: described, then identified, then seen
-
-Status
-: open
-
-Note
-: Known (research/cameras.md): the pipeline and all three control buses are bound; no sensor is described, which alone is why the cameras are dark. The vendor's kernel gives the wiring of seven sensor slots - bus, lanes, supplies, pins, clock - and names no model. Next: power one slot at a time in a test device tree and ask the chip for its identity; describe fully what this kernel already has a driver for; a frame.
-
-About
-: camera-rear
-
-Opened
-: 2026-11-11
-
-Needs
-: phone
-
-Proof
-: image-sensor
-
-Rank
-: 71
-
-
 <a id="mic-capture"></a>
 ### Sound recorded through the microphone
 
@@ -1036,31 +964,6 @@ Needs
 : research
 
 
-<a id="floor-sh0-owner"></a>
-### Find who holds the SH0 x=1,y=3 sleep vote and drop it
-
-Status
-: open
-
-Note
-: Paused 2026-11-17 by decision 2026-11-17-floor-read-the-entry: read the entry first (floor-entry-trace), then decide whether the SH0 owner hunt resumes.
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-17
-
-Needs
-: phone
-
-Proof
-: soc-sleeps
-
-Rank
-: 15
-
-
 <a id="floor-sh0-qup-tags"></a>
 ### If SH0 stays: the other TAG_ALWAYS QUP and crypto consumers, one per cycle
 
@@ -1531,3 +1434,115 @@ Proof
 
 Rank
 : 4
+
+
+<a id="floor-sh0-owner"></a>
+### Find who holds the SH0 x=1,y=3 sleep vote and drop it
+
+Status
+: open
+
+Note
+: Paused 2026-11-17 by decision 2026-11-17-floor-read-the-entry: read the entry first (floor-entry-trace), then decide whether the SH0 owner hunt resumes.
+
+Waits
+: surya answering again (parked after a real suspend; the author's power cycle - backlog surya-unreachable-after-suspend)
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-17
+
+Needs
+: phone
+
+Proof
+: soc-sleeps
+
+Rank
+: 15
+
+
+<a id="verify-headphone-mic-earpiece"></a>
+### Verify headphone, mic and earpiece status directly on hardware instead of relying on the secondhand pmaports note
+
+Status
+: open
+
+Note
+: The source only confirms mic/earpiece are broken as a group; headphone output specifically was never separately confirmed one way or the other.
+
+Waits
+: surya answering again (parked after a real suspend; the author's power cycle - backlog surya-unreachable-after-suspend)
+
+About
+: audio-mic
+
+Opened
+: 2026-11-04
+
+Needs
+: phone
+
+Proof
+: null
+
+Rank
+: 60
+
+
+<a id="camera-identify-slots"></a>
+### Ask each camera slot what it is
+
+Status
+: open
+
+Note
+: The first step of the cameras: a test device tree that only powers a slot (supplies, clock, reset), booted once as the second entry; then the chip's identity register read over its control bus. Turns reported sensor models into facts.
+
+Waits
+: surya answering again (parked after a real suspend; the author's power cycle - backlog surya-unreachable-after-suspend)
+
+About
+: camera-rear
+
+Opened
+: 2026-11-11
+
+Needs
+: phone
+
+Proof
+: image-sensor
+
+Rank
+: 70
+
+
+<a id="image-sensors"></a>
+### Image sensors: described, then identified, then seen
+
+Status
+: open
+
+Note
+: Known (research/cameras.md): the pipeline and all three control buses are bound; no sensor is described, which alone is why the cameras are dark. The vendor's kernel gives the wiring of seven sensor slots - bus, lanes, supplies, pins, clock - and names no model. Next: power one slot at a time in a test device tree and ask the chip for its identity; describe fully what this kernel already has a driver for; a frame.
+
+Waits
+: surya answering again (parked after a real suspend; the author's power cycle - backlog surya-unreachable-after-suspend)
+
+About
+: camera-rear
+
+Opened
+: 2026-11-11
+
+Needs
+: phone
+
+Proof
+: image-sensor
+
+Rank
+: 71
