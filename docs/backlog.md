@@ -2071,3 +2071,25 @@ Proof
 
 Rank
 : 0
+
+
+<a id="surya-lab-owner-and-watch"></a>
+### surya-lab: an **Owner** line in AGENTS.md and [host] watch = true in device.toml
+
+Status
+: open
+
+Note
+: From orchestration (lpoco 0.7+: watchers are opt-in): (1) device.toml gets a [host] table with watch = true (until then devlab-watch@surya-lab keeps running as is but is no longer restarted when its binary changes); (2) AGENTS.md gets an **Owner** line naming the surya coordinator session (local_0ecf107e-d955-49ff-aefb-b0ecaa3bcbdd, 'surya coordinator: the phone lane') as ideal-agent, docs, lab-tools and device-template have. Repo-only edits, no phone step: do them in one landing; checks green.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Rank
+: 5
