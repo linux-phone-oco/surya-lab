@@ -1186,3 +1186,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-0010-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Kept kernel 7.1.0-sm7150-calls+ and kept dtb, up, healthy, nothing armed; sensorspd stop/start across suspend measured 3/3 crash-free (way-back.sh stop-sensors flag); suite 37 pass, 4 fail (known: fingerprint, cameras, soc-sleeps)
+
+Considered
+: next: prove the same through a real systemctl suspend (sxmo), then mark sleep-fastrpc-helpers done; r5 when the author can unplug
+
+About
+: deep-sleep
