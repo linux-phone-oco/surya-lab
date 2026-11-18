@@ -1206,3 +1206,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-18-surya-pmic-bite-restarts"></a>
+### 2026-11-18-surya-pmic-bite-restarts
+
+Date
+: 2026-11-18
+
+Brief
+: surya's PMIC watchdog bite RESTARTS the phone (not power-off), but leaves a boot loop on a kernel without the driver
+
+Question
+: Does the pm8916 PON watchdog bite on surya restart or power off?
+
+Found
+: pmicwdt+ #4 (grenudi/linux f5bb57d27, dyndbg): probe ok; firmware's original S2_CTL was 0x01 (warm reset), driver set 0x07 and read back 0x07; S2_CTL2 0x00 at rest. Author witnessed (18:55-19:07Z). 18:56:46Z armed /dev/watchdog0 (PMIC wdt here; qcom_wdt is watchdog1, so sleep/way-back.sh's wd=/dev/watchdog0 hits the PMIC one on this kernel), 32 s unpetted: at ~18:57:18Z the phone restarted by itself = PASS. Afterwards it reset every ~35 s on the kept kernel calls+ (no pm8916-wdt driver: the PMIC S2 stage stays enabled across the warm restart and nobody pets it); from ~19:05Z not answering at all. Try of pmicwdt5 from a reachable window failed (no window caught). Likely cure: power hold to clear the PMIC, or pmicwdt kernel booted so the driver can stop S2 (unproven). Lesson: a bite test needs a way to stop S2 afterwards (driver kernel as the boot, or a magic close before the bite ends).
+
+About
+: deep-sleep

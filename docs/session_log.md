@@ -1810,3 +1810,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-1910-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Took lease; item surya-kernel-pmic-wdt: read-only facts sent to coordinator; attended PMIC bite run in the author's witnessed window: restart PASS, then boot loop every ~35 s on calls+, now not answering (19:09Z). Backlog item left open (not marked done: phone not left known-working).
+
+Considered
+: next: author's power hold (15 s) then a boot; then check way-back.sh check passes on calls+; keep pm8916-wdt out of the kept kernel until it can stop S2 on its own or the kept kernel carries the driver
+
+About
+: deep-sleep
