@@ -1724,3 +1724,25 @@ Proof
 
 Rank
 : 2
+
+
+<a id="sxmo-autosleep-off-lasting"></a>
+### A lab phone must not idle-suspend: sxmo autosleep off through provisioning, with a health check
+
+Status
+: open
+
+Note
+: Found 2026-11-18: sxmo's autosleep (sxmo_autosuspend.sh -> rtcwake -m mem) suspends the idle lab phone, which drops USB and Wi-Fi, so the phone looks hung until someone presses power (3 'hangs' were this). keeper-9 saw: devlab-usb-awake drops its wake lock whenever the UDC is not 'configured', and sxmo_autosuspend.sh keeps running, so one USB blip starts a suspend that does not come back. Repo work, no phone needed to write it: (1) device.toml / provisioning: sxmo autosleep disabled for the lab build (the sxmo config or a masked/stopped autosuspend service, whichever sxmo supports - look at how sxmo_autosuspend.sh is started), and the usb-awake wake lock held regardless of the UDC state; (2) a health check 'autosleep-off' in the suite (pass when no autosuspend process/unit is active and the wake lock is held); (3) land it; the keeper provisions it on the phone when the phone answers (that step is then a phone item). Measured cycles (way-back.sh / lpoco-health suspend cycle) still suspend it deliberately, with the watchdog armed.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: build
+
+Rank
+: 1
