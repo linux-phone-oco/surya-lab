@@ -1978,10 +1978,10 @@ Proof
 ### Who runs rtcwake -m mem -s 99999999 on the phone? (it replaced try 4's 15 s alarm)
 
 Status
-: open
+: done
 
 Note
-: READ ONLY on the phone (no suspend). Try 4's last journal lines show rtcwake -m mem -s 99999999 plus a write to wakeup_count: something other than sus.sh replaced the 15 s alarm with a three-year one (research 2026-11-18-real-suspend-try4...). Find who: grep the phone's sxmo hooks/scripts and services (sxmo_autosuspend.sh, sxmo_hook_*, ~/.config/sxmo, /usr/share/sxmo, /etc/sxmo, systemd units, crontab), ps/journal of the process that ran it, the parent unit; which of them still runs although the usb-awake lock was stopped for the try (the lock being dropped lets autosuspend act: the try itself invited it). Record the answer and the fix (stop/mask what runs it for a try, or make the try hold sxmo's own lock) as research; land. THEN write, in the item health-cycle-probe-attended, plain words for the author: what to expect and what to check (practice 11), and the way back, so the coordinator can ask him for the go.
+: proven by research 2026-11-18-who-runs-rtcwake-99999999: sxmo_autosuspend.sh -> sxmo_suspend.sh; devlab-usb lock holds it; tries keep the lock or take sxmo_not_suspendable
 
 About
 : deep-sleep
@@ -2006,10 +2006,10 @@ Status
 : open
 
 Note
-: Prepared by the keeper after who-runs-rtcwake-99999999: what way-back.sh cycle probe does (read its header), what happens to USB/screen/phone and for how long, what the author should see and check, and what to do if the phone does not return within ~60 s (press power). The coordinator asks the author for the go; no real systemctl suspend before the fuse is proven to bite on that path (try-4 class).
+: What to say to the author (plain words). WHAT HAPPENS: I run 'way-back.sh cycle 10 probe' on the phone: it arms the 30 s watchdog, suspends the phone to idle for about 2 s (Bluetooth left on, so it wakes at once), and deliberately does NOT disarm the watchdog. The phone then resets itself about 30 s later and reboots. WHAT YOU SEE: USB drops and the screen may blank; about 30 s after the start the phone restarts (logo, boot ~1-2 min) and comes back on USB by itself. NOTHING IS FLASHED, no real long sleep, sxmo's autosleep stays blocked by the devlab-usb lock. WHAT TO CHECK: that it restarted by itself within ~35 s of the start (the proof the watchdog lives through a real suspend entry), and that it is back on USB afterwards. WAY BACK: if it has not returned within ~60 s after the reset, hold the power button ~10 s and boot it. I will not run it until you say go; afterwards I run the suite and report.
 
 Waits
-: who-runs-rtcwake-99999999 answered, and the author's go (he is at the lab)
+: the author's go (he is at the lab)
 
 About
 : deep-sleep

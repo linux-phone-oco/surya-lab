@@ -1083,3 +1083,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-18-who-runs-rtcwake-99999999"></a>
+### 2026-11-18-who-runs-rtcwake-99999999
+
+Date
+: 2026-11-18
+
+Brief
+: rtcwake -m mem -s 99999999 is sxmo_suspend.sh (default suspend_time when no cron job), run in a loop by sxmo_autosuspend.sh (pid of the sxmo session); devlab-usb wake lock is what holds it back
+
+Question
+: Who runs rtcwake -m mem -s 99999999 on the phone, replacing try 4's 15 s alarm?
+
+Found
+: Read only on the phone (no suspend). /usr/bin/sxmo_suspend.sh sets suspend_time=99999999 ('far away') and only lowers it when sxmo_hook_mnc.sh finds a sxmo_rtcwake cron job (crontab has none), then runs 'doas rtcwake -m mem -s $suspend_time'. Its caller is /usr/bin/sxmo_autosuspend.sh (running now, started by the sxmo session): loop that reads /sys/power/wakeup_count (blocks while any wake lock is held), runs sxmo_hook_block_suspend.sh, writes the count back (the wakeup_count write seen in try 4's journal), then sxmo_suspend.sh. Wake locks held now: devlab-usb only (devlab-usb-awake service; /usr/local/bin/devlab-usb-awake says autosuspend blocks on it). So when a try stops devlab-usb, autosuspend sees no lock, writes wakeup_count and runs rtcwake mem -s 99999999: the 15 s alarm is replaced, the phone sleeps three years, in mem not s2idle, with whatever the fuse state. Nothing else (no unit, no cron) runs rtcwake. FIX: a try never stops devlab-usb; if the lock must drop, first hold sxmo's own: 'sxmo_wakelock.sh lock sxmo_not_suspendable infinite' (unlock after), or stop sxmo_autosuspend.sh for the try. way-back.sh cycle writes its own rtcwake -m freeze and leaves the lock alone, so it is not affected.
+
+About
+: deep-sleep
