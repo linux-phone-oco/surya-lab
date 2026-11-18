@@ -1102,3 +1102,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-18-health-cycle-probe-phone-did-not-return"></a>
+### 2026-11-18-health-cycle-probe-phone-did-not-return
+
+Date
+: 2026-11-18
+
+Brief
+: Attended probe 'way-back.sh cycle 10 probe' (fuse 30 s armed, kept lit): phone left USB at 13:57:49 and had not returned or reset 5+ min later; the fuse did not bite again
+
+Question
+: Does the 30 s watchdog reset the phone after a real suspend entry (cycle 10 probe), with the author present?
+
+Found
+: 13:57:38 cycle started; at 13:57:49 the script printed 'back from the suspend; the fuse stays lit'. From then lpoco lab phone find says xiaomi-surya answers at no address (checked to 14:03). No reset within 35 s, none within 5 min. So the fuse does not bite on this path (pre-check showed keep_armed_in_suspend=N on the phone). A real systemctl suspend try must NOT follow. Author's hands needed: hold power ~10 s and boot.
+
+About
+: deep-sleep
