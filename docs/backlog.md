@@ -1902,28 +1902,6 @@ Needs
 : phone
 
 
-<a id="surya-unreachable-after-try4"></a>
-### surya did not return from real suspend try 4: the author's power cycle, then read /var/tmp/sus-try, pstore, journalctl -b -1
-
-Status
-: in-progress
-
-Note
-: Read-back done (research 2026-11-18-try4-read-back): fuse never bit; stray rtcwake -m mem -s 99999999 after the fuse marker; cause not decided by logs. Remaining: trace who ran that rtcwake; the fuse-bite-through-suspend proof (cycle probe) needs an attended window - no real systemctl suspend until then.
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-18
-
-Needs
-: phone
-
-Rank
-: 0
-
-
 <a id="surya-kernel-pmic-wdt"></a>
 ### surya's kernel with the PMIC watchdog series (linux-phone-oco/linux topic/pmic-wdt-wake-in-suspend) and &pm6150_wdt enabled, wakeup-source
 
@@ -2047,3 +2025,27 @@ Proof
 
 Rank
 : 1
+
+
+<a id="surya-unreachable-after-try4"></a>
+### surya did not return from real suspend try 4: the author's power cycle, then read /var/tmp/sus-try, pstore, journalctl -b -1
+
+Status
+: done
+
+Note
+: Read-back done (research 2026-11-18-try4-read-back): fuse never bit; stray rtcwake -m mem -s 99999999 after the fuse marker; cause not decided by logs. Remaining: trace who ran that rtcwake; the fuse-bite-through-suspend proof (cycle probe) needs an attended window - no real systemctl suspend until then.
+
+2026-11-18: READ (surya-lab PRs 216-217): no boot between 11:45 and the author's hold at 12:16, so the fuse never bit; the last journal lines show rtcwake -m mem -s 99999999 replacing the 15 s alarm; pstore empty. Next: who-runs-rtcwake-99999999, then the attended cycle probe.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Rank
+: 0
