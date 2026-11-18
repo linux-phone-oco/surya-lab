@@ -2059,3 +2059,21 @@ Done
 
 Considered
 : next: surya-kernel-pmic-wdt and kept-kernel-with-pmic-wdt need the attended window (never defuse unattended); unattended: surya-step-checks, boot race root cause
+
+---
+
+
+<a id="2026-11-18-2110-how-the-phone-stands-step-checks"></a>
+### How the phone stands after step checks
+
+Entry date
+: 2026-11-18
+
+Done
+: kept kernel 7.1.0-sm7150-calls+ with stock fallback unchanged and healthy (suite 20261118-204845 76 pass 0 fail) watchdog untouched no suspend. Wrote read-only checks battery-gauge charger-online thermal-zones (PR 303) put the suite and claimed 3 steps from that run. surya-kernel-pmic-wdt skipped: its bite is attended only.
+
+Considered
+: next: surya-step-checks goes on with the cheap groups (usb gadget time sync backlight sxmo running shell-up pon-reason); surya-kernel-pmic-wdt and kept-kernel-with-pmic-wdt wait for the attended window
+
+About
+: deep-sleep
