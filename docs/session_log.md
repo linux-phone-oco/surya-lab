@@ -1723,3 +1723,18 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-1800-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: surya answers on kept kernel 7.1.0-sm7150-calls+, healthy (44 pass, 0 fail, 6 not measured, no SIM). Closed surya-silent-after-sxmo-apk: cable event (usb0 carrier down 15:36-17:47), no suspend, ModemManager still installed, sxmo-utils installed. Nothing flashed.
+
+Considered
+: next: surya-kernel-pmic-wdt (build + one-shot try only; never arm the PMIC bite until reset type proven to restart, author present - walleye power-off caution). Findings for the upstreams coordinator: (1) packaging ok on phone, ModemManager present (2) no apk-time restart of NM/tinydm seen.

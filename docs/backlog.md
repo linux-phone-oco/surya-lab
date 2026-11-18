@@ -2267,14 +2267,10 @@ Rank
 ### surya went silent after the sxmo-utils@lab install: asleep again? (read once it answers)
 
 Status
-: open
+: done
 
 Note
-: After the install of sxmo-utils 1.18.1_p20261118 (lab apk: backoff, stop-by-profile, surya sensors) the phone is silent: not on USB, no address. Suspect: sxmo restarted its autosuspend with the new package (its own wake-lock logic, 'stop by profile') while our devlab-usb-awake lock was not held through it, so the phone suspended (the 99999999 s rtcwake) - the same shape as before. When it answers: journalctl -b: the last lines before the silence, who suspended it (sxmo_suspend.sh), whether our lock was held, the apk's backoff behaviour; fix in the install step (hold the lock; /etc/lpoco/allow-autosleep off) and record.
-
-From the upstreams coordinator (read of lab-tools packaging/sxmo-utils vs Alpine 3.24 sxmo-utils 1.18.1-r4) - check these when the phone answers, and send the findings to the upstreams coordinator (local_ab8f8562-e34e-4d3d-92ef-a68ecaecaaf5) via the surya coordinator: (1) packaging is Alpine-identical for NM 00-sxmo.conf and the polkit rules; post-install scripts only print. (2) REAL difference: -common no longer depends on modemmanager, mmsd-tng, vvmd (moved to -modem, -modem-mms, -modem-vvm): if they were not in /etc/apk/world, the install REMOVED ModemManager: check 'apk info -e modemmanager' and /var/log/apk.log. (3) the scripts are upstream master 1fd7822 (51 commits past 1.18.1: sxmo_idle refactor, superd restart, SXMO_NO_MODEM dropped); they act when Sxmo or superd starts, not at apk time - so look at what restarted sxmo/superd and when. (4) If surya had no Sxmo stack before this install, it brought dnsmasq, tinydm, superd, NM's ifupdown managed=true drop-in (NM can take usb0 if it is in /etc/network/interfaces on NM's next restart) - read /var/log/apk.log or 'apk audit' for what came in, and whether NM or tinydm restarted: NM taking usb0 would explain the USB link vanishing without a suspend at all. Check this FIRST: journalctl -b -1 for NetworkManager/usb0/gadget lines before the silence.
-
-2026-11-18 CORRECTION from the author: surya was physically UNPLUGGED (not asleep); he plugged it back in and 172.16.42.1 answers. So read it as a CABLE event, not the sxmo package: journal for USB disconnect/power events at ~17:50Z (usb gadget, UDC state, charger online), confirm the wake lock is held, confirm sxmo-utils@lab is installed and healthy (the packaging checks above are still worth one look: ModemManager still installed? NM did not take usb0?), then close or correct this item; the health suite after. Then resume the queue.
+: proven by journal: no suspend, uptime 4:40 unbroken, usb0 carrier lost 15:36 and back 17:47 (cable unplugged, as the author said); ModemManager and sxmo-utils installed; NM manages usb0 only as USB Networking; suite healthy 44 pass 0 fail
 
 About
 : deep-sleep
