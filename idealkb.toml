@@ -5,3 +5,8 @@ version = "0.16.0"
 own = ["tables.toml", "records/backlog.sql"]
 # records a script runs (lpoco lab files a run with test-run): ikb leaves them out of its help
 machine = ["test-run"]
+
+# Why each own file is kept (bin/check-own.sh in ideal-knowledge-base reads it): a reason, or upstream:ITEM.
+[why]
+"tables.toml" = "the device's own tables (devices, parts, test runs and results) sit in this file beside the generic ones"
+"records/backlog.sql" = "names the queue's fields beside the generic ones; a candidate to drop now that idealkb's backlog record has needs, proof, rank and hardware (backlog tables-own-drift)"
