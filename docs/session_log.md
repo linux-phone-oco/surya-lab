@@ -1222,3 +1222,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-sign-defused-watchdog"></a>
+### Sign: the watchdog was defused for a real suspend and the phone stayed away
+
+Entry date
+: 2026-11-18
+
+Done
+: A keeper ran the third real systemctl suspend try with the 30 s fuse defused (only re-armed on return); the phone never returned and has not enumerated on USB since; it waits for the author's power cycle (backlog surya-unreachable-after-suspend). The lesson was already written (docs PR 272: a step that can drop the only link must leave the watchdog armed) and the coordinator had asked for it armed on every try while the author is away; it did not reach the keeper, because a launcher run reads the queue, not messages.
+
+Considered
+: The sign points at the whole: the rule lives in a lesson (log) but not where the keeper starts; the launcher start reads phone-keeper.md and the item note only. Answer: the rule goes into phone-keeper.md's surya part (via orchestration, docs is theirs): never defuse the watchdog on an unattended try; a suspend that cannot happen with it armed waits for an attended window - and into the note of every item whose try can drop the link.
+
+About
+: deep-sleep
