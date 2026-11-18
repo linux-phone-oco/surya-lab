@@ -2078,7 +2078,7 @@ Proof
 : pmic-wdt-bites
 
 Rank
-: 1
+: 4
 
 
 <a id="surya-pmic-wdt-proof"></a>
@@ -2137,10 +2137,10 @@ Rank
 ### Research: why a resume from s2idle stalls CPU1 (wcd9370 / ADSP resume errors, RCU stalls for minutes, no reset)
 
 Status
-: open
+: done
 
 Note
-: Read 2026-11-18 (research 2026-11-18-probe-drop-1358-read, surya-lab #235): the attended probe's suspend resumed cleanly from s2idle (12:57:47Z), then wcd9370/ADSP resume errors, watchdog0 pretimeout at 12:58:15Z, and CPU1 RCU stalls for 4+ min with the console still printing: a HANG, no bite, no reset, no Oops - the same shape as try 4. So the way back from this hang is not qcom_wdt (the SoC watchdog bark was seen but no reset followed): it is the PMIC watchdog (the series topic/pmic-wdt-wake-in-suspend, surya-kernel-pmic-wdt) or a hardware reset. And the CAUSE of the stall: what the wcd9370 codec / ADSP resume path does that blocks a CPU (sdw / soundwire resume, q6 apr resume, wcd9370 reset gpio / regulator on resume, a lock held across suspend: the sensors daemon, the audio card), compare with other mainline phones with wcd937x (sc7280, sm8250...: known resume fixes, rpmsg/apr/glink resume ordering), and our earlier note: the ADSP crashed on every suspend with sensorspd attached. Ends with a decision and phone items (watchdog armed with the PMIC series first; ideas: unbind/stop the audio stack around a cycle as the way-back already stops sensorspd, then see if the stall disappears).
+: Answered by research 2026-11-18-resume-stall-how-it-stands and decision 2026-11-18-resume-stall-way; steps resume-stall-way-back, resume-stall-repro-attended, resume-stall-stop-clients.
 
 About
 : deep-sleep
@@ -2153,3 +2153,84 @@ Needs
 
 Rank
 : 1
+
+
+<a id="resume-stall-way-back"></a>
+### Stalled-resume way back: sysctl panic_on_rcu_stall=1, kernel.panic=5 on the phone
+
+Status
+: open
+
+Note
+: Decision 2026-11-18-resume-stall-way step 1. Package or sysctl.d (/etc/sysctl.d/90-lpoco-way-back.conf), not by hand; health check tests/health/base/sleep-way-back.sh must pass. Needs the lab's next free-lease window.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: way-back-panic-on-rcu-stall
+
+Rank
+: 1
+
+
+<a id="resume-stall-repro-attended"></a>
+### Attended repro: way-back.sh cycle 15 probe (no stop-sensors) with the sysctls set; read the panic's stack from pstore
+
+Status
+: open
+
+Note
+: Attended (the author present, fuse 30 s). Expected: ADSP crash after resume, stall, panic, reboot within ~40 s, pstore dmesg with CPU1's state. Record what CPU1 is stuck on as research; if no reboot comes, the stall hang is a total one: go to surya-kernel-pmic-wdt.
+
+Blocked by
+: resume-stall-way-back
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: way-back-ramoops-present
+
+Rank
+: 2
+
+
+<a id="resume-stall-stop-clients"></a>
+### Sleep hook: stop sensorspd/FastRPC helpers before, start after, also after a real systemctl suspend; 20 attended cycles, no ADSP crash
+
+Status
+: open
+
+Note
+: Merges with sleep-fastrpc-helpers (same hook); proof also: no 'fatal error received' and no 'IRQ sync failed to resume' in dmesg across the cycles. Decision 2026-11-18-resume-stall-way layer 2.
+
+Blocked by
+: resume-stall-repro-attended
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: bt-no-controller-crash
+
+Rank
+: 3

@@ -1,0 +1,114 @@
+[   12.607996] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[   12.871480] q6afe_probe:1954 DBG
+[   12.874837] q6afe_probe:1970 DBG
+[   12.932261] va_macro 62f20000.codec: qcom,dmic-sample-rate dt entry missing
+[   12.946565] wcd937x_codec audio-codec: missing qcom,mbhc-buttons-vthreshold-microvolt entry
+[   14.616177] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[   15.235375] qcom_q6v5_pas 4080000.remoteproc: Handover signaled, but it already happened
+[   15.598926] qcom_q6v5_pas 4080000.remoteproc: Handover signaled, but it already happened
+[   15.616848] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[   16.617822] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[   20.317929] q6afe_i2s_port_prepare:1550 num_sd_lines=0x1 cfg->sd_line_mask=0x1
+[   20.325419] q6afe_i2s_port_prepare:1659 DBG num_sd_lines=0x1 mono_stereo=0x1 channel_mode=0x1
+[   20.353494] qcom-soundwire 62ed0000.soundwire-controller: qcom_swrm_irq_handler: SWR read enable valid mismatch
+[   20.411719] q6afe_i2s_port_prepare:1550 num_sd_lines=0x1 cfg->sd_line_mask=0x1
+[   20.419263] q6afe_i2s_port_prepare:1659 DBG num_sd_lines=0x1 mono_stereo=0x1 channel_mode=0x1
+[   20.489815] q6afe_i2s_port_prepare:1550 num_sd_lines=0x1 cfg->sd_line_mask=0x1
+[   20.497351] q6afe_i2s_port_prepare:1659 DBG num_sd_lines=0x1 mono_stereo=0x1 channel_mode=0x1
+[   20.555354] q6afe_i2s_port_prepare:1550 num_sd_lines=0x1 cfg->sd_line_mask=0x1
+[   20.567638] q6afe_i2s_port_prepare:1659 DBG num_sd_lines=0x1 mono_stereo=0x1 channel_mode=0x1
+[   20.632166] q6afe_i2s_port_prepare:1550 num_sd_lines=0x1 cfg->sd_line_mask=0x1
+[   20.639714] q6afe_i2s_port_prepare:1659 DBG num_sd_lines=0x1 mono_stereo=0x1 channel_mode=0x1
+[   20.697096] q6afe_i2s_port_prepare:1550 num_sd_lines=0x1 cfg->sd_line_mask=0x1
+[   20.704656] q6afe_i2s_port_prepare:1659 DBG num_sd_lines=0x1 mono_stereo=0x1 channel_mode=0x1
+[   20.769937] q6afe_i2s_port_prepare:1550 num_sd_lines=0x1 cfg->sd_line_mask=0x1
+[   20.777500] q6afe_i2s_port_prepare:1659 DBG num_sd_lines=0x1 mono_stereo=0x1 channel_mode=0x1
+[  124.914333] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[  125.136681] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[  125.359501] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[  125.582410] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[  130.027878] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[  136.436952] q6afe_i2s_port_prepare:1550 num_sd_lines=0x1 cfg->sd_line_mask=0x1
+[  136.444487] q6afe_i2s_port_prepare:1659 DBG num_sd_lines=0x1 mono_stereo=0x1 channel_mode=0x1
+[  138.527602] q6afe_i2s_port_prepare:1550 num_sd_lines=0x1 cfg->sd_line_mask=0x1
+[  138.535160] q6afe_i2s_port_prepare:1659 DBG num_sd_lines=0x1 mono_stereo=0x1 channel_mode=0x1
+[  141.051534] q6afe_i2s_port_prepare:1550 num_sd_lines=0x1 cfg->sd_line_mask=0x1
+[  141.059049] q6afe_i2s_port_prepare:1659 DBG num_sd_lines=0x1 mono_stereo=0x1 channel_mode=0x1
+[  142.227273] q6afe_i2s_port_prepare:1550 num_sd_lines=0x1 cfg->sd_line_mask=0x1
+[  142.236169] q6afe_i2s_port_prepare:1659 DBG num_sd_lines=0x1 mono_stereo=0x1 channel_mode=0x1
+[ 2507.855670] watchdog: watchdog0: watchdog did not stop!
+[ 2510.046893] dwc3-qcom-legacy a6f8800.usb: port-1 HS-PHY not in L2
+[ 2510.450339] qcom_q6v5_pas 62400000.remoteproc: fatal error received: err_qdi.c:1040:EX:sensor_process:0x1:frpc_dsp:0xc9:PC=0xb2051d18
+[ 2510.462819] remoteproc remoteproc0: crash detected in adsp: type fatal error
+[ 2510.470156] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[ 2510.470321] remoteproc remoteproc0: handling crash #1 in adsp
+[ 2510.484641] remoteproc remoteproc0: recovering adsp
+[ 2510.495421] qcom-q6afe aprsvc:service:4:4: packet not transmitted (-5)
+[ 2510.502213] qcom-q6afe aprsvc:service:4:4: AFE set params failed -22
+[ 2510.508794] va_macro 62f20000.codec: unable to prepare mclk
+[ 2510.577976] wcd9370-codec sdw:3:0:0217:010a:00:3: IRQ sync failed to resume: -16
+[ 2510.585691] wcd9370-codec sdw:3:0:0217:010a:00:3: IRQ sync failed to resume: -16
+[ 2510.593336] wcd9370-codec sdw:3:0:0217:010a:00:3: IRQ sync failed to resume: -16
+[ 2510.600968] wcd9370-codec sdw:3:0:0217:010a:00:3: IRQ sync failed to resume: -16
+[ 2510.608597] wcd9370-codec sdw:3:0:0217:010a:00:3: IRQ sync failed to resume: -16
+[ 2510.616228] wcd9370-codec sdw:3:0:0217:010a:00:3: IRQ sync failed to resume: -16
+[ 2510.623894] wcd9370-codec sdw:3:0:0217:010a:00:3: IRQ sync failed to resume: -16
+[ 2510.631537] wcd9370-codec sdw:3:0:0217:010a:00:3: IRQ sync failed to resume: -16
+[ 2510.639144] wcd9370-codec sdw:3:0:0217:010a:00:3: IRQ sync failed to resume: -16
+[ 2510.646745] wcd9370-codec sdw:3:0:0217:010a:00:3: IRQ sync failed to resume: -16
+[ 2510.654345] wcd9370-codec sdw:3:0:0217:010a:00:3: IRQ sync failed to resume: -16
+[ 2510.661948] wcd9370-codec sdw:3:0:0217:010a:00:3: IRQ sync failed to resume: -16
+[ 2510.669551] wcd9370-codec sdw:3:0:0217:010a:00:3: IRQ sync failed to resume: -16
+[ 2510.677157] wcd9370-codec sdw:3:0:0217:010a:00:3: IRQ sync failed to resume: -16
+[ 2510.684765] wcd9370-codec sdw:3:0:0217:010a:00:3: IRQ sync failed to resume: -16
+[ 2510.692365] wcd9370-codec sdw:3:0:0217:010a:00:3: IRQ sync failed to resume: -16
+[ 2510.699966] wcd9370-codec sdw:3:0:0217:010a:00:3: IRQ sync failed to resume: -16
+[ 2510.707569] wcd9370-codec sdw:3:0:0217:010a:00:3: IRQ sync failed to resume: -16
+[ 2510.715173] wcd9370-codec sdw:3:0:0217:010a:00:3: IRQ sync failed to resume: -16
+[ 2510.722784] wcd9370-codec sdw:3:0:0217:010a:00:3: IRQ sync failed to resume: -16
+[ 2510.983909] q6afe_probe:1954 DBG
+[ 2510.989281] q6afe_probe:1970 DBG
+[ 2511.071199] wcd937x_codec audio-codec: ASoC error (-16): at snd_soc_component_probe() on audio-codec
+[ 2511.082138] snd-sm8250 sound: ASoC: failed to instantiate card -16
+[ 2511.217850] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[ 2512.219389] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[ 2513.222132] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[ 2514.223111] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[ 2515.225255] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[ 2538.392058] watchdog0: pretimeout event
+[ 2560.372281] rcu: INFO: rcu_preempt detected stalls on CPUs/tasks:
+[ 2560.378585] rcu: 	1-...0: (1 GPs behind) idle=af5c/1/0x4000000000000000 softirq=68344/68344 fqs=4276
+[ 2560.387982] rcu: 	(detected by 5, t=21017 jiffies, g=270657, q=830 ncpus=8)
+[ 2570.396646] rcu: rcu_preempt kthread timer wakeup didn't happen for 10022 jiffies! g270657 f0x0 RCU_GP_WAIT_FQS(5) ->state=0x402
+[ 2570.408537] rcu: 	Possible timer handling issue on cpu=5 timer-softirq=17788
+[ 2570.415794] rcu: rcu_preempt kthread starved for 10045 jiffies! g270657 f0x0 RCU_GP_WAIT_FQS(5) ->state=0x402 ->cpu=5
+[ 2570.426697] rcu: 	Unless rcu_preempt kthread gets sufficient CPU time, OOM is now expected behavior.
+[ 2570.436082] rcu: RCU grace-period kthread stack dump:
+[ 2570.441422] rcu: Stack dump where RCU GP kthread last ran:
+[ 2633.452668] rcu: INFO: rcu_preempt detected stalls on CPUs/tasks:
+[ 2633.458972] rcu: 	1-...0: (1 GPs behind) idle=af5c/1/0x4000000000000000 softirq=68344/68344 fqs=4277
+[ 2633.468371] rcu: 	(detected by 3, t=94097 jiffies, g=270657, q=3457 ncpus=8)
+[ 2643.477113] rcu: rcu_preempt kthread timer wakeup didn't happen for 73022 jiffies! g270657 f0x0 RCU_GP_WAIT_FQS(5) ->state=0x402
+[ 2643.489004] rcu: 	Possible timer handling issue on cpu=4 timer-softirq=20524
+[ 2643.496250] rcu: rcu_preempt kthread starved for 73045 jiffies! g270657 f0x0 RCU_GP_WAIT_FQS(5) ->state=0x402 ->cpu=4
+[ 2643.507153] rcu: 	Unless rcu_preempt kthread gets sufficient CPU time, OOM is now expected behavior.
+[ 2643.516538] rcu: RCU grace-period kthread stack dump:
+[ 2643.521877] rcu: Stack dump where RCU GP kthread last ran:
+[ 2716.533065] rcu: INFO: rcu_preempt detected stalls on CPUs/tasks:
+[ 2716.539370] rcu: 	1-...0: (1 GPs behind) idle=af5c/1/0x4000000000000000 softirq=68344/68344 fqs=16878
+[ 2716.548855] rcu: 	(detected by 3, t=177177 jiffies, g=270657, q=6885 ncpus=8)
+[ 2726.557702] rcu: rcu_preempt kthread timer wakeup didn't happen for 10022 jiffies! g270657 f0x0 RCU_GP_WAIT_FQS(5) ->state=0x402
+[ 2726.569593] rcu: 	Possible timer handling issue on cpu=3 timer-softirq=30749
+[ 2726.576840] rcu: rcu_preempt kthread starved for 10045 jiffies! g270657 f0x0 RCU_GP_WAIT_FQS(5) ->state=0x402 ->cpu=3
+[ 2726.587742] rcu: 	Unless rcu_preempt kthread gets sufficient CPU time, OOM is now expected behavior.
+[ 2726.597128] rcu: RCU grace-period kthread stack dump:
+[ 2726.602468] rcu: Stack dump where RCU GP kthread last ran:
+[ 2789.615384] rcu: INFO: rcu_preempt detected stalls on CPUs/tasks:
+[ 2789.621688] rcu: 	1-...0: (1 GPs behind) idle=af5c/1/0x4000000000000000 softirq=68344/68344 fqs=19357
+[ 2789.631171] rcu: 	(detected by 0, t=250244 jiffies, g=270657, q=7258 ncpus=8)
+[ 2799.640008] rcu: rcu_preempt kthread timer wakeup didn't happen for 50613 jiffies! g270657 f0x0 RCU_GP_WAIT_FQS(5) ->state=0x402
+[ 2799.651896] rcu: 	Possible timer handling issue on cpu=5 timer-softirq=19765
+[ 2799.659143] rcu: rcu_preempt kthread starved for 50616 jiffies! g270657 f0x0 RCU_GP_WAIT_FQS(5) ->state=0x402 ->cpu=5
+[ 2799.670046] rcu: 	Unless rcu_preempt kthread gets sufficient CPU time, OOM is now expected behavior.
+[ 2799.679431] rcu: RCU grace-period kthread stack dump:
+[ 2799.684770] rcu: Stack dump where RCU GP kthread last ran:

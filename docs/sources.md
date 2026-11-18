@@ -65,3 +65,42 @@ By
 
 Takes
 : on s2idle systems the controller stays enabled and its traffic wakes the system; the usual remedy is bluetoothctl power off before sleep and on after
+
+
+<a id="src-regmap-irq-sync-unlock"></a>
+### drivers/base/regmap/regmap-irq.c (regmap_irq_sync_unlock)
+
+Url
+: https://github.com/torvalds/linux/blob/63fdb511c27afcebce797e3db580b3534ddfa639/drivers/base/regmap/regmap-irq.c
+
+By
+: Linux kernel
+
+Takes
+: The message 'IRQ sync failed to resume: N' is pm_runtime_get_sync() on the codec failing inside an irq mask/unmask; -16 is -EBUSY, so the codec's runtime PM could not resume while its parent chain was down
+
+
+<a id="src-wcd937x-sdw-runtime-pm"></a>
+### sound/soc/codecs/wcd937x-sdw.c (runtime resume, regcache sync)
+
+Url
+: https://github.com/torvalds/linux/blob/63fdb511c27afcebce797e3db580b3534ddfa639/sound/soc/codecs/wcd937x-sdw.c
+
+By
+: Linux kernel
+
+Takes
+: Mainline wcd9370 resume is only a regcache sync; no ADSP-restart handling, no system-sleep ops - so a crash of the ADSP under it has no mainline answer
+
+
+<a id="src-q6v5-pas-adsp-ssr"></a>
+### drivers/remoteproc/qcom_q6v5_pas.c (adsp crash handling)
+
+Url
+: https://github.com/torvalds/linux/blob/63fdb511c27afcebce797e3db580b3534ddfa639/drivers/remoteproc/qcom_q6v5_pas.c
+
+By
+: Linux kernel
+
+Takes
+: A fatal error of the ADSP is handled as a recovery (stop, reload, start) while the audio drivers above it stay bound
