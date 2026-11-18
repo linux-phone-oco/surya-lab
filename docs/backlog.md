@@ -1765,13 +1765,47 @@ Opened
 
 
 <a id="devlab-usb-awake-hold-through-resume"></a>
-### Hold the wake lock through a resume, not only while USB is configured
+### Provision the phone with the always-held devlab-usb-awake (PR 195): it still runs the 2026-11-10 script
 
 Status
 : open
+
+Note
+: Cause of the 11:00-11:17Z suspend loop: the phone's /usr/local/bin/devlab-usb-awake is the old one (lock only while the UDC is configured; repo main holds it always, opt-out /etc/devlab-allow-autosleep). Phone part: copy lab/devlab-usb-awake to the phone, restart the service (devlab only, no reboot), run the suite. Proof must also hold with the UDC not configured - ask the programmer for a check that reads the script, not just the lock. Separate items: surya-key-chatter-resin, adsp/audio.
 
 About
 : deep-sleep
 
 Opened
 : 2026-11-18
+
+Needs
+: phone
+
+Proof
+: autosleep-wakelock-held
+
+Rank
+: 1
+
+
+<a id="surya-adsp-audio-after-suspend-loop"></a>
+### adsp crashed 4x and sound-card, mic, call-audio-path fail after the suspend loop
+
+Status
+: open
+
+Note
+: seen 2026-11-18 11:20Z; passed at 08:22Z. Look read-only first (dmesg adsp, remoteproc state); a reboot only through devlab, tests first.
+
+About
+: audio-speaker
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: sound-card
