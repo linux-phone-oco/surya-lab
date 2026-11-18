@@ -1,0 +1,6 @@
+#!/bin/sh
+# systemd-sleep hook: the sensors daemon is stopped for a suspend (its unit Conflicts=suspend.target) but
+# nothing starts it again on return - Restart=always does not apply to a stop by conflict, and a start from
+# the hook itself is refused while suspend.target's job is still queued. Start it a moment later, apart.
+[ "$1" = post ] && systemd-run --quiet --on-active=3 --unit=devlab-sensors-resume systemctl start hexagonrpcd-adsp-sensorspd.service
+exit 0

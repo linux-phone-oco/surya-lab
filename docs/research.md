@@ -884,3 +884,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-18-systemctl-suspend-leaves-sensors-stopped"></a>
+### 2026-11-18-systemctl-suspend-leaves-sensors-stopped
+
+Date
+: 2026-11-18
+
+Brief
+: A real systemctl suspend stops sensorspd and nothing restarts it; a hook start is refused mid-suspend; try 3 with a delayed start left the phone unreachable
+
+Question
+: Does a real systemctl suspend (RTC wake) keep the sensors working, as the manual stop/start did?
+
+Found
+: Try 1 (no hook): suspend returned at once (serial wakeup write 'echo 0' was invalid; fixed to 'disabled'), sensorspd stayed inactive after return: Conflicts=suspend.target stops it and Restart=always does not apply, so sensors are lost until a manual start. Try 2 (hook starting it in post): systemctl start refused 'destructive: suspend.target has start job queued'; an earlier suspend entry (09.33) still saw the daemon running and ADSP crashed (sensor_process); sensors gone until daemon started by hand, then restored. Try 3 (hook starts via systemd-run --on-active=3, lab/devlab-sensors-resume): phone stopped answering on USB for 10+ min after the try; fuse defuse ran only on return, so cause unknown (hang or wedge). Not proven; the hook is not landed as a fix.
+
+About
+: deep-sleep
