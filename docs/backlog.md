@@ -1994,3 +1994,56 @@ Needs
 
 Proof
 : suspend-retry-backs-off,sensors-after-suspend
+
+
+<a id="who-runs-rtcwake-99999999"></a>
+### Who runs rtcwake -m mem -s 99999999 on the phone? (it replaced try 4's 15 s alarm)
+
+Status
+: open
+
+Note
+: READ ONLY on the phone (no suspend). Try 4's last journal lines show rtcwake -m mem -s 99999999 plus a write to wakeup_count: something other than sus.sh replaced the 15 s alarm with a three-year one (research 2026-11-18-real-suspend-try4...). Find who: grep the phone's sxmo hooks/scripts and services (sxmo_autosuspend.sh, sxmo_hook_*, ~/.config/sxmo, /usr/share/sxmo, /etc/sxmo, systemd units, crontab), ps/journal of the process that ran it, the parent unit; which of them still runs although the usb-awake lock was stopped for the try (the lock being dropped lets autosuspend act: the try itself invited it). Record the answer and the fix (stop/mask what runs it for a try, or make the try hold sxmo's own lock) as research; land. THEN write, in the item health-cycle-probe-attended, plain words for the author: what to expect and what to check (practice 11), and the way back, so the coordinator can ask him for the go.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: soc-sleeps
+
+Rank
+: 0
+
+
+<a id="health-cycle-probe-attended"></a>
+### Attended: way-back.sh cycle probe with the author present (proves the fuse bites on the real path, nothing suspended for long)
+
+Status
+: open
+
+Note
+: Prepared by the keeper after who-runs-rtcwake-99999999: what way-back.sh cycle probe does (read its header), what happens to USB/screen/phone and for how long, what the author should see and check, and what to do if the phone does not return within ~60 s (press power). The coordinator asks the author for the go; no real systemctl suspend before the fuse is proven to bite on that path (try-4 class).
+
+Waits
+: who-runs-rtcwake-99999999 answered, and the author's go (he is at the lab)
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: soc-sleeps
+
+Rank
+: 1
