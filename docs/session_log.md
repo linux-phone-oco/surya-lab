@@ -1947,10 +1947,10 @@ Entry date
 : 2026-11-18
 
 Done
-: kept kernel 7.1.0-sm7150-calls+ and stock fallback; healthy: suite 20261118-202945 44 pass, 3 known gaps, 0 fail; ADSP restarted once to bring the sound card back; no kernel change; steps reclaimed from that run
+: unchanged: kept kernel 7.1.0-sm7150-calls+ with stock fallback; fresh suite run 20261118-203254 (72 pass, 5 fail incl. awake-service-active: lpoco-awake inactive, wake lock held by devlab-usb; fingerprint/image-sensor expected); step mapping found no claimable proofs among 82 unknown
 
 Considered
-: next: surya-kernel-pmic-wdt bite is attended; surya-steps-map-history mapping of the 82 unknown is still to do (repo/records only); surya-adsp-audio-boot-race
+: next: surya-kernel-pmic-wdt bite attended; way-back-pick-watchdog-by-identity; surya-adsp-audio-boot-race; sxmo-config-migration
 
 About
 : deep-sleep
