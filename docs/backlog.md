@@ -2093,3 +2093,31 @@ Needs
 
 Rank
 : 5
+
+
+<a id="surya-awake-from-package"></a>
+### The wake lock comes from the lpoco-awake package, not a hand-put script
+
+Status
+: open
+
+Note
+: From orchestration: lpoco-awake is released in lpoco 0.12.1+. Then: enable lpoco-awake.service, retire the hand-put /usr/local/bin/devlab-usb-awake and its unit, move /etc/devlab-allow-autosleep to /etc/lpoco/allow-autosleep. Keep the wake lock held through the swap (no gap: the sxmo autosuspend rtcwake -m mem -s 99999999 loop comes back otherwise), watchdog armed, no suspend, health after.
+
+Waits
+: orchestration: the lab at lpoco 0.12.2 (lpoco host prepare now in the next free-lease window; they say when)
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: soc-sleeps
+
+Rank
+: 6
