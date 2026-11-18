@@ -1,0 +1,41 @@
+# tracer: nop
+#
+# entries-in-buffer/entries-written: 29/29   #P:8
+#
+#                                _-----=> irqs-off/BH-disabled
+#                               / _----=> need-resched
+#                              | / _---=> hardirq/softirq
+#                              || / _--=> preempt-depth
+#                              ||| / _-=> migrate-disable
+#                              |||| /     delay
+#           TASK-PID     CPU#  |||||  TIMESTAMP  FUNCTION
+#              | |         |   |||||     |         |
+          <idle>-0       [000] d.h1.  1746.643485: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1746.643494: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1746.643498: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1746.643502: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1746.643506: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1746.643510: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1746.643514: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1746.643518: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1746.643521: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1746.643525: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1746.643529: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1746.643532: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1746.643536: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1746.643539: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1746.643543: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1746.643547: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1746.643550: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1746.643558: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1746.643562: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1746.643565: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] dNh1.  1746.683249: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+ sxmo_hook_statu-28467   [000] d.h1.  1747.032057: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+ sxmo_hook_statu-28467   [000] d.h1.  1747.035099: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+ sxmo_hook_statu-28467   [000] d.h..  1747.035501: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+ sxmo_hook_statu-28467   [000] d.h..  1747.035654: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+ sxmo_hook_statu-28467   [000] d.h..  1747.035764: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1747.040498: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1747.080537: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+     kworker/0:0-22023   [000] d.h1.  1749.047836: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0

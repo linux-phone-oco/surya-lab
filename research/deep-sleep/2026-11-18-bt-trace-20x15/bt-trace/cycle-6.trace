@@ -1,0 +1,60 @@
+# tracer: nop
+#
+# entries-in-buffer/entries-written: 48/48   #P:8
+#
+#                                _-----=> irqs-off/BH-disabled
+#                               / _----=> need-resched
+#                              | / _---=> hardirq/softirq
+#                              || / _--=> preempt-depth
+#                              ||| / _-=> migrate-disable
+#                              |||| /     delay
+#           TASK-PID     CPU#  |||||  TIMESTAMP  FUNCTION
+#              | |         |   |||||     |         |
+         rtcwake-30552   [000] d.h1.  1837.959264: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h1.  1837.959275: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h1.  1837.959283: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h1.  1837.959288: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h1.  1837.959292: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h1.  1837.959297: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h1.  1837.959316: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h1.  1837.959320: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h1.  1837.959324: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h1.  1837.959328: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h1.  1837.959333: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h1.  1837.959337: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h1.  1837.959341: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h1.  1837.959345: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h1.  1837.959349: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h1.  1837.959353: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h1.  1837.959357: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h1.  1837.959361: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h1.  1837.959366: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h1.  1837.959370: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h..  1837.959376: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h..  1837.959381: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h..  1837.959386: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h..  1837.959390: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h..  1837.959395: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h..  1837.959399: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h..  1837.959403: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h..  1837.959407: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h..  1837.959411: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h..  1837.959415: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h..  1837.959419: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h..  1837.959424: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h..  1837.959428: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h..  1837.959432: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h..  1837.959436: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h..  1837.959440: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h..  1837.959444: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h..  1837.959449: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h..  1837.959453: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-30552   [000] d.h..  1838.001991: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+  wpa_supplicant-822     [000] d.h..  1838.364091: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+  wpa_supplicant-822     [000] d.h..  1838.367087: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+  wpa_supplicant-822     [000] d.h..  1838.367295: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         sugov:6-96      [000] d.h..  1838.367447: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         sugov:6-96      [000] d.h1.  1838.367557: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+ sxmo_wakelock.s-30573   [000] d.h..  1838.373759: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1838.413791: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+     kworker/0:0-22023   [000] d.h1.  1840.393492: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0

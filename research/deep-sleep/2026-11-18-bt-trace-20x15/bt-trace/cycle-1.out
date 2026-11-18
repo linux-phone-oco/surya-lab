@@ -1,0 +1,33 @@
+qcom_stats before:
+  cxsd Count: 0 Accumulated Duration: 0 
+  aosd Count: 0 Accumulated Duration: 0 
+  ddr Count: 0 Accumulated Duration: 0 
+  adsp Count: 0 Accumulated Duration: 0 
+  cdsp Count: 50 Accumulated Duration: 33074621984 
+  modem Count: 2641 Accumulated Duration: 29748008460 
+way-back: sensorspd stopped before the suspend
+rtcwake: assuming RTC uses UTC ...
+rtcwake: wakeup from "freeze" using /dev/rtc0 at Fri Jan 16 14:47:51 1970
+way-back: sensorspd restarted: active; iio: iio:device0 iio:device1 
+back: watchdog stopped; RTC 1349280, asleep (RTC) 25 s of 15 asked
+qcom_stats after:
+  cxsd Count: 0 Accumulated Duration: 0 
+  aosd Count: 0 Accumulated Duration: 0 
+  ddr Count: 0 Accumulated Duration: 0 
+  adsp Count: 0 Accumulated Duration: 0 
+  cdsp Count: 50 Accumulated Duration: 33609492402 
+  modem Count: 2649 Accumulated Duration: 30108494835 
+dmesg since the suspend:
+[ 1692.890088] PM: suspend entry (s2idle)
+[ 1694.463488] hu 00000000e7669be6 qca enq skb 00000000f95f417b tx_ibs_state 0
+[ 1694.463553] hu 00000000e7669be6 wq awake device
+[ 1694.467108] hu 00000000e7669be6 want to wake up
+[ 1694.467147] hu 00000000e7669be6 wq awake rx
+[ 1694.473149] PM: suspend exit
+[ 1721.906210] PM: suspend entry (s2idle)
+[ 1722.992607] hu 00000000e7669be6 qca enq skb 00000000ee9b02df tx_ibs_state 0
+[ 1722.992685] hu 00000000e7669be6 wq awake device
+[ 1722.996267] hu 00000000e7669be6 want to wake up
+[ 1722.996288] hu 00000000e7669be6 wq awake rx
+[ 1723.001242] PM: suspend exit
+hci0 present after resume, rfkill: 1: hci0: Bluetooth 	Soft blocked: no 	Hard blocked: no 

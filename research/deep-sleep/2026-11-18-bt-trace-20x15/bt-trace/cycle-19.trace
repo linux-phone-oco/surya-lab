@@ -1,0 +1,21 @@
+# tracer: nop
+#
+# entries-in-buffer/entries-written: 9/9   #P:8
+#
+#                                _-----=> irqs-off/BH-disabled
+#                               / _----=> need-resched
+#                              | / _---=> hardirq/softirq
+#                              || / _--=> preempt-depth
+#                              ||| / _-=> migrate-disable
+#                              |||| /     delay
+#           TASK-PID     CPU#  |||||  TIMESTAMP  FUNCTION
+#              | |         |   |||||     |         |
+          <idle>-0       [000] dNh1.  2145.649195: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+  wpa_supplicant-822     [000] d.h..  2146.014157: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  2146.017144: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  2146.019956: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  2146.020104: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  2146.020229: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+            grep-37127   [000] d.h..  2146.024884: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+ sxmo_wakelock.s-37161   [000] d.h1.  2146.064920: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  2148.067396: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0

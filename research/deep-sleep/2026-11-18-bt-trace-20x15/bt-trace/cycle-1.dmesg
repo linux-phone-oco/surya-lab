@@ -1,0 +1,150 @@
+[   19.448036] q6afe_i2s_port_prepare:1550 num_sd_lines=0x1 cfg->sd_line_mask=0x1
+[   19.455489] q6afe_i2s_port_prepare:1659 DBG num_sd_lines=0x1 mono_stereo=0x1 channel_mode=0x1
+[   19.486650] q6afe_set_lpass_clock: clk_id=780, attri=1, clk_root=0, freq=19200000
+[   19.487113] q6afe_set_lpass_clock: clk_id=781, attri=1, clk_root=0, freq=19200000
+[   19.491388] qcom-soundwire 62ed0000.soundwire-controller: qcom_swrm_irq_handler: SWR read enable valid mismatch
+[   19.545393] q6afe_i2s_port_prepare:1550 num_sd_lines=0x1 cfg->sd_line_mask=0x1
+[   19.552922] q6afe_i2s_port_prepare:1659 DBG num_sd_lines=0x1 mono_stereo=0x1 channel_mode=0x1
+[   19.626642] q6afe_i2s_port_prepare:1550 num_sd_lines=0x1 cfg->sd_line_mask=0x1
+[   19.634196] q6afe_i2s_port_prepare:1659 DBG num_sd_lines=0x1 mono_stereo=0x1 channel_mode=0x1
+[   19.695372] q6afe_i2s_port_prepare:1550 num_sd_lines=0x1 cfg->sd_line_mask=0x1
+[   19.702916] q6afe_i2s_port_prepare:1659 DBG num_sd_lines=0x1 mono_stereo=0x1 channel_mode=0x1
+[   19.762515] q6afe_i2s_port_prepare:1550 num_sd_lines=0x1 cfg->sd_line_mask=0x1
+[   19.770185] q6afe_i2s_port_prepare:1659 DBG num_sd_lines=0x1 mono_stereo=0x1 channel_mode=0x1
+[   19.831796] q6afe_i2s_port_prepare:1550 num_sd_lines=0x1 cfg->sd_line_mask=0x1
+[   19.839351] q6afe_i2s_port_prepare:1659 DBG num_sd_lines=0x1 mono_stereo=0x1 channel_mode=0x1
+[   19.902355] q6afe_i2s_port_prepare:1550 num_sd_lines=0x1 cfg->sd_line_mask=0x1
+[   19.910585] q6afe_i2s_port_prepare:1659 DBG num_sd_lines=0x1 mono_stereo=0x1 channel_mode=0x1
+[   20.204095] Bluetooth: RFCOMM TTY layer initialized
+[   20.204114] Bluetooth: RFCOMM socket layer initialized
+[   20.204128] Bluetooth: RFCOMM ver 1.11
+[   21.064690] ath10k_snoc 18800000.wifi: wcn3990 hw1.0 target 0x00000008 chip_id 0x00000000 sub 0000:0000
+[   21.064718] ath10k_snoc 18800000.wifi: kconfig debug 1 debugfs 1 tracing 0 dfs 0 testmode 0
+[   21.064729] ath10k_snoc 18800000.wifi: firmware ver  api 5 features wowlan,no-4addr-pad,allows-mesh-bcast,mgmt-tx-by-reference,non-bmi,single-chan-info-per-channel crc32 7edc0d5a
+[   21.112313] ath10k_snoc 18800000.wifi: htt-ver 3.89 wmi-op 4 htt-op 3 cal file max-sta 32 raw 0 hwcrypto 1
+[   21.206869] ath10k_snoc 18800000.wifi: invalid MAC address; choosing random
+[   21.207073] ath: EEPROM regdomain: 0x809c
+[   21.207083] ath: EEPROM indicates we should expect a country code
+[   21.207090] ath: doing EEPROM country->regdmn map search
+[   21.207095] ath: country maps to regdmn code: 0x52
+[   21.207102] ath: Country alpha2 being used: CN
+[   21.207107] ath: Regpair used: 0x52
+[   23.407555] wlan0: authenticate with e8:df:70:7a:0b:01 (local address=02:20:43:87:8d:c8)
+[   23.407580] wlan0: send auth to e8:df:70:7a:0b:01 (try 1/3)
+[   23.412537] wlan0: authenticated
+[   23.414064] wlan0: associate with e8:df:70:7a:0b:01 (try 1/3)
+[   23.420243] wlan0: RX AssocResp from e8:df:70:7a:0b:01 (capab=0x1431 status=0 aid=2)
+[   23.487984] wlan0: associated
+[   23.488135] wlan0: Limiting TX power to 20 (20 - 0) dBm as advertised by e8:df:70:7a:0b:01
+[   25.591276] gcc-sm7150 100000.clock-controller: sync_state() pending due to 9c000000.framebuffer
+[   25.591304] gcc-sm7150 100000.clock-controller: sync_state() pending due to 506a000.gmu
+[   25.591312] sc7180-gpucc 5090000.clock-controller: sync_state() pending due to 506a000.gmu
+[   28.482772] q6afe_set_lpass_clock: clk_id=781, attri=1, clk_root=0, freq=0
+[   28.483262] q6afe_set_lpass_clock: clk_id=780, attri=1, clk_root=0, freq=0
+[  122.890232] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[  123.112280] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[  123.334503] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[  123.559275] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[  124.225966] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[  126.559294] qcom_q6v5_pas 62400000.remoteproc: Handover signaled, but it already happened
+[  131.513212] q6afe_set_lpass_clock: clk_id=780, attri=1, clk_root=0, freq=19200000
+[  131.513890] q6afe_set_lpass_clock: clk_id=781, attri=1, clk_root=0, freq=19200000
+[  134.006443] q6afe_i2s_port_prepare:1550 num_sd_lines=0x1 cfg->sd_line_mask=0x1
+[  134.013971] q6afe_i2s_port_prepare:1659 DBG num_sd_lines=0x1 mono_stereo=0x1 channel_mode=0x1
+[  136.104974] q6afe_i2s_port_prepare:1550 num_sd_lines=0x1 cfg->sd_line_mask=0x1
+[  136.112523] q6afe_i2s_port_prepare:1659 DBG num_sd_lines=0x1 mono_stereo=0x1 channel_mode=0x1
+[  138.625381] q6afe_i2s_port_prepare:1550 num_sd_lines=0x1 cfg->sd_line_mask=0x1
+[  138.632909] q6afe_i2s_port_prepare:1659 DBG num_sd_lines=0x1 mono_stereo=0x1 channel_mode=0x1
+[  139.809406] q6afe_i2s_port_prepare:1550 num_sd_lines=0x1 cfg->sd_line_mask=0x1
+[  139.816948] q6afe_i2s_port_prepare:1659 DBG num_sd_lines=0x1 mono_stereo=0x1 channel_mode=0x1
+[  154.899329] q6afe_set_lpass_clock: clk_id=781, attri=1, clk_root=0, freq=0
+[  154.899944] q6afe_set_lpass_clock: clk_id=780, attri=1, clk_root=0, freq=0
+[ 1674.310058] NOTICE: Automounting of tracing to debugfs is deprecated and will be removed in 2030
+[ 1689.725890] way-back: cycle: sleep 15 s, fuse 30 s, bt-on
+[ 1692.818615] watchdog: watchdog0: watchdog did not stop!
+[ 1692.890088] PM: suspend entry (s2idle)
+[ 1692.907680] Filesystems sync: 0.017 seconds
+[ 1693.004439] Freezing user space processes
+[ 1693.007630] Freezing user space processes completed (elapsed 0.003 seconds)
+[ 1693.007653] OOM killer disabled.
+[ 1693.007658] Freezing remaining freezable tasks
+[ 1693.009353] Freezing remaining freezable tasks completed (elapsed 0.001 seconds)
+[ 1693.009375] printk: Suspending console(s) (use no_console_suspend to debug)
+[ 1693.032098] wlan0: deauthenticating from e8:df:70:7a:0b:01 by local choice (Reason: 3=DEAUTH_LEAVING)
+[ 1694.068006] dwc3-qcom-legacy a6f8800.usb: port-1 HS-PHY not in L2
+[ 1694.101936] qcom_geni_serial 88c000.serial: desired_rate = 102400000, clk_rate = 102400000, clk_div = 1, clk_idx = 10
+[ 1694.102543] qcom_geni_serial a88000.serial: desired_rate = 3686400, clk_rate = 7372800, clk_div = 2, clk_idx = 0
+[ 1694.103415] qcom_geni_serial a88000.serial: desired_rate = 3686400, clk_rate = 7372800, clk_div = 2, clk_idx = 0
+[ 1694.458357] OOM killer enabled.
+[ 1694.458374] Restarting tasks: Starting
+[ 1694.462690] Restarting tasks: Done
+[ 1694.463488] hu 00000000e7669be6 qca enq skb 00000000f95f417b tx_ibs_state 0
+[ 1694.463510] Device asleep, waking up and queueing packet
+[ 1694.463553] hu 00000000e7669be6 wq awake device
+[ 1694.463567] Vote serial clock true(true)
+[ 1694.463574] hu 00000000e7669be6 send hci ibs cmd 0xfd
+[ 1694.466754] hu 00000000e7669be6 recv hci ibs cmd 0xfc
+[ 1694.466776] hu 00000000e7669be6 woke up
+[ 1694.467090] hu 00000000e7669be6 recv hci ibs cmd 0xfd
+[ 1694.467108] hu 00000000e7669be6 want to wake up
+[ 1694.467147] hu 00000000e7669be6 wq awake rx
+[ 1694.467155] hu 00000000e7669be6 send hci ibs cmd 0xfc
+[ 1694.473149] PM: suspend exit
+[ 1694.512012] hu 00000000e7669be6 recv hci ibs cmd 0xfe
+[ 1694.512023] hu 00000000e7669be6 want to sleep in 1 state
+[ 1694.512033] hu 00000000e7669be6 rx clock vote off
+[ 1696.105546] wlan0: authenticate with e8:df:70:7a:0b:01 (local address=02:20:43:87:8d:c8)
+[ 1696.105592] wlan0: send auth to e8:df:70:7a:0b:01 (try 1/3)
+[ 1696.113485] wlan0: authenticated
+[ 1696.115371] wlan0: associate with e8:df:70:7a:0b:01 (try 1/3)
+[ 1696.121654] wlan0: RX AssocResp from e8:df:70:7a:0b:01 (capab=0x1431 status=0 aid=2)
+[ 1696.195877] wlan0: associated
+[ 1696.196402] wlan0: Limiting TX power to 20 (20 - 0) dBm as advertised by e8:df:70:7a:0b:01
+[ 1696.511729] hu 00000000e7669be6 idle timeout in 2 state
+[ 1696.511806] hu 00000000e7669be6 send hci ibs cmd 0xfe
+[ 1696.511904] hu 00000000e7669be6 tx clock vote off
+[ 1696.511930] Vote serial clock false(true)
+[ 1718.722872] way-back: cycle: sleep 15 s, fuse 30 s, bt-on
+[ 1721.829094] watchdog: watchdog0: watchdog did not stop!
+[ 1721.906210] PM: suspend entry (s2idle)
+[ 1721.923421] Filesystems sync: 0.017 seconds
+[ 1722.041622] Freezing user space processes
+[ 1722.044598] Freezing user space processes completed (elapsed 0.002 seconds)
+[ 1722.044625] OOM killer disabled.
+[ 1722.044634] Freezing remaining freezable tasks
+[ 1722.045951] Freezing remaining freezable tasks completed (elapsed 0.001 seconds)
+[ 1722.045974] printk: Suspending console(s) (use no_console_suspend to debug)
+[ 1722.054462] wlan0: deauthenticating from e8:df:70:7a:0b:01 by local choice (Reason: 3=DEAUTH_LEAVING)
+[ 1722.596238] dwc3-qcom-legacy a6f8800.usb: port-1 HS-PHY not in L2
+[ 1722.632227] qcom_geni_serial 88c000.serial: desired_rate = 102400000, clk_rate = 102400000, clk_div = 1, clk_idx = 10
+[ 1722.632943] qcom_geni_serial a88000.serial: desired_rate = 3686400, clk_rate = 7372800, clk_div = 2, clk_idx = 0
+[ 1722.634677] qcom_geni_serial a88000.serial: desired_rate = 3686400, clk_rate = 7372800, clk_div = 2, clk_idx = 0
+[ 1722.988672] OOM killer enabled.
+[ 1722.988690] Restarting tasks: Starting
+[ 1722.992527] Restarting tasks: Done
+[ 1722.992607] hu 00000000e7669be6 qca enq skb 00000000ee9b02df tx_ibs_state 0
+[ 1722.992621] Device asleep, waking up and queueing packet
+[ 1722.992685] hu 00000000e7669be6 wq awake device
+[ 1722.992692] Vote serial clock true(true)
+[ 1722.992699] hu 00000000e7669be6 send hci ibs cmd 0xfd
+[ 1722.995921] hu 00000000e7669be6 recv hci ibs cmd 0xfc
+[ 1722.995946] hu 00000000e7669be6 woke up
+[ 1722.996252] hu 00000000e7669be6 recv hci ibs cmd 0xfd
+[ 1722.996267] hu 00000000e7669be6 want to wake up
+[ 1722.996288] hu 00000000e7669be6 wq awake rx
+[ 1722.996293] hu 00000000e7669be6 send hci ibs cmd 0xfc
+[ 1723.001242] PM: suspend exit
+[ 1723.041101] hu 00000000e7669be6 recv hci ibs cmd 0xfe
+[ 1723.041112] hu 00000000e7669be6 want to sleep in 1 state
+[ 1723.041123] hu 00000000e7669be6 rx clock vote off
+[ 1724.628314] wlan0: authenticate with e8:df:70:7a:0b:01 (local address=02:20:43:87:8d:c8)
+[ 1724.628360] wlan0: send auth to e8:df:70:7a:0b:01 (try 1/3)
+[ 1724.639727] wlan0: authenticated
+[ 1724.643521] wlan0: associate with e8:df:70:7a:0b:01 (try 1/3)
+[ 1724.650067] wlan0: RX AssocResp from e8:df:70:7a:0b:01 (capab=0x1431 status=0 aid=2)
+[ 1724.723486] wlan0: associated
+[ 1724.723985] wlan0: Limiting TX power to 20 (20 - 0) dBm as advertised by e8:df:70:7a:0b:01
+[ 1725.054508] hu 00000000e7669be6 idle timeout in 2 state
+[ 1725.054528] hu 00000000e7669be6 send hci ibs cmd 0xfe
+[ 1725.054664] hu 00000000e7669be6 tx clock vote off
+[ 1725.054729] Vote serial clock false(true)

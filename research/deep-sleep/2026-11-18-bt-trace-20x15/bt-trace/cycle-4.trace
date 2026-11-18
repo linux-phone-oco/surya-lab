@@ -1,0 +1,21 @@
+# tracer: nop
+#
+# entries-in-buffer/entries-written: 9/9   #P:8
+#
+#                                _-----=> irqs-off/BH-disabled
+#                               / _----=> need-resched
+#                              | / _---=> hardirq/softirq
+#                              || / _--=> preempt-depth
+#                              ||| / _-=> migrate-disable
+#                              |||| /     delay
+#           TASK-PID     CPU#  |||||  TIMESTAMP  FUNCTION
+#              | |         |   |||||     |         |
+   kworker/u32:3-27229   [000] dNh1.  1792.822719: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+ sxmo_run_aligne-1691    [000] d.h..  1793.179398: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+    systemd-oomd-557     [000] d.h1.  1793.182404: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         sugov:6-96      [000] d.h..  1793.182639: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+ systemd-journal-489     [000] d.h..  1793.182791: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+     kworker/0:0-22023   [000] d.h..  1793.183543: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+ systemd-journal-489     [000] d.h..  1793.188203: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1793.228240: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1795.202432: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
