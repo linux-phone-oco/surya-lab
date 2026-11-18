@@ -2069,6 +2069,9 @@ Proof
 Rank
 : 2
 
+Witness
+: person
+
 
 <a id="resume-stall-stop-clients"></a>
 ### Sleep hook: stop sensorspd/FastRPC helpers before, start after, also after a real systemctl suspend; 20 attended cycles, no ADSP crash
@@ -2127,6 +2130,9 @@ Proof
 Rank
 : 1
 
+Witness
+: person
+
 
 <a id="surya-sxmo-suspend-series"></a>
 ### surya runs sxmo-utils from our fork (sxmo-utils@lab): suspend retries back off, the sensors daemon is stopped and started around each suspend
@@ -2154,6 +2160,9 @@ Proof
 
 Rank
 : 3
+
+Witness
+: person
 
 
 <a id="ramoops-reserved-dt"></a>
@@ -2329,6 +2338,9 @@ Proof
 Rank
 : 2
 
+Witness
+: person
+
 
 <a id="pmic-bite-then-pmicwdt-boot-check"></a>
 ### Bite, then boot the pmicwdt kernel: no loop, dyndbg shows S2 running at probe
@@ -2356,6 +2368,9 @@ Proof
 
 Rank
 : 9
+
+Witness
+: person
 
 
 <a id="way-back-pick-watchdog-by-identity"></a>
@@ -2406,6 +2421,9 @@ Proof
 
 Rank
 : 6
+
+Witness
+: person
 
 
 <a id="surya-steps-claimed"></a>
@@ -2550,6 +2568,9 @@ Proof
 
 Rank
 : 0
+
+Witness
+: person
 
 
 <a id="pmic-kernel-8b2283da3-build"></a>
