@@ -4,7 +4,7 @@
 -- --upstream  string?  only what goes to this upstream
 -- --state     string?  only items in this state (finished ones too)
 -- --about     string?  only what is about this subject
-SELECT i.id, i.upstream, i.form, i.state, i.from_work, i.last_update, i.waits, i.title
+SELECT i.id, i.upstream, i.form, i.state, i.carried_in, i.from_work, i.last_update, i.waits, i.title
 FROM upstream_items i
 WHERE ($upstream IS NULL OR i.upstream = $upstream)
   AND ($about IS NULL OR i.about = $about OR i.about LIKE $about || '-%')
