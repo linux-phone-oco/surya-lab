@@ -12,7 +12,7 @@
 - [Sources](sources.md): 8
 - [Steps](steps.md): 113
 - [Summaries](summaries.md): 1
-- [Test Results](test_results.md): 7212
-- [Test Runs](test_runs.md): 179
+- [Test Results](test_results.md): 8060
+- [Test Runs](test_runs.md): 190
 - [Upstream Items](upstream_items.md): 0
 - [Upstreams](upstreams.md): 2
