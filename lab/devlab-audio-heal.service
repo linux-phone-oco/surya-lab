@@ -1,4 +1,5 @@
 [Unit]
+# WORKAROUND(surya-adsp-audio-boot-race): restarts the ADSP when the card is missing - stands in for the unread boot race; flagged once the race is fixed.
 Description=Restart the ADSP when a boot left it without the sound card (surya)
 After=multi-user.target
 
