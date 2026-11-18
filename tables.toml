@@ -306,6 +306,10 @@ type = "string"
 name = "notes"
 type = "string"
 
+[[tables.upstreams.fields]]
+name = "fork_of"
+type = "string"
+
 # What was headed to an upstream: a patch, a piece of information, a correction, a question, a finding. It
 # links back to the work here it comes from (from_work: a backlog item, decision or research id) and may be a
 # row, a file in upstream/UPSTREAM/ID/ (file), or both. The state only moves forward; the person's word that
@@ -391,6 +395,14 @@ name = "applied_upstream"
 type = "string"
 
 [[tables.upstream_items.fields]]
+name = "carried_in"
+type = "string"
+
+[[tables.upstream_items.fields]]
+name = "reviewed_by"
+type = "string"
+
+[[tables.upstream_items.fields]]
 name = "waits"
 type = "string"
 
@@ -405,6 +417,10 @@ required = true
 
 [[rules.references]]
 field = "upstream_items.upstream"
+to = ["upstreams"]
+
+[[rules.references]]
+field = "upstreams.fork_of"
 to = ["upstreams"]
 
 [[rules.references]]
