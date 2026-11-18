@@ -593,7 +593,7 @@ Updated
 ### Row 36
 
 Step
-: charger-online
+: watchdog-way-back
 
 Status
 : unknown
@@ -608,7 +608,7 @@ Updated
 ### Row 37
 
 Step
-: watchdog-way-back
+: pon-reason-read
 
 Status
 : unknown
@@ -623,7 +623,7 @@ Updated
 ### Row 38
 
 Step
-: battery-gauge-reads
+: storage-readonly
 
 Status
 : unknown
@@ -638,7 +638,7 @@ Updated
 ### Row 39
 
 Step
-: pon-reason-read
+: reset-types-right
 
 Status
 : unknown
@@ -653,7 +653,7 @@ Updated
 ### Row 40
 
 Step
-: storage-readonly
+: reset-state-survives
 
 Status
 : unknown
@@ -668,7 +668,7 @@ Updated
 ### Row 41
 
 Step
-: reset-types-right
+: key-reset-recovers
 
 Status
 : unknown
@@ -683,7 +683,7 @@ Updated
 ### Row 42
 
 Step
-: reset-state-survives
+: rootfs-boots
 
 Status
 : unknown
@@ -698,7 +698,7 @@ Updated
 ### Row 43
 
 Step
-: key-reset-recovers
+: suspend-way-back
 
 Status
 : unknown
@@ -713,7 +713,7 @@ Updated
 ### Row 44
 
 Step
-: rootfs-boots
+: power-off-stays-off
 
 Status
 : unknown
@@ -728,51 +728,6 @@ Updated
 ### Row 45
 
 Step
-: suspend-way-back
-
-Status
-: unknown
-
-Notes
-: no suite result for its proof in this base's runs; nobody checked
-
-Updated
-: 2026-11-18
-
-
-### Row 46
-
-Step
-: power-off-stays-off
-
-Status
-: unknown
-
-Notes
-: no suite result for its proof in this base's runs; nobody checked
-
-Updated
-: 2026-11-18
-
-
-### Row 47
-
-Step
-: thermal-zones-sane
-
-Status
-: unknown
-
-Notes
-: no suite result for its proof in this base's runs; nobody checked
-
-Updated
-: 2026-11-18
-
-
-### Row 48
-
-Step
 : health-suite-runs
 
 Status
@@ -785,7 +740,7 @@ Updated
 : 2026-11-18
 
 
-### Row 49
+### Row 46
 
 Step
 : fastrpc-helpers-stable
@@ -809,7 +764,7 @@ Updated
 : 2026-11-18
 
 
-### Row 50
+### Row 47
 
 Step
 : buttons-report
@@ -824,7 +779,7 @@ Updated
 : 2026-11-18
 
 
-### Row 51
+### Row 48
 
 Step
 : haptics-buzz
@@ -848,7 +803,7 @@ Updated
 : 2026-11-18
 
 
-### Row 52
+### Row 49
 
 Step
 : modem-file-services
@@ -872,7 +827,7 @@ Updated
 : 2026-11-18
 
 
-### Row 53
+### Row 50
 
 Step
 : nfc-reads-tag
@@ -887,7 +842,7 @@ Updated
 : 2026-11-18
 
 
-### Row 54
+### Row 51
 
 Step
 : usb-host-works
@@ -911,7 +866,7 @@ Updated
 : 2026-11-18
 
 
-### Row 55
+### Row 52
 
 Step
 : s2idle-cycle-returns
@@ -926,7 +881,7 @@ Updated
 : 2026-11-18
 
 
-### Row 56
+### Row 53
 
 Step
 : charger-mode-entered
@@ -941,7 +896,7 @@ Updated
 : 2026-11-18
 
 
-### Row 57
+### Row 54
 
 Step
 : rtc-alarm-powers-on
@@ -956,7 +911,7 @@ Updated
 : 2026-11-18
 
 
-### Row 58
+### Row 55
 
 Step
 : speaker-heard
@@ -971,7 +926,7 @@ Updated
 : 2026-11-18
 
 
-### Row 59
+### Row 56
 
 Step
 : modem-seen
@@ -995,7 +950,7 @@ Updated
 : 2026-11-18
 
 
-### Row 60
+### Row 57
 
 Step
 : bt-pairs-carries-audio
@@ -1010,7 +965,7 @@ Updated
 : 2026-11-18
 
 
-### Row 61
+### Row 58
 
 Step
 : sensor-hub-stable
@@ -1034,7 +989,7 @@ Updated
 : 2026-11-18
 
 
-### Row 62
+### Row 59
 
 Step
 : suspend-wakes-quiet
@@ -1058,7 +1013,7 @@ Updated
 : 2026-11-18
 
 
-### Row 63
+### Row 60
 
 Step
 : radios-survive-suspend
@@ -1073,7 +1028,7 @@ Updated
 : 2026-11-18
 
 
-### Row 64
+### Row 61
 
 Step
 : shell-runs-with-hardware
@@ -1088,7 +1043,7 @@ Updated
 : 2026-11-18
 
 
-### Row 65
+### Row 62
 
 Step
 : update-applies
@@ -1103,7 +1058,7 @@ Updated
 : 2026-11-18
 
 
-### Row 66
+### Row 63
 
 Step
 : kernel-upgrade-keeps-steps
@@ -1118,7 +1073,7 @@ Updated
 : 2026-11-18
 
 
-### Row 67
+### Row 64
 
 Step
 : linux-runs
@@ -1133,7 +1088,7 @@ Updated
 : 2026-11-18
 
 
-### Row 68
+### Row 65
 
 Step
 : off-mode-charging
@@ -1148,7 +1103,7 @@ Updated
 : 2026-11-18
 
 
-### Row 69
+### Row 66
 
 Step
 : sim-ready
@@ -1163,7 +1118,7 @@ Updated
 : 2026-11-18
 
 
-### Row 70
+### Row 67
 
 Step
 : emergency-numbers-known
@@ -1178,7 +1133,7 @@ Updated
 : 2026-11-18
 
 
-### Row 71
+### Row 68
 
 Step
 : gnss-fix
@@ -1193,7 +1148,7 @@ Updated
 : 2026-11-18
 
 
-### Row 72
+### Row 69
 
 Step
 : fingerprint-unlocks
@@ -1208,7 +1163,7 @@ Updated
 : 2026-11-18
 
 
-### Row 73
+### Row 70
 
 Step
 : photo-taken
@@ -1223,7 +1178,7 @@ Updated
 : 2026-11-18
 
 
-### Row 74
+### Row 71
 
 Step
 : soc-floor-reached
@@ -1247,7 +1202,7 @@ Updated
 : 2026-11-18
 
 
-### Row 75
+### Row 72
 
 Step
 : on-screen-keyboard
@@ -1262,7 +1217,7 @@ Updated
 : 2026-11-18
 
 
-### Row 76
+### Row 73
 
 Step
 : lock-and-unlock
@@ -1277,7 +1232,7 @@ Updated
 : 2026-11-18
 
 
-### Row 77
+### Row 74
 
 Step
 : update-rolls-back
@@ -1292,7 +1247,7 @@ Updated
 : 2026-11-18
 
 
-### Row 78
+### Row 75
 
 Step
 : modem-registered
@@ -1316,7 +1271,7 @@ Updated
 : 2026-11-18
 
 
-### Row 79
+### Row 76
 
 Step
 : auto-rotate-follows
@@ -1331,7 +1286,7 @@ Updated
 : 2026-11-18
 
 
-### Row 80
+### Row 77
 
 Step
 : brightness-follows-light
@@ -1346,7 +1301,7 @@ Updated
 : 2026-11-18
 
 
-### Row 81
+### Row 78
 
 Step
 : video-recorded
@@ -1361,7 +1316,7 @@ Updated
 : 2026-11-18
 
 
-### Row 82
+### Row 79
 
 Step
 : sensors-across-suspend
@@ -1376,7 +1331,7 @@ Updated
 : 2026-11-18
 
 
-### Row 83
+### Row 80
 
 Step
 : sms-both-ways
@@ -1400,7 +1355,7 @@ Updated
 : 2026-11-18
 
 
-### Row 84
+### Row 81
 
 Step
 : mobile-data
@@ -1424,7 +1379,7 @@ Updated
 : 2026-11-18
 
 
-### Row 85
+### Row 82
 
 Step
 : resume-without-stall
@@ -1439,7 +1394,7 @@ Updated
 : 2026-11-18
 
 
-### Row 86
+### Row 83
 
 Step
 : coprocessor-restart-recovers
@@ -1454,7 +1409,7 @@ Updated
 : 2026-11-18
 
 
-### Row 87
+### Row 84
 
 Step
 : mms-both-ways
@@ -1469,7 +1424,7 @@ Updated
 : 2026-11-18
 
 
-### Row 88
+### Row 85
 
 Step
 : voice-call-both-ways
@@ -1493,7 +1448,7 @@ Updated
 : 2026-11-18
 
 
-### Row 89
+### Row 86
 
 Step
 : hotspot-shares-data
@@ -1508,7 +1463,7 @@ Updated
 : 2026-11-18
 
 
-### Row 90
+### Row 87
 
 Step
 : real-suspend-under-shell
@@ -1523,7 +1478,7 @@ Updated
 : 2026-11-18
 
 
-### Row 91
+### Row 88
 
 Step
 : notifications-arrive
@@ -1538,7 +1493,7 @@ Updated
 : 2026-11-18
 
 
-### Row 92
+### Row 89
 
 Step
 : cycles-repeat-clean
@@ -1553,7 +1508,7 @@ Updated
 : 2026-11-18
 
 
-### Row 93
+### Row 90
 
 Step
 : proximity-blanks-in-call
@@ -1568,7 +1523,7 @@ Updated
 : 2026-11-18
 
 
-### Row 94
+### Row 91
 
 Step
 : volte-call
@@ -1583,7 +1538,7 @@ Updated
 : 2026-11-18
 
 
-### Row 95
+### Row 92
 
 Step
 : call-wakes-from-sleep
@@ -1598,7 +1553,7 @@ Updated
 : 2026-11-18
 
 
-### Row 96
+### Row 93
 
 Step
 : standby-current
@@ -1613,7 +1568,7 @@ Updated
 : 2026-11-18
 
 
-### Row 97
+### Row 94
 
 Step
 : alarm-wakes-from-sleep
@@ -1628,7 +1583,7 @@ Updated
 : 2026-11-18
 
 
-### Row 98
+### Row 95
 
 Step
 : all-day-battery
@@ -1643,7 +1598,7 @@ Updated
 : 2026-11-18
 
 
-### Row 99
+### Row 96
 
 Step
 : days-without-reboot
@@ -1658,7 +1613,7 @@ Updated
 : 2026-11-18
 
 
-### Row 100
+### Row 97
 
 Step
 : daily-usable-phone
@@ -1673,7 +1628,7 @@ Updated
 : 2026-11-18
 
 
-### Row 101
+### Row 98
 
 Step
 : complete-phone
@@ -1688,7 +1643,7 @@ Updated
 : 2026-11-18
 
 
-### Row 102
+### Row 99
 
 Step
 : pd-mapper-before-remoteproc
@@ -1712,7 +1667,7 @@ Updated
 : 2026-11-18
 
 
-### Row 103
+### Row 100
 
 Step
 : audio-codec-attached
@@ -1736,7 +1691,7 @@ Updated
 : 2026-11-18
 
 
-### Row 104
+### Row 101
 
 Step
 : sound-card-registered
@@ -1760,7 +1715,7 @@ Updated
 : 2026-11-18
 
 
-### Row 105
+### Row 102
 
 Step
 : mic-captures
@@ -1784,7 +1739,7 @@ Updated
 : 2026-11-18
 
 
-### Row 106
+### Row 103
 
 Step
 : ucm-hifi-profile
@@ -1808,7 +1763,7 @@ Updated
 : 2026-11-18
 
 
-### Row 107
+### Row 104
 
 Step
 : earpiece-plays
@@ -1832,7 +1787,7 @@ Updated
 : 2026-11-18
 
 
-### Row 108
+### Row 105
 
 Step
 : headset-jack
@@ -1856,7 +1811,7 @@ Updated
 : 2026-11-18
 
 
-### Row 109
+### Row 106
 
 Step
 : mic-hears-speaker
@@ -1880,7 +1835,7 @@ Updated
 : 2026-11-18
 
 
-### Row 110
+### Row 107
 
 Step
 : sensors-exposed
@@ -1904,7 +1859,7 @@ Updated
 : 2026-11-18
 
 
-### Row 111
+### Row 108
 
 Step
 : proximity-reads
@@ -1928,7 +1883,7 @@ Updated
 : 2026-11-18
 
 
-### Row 112
+### Row 109
 
 Step
 : call-audio-path
@@ -1952,7 +1907,7 @@ Updated
 : 2026-11-18
 
 
-### Row 113
+### Row 110
 
 Step
 : image-sensor-identified
@@ -1971,6 +1926,78 @@ Proven on
 
 Notes
 : suite run 20261118-202945: image-sensor=fail (0 sensors bound): a real gap on this kernel, not a stale run
+
+Updated
+: 2026-11-18
+
+
+### Row 111
+
+Step
+: battery-gauge-reads
+
+Status
+: done
+
+Proof
+: battery-gauge
+
+Run
+: 20261118-204845
+
+Proven on
+: 7.1.0-sm7150-calls+
+
+Notes
+: suite run 20261118-204845 battery-gauge pass
+
+Updated
+: 2026-11-18
+
+
+### Row 112
+
+Step
+: charger-online
+
+Status
+: done
+
+Proof
+: charger-online
+
+Run
+: 20261118-204845
+
+Proven on
+: 7.1.0-sm7150-calls+
+
+Notes
+: suite run 20261118-204845 charger-online pass
+
+Updated
+: 2026-11-18
+
+
+### Row 113
+
+Step
+: thermal-zones-sane
+
+Status
+: done
+
+Proof
+: thermal-zones
+
+Run
+: 20261118-204845
+
+Proven on
+: 7.1.0-sm7150-calls+
+
+Notes
+: suite run 20261118-204845 thermal-zones pass
 
 Updated
 : 2026-11-18
