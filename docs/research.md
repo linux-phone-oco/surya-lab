@@ -1064,3 +1064,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-18-try4-read-back"></a>
+### 2026-11-18-try4-read-back
+
+Date
+: 2026-11-18
+
+Brief
+: Try 4 read back: no reboot at all after 11:45:03 (fuse never bit); pstore empty; journal truncated; an rtcwake -m mem -s 99999999 ran after the fuse, replacing the 15 s alarm
+
+Question
+: Why did try 4 never return and why did the fuse not bite on the real suspend path?
+
+Found
+: Read only, phone booted after the author's power hold (boot 0 at 12:16; no boot between 08:20 and it). Facts: (1) boots list: boot -1 ends 11:45:03, next boot is the author's power cycle at 12:16: the watchdog never reset the phone in 30 s nor in 30 min. (2) pstore empty (expected: way-back-measured says pstore does not survive a reset; it also shows no panic). (3) the prior journal file is truncated; its last lines are the fuse marker 'way-back: marker before the fuse of 30 s', a write to wakeup_count, and 'rtcwake -m mem -s 99999999' run by user - not sus.sh's 'rtcwake -m no -s 15' + systemctl suspend. rtcwake -s sets the wake alarm, so the 15 s alarm was replaced by a ~3 year one; mem_sleep is s2idle only, so -m mem is s2idle by a different entry. Who ran that second command is not in the journal. sus-try/rtcwake shows the 15 s alarm (RTC 1970-01-16 18:42:24), t0 written, no t1/defuse/after: the script never passed systemctl suspend. (4) keep_armed_in_suspend was Y at check (after enable); N now (resets each boot, by design). So: the fuse was armed (marker) yet no reset: the watchdog stopped or was disarmed on this path, or the SoC hung below it. Not decided by logs. Not found: whether the watchdog counted, why the alarm was 99999999. Next, nothing suspended: (a) find who wrote 'rtcwake -m mem -s 99999999' (grep the lab and the phone's /var/tmp, the sleep-inhibitor and systemd-sleep hooks); (b) a dry run on the same entry (arm via way-back fuse 30, then only 'systemctl suspend' replaced by a mere wake lock/idle: proven before) tells nothing new; the missing proof is a fuse bite THROUGH a real suspend entry: way-back.sh cycle probe does exactly this on s2idle by rtcwake (proven 3+ times) - so run 'cycle probe' once attended, then the same with the systemctl entry only with the author present. No further real systemctl suspend unattended.
+
+About
+: deep-sleep

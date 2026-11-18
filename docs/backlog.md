@@ -1906,17 +1906,10 @@ Needs
 ### surya did not return from real suspend try 4: the author's power cycle, then read /var/tmp/sus-try, pstore, journalctl -b -1
 
 Status
-: open
+: in-progress
 
 Note
-: Phone work PARKED. Facts (research 2026-11-18-real-suspend-try4-phone-did-not-return): fuse armed, 15 s RTC alarm, usb-awake stopped, UDC disconnected; no watchdog reset in over an hour. So the fuse did not bite during a real systemctl suspend (it bites in way-back cycles): the weak link is how the real suspend path differs from way-back.sh (suspend-to-mem vs s2idle? the wdt kept-armed patch active? the RTC alarm set on the wrong rtc?). When it answers: read /var/tmp/sus-try/*, pstore, journalctl -b -1; no further real systemctl suspend until the fuse is proven to bite on that path (a dry run that suspends nothing).
-
-THE CLASS (coordinator, 2026-11-18, three lines): 
-1. Class: a fallback proven on one path was trusted on another - the watchdog fuse bites in way-back.sh cycles (s2idle by rtcwake, proven 3+ times) but was never proven on a real systemctl suspend; a try that can take the only link away ran on the unproven path, so a fallback that missed became unplanned hands (try 4; tries 1-3 the same shape).
-2. Where else: any try whose way back was proven by a neighbouring path - the one-shot dtb tries (boot counting proven for a kernel, not every dtb: the CTS pull-down try), the standby runs (r2-r4: the fuse proven for 15 s cycles, not for the Bluetooth retry loop that overran it), and any keeper step run 'through the real thing' instead of the proven cycle.
-3. Root: I gave the go. The keeper held back after tries 1-2 left the phone unreachable; I overrode that caution in the item note ('GO ... the two causes are gone') because the two known causes (autosleep alarm, defused fuse) were fixed, but I never asked whether the fuse had been proven on THAT path; the keeper's caution was the signal, and the go treated 'known causes removed' as 'way back proven'. Rule that follows: a go for a try that can drop the only link names the dry run that proved the way back on that exact path (a fuse bite with nothing suspended, on the same entry point), or it does not go.
-
-2026-11-18 ~13:00Z: the author power-held surya; it is booting. YOU, keeper: this item now (waits cleared). READ ONLY, no suspend: /var/tmp/sus-try/*, pstore/ramoops, journalctl -b -1 (the last lines: suspend entry? what ran: the 15 s alarm?), the rtc alarm state, why try 4 never returned and why qcom_wdt did not bite on this path (is the kept-armed patch active when suspend comes from systemctl suspend? is the watchdog even running: /sys/class/watchdog, its timeleft/state before the suspend; did the hw watchdog stop in the deeper state suspend (PSCI/ system suspend) vs s2idle?). Tie the finding to the fork-and-fix research under orchestration on qcom_wdt armed in suspend (read its decision/research in docs, do not duplicate it). Then the dry run that proves the fuse fires on THAT path with nothing suspended (e.g. arm the fuse, no suspend, and see the bite) - only then say whether another real suspend is allowed. Health after. Record research.
+: Read-back done (research 2026-11-18-try4-read-back): fuse never bit; stray rtcwake -m mem -s 99999999 after the fuse marker; cause not decided by logs. Remaining: trace who ran that rtcwake; the fuse-bite-through-suspend proof (cycle probe) needs an attended window - no real systemctl suspend until then.
 
 About
 : deep-sleep
