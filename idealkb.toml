@@ -3,5 +3,5 @@
 # tables.toml (the queue's needs, proof and rank, and the device's own tables) and the backlog records that go with it.
 version = "0.9.1"
 own = ["tables.toml", "records/backlog.sql"]
-# records a script runs (devlab files a run with test-run): ikb leaves them out of its help
+# records a script runs (lpoco lab files a run with test-run): ikb leaves them out of its help
 machine = ["test-run"]

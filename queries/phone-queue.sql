@@ -3,7 +3,7 @@
 -- `waits` (outside this base), `blocked_on` (items of this base not yet done; an item done clears itself) and
 -- `awaits_hardware` (hardware not yet owned, or refuted; arrives and clears itself). The keeper takes the first
 -- that waits on nothing - then what names the test that proves it, then the oldest. One change to the phone at a
--- time (devlab holds it); other sessions put work here with backlog-needs (needs phone, and the proof), never on
+-- time (lpoco lab holds it); other sessions put work here with backlog-needs (needs phone, and the proof), never on
 -- the phone. The base is the device: no device option.
 WITH w AS (
     SELECT b.id,

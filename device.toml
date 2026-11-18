@@ -1,4 +1,4 @@
-# This device's manifest, read by linux-phone-oco/lab-tools (devlab). Secrets and what is learned at
+# This device's manifest, read by linux-phone-oco/lab-tools (lpoco lab). Secrets and what is learned at
 # run time stay outside the repository: ~/.config/devlab/xiaomi-surya/ and ~/.local/state/devlab/xiaomi-surya/
 [device]
 codename = "xiaomi-surya"
@@ -82,8 +82,8 @@ from = "../../surya-audio/kernel-rc3/snd-soc-tas2562.ko.zst"
 to = "root:/lib/modules/7.1.0-rc3-sm7150/kernel/sound/soc/codecs/snd-soc-tas2562.ko.zst"
 if_exists = "root:/lib/modules/7.1.0-rc3-sm7150"
 
-# the lab's ear (devlab hear): tones played on the phone and heard through the lab's microphone
-# how loud every test sound is (devlab hear, and the suite's TEST_TONE_DBFS and TEST_VOLUME): the author, 2026-11-17 -
+# the lab's ear (lpoco lab hear): tones played on the phone and heard through the lab's microphone
+# how loud every test sound is (lpoco lab hear, and the suite's TEST_TONE_DBFS and TEST_VOLUME): the author, 2026-11-17 -
 # "sound is fine, just quieter - about 20% volume"; the phone's own microphone sits right by its speakers.
 # -20 dBFS at 20% was inaudible and barely reached the microphone; -6 dBFS at 20% the author heard as a
 # quiet beep ("i hear the beep now", 2026-11-17) and the phone's microphone found it 65 dB above the noise
@@ -101,7 +101,7 @@ name = "heard-right"
 channel = "right"
 freq = 1000
 
-# what the phone's own health suite expects (devlab suite put now; lab-tools/health)
+# what the phone's own health suite expects (lpoco lab suite put now; lab-tools/health)
 [health]
 sound_cards = ["POCO X3"]
 checks = "tests/health"   # surya's own: the speaker amplifiers, the microphones, the earpiece, the call audio path
@@ -126,7 +126,7 @@ adsp = "audio-speaker"
 cdsp = "kernel"
 modem = "modem-data"
 
-# paths devlab refuses to carry to the phone (devlab guard): reading them can hang the phone
+# paths lpoco lab refuses to carry to the phone (lpoco lab guard): reading them can hang the phone
 [[hazard]]
 path = "/sys/kernel/debug/gpio"
 why = "dumps every GPIO chip, the LPASS LPI pins among them; with an LPI driver that maps the sensor DSP's pins (0x62b40000-0x62b51fff, the 32-pin driver of the WCD test kernels) the read stalls the bus and the phone hangs until a person holds power (2026-11-17, ~02:15 UTC)"
