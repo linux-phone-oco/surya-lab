@@ -33,9 +33,7 @@
 {"step":"pmic-bound","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
 {"step":"speaker-amps-fed","status":"partial","proof":"amp-channels,amp-volume-0x4c,amp-volume-0x4d","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: amp-channels=fail amp-volume-0x4c=pass amp-volume-0x4d=pass","updated":"2026-11-18"}
 {"step":"focus-and-flash","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
-{"step":"charger-online","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
 {"step":"watchdog-way-back","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
-{"step":"battery-gauge-reads","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
 {"step":"pon-reason-read","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
 {"step":"storage-readonly","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
 {"step":"reset-types-right","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
@@ -44,7 +42,6 @@
 {"step":"rootfs-boots","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
 {"step":"suspend-way-back","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
 {"step":"power-off-stays-off","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
-{"step":"thermal-zones-sane","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
 {"step":"health-suite-runs","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
 {"step":"fastrpc-helpers-stable","status":"done","proof":"no-processor-crashes","run":"20261118-191339","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-191339: no-processor-crashes=pass","updated":"2026-11-18"}
 {"step":"buttons-report","status":"unknown","proof":null,"run":null,"proven_on":null,"notes":"no suite result for its proof in this base's runs; nobody checked","updated":"2026-11-18"}
@@ -111,3 +108,6 @@
 {"step":"proximity-reads","status":"done","proof":"proximity-reads","run":"20261118-202945","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-202945: proximity-reads=pass","updated":"2026-11-18"}
 {"step":"call-audio-path","status":"done","proof":"call-audio-path","run":"20261118-202945","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-202945: call-audio-path=pass","updated":"2026-11-18"}
 {"step":"image-sensor-identified","status":"failing","proof":"image-sensor","run":"20261118-202945","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-202945: image-sensor=fail (0 sensors bound): a real gap on this kernel, not a stale run","updated":"2026-11-18"}
+{"step":"battery-gauge-reads","status":"done","proof":"battery-gauge","run":"20261118-204845","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-204845 battery-gauge pass","updated":"2026-11-18"}
+{"step":"charger-online","status":"done","proof":"charger-online","run":"20261118-204845","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-204845 charger-online pass","updated":"2026-11-18"}
+{"step":"thermal-zones-sane","status":"done","proof":"thermal-zones","run":"20261118-204845","proven_on":"7.1.0-sm7150-calls+","notes":"suite run 20261118-204845 thermal-zones pass","updated":"2026-11-18"}
