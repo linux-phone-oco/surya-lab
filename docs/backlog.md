@@ -2508,7 +2508,9 @@ Status
 : open
 
 Note
-: surya-steps-claimed (PR 288) claimed all 113 steps from ONE suite run (20261118-191339): done 11, partial 2, failing 12, open 6, unknown 82. Orchestration says surya's history covers about 50 steps (kernel, console, audio, calls, mic, suspend, sensors). A mapping pass, REPO/RECORDS ONLY (no phone): for each unknown step, look in tests/results (older runs), the research rows and the session log for a passing proof; claim done with test + run id only where one exists (the step's own test, not a neighbour's); partial/open where the history says so; never invent a proof. Skip steps that need a fresh phone check: list them. Land in batches; send the new counts to the surya coordinator (orchestration reruns docs' feeds). Also: daily-phone.sh errors 'bringup_steps does not exist' in the docs checkout - tell orchestration if it persists after the next follow.
+: FIRST (orchestration, feeds ran; docs now reads 11 done / 2 partial / 12 failing / 6 open / 82 unknown): CHECK THE 12 FAILING CLAIMS before they stand: 12 failing is a lot for steps surya has proven before (e.g. audio-codec-attached). Was run 20261118-191339 on a kernel/boot WITHOUT the piece (a one-shot pmicwdt kernel, the kept calls+ right after a power cycle with audio not yet up, the SIM out, a suite run mid-boot)? For each failing step: read the test's result in that run and the previous passing runs; if the failure is a skip/not-measured/another kernel, the claim is wrong: set it to open/unknown (practice 12: not measured is never broken) and re-claim from a good run (cite run id and kernel); if it really fails now, keep failing and say why in the notes. Also run the suite once more first if the phone answers and the last run is old (put the suite). Then the mapping pass below.
+
+surya-steps-claimed (PR 288) claimed all 113 steps from ONE suite run (20261118-191339): done 11, partial 2, failing 12, open 6, unknown 82. Orchestration says surya's history covers about 50 steps (kernel, console, audio, calls, mic, suspend, sensors). A mapping pass, REPO/RECORDS ONLY (no phone): for each unknown step, look in tests/results (older runs), the research rows and the session log for a passing proof; claim done with test + run id only where one exists (the step's own test, not a neighbour's); partial/open where the history says so; never invent a proof. Skip steps that need a fresh phone check: list them. Land in batches; send the new counts to the surya coordinator (orchestration reruns docs' feeds). Also: daily-phone.sh errors 'bringup_steps does not exist' in the docs checkout - tell orchestration if it persists after the next follow.
 
 About
 : deep-sleep
@@ -2520,4 +2522,4 @@ Needs
 : phone
 
 Rank
-: 10
+: 0
