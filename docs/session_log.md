@@ -1240,3 +1240,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-0725-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Took the lease; phone reachable again on kept kernel 7.1.0-sm7150-calls+ (suite latest: audio passes, telephony skip for no SIM). Read pstore (empty) and journal -b -1 (ends at s2idle entry from sxmo autosleep's rtcwake). Changed nothing on the phone.
+
+Considered
+: next: sleep-fastrpc-helpers stays open; before any further suspend try stop sxmo autosleep, have the author at hand, and fix a wake source (RTC alarm short, e.g. 60 s) so an unreachable phone returns by itself; do not repeat the hook until then
+
+About
+: deep-sleep
