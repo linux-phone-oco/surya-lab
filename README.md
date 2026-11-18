@@ -42,7 +42,7 @@ how. The standing tables follow [grenudi/ideal-knowledge-base](https://github.co
 (`idealkb.toml`); the device's own are in `tables.toml`. Fill the device (`ikb device ...`) and declare what is
 claimed of each part (`ikb part`: status, evidence, date) - [linux-phone-oco/docs](https://github.com/linux-phone-oco/docs)
 pulls `parts` (contract in `devicebase.toml`) and derives the device's support status from them; it types nothing of
-its own. The phone's queue is `tad q phone-queue`, its keeper's next item `tad q phone-next`; `devlab gather` files runs
+its own. The phone's queue is `tad q phone-queue`, its keeper's next item `tad q phone-next`; `lpoco lab gather` files runs
 with the `test-run` record.
 
 ## Rules
@@ -54,17 +54,17 @@ with the `test-run` record.
 
 ## Tests
 
-The phone checks its own health 120 s after every boot (devlab's suite: the generic checks of
-linux-phone-oco/lab-tools, surya's own in `tests/health/`, and the manifest's `[health]`); `devlab
+The phone checks its own health 120 s after every boot (lpoco lab's suite: the generic checks of
+linux-phone-oco/lab-tools, surya's own in `tests/health/`, and the manifest's `[health]`); `lpoco lab
 watch` brings every report into `tests/results/DATE-TIME.jsonl` - one line per check, with its
 linux-phone-oco/docs component, pass / fail / skip, a detail, and the run (device, time, kernel,
 shell) - and files it into the docs' `test_results`, the evidence the support grid's verdicts cite.
-`devlab suite run` runs it now. A pass proves a part is there and set up; whether a person hears or
+`lpoco lab suite run` runs it now. A pass proves a part is there and set up; whether a person hears or
 sees it is a witnessed test (a question with buttons on the desktop and the board).
 
 ## Provisioning
 
-After a flash, `devlab provision now` installs the packages in `provision/packages.txt` (Firefox,
+After a flash, `lpoco lab provision now` installs the packages in `provision/packages.txt` (Firefox,
 i2c-tools) over the PC's internet connection: the PC shares it only for the install - forwarding and
 a masquerade rule in an nftables table of its own, all undone on exit - so a phone without Wi-Fi
 set up still gets them.

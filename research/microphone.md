@@ -1,7 +1,7 @@
 # The microphones: why the codec falls off its buses
 
 Measured on the phone on 2026-11-17 by the bring-up session, in one-off test kernels tried through
-`devlab kernel try` (7.1.0-rc3-sm7150-wcd: the sm7150-mainline kernel with the WCD9375 described in the
+`lpoco lab kernel try` (7.1.0-rc3-sm7150-wcd: the sm7150-mainline kernel with the WCD9375 described in the
 device tree and the LPASS pin-mux fix, plus experiment switches). Records of the earlier work:
 `~/Projects/surya-audio/wcd-boots/` on the lab machine.
 

@@ -512,7 +512,7 @@ type = "string"
 name = "measured_run"
 type = "string"
 
-# One run of the phone's own health suite, filed by devlab (the test-run record), and each line of its report.
+# One run of the phone's own health suite, filed by lpoco lab (the test-run record), and each line of its report.
 [tables.test_runs]
 key = ["id"]
 
