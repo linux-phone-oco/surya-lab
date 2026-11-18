@@ -2700,6 +2700,8 @@ Status
 Note
 : surya-lab PR 315 (read only): the boot-warning at clk.c:1047 is NEW: in 0 of ~45 calls+ runs, but present on calls2+ and on the pmicwdt run 184720 (not on pmicwdt+). The bt controller-crash line is in no stored run (212207 shows 0): unconfirmed, probably the known QCA SSR family. DO NOT PROMOTE calls2+ until the stack is read. UNATTENDED, no suspend, no bite (the PMIC wdt is never opened/armed): one-shot try of calls2+ (lpoco lab kernel try; boot-counted, falls back by itself) saving the FULL dmesg of that boot (dmesg -T > file on the phone, then pulled into research/), find the clk.c:1047 stack and read it: which clock, which caller (the pm8916-wdt probe? &pm6150_wdt's node: a clock/regulator get on the PMIC wdt? pm6150 PON/SPMI probe order?), and compare with the pmicwdt+ boot's dmesg that lacked it. Say: caused by the series (then the exact patch/node: queue it for the upstreams lane via the surya coordinator) or by something else in calls2+ (what differs in the config vs calls+). Record research; land; tell the surya coordinator.
 
+ADDED (upstreams' first read): the series touches no clock code. On v7.3 at 8b2283da3 clk.c:1047 has no WARN, so calls2+'s clk.c differs. Send WITH the stack: the kernel's exact tree and commit (rev-parse HEAD, branch, describe), lines 1040-1050 of THAT clk.c, the config diff vs calls+. It showed on pmicwdt (184720) but not on pmicwdt+: boot calls2+ TWICE (two one-shot tries, dmesg saved each), say whether stable; check calls+ once more. No bite, no suspend.
+
 About
 : deep-sleep
 
