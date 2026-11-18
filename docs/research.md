@@ -1285,3 +1285,25 @@ About
 
 Material
 : research/deep-sleep/2026-11-19-clk1047/
+
+
+<a id="clk-1047-calls2-stable-built-with-gcc-not-clang"></a>
+### clk-1047-calls2-stable-built-with-gcc-not-clang
+
+Date
+: 2026-11-18
+
+Brief
+: clk.c:1047 shows on calls2+ in 3 of 3 boots, 0 of 1 calls+ boots; same clk.c, same DSI PLL failure on both; calls2+ is built with GCC 16.2, calls+ with clang 23+LTO+CFI
+
+Question
+: Is calls2+'s clk.c:1047 warning stable, and what differs from calls+ (exact tree, clk.c lines, config)?
+
+Found
+: Correction to the 8b2283da3 reading: calls2+ is NOT built from 8b2283da3 (topic/pmic-wdt-wake-in-suspend, v7.3-based). It is built in ~/Projects/surya-audio/wt-pmic-wdt2, detached HEAD c88ed67e0196e49bbd8a7a10412de1c477224e20, no branch, no tag (describe fails), Makefile 7.1.0: calls+'s source 29d92793b (test/surya-calls, 'Modem calls: audio both ways') plus 7 commits: 99120e9bd, a3cf0db38, cf697da15, 0e8afe134, 9b2409744, ba3c275a9, c88ed67e0 = the PMIC wdt series. git diff 29d92793b..HEAD touches 5 files (qcom,pm8916-wdt.yaml, pm6150.dtsi, pm8998.dtsi, sm7150-xiaomi-common.dtsi, pm8916_wdt.c), 0 lines of drivers/clk. clk.c lines 1040-1050 of that tree: clk_core_unprepare() { lockdep_assert_held(&prepare_lock); if (!core) return; if (WARN(core->prepare_count == 0, "%s already unprepared\n", core->name)) return; } - the WARN is there (the 8b2283da3 tree is a different base with different clk.c). Stability: calls2+ booted 3 times (23:18, 23:43, 23:50Z, each one-shot, dmesg saved): clk.c:1047 and clk.c:1188 and 2 PLL lock-failed lines every time. calls+ checked once (23:45Z): the same 2 PLL lock-failed lines and the same clk.c:1188 'already disabled' warning (from clk_core_disable), but NO clk.c:1047. So the DSI PLL lock failure is old and in both; calls2+ adds only the second warning (the unprepare after the failed prepare). Config diff calls+ (wt-test-mic/.config) vs calls2+ (obj-pmic-wdt2/.config): the only non-toolchain difference besides LOCALVERSION is CONFIG_PM8916_WATCHDOG m->y (the series' driver built in); the rest is the toolchain: calls+ clang 23.1.5 with LTO_CLANG_THIN, CFI, SHADOW_CALL_STACK, COMPAT_VDSO; calls2+ aarch64 gcc 16.2.0, LTO_NONE, no CFI/SCS, ARM64_MTE, ARM64_LSUI, GCC_PLUGINS. Verdict: stable on calls2+; clk code identical, series does not touch it; the leading suspect is the build (gcc vs clang+LTO changes timing/inlining at the failed-PLL unwind) or PM8916_WATCHDOG=y probing earlier, not a patch. Untested: calls2's source built with clang+LTO like calls+ (would split toolchain from series). Phone left on stock calls+; no bite, no suspend, no wdt armed.
+
+About
+: deep-sleep
+
+Material
+: research/deep-sleep/2026-11-19-clk1047/
