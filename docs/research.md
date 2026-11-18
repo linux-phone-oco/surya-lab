@@ -1187,3 +1187,22 @@ About
 
 Material
 : research/deep-sleep/2026-11-18-resume-stall/
+
+
+<a id="2026-11-18-surya-pon-s2-ctl-read"></a>
+### 2026-11-18-surya-pon-s2-ctl-read
+
+Date
+: 2026-11-18
+
+Brief
+: surya PON S2_CTL=0x07 (hard reset), S2_CTL2=0x00 (S2 not enabled), read before the PMIC watchdog was opened
+
+Question
+: What reset type does the pm6150 PON hold for the S2 stage (walleye power-off caution)?
+
+Found
+: Booted pmicwdt kernel once (7.1.0-sm7150-pmicwdt+), read-only via debugfs regmap 0-00 (pmic-spmi, pon@800) before opening /dev/watchdog0: 0x856 S2_CTL=0x07 (hard reset), 0x857 S2_CTL2=0x00 (S2 enable bit clear), 0x852=04 0x854=20 0x85a=07. So the driver's probe write (0x07) matches or the value is the default; type 7 = restart not shutdown, but S2 enable is cleared at rest, so whether the bite restarts or powers off is still unproven; no bite armed. Walleye's suspicion (S2 enable not cleared before the write) is not excluded: the S2_CTL2 enable is set by the driver on open. Next: read the same registers with /dev/watchdog0 opened and armed long (no bite), then the bite only with the author present. Phone returned to kept kernel 7.1.0-sm7150-calls+, healthy, way-back check ok.
+
+About
+: deep-sleep
