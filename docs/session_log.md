@@ -1528,3 +1528,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-1850-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Phone awake, kernel 7.1.0-sm7150-calls+ kept, devlab-usb lock held (autosuspend blocked). Answered who-runs-rtcwake-99999999 (sxmo_autosuspend -> sxmo_suspend.sh), prepared the attended probe note
+
+Considered
+: next: coordinator asks the author for the go on health-cycle-probe-attended; install tests/health on the phone for autosleep-bt-gate
+
+About
+: deep-sleep
