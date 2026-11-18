@@ -2297,31 +2297,6 @@ Rank
 : 5
 
 
-<a id="way-back-pick-watchdog-by-identity"></a>
-### way-back.sh picks the APSS watchdog by identity, not /dev/watchdog0
-
-Status
-: open
-
-Note
-: From the upstreams lane: sleep/way-back.sh line 30 hardcodes wd=/dev/watchdog0 as the APSS fuse. On kernel pmicwdt+ the PMIC watchdog (identity 'QCOM PM8916 PON WDT') is watchdog0 and qcom_wdt is watchdog1, so 'way-back.sh fuse' would arm the device under test and leave no second way back. Fix: choose the node by /sys/class/watchdog/*/identity (qcom_wdt = the one that is NOT 'QCOM PM8916 PON WDT'; refuse with a clear message if none), in way-back.sh and anything else that opens /dev/watchdog0 (lpoco-health suspend guard, standby-run.sh, the sysctl way back); a test for it. The class (a name that shifts when a driver is added): any device node taken by number, look for others. Do it after the PMIC bite; repo + one dry run (fuse arms the APSS node, nothing suspended).
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-18
-
-Needs
-: phone
-
-Proof
-: soc-sleeps
-
-Rank
-: 1
-
-
 <a id="pmic-loop-recovery"></a>
 ### After the PMIC bite: is S2 still enabled and is the reboot loop gone? Stop it, record the way back
 
@@ -2342,45 +2317,6 @@ Needs
 
 Proof
 : soc-sleeps
-
-Rank
-: 0
-
-
-<a id="surya-kernel-pmic-wdt"></a>
-### surya's kernel with the PMIC watchdog series (linux-phone-oco/linux topic/pmic-wdt-wake-in-suspend) and &pm6150_wdt enabled, wakeup-source
-
-Status
-: open
-
-Note
-: docs decision 2026-11-18-upstream-forks, research pmic-wdt-way-back. The four commits are on v7.3 (local worktree ~/Projects/linux-phone-oco/linux-topics until the upstreams lane pushes the branch); pick them onto surya's v7.2 test branch (pm8916_wdt.c and its binding are the same in v7.2; pm6150.dtsi differs - apply that hunk by hand), CONFIG_PM8916_WATCHDOG=y, board: &pm6150_wdt { status = "okay"; wakeup-source; }. Built with the lab's kernel route; nothing flashed by this item.
-
-2026-11-18 coordinator (upstreams coordinator's ask): the series is pushed: https://github.com/grenudi/linux branch topic/pmic-wdt-wake-in-suspend, e123d3bff, 4 commits on v7.3 (use this instead of 'local worktree until pushed'; the rest of the note holds). The keeper builds the kernel on the lab as it did before (a one-shot try, boot-counted, falls back by itself; watchdog armed; no real suspend in this item). Result to the surya coordinator: built or not, the install name.
-
-2026-11-18 CAUTION (from the upstreams lane, via the coordinator): on walleye the same PMIC watchdog series BIT, but the bite ended in a POWER-OFF, not a restart, and needed the author's hands (walleye decision 2026-11-18-walleye-pmic-bite-read-then-warm). Suspected: the S2_CTL hard-reset write does not take because the S2 enable is not cleared first. On surya: building, installing and booting the kernel as a one-shot try, and probing the driver read-only (registers? timeout? reset type) is FINE. Do NOT arm the PMIC watchdog to bite until the reset type is proven to RESTART; and then only with the author present and told what to expect (a power-off needing a power press is possible). Read the walleye decision first.
-
-2026-11-18 from the upstreams coordinator (walleye decision 2026-11-18-walleye-no-pmic-bite-until-reset-type; walleye could not read the PON registers and parked): FIRST, read-only, as soon as the kernel with the series is booted once: READ PON S2_CTL (pm6150 PON base + 0x56) and S2_CTL2 (+0x57) - the driver writes 0x07 (hard reset) at probe. 0x07 = surya's bite should restart; 0x04 (shutdown) or anything else = it powers off. How: through the PMIC's regmap (debugfs regmap for the spmi pmic, or the pm6150 PON node's registers: find the base from the device tree / dmesg; no bite, no write). Send the raw values and how you read them to the surya coordinator at once (they go to the upstreams coordinator even if the bite is deferred): that fact decides 'a write that does not take' vs 'a different encoding'. The BITE itself: only with the author present to press power if needed.
-
-2026-11-18 from the upstreams coordinator: REBUILD at grenudi/linux topic/pmic-wdt-wake-in-suspend f5bb57d27 (not e123d3bff). New patch 5/5 sets the S2 reset type with S2 disabled and a 500-1000 us wait, then reads it back: a type that does not take now FAILS THE PROBE (so a bite cannot silently become a power-off). dev_dbg logs the firmware's original S2_CTL: enable it with dyndbg="file pm8916_wdt.c +p" on the kernel cmdline (one-shot: lpoco lab kernel install NAME VMLINUZ DTB MODULES --cmdline ... - the new release name differs from the running one so install accepts it), and read that logged value: it is the fact the series still needs. Built W=1/checkpatch clean, NOT yet run on hardware. Steps: rebuild at f5bb57d27 as 7.1.0-sm7150-pmicwdt+ (same recipe), one-shot try with dyndbg, read dmesg (probe ok? the original S2_CTL line) and the PON S2_CTL/S2_CTL2 registers read-only, send the raw values to the surya coordinator at once. The BITE stays attended until it proves a restart.
-
-GO GIVEN 2026-11-18 by the author ('Go'), at the phone, having read the plain words: (1) rebuild at f5bb57d27 (7.1.0-sm7150-pmicwdt+), one-shot try with dyndbg="file pm8916_wdt.c +p"; read the 'S2 reset control was' line and PON 0x856/0x857 again; (2) open /dev/watchdog0 with a long timeout, read, no bite; (3) THE BITE: open with a short timeout (e.g. 20-30 s) and do not feed it; the PMIC resets the phone: restart by itself = PASS, stays dark = POWER-OFF (REPORT AT ONCE to the surya coordinator local_0ecf107e-d955-49ff-aefb-b0ecaa3bcbdd: the author presses power once, hold 10 s if needed, it boots the kept kernel by boot counting). No suspend, nothing flashed. Send the result and the 'S2 reset control was' line to the surya coordinator (they go to the upstreams coordinator). Record research; land.
-
-WITNESS (ideal-agent 0.3.50 witnessed go), 2026-11-18 18:55Z, expires 19:07Z: the author said verbatim 'Yes, at surya now' (relayed by the top coordinator); he is at the phone for ~10 minutes. RUN THE BITE NOW, inside this window; after 19:07Z this witness is void (ask the coordinator again). Restart by itself = PASS; dark = power-off: report AT ONCE to the surya coordinator so he presses power.
-
-LANE RULE (upstreams coordinator, 2026-11-18, after the bite loop): AFTER ANY PMIC BITE the next boot MUST be a kernel carrying pm8916_wdt (it finds S2 running, sets HW_RUNNING, and the core pets it) - never calls+ or another kernel; no driver can clear S2 after a bite itself (PMIC behaviour); otherwise a full power-off (eOS recovery, 30 s USB out) is the only way out. Every bite step boots back into the pmicwdt kernel. Series patch 6/6 (grenudi/linux topic/pmic-wdt-wake-in-suspend 8b2283da3) adds watchdog_stop_on_reboot/stop_on_unregister: an orderly reboot/shutdown/unbind clears S2. The next proof the series needs: pmic-wdt-wakes-in-suspend, ATTENDED, with the APSS fuse picked by identity (way-back-pick-watchdog-by-identity first).
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-18
-
-Needs
-: phone
-
-Proof
-: pmic-wdt-bites
 
 Rank
 : 0
@@ -2448,3 +2384,96 @@ Proof
 
 Rank
 : 9
+
+
+<a id="surya-kernel-pmic-wdt"></a>
+### surya's kernel with the PMIC watchdog series (linux-phone-oco/linux topic/pmic-wdt-wake-in-suspend) and &pm6150_wdt enabled, wakeup-source
+
+Status
+: open
+
+Note
+: docs decision 2026-11-18-upstream-forks, research pmic-wdt-way-back. The four commits are on v7.3 (local worktree ~/Projects/linux-phone-oco/linux-topics until the upstreams lane pushes the branch); pick them onto surya's v7.2 test branch (pm8916_wdt.c and its binding are the same in v7.2; pm6150.dtsi differs - apply that hunk by hand), CONFIG_PM8916_WATCHDOG=y, board: &pm6150_wdt { status = "okay"; wakeup-source; }. Built with the lab's kernel route; nothing flashed by this item.
+
+2026-11-18 coordinator (upstreams coordinator's ask): the series is pushed: https://github.com/grenudi/linux branch topic/pmic-wdt-wake-in-suspend, e123d3bff, 4 commits on v7.3 (use this instead of 'local worktree until pushed'; the rest of the note holds). The keeper builds the kernel on the lab as it did before (a one-shot try, boot-counted, falls back by itself; watchdog armed; no real suspend in this item). Result to the surya coordinator: built or not, the install name.
+
+2026-11-18 CAUTION (from the upstreams lane, via the coordinator): on walleye the same PMIC watchdog series BIT, but the bite ended in a POWER-OFF, not a restart, and needed the author's hands (walleye decision 2026-11-18-walleye-pmic-bite-read-then-warm). Suspected: the S2_CTL hard-reset write does not take because the S2 enable is not cleared first. On surya: building, installing and booting the kernel as a one-shot try, and probing the driver read-only (registers? timeout? reset type) is FINE. Do NOT arm the PMIC watchdog to bite until the reset type is proven to RESTART; and then only with the author present and told what to expect (a power-off needing a power press is possible). Read the walleye decision first.
+
+2026-11-18 from the upstreams coordinator (walleye decision 2026-11-18-walleye-no-pmic-bite-until-reset-type; walleye could not read the PON registers and parked): FIRST, read-only, as soon as the kernel with the series is booted once: READ PON S2_CTL (pm6150 PON base + 0x56) and S2_CTL2 (+0x57) - the driver writes 0x07 (hard reset) at probe. 0x07 = surya's bite should restart; 0x04 (shutdown) or anything else = it powers off. How: through the PMIC's regmap (debugfs regmap for the spmi pmic, or the pm6150 PON node's registers: find the base from the device tree / dmesg; no bite, no write). Send the raw values and how you read them to the surya coordinator at once (they go to the upstreams coordinator even if the bite is deferred): that fact decides 'a write that does not take' vs 'a different encoding'. The BITE itself: only with the author present to press power if needed.
+
+2026-11-18 from the upstreams coordinator: REBUILD at grenudi/linux topic/pmic-wdt-wake-in-suspend f5bb57d27 (not e123d3bff). New patch 5/5 sets the S2 reset type with S2 disabled and a 500-1000 us wait, then reads it back: a type that does not take now FAILS THE PROBE (so a bite cannot silently become a power-off). dev_dbg logs the firmware's original S2_CTL: enable it with dyndbg="file pm8916_wdt.c +p" on the kernel cmdline (one-shot: lpoco lab kernel install NAME VMLINUZ DTB MODULES --cmdline ... - the new release name differs from the running one so install accepts it), and read that logged value: it is the fact the series still needs. Built W=1/checkpatch clean, NOT yet run on hardware. Steps: rebuild at f5bb57d27 as 7.1.0-sm7150-pmicwdt+ (same recipe), one-shot try with dyndbg, read dmesg (probe ok? the original S2_CTL line) and the PON S2_CTL/S2_CTL2 registers read-only, send the raw values to the surya coordinator at once. The BITE stays attended until it proves a restart.
+
+GO GIVEN 2026-11-18 by the author ('Go'), at the phone, having read the plain words: (1) rebuild at f5bb57d27 (7.1.0-sm7150-pmicwdt+), one-shot try with dyndbg="file pm8916_wdt.c +p"; read the 'S2 reset control was' line and PON 0x856/0x857 again; (2) open /dev/watchdog0 with a long timeout, read, no bite; (3) THE BITE: open with a short timeout (e.g. 20-30 s) and do not feed it; the PMIC resets the phone: restart by itself = PASS, stays dark = POWER-OFF (REPORT AT ONCE to the surya coordinator local_0ecf107e-d955-49ff-aefb-b0ecaa3bcbdd: the author presses power once, hold 10 s if needed, it boots the kept kernel by boot counting). No suspend, nothing flashed. Send the result and the 'S2 reset control was' line to the surya coordinator (they go to the upstreams coordinator). Record research; land.
+
+WITNESS (ideal-agent 0.3.50 witnessed go), 2026-11-18 18:55Z, expires 19:07Z: the author said verbatim 'Yes, at surya now' (relayed by the top coordinator); he is at the phone for ~10 minutes. RUN THE BITE NOW, inside this window; after 19:07Z this witness is void (ask the coordinator again). Restart by itself = PASS; dark = power-off: report AT ONCE to the surya coordinator so he presses power.
+
+WORKAROUND(kept-kernel-with-pmic-wdt) LANE RULE (upstreams coordinator, 2026-11-18, after the bite loop): AFTER ANY PMIC BITE the next boot MUST be a kernel carrying pm8916_wdt (it finds S2 running, sets HW_RUNNING, and the core pets it) - never calls+ or another kernel; no driver can clear S2 after a bite itself (PMIC behaviour); otherwise a full power-off (eOS recovery, 30 s USB out) is the only way out. Every bite step boots back into the pmicwdt kernel. Series patch 6/6 (grenudi/linux topic/pmic-wdt-wake-in-suspend 8b2283da3) adds watchdog_stop_on_reboot/stop_on_unregister: an orderly reboot/shutdown/unbind clears S2. The next proof the series needs: pmic-wdt-wakes-in-suspend, ATTENDED, with the APSS fuse picked by identity (way-back-pick-watchdog-by-identity first).
+
+2026-11-18 (the author): the rule 'after any bite the next boot must carry pm8916_wdt' is a WORKAROUND(kept-kernel-with-pmic-wdt), not a rule to remember: the real fix is that EVERY kernel surya boots, the kept calls+ one included, carries the PMIC watchdog driver with patch 6/6, so any boot after a bite finds S2 running and feeds or stops it. Item kept-kernel-with-pmic-wdt. scripts/workarounds flags this once the kept kernel carries the driver.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: pmic-wdt-bites
+
+Rank
+: 0
+
+
+<a id="way-back-pick-watchdog-by-identity"></a>
+### way-back.sh picks the APSS watchdog by identity, not /dev/watchdog0
+
+Status
+: open
+
+Note
+: From the upstreams lane: sleep/way-back.sh line 30 hardcodes wd=/dev/watchdog0 as the APSS fuse. On kernel pmicwdt+ the PMIC watchdog (identity 'QCOM PM8916 PON WDT') is watchdog0 and qcom_wdt is watchdog1, so 'way-back.sh fuse' would arm the device under test and leave no second way back. Fix: choose the node by /sys/class/watchdog/*/identity (qcom_wdt = the one that is NOT 'QCOM PM8916 PON WDT'; refuse with a clear message if none), in way-back.sh and anything else that opens /dev/watchdog0 (lpoco-health suspend guard, standby-run.sh, the sysctl way back); a test for it. The class (a name that shifts when a driver is added): any device node taken by number, look for others. Do it after the PMIC bite; repo + one dry run (fuse arms the APSS node, nothing suspended).
+
+Also (the author, 2026-11-18): in sleep/way-back.sh mark the bite-related rule as a comment 'WORKAROUND(kept-kernel-with-pmic-wdt): after a PMIC bite boot a kernel carrying pm8916_wdt' wherever the script or its header states it, so scripts/workarounds finds it.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: soc-sleeps
+
+Rank
+: 1
+
+
+<a id="kept-kernel-with-pmic-wdt"></a>
+### The kept kernel carries the PMIC watchdog driver (patch 6/6): then the after-a-bite rule is unnecessary
+
+Status
+: open
+
+Note
+: The author (2026-11-18): the lane rule 'after any PMIC bite the next boot must carry pm8916_wdt' is a workaround kept in heads and briefs; make it unnecessary. Rebuild the kept kernel (7.1.0-sm7150-calls+ branch) WITH the PMIC watchdog series incl. patch 6/6 (grenudi/linux topic/pmic-wdt-wake-in-suspend 8b2283da3: stop_on_reboot/stop_on_unregister) and &pm6150_wdt enabled in the kept dtb, so every boot - the kept one included - finds S2 running after a bite and feeds or stops it. Steps: build (same recipe as pmicwdt+, one release name, e.g. 7.1.0-sm7150-calls+ rebuilt or 7.1.0-sm7150-calls2+), install, ONE one-shot try (boot-counted, no bite), health; only then promote it as the kept kernel (devlab/lpoco lab kernel keep? read its --help; the old kept one stays as the fallback entry). Proof: no PMIC wdt left unattended without a driver: the test 'kept kernel has pm8916_wdt' passes; then remove the WORKAROUND(kept-kernel-with-pmic-wdt) markers (the items surya-kernel-pmic-wdt, way-back-pick-watchdog-by-identity, way-back.sh). Attended window for the PROMOTION only (a bad kept kernel is the risk): the plain-words ask goes through the coordinator.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: soc-sleeps
+
+Rank
+: 6
