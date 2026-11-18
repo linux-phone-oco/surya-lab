@@ -16,7 +16,7 @@
 #                     is doing - the dry run, nothing suspends. A marker goes to the kernel log first
 #   defuse            stop an armed watchdog by the magic close
 #   collect DIR       copy what pstore kept (the last boot's console and panic log) into DIR, then clear it
-#   cycle SLEEP [probe|bt-on]
+#   cycle SLEEP [probe|bt-on [stop-sensors]]   (stop-sensors: sensorspd stopped before, started after, as suspend.target does)
 #                     ONE s2idle cycle with Bluetooth blocked (its UART is the wake source that ended s2idle at once):
 #                     fuse 30 s, rtcwake -m freeze -s SLEEP (5 to 15: the fuse is the watchdog's longest), defuse and
 #                     unblock on return; refuses unless `check` passes and the patched parameter is there. With `probe`
@@ -86,6 +86,7 @@ case ${1:-} in
 		[ "${3:-}" = probe ] || [ "${3:-}" = bt-on ] || rfkill block bluetooth
 		stats before
 		say "way-back: cycle: sleep $2 s, fuse 30 s${3:+, $3}" > /dev/kmsg; sync
+		if [ "${4:-}" = stop-sensors ]; then systemctl stop hexagonrpcd-adsp-sensorspd; say "way-back: sensorspd stopped before the suspend"; fi
 		arm_and_release 30
 		u=/sys/class/udc/a600000.usb/soft_connect   # as in the first cycles: the gadget let go, then back
 		[ -w "$u" ] && echo disconnect > "$u"
@@ -94,6 +95,7 @@ case ${1:-} in
 		[ -w "$u" ] && echo connect > "$u"
 		if [ "${3:-}" = probe ]; then say "back from the suspend; the fuse stays lit: the phone resets about 30 s after arming"; else
 			printf V > "$wd"; echo 0 > "$param"
+			if [ "${4:-}" = stop-sensors ]; then systemctl start hexagonrpcd-adsp-sensorspd; sleep 8; say "way-back: sensorspd restarted: $(systemctl is-active hexagonrpcd-adsp-sensorspd); iio: $(ls /sys/bus/iio/devices 2>/dev/null | tr "\n" " ")"; fi
 			r1=$(cat /sys/class/rtc/rtc0/since_epoch)
 			if [ "${3:-}" = bt-on ]; then echo "$sw0" > "$serw"; else rfkill unblock bluetooth; fi
 			say "back: watchdog stopped; RTC $r1, asleep (RTC) $((r1 - r0)) s of $2 asked"

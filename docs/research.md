@@ -865,3 +865,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-18-sensorspd-stopped-no-adsp-crash"></a>
+### 2026-11-18-sensorspd-stopped-no-adsp-crash
+
+Date
+: 2026-11-18
+
+Brief
+: With sensorspd stopped before and started after, 3 of 3 bt-on s2idle cycles crashed no processor; sensors came back each time
+
+Question
+: Does stopping hexagonrpcd-adsp-sensorspd around a suspend (what its Conflicts=suspend.target does) stop the ADSP crash on every suspend?
+
+Found
+: way-back.sh cycle 15 bt-on stop-sensors x3, watchdog armed, USB attached: no sensor_process/ADSP crash in dmesg (4 of 4 crashed before, with the daemon running); after each restart the daemon was active and iio-sensor-proxy still gave Accelerometer, AmbientLight, Proximity; hci0 present. Suite after: no-processor-crashes, motion-and-light, proximity-reads pass; soc-sleeps still fails (cxsd/aosd 0, adsp never asleep). The unit already carries Conflicts/Before=suspend.target, so a real systemd suspend does this by itself; rtcwake bypasses it, hence the new stop-sensors flag. Not done: a real systemctl suspend path (sxmo) and the sensors-across-suspend streaming read.
+
+About
+: deep-sleep

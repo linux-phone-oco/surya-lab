@@ -1487,9 +1487,7 @@ Status
 : open
 
 Note
-: 2026-11-17 keeper-8: the probe of sensors-and-the-mask (research 2026-11-17-sensorspd-probe-still-writes) shows the DSP still writes the registry with the configs current - crash-loop at start, so there is nothing to measure across a suspend until hexagonrpcd serves writes (sensors-registry-writes). Plan when sensors are up: measure whether they keep streaming after a resume with sensorspd stopped by its Conflicts=suspend.target; restart it after resume (unit WantedBy=suspend.target, After=) only if not; rootpd stays masked; way-back.sh cycle 15 bt-on, one change at a time. Proof: after a measured sleep in one boot, motion-and-light, soc-sleeps and no-processor-crashes pass.
-
-2026-11-18: sensors are up and lasting (sensors-without-crash landed); the daemon crashed the ADSP on every suspend (4/4) so now do the sleep hook: stop sensorspd before suspend, restart after, measured on way-back.sh cycles (watchdog armed, USB attached, no hands).
+: 2026-11-18 keeper: stop/start around suspend measured 3/3 crash-free with sensors back (research 2026-11-18-sensorspd-stopped-no-adsp-crash). Left: same via sxmo/systemctl suspend, then done.
 
 About
 : deep-sleep
