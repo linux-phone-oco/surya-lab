@@ -2035,10 +2035,10 @@ Rank
 ### surya-lab: an **Owner** line in AGENTS.md and [host] watch = true in device.toml
 
 Status
-: open
+: done
 
 Note
-: From orchestration (lpoco 0.7+: watchers are opt-in): (1) device.toml gets a [host] table with watch = true (until then devlab-watch@surya-lab keeps running as is but is no longer restarted when its binary changes); (2) AGENTS.md gets an **Owner** line naming the owner BY ROLE (correction from orchestration, ideal-agent 0.3.37): **Owner**: `surya-coordinator` - the lane coordinator (not a session id); land with AGENT_NAME=surya-coordinator.<run> as ideal-agent, docs, lab-tools and device-template have. Repo-only edits, no phone step: do them in one landing; checks green.
+: Owner line in AGENTS.md, [host] watch = true in device.toml; tad check green
 
 About
 : deep-sleep

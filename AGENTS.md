@@ -1,5 +1,7 @@
 # surya-lab - notes for agents
 
+**Owner**: `surya-coordinator` - the lane coordinator of the POCO X3 NFC. It queues the lane (tad q phone-next, lane-next), starts the keeper, builder and research launchers and decides what needs no hands; the keeper (`surya-keeper`) holds the phone, the builder and research sessions never touch it.
+
 Principles of linux-phone-oco, cited and never restated ([`tad q principles`](https://github.com/linux-phone-oco/docs) in docs): [as-good-as-android](https://github.com/linux-phone-oco/docs/blob/main/docs/concepts.md#as-good-as-android), [measured-not-claimed](https://github.com/linux-phone-oco/docs/blob/main/docs/concepts.md#measured-not-claimed), [mainline-first](https://github.com/linux-phone-oco/docs/blob/main/docs/concepts.md#mainline-first), [no-manual-steps](https://github.com/linux-phone-oco/docs/blob/main/docs/concepts.md#no-manual-steps), [rust-with-argenv](https://github.com/linux-phone-oco/docs/blob/main/docs/concepts.md#rust-with-argenv).
 
 The device lab for the Xiaomi POCO X3 NFC (surya, Huaxing panel): flashing, provisioning, switching

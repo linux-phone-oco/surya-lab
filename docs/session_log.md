@@ -1669,3 +1669,21 @@ Considered
 
 About
 : sensors
+
+---
+
+
+<a id="2026-11-18-2000-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Keeper took the lease; surya answers at no address and is not on USB (lpoco lab phone sh: does not answer; lsusb shows only the Pixel). Nothing changed. Last known: kernel 7.1.0-sm7150-calls+ kept. Needs the author's hands (power cycle or cable).
+
+Considered
+: next: coordinator asks the author to check surya's cable and power; then surya-kernel-pmic-wdt
+
+About
+: deep-sleep

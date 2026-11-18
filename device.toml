@@ -3,6 +3,9 @@
 [device]
 codename = "xiaomi-surya"
 
+[host]
+watch = true   # devlab-watch@surya-lab: opt-in since lpoco 0.7
+
 [connection]
 user = "user"
 addresses = ["172.16.42.1"]   # USB networking; the Wi-Fi address is remembered once learned
