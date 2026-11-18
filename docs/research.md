@@ -1111,13 +1111,13 @@ Date
 : 2026-11-18
 
 Brief
-: Attended probe 'way-back.sh cycle 10 probe' (fuse 30 s armed, kept lit): phone left USB at 13:57:49 and had not returned or reset 5+ min later; the fuse did not bite again
+: Attended probe (fuse 30 s lit): phone stayed on USB, same boot, until 13:58:14, then vanished ~35 s after arming and did not return in 6+ min; whether the fuse bit is not read
 
 Question
 : Does the 30 s watchdog reset the phone after a real suspend entry (cycle 10 probe), with the author present?
 
 Found
-: 13:57:38 cycle started; at 13:57:49 the script printed 'back from the suspend; the fuse stays lit'. From then lpoco lab phone find says xiaomi-surya answers at no address (checked to 14:03). No reset within 35 s, none within 5 min. So the fuse does not bite on this path (pre-check showed keep_armed_in_suspend=N on the phone). A real systemctl suspend try must NOT follow. Author's hands needed: hold power ~10 s and boot.
+: 13:57:38 cycle started; script returned 13:57:49 ('back from the suspend; the fuse stays lit'). The phone then answered every 4 s with the same boot (up since 12:15:56, uptime 2516 s to 2537 s) until 13:58:14, then never again (lpoco lab phone find: no address at 14:03). So the link dropped ~30-35 s after arming, as a watchdog reset would; but the phone did not come back on USB in 6+ min, so a reset-and-boot is not shown, nor is a hang. keep_armed_in_suspend=N was read before the probe. Author's hands needed: hold power ~10 s, boot; then read pstore and the previous journal to say reset or hang. No real systemctl suspend try until then.
 
 About
 : deep-sleep

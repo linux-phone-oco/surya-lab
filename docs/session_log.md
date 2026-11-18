@@ -1557,10 +1557,10 @@ Entry date
 : 2026-11-18
 
 Done
-: Ran the attended probe (cycle 10 probe) with the author's go: phone dropped off USB at 13:57:49 and neither reset nor returned in 5+ min; the fuse did not bite on this path. Phone is DOWN, needs the author to hold power ~10 s and boot.
+: Ran the attended probe (cycle 10 probe) with the author's go: phone stayed up on the same boot until 13:58:14 (~35 s after arming), then left USB and had not returned 6+ min later. Reset vs hang not read. Phone is DOWN: the author holds power ~10 s and boots it.
 
 Considered
-: next: after the power cycle read pstore + previous journal; check why keep_armed_in_suspend=N on the phone before the probe (is the patched wdt module loaded?); no real suspend try until the fuse is shown to bite
+: next: after the power cycle read pstore + previous journal (reset or hang?); why keep_armed_in_suspend=N; no real suspend try until the fuse is shown to bite and the phone to return
 
 About
 : deep-sleep
