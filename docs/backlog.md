@@ -1480,31 +1480,6 @@ Rank
 : 1
 
 
-<a id="sleep-fastrpc-helpers"></a>
-### FastRPC helpers stopped across suspend; the sensors back
-
-Status
-: open
-
-Note
-: 2026-11-18 keeper: stop/start around suspend measured 3/3 crash-free with sensors back (research 2026-11-18-sensorspd-stopped-no-adsp-crash). Left: same via sxmo/systemctl suspend, then done.
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-17
-
-Needs
-: phone
-
-Proof
-: motion-and-light
-
-Rank
-: 4
-
-
 <a id="surya-unreachable-after-suspend"></a>
 ### surya unreachable after a real systemctl suspend: the author's power cycle, then the cause
 
@@ -1528,3 +1503,31 @@ Needs
 
 Rank
 : 0
+
+
+<a id="sleep-fastrpc-helpers"></a>
+### FastRPC helpers stopped across suspend; the sensors back
+
+Status
+: open
+
+Note
+: 2026-11-18 keeper: stop/start around suspend measured 3/3 crash-free with sensors back (research 2026-11-18-sensorspd-stopped-no-adsp-crash). Left: same via sxmo/systemctl suspend, then done.
+
+Waits
+: surya answering again (parked: unreachable after a real suspend, needs the author's power cycle - backlog surya-unreachable-after-suspend)
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-17
+
+Needs
+: phone
+
+Proof
+: motion-and-light
+
+Rank
+: 4
