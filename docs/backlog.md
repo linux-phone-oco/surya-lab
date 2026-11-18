@@ -1730,12 +1730,13 @@ Rank
 ### A lab phone must not idle-suspend: sxmo autosleep off through provisioning, with a health check
 
 Status
-: open
+: in-progress
 
 Note
-: Found 2026-11-18: sxmo's autosleep (sxmo_autosuspend.sh -> rtcwake -m mem) suspends the idle lab phone, which drops USB and Wi-Fi, so the phone looks hung until someone presses power (3 'hangs' were this). keeper-9 saw: devlab-usb-awake drops its wake lock whenever the UDC is not 'configured', and sxmo_autosuspend.sh keeps running, so one USB blip starts a suspend that does not come back. Repo work, no phone needed to write it: (1) device.toml / provisioning: sxmo autosleep disabled for the lab build (the sxmo config or a masked/stopped autosuspend service, whichever sxmo supports - look at how sxmo_autosuspend.sh is started), and the usb-awake wake lock held regardless of the UDC state; (2) a health check 'autosleep-off' in the suite (pass when no autosuspend process/unit is active and the wake lock is held); (3) land it; the keeper provisions it on the phone when the phone answers (that step is then a phone item). Measured cycles (way-back.sh / lpoco-health suspend cycle) still suspend it deliberately, with the watchdog armed.
+: 2026-11-18 keeper: repo part written - lab/devlab-usb-awake holds the devlab-usb wake lock always (opt-out /etc/devlab-allow-autosleep), so sxmo_autosuspend.sh blocks on wakeup_count; health check tests/health/base/autosleep-off.sh. Phone part waits: install the overlay (reflash or copy) and run the suite.
 
-2026-11-18 coordinator: the keeper takes this (phone item) and does the REPO part FIRST even while the phone is asleep/silent (the author is away; a silent phone is not a reason to end): write the provisioning change and the 'autosleep-off' health check, land them; only the last step (provision on the phone, run the suite) waits for the phone to answer - then record that step as waiting (waits: surya answering) and end. Do not touch what needs the phone while it is silent.
+Waits
+: surya answering: provision devlab-usb-awake on the phone, run suite for autosleep-off
 
 About
 : deep-sleep

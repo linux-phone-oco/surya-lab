@@ -1381,3 +1381,18 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-1500-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Phone silent (no known address); changed nothing on it. Wrote and landed the repo part of sxmo-autosleep-off-lasting: devlab-usb-awake holds the wake lock always, autosleep-off health check. Kernel kept 7.1.0-sm7150-calls+ unchanged.
+
+Considered
+: next: when surya answers, provision the new devlab-usb-awake (overlay) and run the suite for autosleep-off; then the pending pstore/journal read after the power hold, and the dtb repeat. Rejected: stopping sxmo_autosuspend by superctl - the wake lock needs no sxmo knowledge

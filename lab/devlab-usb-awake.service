@@ -1,5 +1,5 @@
 [Unit]
-Description=Awake while connected by USB to a host (the lab's phone must not drop its link)
+Description=Awake always (the lab phone must not idle-suspend nor drop its USB link)
 
 [Service]
 ExecStart=/usr/local/bin/devlab-usb-awake
