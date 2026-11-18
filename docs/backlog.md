@@ -1546,31 +1546,6 @@ Rank
 : 4
 
 
-<a id="bt-trace-cycles"></a>
-### Bluetooth s2idle: 20x15 s and 3x120 s way-back cycles bt-on, wakeup ON, with hci_qca dyndbg and geni irq trace; read storm vs crash order
-
-Status
-: open
-
-Note
-: Read-only on the phone apart from trace switches; watchdog armed, no unplug. Decision 2026-11-18-bt-suspend-way step 1.
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-18
-
-Needs
-: phone
-
-Proof
-: bt-no-irq-storm
-
-Rank
-: 1
-
-
 <a id="bt-sleep-cts-pulldown"></a>
 ### One-shot dtb: CTS pull-down in qup-uart3-sleep like sc7180-trogdor; same cycles as bt-trace-cycles
 
@@ -1697,3 +1672,30 @@ Proof
 
 Rank
 : 4
+
+
+<a id="bt-trace-cycles"></a>
+### Bluetooth s2idle: 20x15 s and 3x120 s way-back cycles bt-on, wakeup ON, with hci_qca dyndbg and geni irq trace; read storm vs crash order
+
+Status
+: open
+
+Note
+: Read-only on the phone apart from trace switches; watchdog armed, no unplug. Decision 2026-11-18-bt-suspend-way step 1.
+
+2026-11-18 coordinator: YOU write the cycle wrapper yourself (sleep/bt-trace.sh, shell, in surya-lab; not a builder item): it wraps way-back.sh cycles with hci_qca dyndbg + the geni irq trace, collects the trace per cycle, keeps the watchdog armed, sxmo autosleep stopped, sensorspd stopped around the cycle, a short RTC alarm (15 s; 3 x 120 s only if the fuse allows it - otherwise note why and skip them), starts under systemd-run (not nohup), restores everything on any end. Then run the 20 x 15 s cycles and record what the traces show (which comes first: the irq 157 storm or the controller crash). The author is at hand (attended window), no unplug needed. Land, hand over.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: bt-no-irq-storm
+
+Rank
+: 1
