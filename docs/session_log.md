@@ -1441,3 +1441,21 @@ Done
 
 Considered
 : next: phone-next queue; soc-sleeps still fails (cxsd/aosd 0) - deep-sleep research continues
+
+---
+
+
+<a id="2026-11-18-1745-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Phone awake and answering (up 3 h, kernel 7.1.0-sm7150-calls+ kept, autosleep service active). bt-suspend-gate done: devlab-usb-awake also holds the wake lock while hci0 is not UP or an rfkill is in D state, even with /etc/devlab-allow-autosleep; installed on the phone; test autosleep-bt-gate added (the suite run on the phone still uses its installed tests, so it did not show it yet)
+
+Considered
+: next: queue's next item via phone-next; install tests/health on the phone so autosleep-bt-gate shows in the suite
+
+About
+: deep-sleep
