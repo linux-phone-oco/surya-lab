@@ -1244,3 +1244,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="calls2-s-clk-c-1047-boot-warning-is-new-vs-calls"></a>
+### calls2-s-clk-c-1047-boot-warning-is-new-vs-calls
+
+Date
+: 2026-11-18
+
+Brief
+: calls2+'s clk.c:1047 boot warning is new vs calls+ (0 of ~45 calls+ runs), also on pmicwdt (184720) but not pmicwdt+; its bt crash line is not in any stored run
+
+Question
+: Are calls2+'s two suite fails (boot-warnings clk.c:1047, one bt controller-crash line) also in calls+?
+
+Found
+: Read only, from tests/results. boot-warnings: calls+ passed in every stored run (3 known warnings); clk.c:1047 failed only on calls2+ (20261118-212207) and 7.1.0-sm7150-pmicwdt (184720); pmicwdt+ runs (181312, 182313) passed. So NEW, not a calls+ warning, tied to a PMIC-wdt-series kernel build but not every one. Cause unread: the try boot's dmesg is not stored. bt: run 212207 itself shows bt-no-controller-crash pass (0 lines), as do the calls+ runs after it; the 1 line in the try's own health is in no stored run, so unconfirmed. Verdict: NEW for clk.c:1047, UNKNOWN for bt. Next: an attended try of calls2+ that saves its dmesg (clk.c:1047 stack) before kept-kernel-with-pmic-wdt promotes it.
+
+About
+: deep-sleep
