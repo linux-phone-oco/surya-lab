@@ -1510,3 +1510,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-1225-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Phone awake, up ~1 min after the author's power hold, kernel 7.1.0-sm7150-calls+ kept, watchdog check passes (keep_armed N until enable, by design). Try 4 read back read-only (research 2026-11-18-try4-read-back); nothing changed on the phone.
+
+Considered
+: next: surya-unreachable-after-try4 stays in-progress: trace who ran rtcwake -m mem -s 99999999; cycle probe attended; no unattended real systemctl suspend
+
+About
+: deep-sleep
