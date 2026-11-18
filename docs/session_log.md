@@ -1204,3 +1204,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-0125-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Kept kernel 7.1.0-sm7150-calls+. Three real systemctl-suspend tries for sleep-fastrpc-helpers; the third left surya unreachable on USB (10+ min, no answer): it needs the author's hands (unplug/power-cycle) and a look at the log after
+
+Considered
+: next: after reboot check ramoops/pstore and journal -b -1; do not retry the hook until the cause of the unreachable state is known; stop sxmo autosleep first; lab/devlab-sensors-resume (delayed start) is unproven, kept on a branch
+
+About
+: deep-sleep
