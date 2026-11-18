@@ -149,6 +149,22 @@ type = "string"
 name = "research"
 type = "string"
 
+[[tables.decisions.fields]]
+name = "supersedes"
+type = "string"
+
+[[tables.decisions.fields]]
+name = "amends"
+type = "string"
+
+[[tables.decisions.fields]]
+name = "scope"
+type = "string"
+
+[[tables.decisions.fields]]
+name = "tracked_by"
+type = "string"
+
 [tables.research]
 key = ["id"]
 
@@ -430,6 +446,18 @@ to = ["upstream_items"]
 
 # What this base is about, besides its work items: the device itself, then its parts. Each record names one
 # of them (or a backlog item) in about.
+[[rules.references]]
+field = "decisions.supersedes"
+to = ["decisions"]
+
+[[rules.references]]
+field = "decisions.amends"
+to = ["decisions"]
+
+[[rules.references]]
+field = "decisions.tracked_by"
+to = ["backlog"]
+
 [[rules.references]]
 field = "decisions.about"
 to = ["backlog", "parts"]
