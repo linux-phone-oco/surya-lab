@@ -1168,3 +1168,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-0105-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Kept kernel 7.1.0-sm7150-calls+ and kept dtb, booted 23:56 CET-1 (up, healthy, nothing armed); r4 scored aborted/partial (unscorable) and the hang explained; no change made to the phone this session
+
+Considered
+: next: arm r5 when the author can unplug - Bluetooth off during cycles (irq 157 aborts bt-on), sxmo autosleep stopped so a failed run cannot wedge it, sensorspd stopped; sensors-across-suspend; proximity cover witnessed test
+
+About
+: deep-sleep
