@@ -1687,3 +1687,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-2100-surya-follows-template"></a>
+### surya-lab follows docs' device layer
+
+Entry date
+: 2026-11-18
+
+Done
+: devicebase.toml pins linux-phone-oco/docs 0.17.0 (own empty); tables.toml device tables between device:begin/end; tad check green. Repo-only, phone untouched
+
+Considered
+: next: surya still not answering; needs the author's cable/power
+
+About
+: surya-follows-template

@@ -2213,10 +2213,10 @@ Rank
 ### surya-lab follows the device template's device layer from docs (devicebase.toml pin 0.17.0, tables markers, [why] lines)
 
 Status
-: open
+: done
 
 Note
-: From orchestration (decision 2026-11-18-device-layer-from-docs; docs item surya-follows-template; example: device-template #26). REPO-ONLY edits, no phone step - one landing: (1) devicebase.toml gets source, version, own (pin linux-phone-oco/docs at 0.17.0); (2) tables.toml: the device tables go between '# device:begin' and '# device:end' markers; (3) every own file gets a [why] line (idealkb v0.19.0). Today follow.sh on surya-lab ends 'the pin did not move' and an appended part fails tad check with duplicate devices. Check: tad check green, follow.sh moves the pin; copy device-template #26. Do it in a worktree of your own; watchdog etc. not involved.
+: proven by tad check green (13 tables) and follow.sh --source docs v0.17.0 moving the pin 0.16.0 -> 0.17.0; device:begin/end markers added, devicebase.toml now source/version/own/[why]; device layer text identical to docs'
 
 About
 : deep-sleep
