@@ -2077,3 +2077,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-0010-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: kept kernel 7.1.0-sm7150-calls+ (stock fallback), healthy 76 pass 0 fail, watchdog untouched. Built-tree calls2+ (PMIC wdt incl. patch 6/6, modules repacked with aarch64 strip; tree surya-audio/obj-pmic-wdt2) installed as calls2 and tried once, no suspend: pm8916-wdt probed, S2 reset control was 0x1, POFF 0x2 0x0. Try ended 2 fail: clk.c:1047 warning at boot (new vs calls+? not compared) and one bt controller-crash line (known boot race?). Rebooted back to kept.
+
+Considered
+: next: the attended window for surya-kernel-pmic-wdt / kept-kernel-with-pmic-wdt; unattended: compare the clk.c:1047 warning with calls+ before promoting, surya-step-checks, boot race root cause. Note: modules need CROSS_COMPILE=aarch64-linux-gnu- INSTALL_MOD_STRIP=1
+
+About
+: deep-sleep

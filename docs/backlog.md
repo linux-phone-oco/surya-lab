@@ -2577,10 +2577,10 @@ Witness
 ### Build the kept-kernel candidate with the PMIC watchdog series incl. patch 6/6 (8b2283da3): one-shot try, no bite
 
 Status
-: open
+: done
 
 Note
-: UNATTENDED prerequisite of the attended session and of kept-kernel-with-pmic-wdt. Build grenudi/linux topic/pmic-wdt-wake-in-suspend at 8b2283da3 (patch 6/6: watchdog_stop_on_reboot/stop_on_unregister; 5/5: S2 reset type set with S2 disabled and read back) on the calls branch with &pm6150_wdt enabled in the dtb; release name distinct from the running calls+ (e.g. 7.1.0-sm7150-calls2+ - read how pmicwdt+ was named/built); install (lpoco lab kernel install ... --cmdline dyndbg="file pm8916_wdt.c +p"), ONE one-shot try (boot-counted, no bite, no suspend, the PMIC wdt never opened/armed), health suite green, dmesg: probe ok + 'S2 reset control was' line, PON 0x856/0x857 read-only. Wake lock held, watchdog as is. Record; land; the promotion as the kept kernel is the attended step (kept-kernel-with-pmic-wdt).
+: proven by one one-shot try of 7.1.0-sm7150-calls2+ (grenudi/linux 8b2283da3 on calls, pm6150_wdt on, huaxing dtb): booted in 72 s; dmesg pm8916-wdt probe ok, 'POFF reason 0x2 0x0', 'S2 reset control was 0x1'; watchdog never opened, no suspend, no bite; try health 2 fail (boot-warnings clk.c:1047 at 0.88 s in deferred_probe; bt-no-controller-crash 1 line), back on kept calls+ healthy 76 pass 0 fail (run 20261118-231104)
 
 About
 : deep-sleep
