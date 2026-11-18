@@ -1330,3 +1330,21 @@ Done
 
 Considered
 : next: the author or research decides from the storm-without-crash finding; 3x120 s needs a longer fuse; remove sleep/bt-trace.sh when the lpoco-health hook lands
+
+---
+
+
+<a id="2026-11-18-1200-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Took the lease, read the queue: only item bt-trace-cycles remains, blocked on a longer-fuse way-back for 3x120 s cycles (30 s fuse); no phone change made; kept kernel 7.1.0-sm7150-calls+ unchanged, last suite as before (soc-sleeps fails, rest pass/skip no SIM)
+
+Considered
+: next: coordinator decides whether to build a longer-fuse way-back or accept the 20x15 s finding (research 2026-11-18-bt-trace-20x15-no-crash) and close bt-trace-cycles
+
+About
+: deep-sleep
