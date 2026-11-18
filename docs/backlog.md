@@ -1902,53 +1902,6 @@ Needs
 : phone
 
 
-<a id="surya-kernel-pmic-wdt"></a>
-### surya's kernel with the PMIC watchdog series (linux-phone-oco/linux topic/pmic-wdt-wake-in-suspend) and &pm6150_wdt enabled, wakeup-source
-
-Status
-: open
-
-Note
-: docs decision 2026-11-18-upstream-forks, research pmic-wdt-way-back. The four commits are on v7.3 (local worktree ~/Projects/linux-phone-oco/linux-topics until the upstreams lane pushes the branch); pick them onto surya's v7.2 test branch (pm8916_wdt.c and its binding are the same in v7.2; pm6150.dtsi differs - apply that hunk by hand), CONFIG_PM8916_WATCHDOG=y, board: &pm6150_wdt { status = "okay"; wakeup-source; }. Built with the lab's kernel route; nothing flashed by this item.
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-18
-
-Needs
-: build
-
-Proof
-: pmic-wdt-bites
-
-
-<a id="surya-pmic-wdt-proof"></a>
-### Prove the PMIC watchdog way back on surya: it bites unpetted, and its bark wakes a suspend with nothing else to wake it
-
-Status
-: open
-
-Note
-: Script https://github.com/linux-phone-oco/docs/blob/main/research/upstream-forks/2026-11-18/tests/pmic-wdt-way-back.sh (devlab phone put): check; first read PON_HLOS 0x854-0x858 and 0x810 through regmap debugfs (writable by HLOS? the bark bit?); bite 20 (dry run, nothing suspended), after the boot check says CARDRESET; then wake, with way-back.sh's APSS fuse armed as the second way back. Settles: HLOS writes the PMIC watchdog, the gen2 bark interrupt index (6 assumed), POFF_REASON1 bit 2, the bark waking through PDC. Proves docs upstream item pmic-wdt-wake-in-suspend; until it passes, keep_armed_in_suspend stays the lab's s2idle-only guard (it does not cover a real suspend: try 4).
-
-Blocked by
-: surya-kernel-pmic-wdt,surya-unreachable-after-try4
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-18
-
-Needs
-: phone
-
-Proof
-: pmic-wdt-bites,pmic-wdt-wakes-in-suspend
-
-
 <a id="surya-sxmo-suspend-series"></a>
 ### surya runs sxmo-utils from our fork (sxmo-utils@lab): suspend retries back off, the sensors daemon is stopped and started around each suspend
 
@@ -2121,3 +2074,60 @@ Proof
 
 Rank
 : 6
+
+
+<a id="surya-kernel-pmic-wdt"></a>
+### surya's kernel with the PMIC watchdog series (linux-phone-oco/linux topic/pmic-wdt-wake-in-suspend) and &pm6150_wdt enabled, wakeup-source
+
+Status
+: open
+
+Note
+: docs decision 2026-11-18-upstream-forks, research pmic-wdt-way-back. The four commits are on v7.3 (local worktree ~/Projects/linux-phone-oco/linux-topics until the upstreams lane pushes the branch); pick them onto surya's v7.2 test branch (pm8916_wdt.c and its binding are the same in v7.2; pm6150.dtsi differs - apply that hunk by hand), CONFIG_PM8916_WATCHDOG=y, board: &pm6150_wdt { status = "okay"; wakeup-source; }. Built with the lab's kernel route; nothing flashed by this item.
+
+2026-11-18 coordinator (upstreams coordinator's ask): the series is pushed: https://github.com/grenudi/linux branch topic/pmic-wdt-wake-in-suspend, e123d3bff, 4 commits on v7.3 (use this instead of 'local worktree until pushed'; the rest of the note holds). The keeper builds the kernel on the lab as it did before (a one-shot try, boot-counted, falls back by itself; watchdog armed; no real suspend in this item). Result to the surya coordinator: built or not, the install name.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: pmic-wdt-bites
+
+Rank
+: 1
+
+
+<a id="surya-pmic-wdt-proof"></a>
+### Prove the PMIC watchdog way back on surya: it bites unpetted, and its bark wakes a suspend with nothing else to wake it
+
+Status
+: open
+
+Note
+: Script https://github.com/linux-phone-oco/docs/blob/main/research/upstream-forks/2026-11-18/tests/pmic-wdt-way-back.sh (devlab phone put): check; first read PON_HLOS 0x854-0x858 and 0x810 through regmap debugfs (writable by HLOS? the bark bit?); bite 20 (dry run, nothing suspended), after the boot check says CARDRESET; then wake, with way-back.sh's APSS fuse armed as the second way back. Settles: HLOS writes the PMIC watchdog, the gen2 bark interrupt index (6 assumed), POFF_REASON1 bit 2, the bark waking through PDC. Proves docs upstream item pmic-wdt-wake-in-suspend; until it passes, keep_armed_in_suspend stays the lab's s2idle-only guard (it does not cover a real suspend: try 4).
+
+2026-11-18: script: docs research/upstream-forks/2026-11-18/tests/pmic-wdt-way-back.sh. Attended if it can drop the only link (the try-4 class: name the dry run that proved the way back on that path first). Result (pass/fail with the run id) goes to the upstreams coordinator via the surya coordinator.
+
+Waits
+: surya-kernel-pmic-wdt built and installed; read-probe-drop-1358 answered (no suspend try before that is read)
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: pmic-wdt-bites,pmic-wdt-wakes-in-suspend
+
+Rank
+: 2
