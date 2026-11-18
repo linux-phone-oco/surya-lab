@@ -1619,24 +1619,6 @@ Considered
 ---
 
 
-<a id="2026-11-18-1930-how-the-phone-stands"></a>
-### How the phone stands
-
-Entry date
-: 2026-11-18
-
-Done
-: Keeper took the lease; the one ready item ramoops-reserved-dt needs a dtb try, unattended with no witness, so not taken; noted on the item. Phone untouched: kernel 7.1.0-sm7150-calls+ kept, awake, suite last run all pass/skip (no SIM).
-
-Considered
-: next: coordinator asks the author for an attended window; then ramoops dtb try with fuse armed (30 s), proof way-back-ramoops-present; health-cycle-probe-attended still waits on the author's go
-
-About
-: deep-sleep
-
----
-
-
 <a id="2026-11-18-1530-how-the-phone-stands"></a>
 ### How the phone stands
 
@@ -1771,6 +1753,24 @@ Done
 
 Considered
 : next: author's hands for a PMIC bite try; otherwise no phone item is ready
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-18-1930-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Took lease; surya answers again. Reinstalled pmicwdt, one try (61 s, healthy 44/0 fail), read PON S2_CTL=0x07 S2_CTL2=0x00 read-only, no watchdog opened. Back on kept kernel 7.1.0-sm7150-calls+, healthy, way-back check ok.
+
+Considered
+: next: send the S2_CTL values to the surya coordinator for the upstreams coordinator; the bite only with the author present; then sxmo-config-migration
 
 About
 : deep-sleep
