@@ -2348,6 +2348,8 @@ Note
 
 2026-11-18 from the upstreams coordinator: REBUILD at grenudi/linux topic/pmic-wdt-wake-in-suspend f5bb57d27 (not e123d3bff). New patch 5/5 sets the S2 reset type with S2 disabled and a 500-1000 us wait, then reads it back: a type that does not take now FAILS THE PROBE (so a bite cannot silently become a power-off). dev_dbg logs the firmware's original S2_CTL: enable it with dyndbg="file pm8916_wdt.c +p" on the kernel cmdline (one-shot: lpoco lab kernel install NAME VMLINUZ DTB MODULES --cmdline ... - the new release name differs from the running one so install accepts it), and read that logged value: it is the fact the series still needs. Built W=1/checkpatch clean, NOT yet run on hardware. Steps: rebuild at f5bb57d27 as 7.1.0-sm7150-pmicwdt+ (same recipe), one-shot try with dyndbg, read dmesg (probe ok? the original S2_CTL line) and the PON S2_CTL/S2_CTL2 registers read-only, send the raw values to the surya coordinator at once. The BITE stays attended until it proves a restart.
 
+GO GIVEN 2026-11-18 by the author ('Go'), at the phone, having read the plain words: (1) rebuild at f5bb57d27 (7.1.0-sm7150-pmicwdt+), one-shot try with dyndbg="file pm8916_wdt.c +p"; read the 'S2 reset control was' line and PON 0x856/0x857 again; (2) open /dev/watchdog0 with a long timeout, read, no bite; (3) THE BITE: open with a short timeout (e.g. 20-30 s) and do not feed it; the PMIC resets the phone: restart by itself = PASS, stays dark = POWER-OFF (REPORT AT ONCE to the surya coordinator local_0ecf107e-d955-49ff-aefb-b0ecaa3bcbdd: the author presses power once, hold 10 s if needed, it boots the kept kernel by boot counting). No suspend, nothing flashed. Send the result and the 'S2 reset control was' line to the surya coordinator (they go to the upstreams coordinator). Record research; land.
+
 About
 : deep-sleep
 
@@ -2361,4 +2363,4 @@ Proof
 : pmic-wdt-bites
 
 Rank
-: 4
+: 0
