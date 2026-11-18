@@ -1411,3 +1411,18 @@ Done
 
 Considered
 : next: when surya answers, provision devlab-usb-awake overlay, run suite for autosleep-off, then the screen-turns-off-by-itself question read-only (journal, sxmo idle hooks, pwrkey events)
+
+---
+
+
+<a id="2026-11-18-1125-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Phone answered in a window; kernel 7.1.0-sm7150-calls+ unchanged, devlab-usb-awake already live, wake lock held, no suspend loop now. Screen question answered read-only (sxmo autosuspend; research recorded). Not run: reboot or reflash. Audio checks fail since adsp crashes.
+
+Considered
+: next: look at the audio/adsp regression after the loop (reboot only through devlab, tests first)
