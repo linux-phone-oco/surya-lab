@@ -27,7 +27,20 @@
 #                     watchdog is defused on return, the wakeup put back, and what the SoC counted is printed (qcom_stats
 #                     before and after, the wake irq, hci0 still there)
 set -eu
-wd=/dev/watchdog0
+# The APSS watchdog is picked by what it is, never by number: with the PMIC watchdog (pm8916_wdt, the device under
+# test on kernel pmicwdt+) in the kernel, /dev/watchdog0 may be either. qcom_wdt's parent is 17c10000.watchdog;
+# a node whose identity says PM8916 PON WDT is never taken. None found: refuse, name why.
+# WORKAROUND(kept-kernel-with-pmic-wdt): after a PMIC bite boot a kernel carrying pm8916_wdt (the stock-driver
+# kernel loops after a bite); this script arms only the APSS node.
+pick_wd() {
+	for w in /sys/class/watchdog/watchdog*; do
+		[ -e "$w" ] || continue
+		case "$(readlink -f "$w/device" 2>/dev/null)" in */17c10000.watchdog) echo "/dev/${w##*/}"; return 0 ;; esac
+		case "$(cat "$w/identity" 2>/dev/null)" in ""|*PM8916*) ;; *) echo "/dev/${w##*/}"; return 0 ;; esac
+	done
+	return 1
+}
+wd=$(pick_wd) || { [ $# -eq 0 ] || { printf "%s\n" "way-back: no APSS watchdog (qcom_wdt, 17c10000.watchdog) found: refusing to take another" >&2; exit 1; }; wd=; }
 param=/sys/module/qcom_wdt/parameters/keep_armed_in_suspend
 say() { printf '%s\n' "$*"; }
 usage() { sed -n '2,/^set -eu/p' "$0" | sed '$d;s/^# \{0,1\}//'; }

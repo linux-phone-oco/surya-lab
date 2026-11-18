@@ -1900,3 +1900,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-2050-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: unchanged: kept kernel 7.1.0-sm7150-calls+ and stock fallback, watchdog defused after a seen dry run (way-back.sh check passes). Took way-back-pick-watchdog-by-identity: way-back.sh and standby-run.sh pick the APSS watchdog by parent device, WORKAROUND(kept-kernel-with-pmic-wdt) marked, new health check. surya-kernel-pmic-wdt: only the attended bite remains (nothing done on it).
+
+Considered
+: next: surya-kernel-pmic-wdt bite and pmic-bite-then-pmicwdt-boot-check need the author at the phone; other ready: sxmo-config-migration, surya-steps-map-history
+
+About
+: deep-sleep
