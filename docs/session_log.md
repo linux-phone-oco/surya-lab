@@ -2110,3 +2110,21 @@ Done
 
 Considered
 : next: kept-kernel-with-pmic-wdt must not promote calls2+ before its clk.c:1047 stack is read (save dmesg on the attended try); unattended: surya-step-checks, boot race
+
+---
+
+
+<a id="2026-11-19-1000-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: kept calls+ with stock fallback, running (rebooted after the try). One unattended try of calls2+ (reinstalled: its try was spent): booted, no suspend, no wdt armed; clk.c:1047 stack read: DSI PHY PLL lock failure at probe, not the PMIC wdt (research clk-1047-is-the-dsi-pll-lock-failure).
+
+Considered
+: next: kept-kernel-with-pmic-wdt may be weighed: boot-warnings fails on calls2+ until the DSI PLL race is read (several boots of calls2+ to tell a race from a build difference) or the warning allowed; unattended: surya-step-checks, host-check-stale-pieces
+
+About
+: deep-sleep

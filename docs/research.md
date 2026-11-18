@@ -1263,3 +1263,25 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="clk-1047-is-the-dsi-pll-lock-failure"></a>
+### clk-1047-is-the-dsi-pll-lock-failure
+
+Date
+: 2026-11-18
+
+Brief
+: calls2+'s clk.c:1047/1188 warnings come from the DSI PHY PLL failing to lock at msm_dsi_phy probe (display), not the PMIC wdt
+
+Question
+: What is the stack of calls2+'s clk.c:1047 boot warning?
+
+Found
+: Unattended one-shot try of calls2+ (health 20261118-232049, reproduced), no suspend, no wdt armed; full dmesg in material. Stack: dsi_phy_driver_probe -> devm_of_clk_add_hw_provider -> clk_core_reparent_orphans_nolock -> __clk_set_parent_after -> clk_core_unprepare on dsi0_phy_pll_out_dsiclk 'already unprepared' (1188: 'already disabled'). Just before: msm_dsi_phy ae94400.phy dsi_pll_10nm_vco_prepare 'DSI PLL(0) lock failed'. No PMIC wdt/pm6150/SPMI frame: the series is not the cause. Why calls+ never showed it (0 of ~45 runs) is unread: a DSI PLL lock race at boot is the lead; compare several boots of the same kernel before blaming a patch. Verdict: not the PMIC wdt series; boot-warnings fails on calls2+ until the DSI PLL is read or the warning allowed. bt crash line not seen. Phone returned to kept calls+.
+
+About
+: deep-sleep
+
+Material
+: research/deep-sleep/2026-11-19-clk1047/
