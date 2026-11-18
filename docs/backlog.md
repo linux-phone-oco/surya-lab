@@ -1762,3 +1762,16 @@ About
 
 Opened
 : 2026-11-18
+
+
+<a id="devlab-usb-awake-hold-through-resume"></a>
+### Hold the wake lock through a resume, not only while USB is configured
+
+Status
+: open
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18

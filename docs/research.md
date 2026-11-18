@@ -1026,3 +1026,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-18-suspend-flap-stopped-at-1117"></a>
+### 2026-11-18-suspend-flap-stopped-at-1117
+
+Date
+: 2026-11-18
+
+Brief
+: Suspend loop (one per ~38 s) ended after the 11:17:41 resume once devlab-usb stayed held; the lock drops with USB at each suspend, which feeds the loop
+
+Question
+: What stopped the screen flapping around 11:17-11:26Z and what started it?
+
+Found
+: Journal: last of 24 suspends at 11:17:41, then none; devlab-usb held since 11:18:23 and sxmo_autosuspend blocks while a wake lock is held. Lab root sessions at 11:17:57 and 11:18:27 (content not logged) and sxmo idle daemons restarted 11:18:33 and 11:19:03. devlab-usb-awake (running since 08:20) holds the lock only while the USB gadget is configured, polling every 5 s; a suspend drops USB, so the lock is released and the next idle suspend follows: the loop feeds itself. Mechanism not proven; the weak point is that no lock is held across a resume. Possible fix: hold the lock regardless of USB state unless /etc/devlab-allow-autosleep.
+
+About
+: deep-sleep
