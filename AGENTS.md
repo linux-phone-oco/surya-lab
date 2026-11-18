@@ -31,6 +31,7 @@ shells, tests. Everything runs on the lab machine (via lab-agent), never in an a
   (proven on surya: the try is counted down on the ESP, and the next boot is stock by itself); a
   stalled initramfs saves its log to the ESP after 5 minutes and reboots (`log NAME` reads it).
   Never `pmos.debug-shell` on an unattended try: it halts the boot until someone continues it.
+  WORKAROUND(kept-kernel-with-pmic-wdt): after any PMIC bite, boot only a kernel with pm8916_wdt - stands in for the kept kernel carrying the driver.
 
 - **Record as you go** in this device's own base (data/, kept by tad): `ikb --help`, then `ikb help RECORD` - decisions with
   what was rejected, research, the backlog (`ikb backlog`; `ikb backlog-needs` for the phone's queue), the log, and
