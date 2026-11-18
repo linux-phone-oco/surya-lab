@@ -2245,7 +2245,7 @@ Status
 : open
 
 Note
-: Found 2026-11-18 by sleep-way-back.sh: 0 ramoops iomem lines. Turning point for the coordinator: a dt change on a one-shot dtb try (fuse armed, attended).
+: Keeper 2026-11-18 (unattended run): not taken. A dt change on a one-shot dtb try reboots the phone; the 2026-11-18-cts-pulldown-dtb-hangs try left it off USB past the 30 s fuse, and the brief forbids an unattended try without the fuse. Waits for an attended window (author present) and the lane coordinator's go.
 
 About
 : deep-sleep

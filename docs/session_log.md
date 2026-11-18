@@ -1615,3 +1615,21 @@ Done
 
 Considered
 : next: coordinator asks the author for the go on health-cycle-probe-attended; ramoops-reserved-dt needs a dt change, coordinator to decide; install tests/health on the phone for autosleep-bt-gate
+
+---
+
+
+<a id="2026-11-18-1930-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Keeper took the lease; the one ready item ramoops-reserved-dt needs a dtb try, unattended with no witness, so not taken; noted on the item. Phone untouched: kernel 7.1.0-sm7150-calls+ kept, awake, suite last run all pass/skip (no SIM).
+
+Considered
+: next: coordinator asks the author for an attended window; then ramoops dtb try with fuse armed (30 s), proof way-back-ramoops-present; health-cycle-probe-attended still waits on the author's go
+
+About
+: deep-sleep
