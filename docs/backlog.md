@@ -1749,3 +1749,16 @@ Proof
 
 Rank
 : 1
+
+
+<a id="surya-key-chatter-resin"></a>
+### Phantom key edges on pm8941_resin/pwrkey: screen goes off during use
+
+Status
+: open
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
