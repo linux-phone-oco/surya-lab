@@ -11,7 +11,7 @@
 - [Session Log](session_log.md): 100
 - [Sources](sources.md): 8
 - [Summaries](summaries.md): 1
-- [Test Results](test_results.md): 6577
-- [Test Runs](test_runs.md): 167
+- [Test Results](test_results.md): 7054
+- [Test Runs](test_runs.md): 176
 - [Upstream Items](upstream_items.md): 0
 - [Upstreams](upstreams.md): 2
