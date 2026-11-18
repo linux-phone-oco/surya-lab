@@ -2244,6 +2244,9 @@ Note
 
 2026-11-18 CAUTION (from the upstreams lane, via the coordinator): on walleye the same PMIC watchdog series BIT, but the bite ended in a POWER-OFF, not a restart, and needed the author's hands (walleye decision 2026-11-18-walleye-pmic-bite-read-then-warm). Suspected: the S2_CTL hard-reset write does not take because the S2 enable is not cleared first. On surya: building, installing and booting the kernel as a one-shot try, and probing the driver read-only (registers? timeout? reset type) is FINE. Do NOT arm the PMIC watchdog to bite until the reset type is proven to RESTART; and then only with the author present and told what to expect (a power-off needing a power press is possible). Read the walleye decision first.
 
+Waits
+: surya answering again (silent since ~17:50Z: not on USB, no address - after the sxmo-utils@lab install? the author's hands: cable/power; backlog surya-silent-after-sxmo-apk)
+
 About
 : deep-sleep
 
@@ -2274,7 +2277,7 @@ Note
 2026-11-18 CAUTION (from the upstreams lane, via the coordinator): on walleye the same PMIC watchdog series BIT, but the bite ended in a POWER-OFF, not a restart, and needed the author's hands (walleye decision 2026-11-18-walleye-pmic-bite-read-then-warm). Suspected: the S2_CTL hard-reset write does not take because the S2 enable is not cleared first. On surya: building, installing and booting the kernel as a one-shot try, and probing the driver read-only (registers? timeout? reset type) is FINE. Do NOT arm the PMIC watchdog to bite until the reset type is proven to RESTART; and then only with the author present and told what to expect (a power-off needing a power press is possible). Read the walleye decision first.
 
 Waits
-: surya-kernel-pmic-wdt built and installed; read-probe-drop-1358 answered (no suspend try before that is read)
+: surya answering again (silent since ~17:50Z: not on USB, no address - after the sxmo-utils@lab install? the author's hands: cable/power; backlog surya-silent-after-sxmo-apk)
 
 About
 : deep-sleep
@@ -2290,3 +2293,28 @@ Proof
 
 Rank
 : 2
+
+
+<a id="surya-silent-after-sxmo-apk"></a>
+### surya went silent after the sxmo-utils@lab install: asleep again? (read once it answers)
+
+Status
+: open
+
+Note
+: After the install of sxmo-utils 1.18.1_p20261118 (lab apk: backoff, stop-by-profile, surya sensors) the phone is silent: not on USB, no address. Suspect: sxmo restarted its autosuspend with the new package (its own wake-lock logic, 'stop by profile') while our devlab-usb-awake lock was not held through it, so the phone suspended (the 99999999 s rtcwake) - the same shape as before. When it answers: journalctl -b: the last lines before the silence, who suspended it (sxmo_suspend.sh), whether our lock was held, the apk's backoff behaviour; fix in the install step (hold the lock; /etc/lpoco/allow-autosleep off) and record.
+
+Waits
+: surya answering again (the author's hands: power press / cable)
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Rank
+: 0
