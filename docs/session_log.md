@@ -1348,3 +1348,18 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-1330-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Took the lease; item bt-sleep-cts-pulldown (unblocked, coordinator accepted bt-trace-cycles). Built the CTS pull-down dtb, tried it: healthy boot, pull-down confirmed live; bt-trace 20x15 s then left the phone off USB for 15+ min (fuse did not rescue). Phone state unknown until power is held; author notified. Kept kernel 7.1.0-sm7150-calls+ unchanged; the dtb was one-shot, never kept.
+
+Considered
+: next: after a power hold, read pstore/journal for the hang, then repeat once on the dtb to tell a one-off from the pull-down; if it hangs twice it is a turning point for the coordinator. Rejected: keeping the dtb, or repeating without a power hold (nobody can reach the phone)

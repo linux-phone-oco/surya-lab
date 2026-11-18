@@ -969,3 +969,22 @@ About
 
 Material
 : research/deep-sleep/2026-11-18-bt-trace-20x15/
+
+
+<a id="2026-11-18-cts-pulldown-dtb-hangs"></a>
+### 2026-11-18-cts-pulldown-dtb-hangs
+
+Date
+: 2026-11-18
+
+Brief
+: CTS pull-down dtb (qup-uart3-sleep gpio38 bus-hold -> pull-down): phone booted it healthy, then vanished from USB during the first bt-trace 20x15 s run and did not return in 15+ min
+
+Question
+: Does the sc7180-trogdor CTS pull-down in qup-uart3-sleep stop the Bluetooth s2idle failures (bt-sleep-cts-pulldown)?
+
+Found
+: One-shot dtb built from the installed one with only gpio38 sleep bias changed, tried through devlab kernel try calls --dtb: booted healthy (37 pass, 0 fail), cts-pins bias-pull-down confirmed in the live device tree, way-back check passed. bt-trace.sh 20 15 started as unit bt-trace-cts; afterwards the phone never answered again, not on USB at all, 15+ min, well past the 30 s fuse, so the watchdog way-back did not rescue it. Result not scored: no cycle log read back. Author asked by notification to hold power.
+
+About
+: deep-sleep
