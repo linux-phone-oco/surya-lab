@@ -2128,3 +2128,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-1030-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: kept calls+ running. Two more one-shot calls2+ tries and a calls+ check, no bite, no suspend: clk.c:1047 on calls2+ 3 of 3 boots, calls+ 0; both show the DSI PLL lock failure and clk.c:1188. calls2+ is gcc-built, calls+ clang+LTO (research clk-1047-calls2-stable-built-with-gcc-not-clang).
+
+Considered
+: next: rebuild calls2's source (c88ed67e0) with the calls+ clang+LTO config to split toolchain from series; unattended
+
+About
+: deep-sleep
