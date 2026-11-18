@@ -1459,3 +1459,18 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-1145-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Phone awake, kernel 7.1.0-sm7150-calls+ kept, autosleep service inactive, usb-awake active, nothing changed this run. sleep-fastrpc-helpers not tried: two real systemctl suspends already left the phone unreachable with no log, so a third is a turning point for the coordinator
+
+Considered
+: next: coordinator decides how the sensorspd restore across a real suspend is tried (the phone may need hands to come back); else take the next queue item
