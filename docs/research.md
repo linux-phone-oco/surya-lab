@@ -903,3 +903,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-18-unreachable-after-suspend-journal"></a>
+### 2026-11-18-unreachable-after-suspend-journal
+
+Date
+: 2026-11-18
+
+Brief
+: Previous boot's journal ends at 'PM: suspend entry (s2idle)' from sxmo autosleep (rtcwake -m mem); no pstore, so no crash proof
+
+Question
+: Why was surya unreachable on USB after the third systemctl-suspend try?
+
+Found
+: Phone came back (up 1 min, same kept kernel) after the author's power-cycle. /sys/fs/pstore is empty: no oops was stored. The previous boot's last journal line is 'kernel: PM: suspend entry (s2idle)' at 00:10:19, right after a systemctl suspend finished at 00:10:18 and sxmo autosleep ran 'rtcwake -m mem -s 99999999' (a second, nested suspend with no near wake). So: the phone went into a second s2idle straight after resume, because sxmo autosleep was still on, and did not wake on USB; the journal alone does not say whether that is a hang or a missing wake source. Not shown: a FastRPC/ADSP crash. Unproven.
+
+About
+: deep-sleep
