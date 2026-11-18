@@ -1872,31 +1872,6 @@ Needs
 : phone
 
 
-<a id="surya-sxmo-suspend-series"></a>
-### surya runs sxmo-utils from our fork (sxmo-utils@lab): suspend retries back off, the sensors daemon is stopped and started around each suspend
-
-Status
-: open
-
-Note
-: With the gadget configured surya's suspend aborts (the original symptom): sxmo.log must show 'next try in' 1 2 4 .. 64 s and the host count at most 8 reconnects in 5 minutes (26 before); after one real suspend hexagonrpcd-adsp-sensorspd was stopped before and runs after, and proximity reads. Proves docs upstream items sxmo-autosuspend-backoff, sxmo-suspend-stop-by-profile, sxmo-surya-sensors-suspend (decision 2026-11-18-upstream-forks).
-
-Waits
-: the lab apk: docs item sxmo-utils-lab-apk (lab-tools)
-
-About
-: sensors
-
-Opened
-: 2026-11-18
-
-Needs
-: phone
-
-Proof
-: suspend-retry-backs-off,sensors-after-suspend
-
-
 <a id="who-runs-rtcwake-99999999"></a>
 ### Who runs rtcwake -m mem -s 99999999 on the phone? (it replaced try 4's 15 s alarm)
 
@@ -2261,3 +2236,30 @@ Proof
 
 Rank
 : 2
+
+
+<a id="surya-sxmo-suspend-series"></a>
+### surya runs sxmo-utils from our fork (sxmo-utils@lab): suspend retries back off, the sensors daemon is stopped and started around each suspend
+
+Status
+: open
+
+Note
+: With the gadget configured surya's suspend aborts (the original symptom): sxmo.log must show 'next try in' 1 2 4 .. 64 s and the host count at most 8 reconnects in 5 minutes (26 before); after one real suspend hexagonrpcd-adsp-sensorspd was stopped before and runs after, and proximity reads. Proves docs upstream items sxmo-autosuspend-backoff, sxmo-suspend-stop-by-profile, sxmo-surya-sensors-suspend (decision 2026-11-18-upstream-forks).
+
+2026-11-18 UNBLOCKED (orchestration): the lab apk is published - https://linux-phone-oco.github.io/lab-tools/ has sxmo-utils 1.18.1_p20261118-r0 (backoff, stop-by-profile, surya sensors), signed with the lab key. Do: add the repository (signed key already on the lab) and install it as sxmo-utils@lab - a package change, NO suspend; keep the wake lock held through the install (an sxmo restart must not let autosuspend act: check the lock after); health after. The two suspend tests (suspend-retry-backs-off, sensors-after-suspend) run ONLY in an attended window with the fuse armed and the resume-stall way back in place (resume-stall-way-back landed; ramoops-reserved-dt first). Result (pass/fail with run id) goes to the upstreams coordinator via the surya coordinator.
+
+About
+: sensors
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: suspend-retry-backs-off,sensors-after-suspend
+
+Rank
+: 3
