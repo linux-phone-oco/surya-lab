@@ -1792,3 +1792,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-1955-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Keeper took the lease; surya answers again (phone sh ok), running the kept kernel 7.1.0-sm7150-calls+; nothing changed on the phone. The PMIC-wdt kernel was built and tried once at 18:20 (S2_CTL=0x07, S2_CTL2=0x00 read); what remains of surya-kernel-pmic-wdt is the BITE, which needs the author at the phone to press power if it powers off - not run unattended, no watchdog defused.
+
+Considered
+: next: the bite only in an attended window (author present, told what to expect); sxmo-config-migration (read-only) is the other ready item
+
+About
+: deep-sleep
