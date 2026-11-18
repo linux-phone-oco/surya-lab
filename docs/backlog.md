@@ -969,36 +969,6 @@ Rank
 : 6
 
 
-<a id="sleep-standby-current"></a>
-### Standby current measured beside Android's
-
-Status
-: open
-
-Note
-: r4 SCORED: aborted/partial, unscorable (4 samples, median 120 mA, 63% asleep); aborted by irq 157 + BT SSR at 22:40:48; hang after = sxmo suspend loop on stuck BT SSR, rfkill D-state. Next r5: BT off in cycle, sxmo autosleep stopped, needs unplug. See research 2026-11-18-r4-aborted-partial-and-the-hang.
-
-2026-11-18: r4 aborted/partial (unscorable: 4 clean samples). Bluetooth keeps ending the runs: irq 157 'nobody cached' + QCA controller crash (SSR) in a bt-on cycle; after the stop sxmo's autosleep kept rtcwake -m mem looping, rfkill procs stuck on the misc_open mutex, USB gone. r5 needs: BT off in cycles OR a suspend-proof Bluetooth, sxmo autosleep stopped, sensorspd stopped, the author's unplug.
-
-Waits
-: the author back to unplug, and the Bluetooth suspend fix (backlog bt-suspend-proof)
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-17
-
-Needs
-: phone
-
-Proof
-: soc-sleeps
-
-Rank
-: 1
-
-
 <a id="devlab-kernel-try-cmdline"></a>
 ### devlab kernel try NAME --cmdline: a one-shot kernel command line
 
@@ -1976,31 +1946,6 @@ Rank
 : 0
 
 
-<a id="health-cycle-probe-attended"></a>
-### Attended: way-back.sh cycle probe with the author present (proves the fuse bites on the real path, nothing suspended for long)
-
-Status
-: open
-
-Note
-: RUN 2026-11-18 13:57 with the author's go; read after his power hold: previous journal ends 'watchdog0: pretimeout event' 12:58:15, pstore empty - the fuse bit (reset), the phone did not reboot itself (research 2026-11-18-probe-previous-journal-pretimeout-then-silence). Open: why no self-boot after the bite - needs an attended window (fastboot/reset reason). No more unattended tries.
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-18
-
-Needs
-: phone
-
-Proof
-: soc-sleeps
-
-Rank
-: 1
-
-
 <a id="read-probe-drop-1358"></a>
 ### Read how the 13:58 probe drop ended (read only): reset that failed to boot, or a hang?
 
@@ -2180,6 +2125,33 @@ Rank
 : 1
 
 
+<a id="health-cycle-probe-attended"></a>
+### Attended: way-back.sh cycle probe with the author present (proves the fuse bites on the real path, nothing suspended for long)
+
+Status
+: done
+
+Note
+: RUN 2026-11-18 13:57 with the author's go; read after his power hold: previous journal ends 'watchdog0: pretimeout event' 12:58:15, pstore empty - the fuse bit (reset), the phone did not reboot itself (research 2026-11-18-probe-previous-journal-pretimeout-then-silence). Open: why no self-boot after the bite - needs an attended window (fastboot/reset reason). No more unattended tries.
+
+2026-11-18: DONE - it ran (13:57Z) and was read (research 2026-11-18-probe-drop-1358-read, resume-stall-wcd9370-adsp). Superseded by resume-stall-way-back and resume-stall-repro-attended.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: soc-sleeps
+
+Rank
+: 1
+
+
 <a id="resume-stall-repro-attended"></a>
 ### Attended repro: way-back.sh cycle 15 probe (no stop-sensors) with the sysctls set; read the panic's stack from pstore
 
@@ -2189,8 +2161,8 @@ Status
 Note
 : Attended (the author present, fuse 30 s). Expected: ADSP crash after resume, stall, panic, reboot within ~40 s, pstore dmesg with CPU1's state. Record what CPU1 is stuck on as research; if no reboot comes, the stall hang is a total one: go to surya-kernel-pmic-wdt.
 
-Blocked by
-: resume-stall-way-back
+Waits
+: resume-stall-way-back (sysctl way back first), then the author present
 
 About
 : deep-sleep
@@ -2217,7 +2189,7 @@ Status
 Note
 : Merges with sleep-fastrpc-helpers (same hook); proof also: no 'fatal error received' and no 'IRQ sync failed to resume' in dmesg across the cycles. Decision 2026-11-18-resume-stall-way layer 2.
 
-Blocked by
+Waits
 : resume-stall-repro-attended
 
 About
@@ -2234,3 +2206,33 @@ Proof
 
 Rank
 : 3
+
+
+<a id="sleep-standby-current"></a>
+### Standby current measured beside Android's
+
+Status
+: open
+
+Note
+: r4 SCORED: aborted/partial, unscorable (4 samples, median 120 mA, 63% asleep); aborted by irq 157 + BT SSR at 22:40:48; hang after = sxmo suspend loop on stuck BT SSR, rfkill D-state. Next r5: BT off in cycle, sxmo autosleep stopped, needs unplug. See research 2026-11-18-r4-aborted-partial-and-the-hang.
+
+2026-11-18: r4 aborted/partial (unscorable: 4 clean samples). Bluetooth keeps ending the runs: irq 157 'nobody cached' + QCA controller crash (SSR) in a bt-on cycle; after the stop sxmo's autosleep kept rtcwake -m mem looping, rfkill procs stuck on the misc_open mutex, USB gone. r5 needs: BT off in cycles OR a suspend-proof Bluetooth, sxmo autosleep stopped, sensorspd stopped, the author's unplug.
+
+Waits
+: the author present to unplug, and a real way back (resume-stall-way-back, pmic wdt): r5 is not attempted before
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-17
+
+Needs
+: phone
+
+Proof
+: soc-sleeps
+
+Rank
+: 1
