@@ -2499,3 +2499,25 @@ Needs
 
 Rank
 : 0
+
+
+<a id="surya-steps-map-history"></a>
+### Map surya's history to bring-up steps: raise the 82 unknown (claim from older runs, research, log)
+
+Status
+: open
+
+Note
+: surya-steps-claimed (PR 288) claimed all 113 steps from ONE suite run (20261118-191339): done 11, partial 2, failing 12, open 6, unknown 82. Orchestration says surya's history covers about 50 steps (kernel, console, audio, calls, mic, suspend, sensors). A mapping pass, REPO/RECORDS ONLY (no phone): for each unknown step, look in tests/results (older runs), the research rows and the session log for a passing proof; claim done with test + run id only where one exists (the step's own test, not a neighbour's); partial/open where the history says so; never invent a proof. Skip steps that need a fresh phone check: list them. Land in batches; send the new counts to the surya coordinator (orchestration reruns docs' feeds). Also: daily-phone.sh errors 'bringup_steps does not exist' in the docs checkout - tell orchestration if it persists after the next follow.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Rank
+: 10
