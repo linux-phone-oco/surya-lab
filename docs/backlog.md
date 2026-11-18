@@ -2131,3 +2131,25 @@ Needs
 
 Rank
 : 5
+
+
+<a id="resume-stall-wcd9370-adsp"></a>
+### Research: why a resume from s2idle stalls CPU1 (wcd9370 / ADSP resume errors, RCU stalls for minutes, no reset)
+
+Status
+: open
+
+Note
+: Read 2026-11-18 (research 2026-11-18-probe-drop-1358-read, surya-lab #235): the attended probe's suspend resumed cleanly from s2idle (12:57:47Z), then wcd9370/ADSP resume errors, watchdog0 pretimeout at 12:58:15Z, and CPU1 RCU stalls for 4+ min with the console still printing: a HANG, no bite, no reset, no Oops - the same shape as try 4. So the way back from this hang is not qcom_wdt (the SoC watchdog bark was seen but no reset followed): it is the PMIC watchdog (the series topic/pmic-wdt-wake-in-suspend, surya-kernel-pmic-wdt) or a hardware reset. And the CAUSE of the stall: what the wcd9370 codec / ADSP resume path does that blocks a CPU (sdw / soundwire resume, q6 apr resume, wcd9370 reset gpio / regulator on resume, a lock held across suspend: the sensors daemon, the audio card), compare with other mainline phones with wcd937x (sc7280, sm8250...: known resume fixes, rpmsg/apr/glink resume ordering), and our earlier note: the ADSP crashed on every suspend with sensorspd attached. Ends with a decision and phone items (watchdog armed with the PMIC series first; ideas: unbind/stop the audio stack around a cycle as the way-back already stops sensorspd, then see if the stall disappears).
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: research
+
+Rank
+: 1
