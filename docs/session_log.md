@@ -1363,3 +1363,18 @@ Done
 
 Considered
 : next: after a power hold, read pstore/journal for the hang, then repeat once on the dtb to tell a one-off from the pull-down; if it hangs twice it is a turning point for the coordinator. Rejected: keeping the dtb, or repeating without a power hold (nobody can reach the phone)
+
+---
+
+
+<a id="2026-11-18-0855-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Took the lease; phone unreachable: 172.16.42.1 and its Wi-Fi 192.168.178.142 (MAC 02:20:43:87:8d:c8, stale in ARP) both time out, no USB gadget net on the host (lsusb shows only the Pixel). Nothing changed on the phone; could not read journalctl -b -1 / pstore for how the pull-down try came back.
+
+Considered
+: next: someone with hands checks the phone is on and on Wi-Fi/USB; then read journalctl -b -1, pstore, boot reason, address, record as research, then bt-suspend-gate. Rejected: guessing from the host side
