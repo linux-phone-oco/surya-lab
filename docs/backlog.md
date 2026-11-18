@@ -2358,31 +2358,6 @@ Rank
 : 9
 
 
-<a id="surya-kernel-pmic-wdt"></a>
-### surya's kernel with the PMIC watchdog series (linux-phone-oco/linux topic/pmic-wdt-wake-in-suspend) and &pm6150_wdt enabled, wakeup-source
-
-Status
-: open
-
-Note
-: 2026-11-18 keeper (again): its last step (the bite) is attended only; not tried unattended; waits for the author at the phone.
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-18
-
-Needs
-: phone
-
-Proof
-: pmic-wdt-bites
-
-Rank
-: 0
-
-
 <a id="way-back-pick-watchdog-by-identity"></a>
 ### way-back.sh picks the APSS watchdog by identity, not /dev/watchdog0
 
@@ -2569,3 +2544,56 @@ Needs
 
 Rank
 : 3
+
+
+<a id="surya-kernel-pmic-wdt"></a>
+### surya's kernel with the PMIC watchdog series (linux-phone-oco/linux topic/pmic-wdt-wake-in-suspend) and &pm6150_wdt enabled, wakeup-source
+
+Status
+: open
+
+Note
+: 2026-11-18 keeper (again): its last step (the bite) is attended only; not tried unattended; waits for the author at the phone.
+
+Waits
+: the attended session (one window, asked through the top coordinator; prerequisites: pmic-kernel-8b2283da3-build, step-checks, boot race)
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: pmic-wdt-bites
+
+Rank
+: 0
+
+
+<a id="pmic-kernel-8b2283da3-build"></a>
+### Build the kept-kernel candidate with the PMIC watchdog series incl. patch 6/6 (8b2283da3): one-shot try, no bite
+
+Status
+: open
+
+Note
+: UNATTENDED prerequisite of the attended session and of kept-kernel-with-pmic-wdt. Build grenudi/linux topic/pmic-wdt-wake-in-suspend at 8b2283da3 (patch 6/6: watchdog_stop_on_reboot/stop_on_unregister; 5/5: S2 reset type set with S2 disabled and read back) on the calls branch with &pm6150_wdt enabled in the dtb; release name distinct from the running calls+ (e.g. 7.1.0-sm7150-calls2+ - read how pmicwdt+ was named/built); install (lpoco lab kernel install ... --cmdline dyndbg="file pm8916_wdt.c +p"), ONE one-shot try (boot-counted, no bite, no suspend, the PMIC wdt never opened/armed), health suite green, dmesg: probe ok + 'S2 reset control was' line, PON 0x856/0x857 read-only. Wake lock held, watchdog as is. Record; land; the promotion as the kept kernel is the attended step (kept-kernel-with-pmic-wdt).
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: soc-sleeps
+
+Rank
+: 0
