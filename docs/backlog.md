@@ -1735,8 +1735,7 @@ Status
 Note
 : 2026-11-18 keeper: repo part written - lab/devlab-usb-awake holds the devlab-usb wake lock always (opt-out /etc/devlab-allow-autosleep), so sxmo_autosuspend.sh blocks on wakeup_count; health check tests/health/base/autosleep-off.sh. Phone part waits: install the overlay (reflash or copy) and run the suite.
 
-Waits
-: surya answering: provision devlab-usb-awake on the phone, run suite for autosleep-off
+2026-11-18 11:10Z, the author pressed power; the phone should be awake: FIRST provision this item (the repo part landed in PR 195), run the suite. THEN his question: the screen turns off by itself, as if the power button were tapped, and turns back on some time later with no touch - is that our doing? Find out with the phone in hand, read-only first: journalctl around those moments, sxmo's idle/blanking/autosleep hooks (sxmo_autosuspend.sh, the idle daemon, sxmo_screenoff), our wake-lock/devlab-usb-awake changes, any lpoco-health suspend cycle or way-back run, and spurious power-key input events (evtest/libinput on the pmic pwrkey, the volume/power keys; a pwrkey that bounces). Report the cause in plain words (record research); if it is ours, fix it through the queue; if sxmo's, record it. Never defuse the watchdog.
 
 About
 : deep-sleep
