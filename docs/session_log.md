@@ -1258,3 +1258,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-0830-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Unattended scheduled run: took the lease, phone reachable on kept kernel 7.1.0-sm7150-calls+ (up 4 min, sxmo autosleep inactive). Changed nothing; no real suspend run because no witness is at hand (a real suspend needs the attended window, fuse armed, short RTC alarm).
+
+Considered
+: next: sleep-fastrpc-helpers waits for an attended window; the other open items need the author (SIM, unplug) or research decisions, so none was taken
+
+About
+: deep-sleep
