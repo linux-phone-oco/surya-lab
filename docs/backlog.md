@@ -2350,6 +2350,8 @@ Note
 
 GO GIVEN 2026-11-18 by the author ('Go'), at the phone, having read the plain words: (1) rebuild at f5bb57d27 (7.1.0-sm7150-pmicwdt+), one-shot try with dyndbg="file pm8916_wdt.c +p"; read the 'S2 reset control was' line and PON 0x856/0x857 again; (2) open /dev/watchdog0 with a long timeout, read, no bite; (3) THE BITE: open with a short timeout (e.g. 20-30 s) and do not feed it; the PMIC resets the phone: restart by itself = PASS, stays dark = POWER-OFF (REPORT AT ONCE to the surya coordinator local_0ecf107e-d955-49ff-aefb-b0ecaa3bcbdd: the author presses power once, hold 10 s if needed, it boots the kept kernel by boot counting). No suspend, nothing flashed. Send the result and the 'S2 reset control was' line to the surya coordinator (they go to the upstreams coordinator). Record research; land.
 
+WITNESS (ideal-agent 0.3.50 witnessed go), 2026-11-18 18:55Z, expires 19:07Z: the author said verbatim 'Yes, at surya now' (relayed by the top coordinator); he is at the phone for ~10 minutes. RUN THE BITE NOW, inside this window; after 19:07Z this witness is void (ask the coordinator again). Restart by itself = PASS; dark = power-off: report AT ONCE to the surya coordinator so he presses power.
+
 About
 : deep-sleep
 
