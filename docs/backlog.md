@@ -2502,28 +2502,6 @@ Rank
 : 1
 
 
-<a id="surya-step-checks"></a>
-### Write health-suite checks for surya's daily-usable-phone steps that have no proof test
-
-Status
-: open
-
-Note
-: surya-steps-map-history (PR 294): none of the 82 unknown steps has its own proof test with a result in any stored run; 30 of them are phone-suite steps that need NEW checks first. Do: list the unknown steps on goal daily-usable-phone (tad q bringup-chain in docs, and the base's step_status), group by what a check needs (a shell test in tests/health/ - read how an existing one is built: tests/health/base/*.sh, the manifest), write the cheap ones first (read-only checks of a running thing: wifi connected, battery gauge reads, backlight, usb gadget, time sync, modem present, sxmo running...), put the suite, run it once, claim from that run id (done only with test + run). Skip the steps that need a human (witnessed tests) and record them as such (open + notes). One landing per group; no suspend, no risky state; wake lock held.
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-18
-
-Needs
-: phone
-
-Rank
-: 8
-
-
 <a id="sxmo-migration-diff"></a>
 ### Settle which way the 4 migrated sxmo configs differ: package newer or ours newer?
 
@@ -2597,3 +2575,27 @@ Proof
 
 Rank
 : 0
+
+
+<a id="surya-step-checks"></a>
+### Write health-suite checks for surya's daily-usable-phone steps that have no proof test
+
+Status
+: open
+
+Note
+: FIRST, from orchestration (the steps are live: https://linux-phone-oco.github.io/docs/en/linux-phones/steps.html; surya reads 0 of 23 for the goal 'Linux runs' while it runs mainline with a shell, a gadget and a health suite): claim the 'Linux runs' steps that the suite run ITSELF proves - kernel-builds, kernel-reaches-init, boot-image-packs, gadget-enumerates, shell-on-console, usb-network, rootfs-boots, health-suite-runs and the others of that goal's 23 (tad q bringup-chain in docs) - 'tad r step --step S --status done --proof <the suite check or the boot it rode> --run 20261118-203254 (or a newer run) --proven-on <the running kernel/image/dtb>'. KEEP THE BAR HONEST: claim only what that run shows (a check that passed in it, or a boot it demonstrably rode); anything the run does not show stays unknown/open with a note; no neighbour's proof. Then the cheap new checks below. Land; send the new counts to the surya coordinator (orchestration reruns feeds).
+
+surya-steps-map-history (PR 294): none of the 82 unknown steps has its own proof test with a result in any stored run; 30 of them are phone-suite steps that need NEW checks first. Do: list the unknown steps on goal daily-usable-phone (tad q bringup-chain in docs, and the base's step_status), group by what a check needs (a shell test in tests/health/ - read how an existing one is built: tests/health/base/*.sh, the manifest), write the cheap ones first (read-only checks of a running thing: wifi connected, battery gauge reads, backlight, usb gadget, time sync, modem present, sxmo running...), put the suite, run it once, claim from that run id (done only with test + run). Skip the steps that need a human (witnessed tests) and record them as such (open + notes). One landing per group; no suspend, no risky state; wake lock held.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Rank
+: 1
