@@ -2477,3 +2477,25 @@ Proof
 
 Rank
 : 6
+
+
+<a id="surya-steps-claimed"></a>
+### Claim surya's bring-up steps in its own base (ikb step), proven ones first
+
+Status
+: open
+
+Note
+: From orchestration (the steps contract reached surya-lab in the 21:00 follow, docs 0.17.0 -> 0.18.0; step_status between the device markers, records/step.sql). REPO/RECORDS ONLY, no phone step needed (read the base's own test runs, research, log). Claim with: ikb step --step ID --status done|partial|failing|open|not-needed|unknown --proof TEST --run RUN --proven-on IMAGE/KERNEL/DTB. A done claim needs BOTH its proof and its run, or it is only a claim (then use partial or open). The steps are docs' 'tad q bringup-chain' (113 now; goals linux-runs, daily-usable-phone, complete-phone); surya's history covers about 50: kernel, console, audio, calls, mic, suspend, sensors. Claim what is PROVEN first (a test run in this base's tests/results that passed: cite the test and the run id), mark the rest open or unknown (never broken: nobody checked = unknown). Check with docs research/bringup-steps/2026-11-18-phone-stages/daily-phone.sh xiaomi-surya. Land, then send the COUNT (done/partial/open/unknown) to the surya coordinator for orchestration (they run docs' feeds by hand). One landing, or in a few batches.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Rank
+: 7
