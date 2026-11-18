@@ -1918,3 +1918,39 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-2035-adsp-audio-restart"></a>
+### A boot whose ADSP had no audio services: restart cured it
+
+Entry date
+: 2026-11-18
+
+Done
+: Suite 20261118-202828 on the kept kernel (boot 19:12) failed 11: no sound card. Read only: pinctrl@62b52000 (lpass lpi) never bound, rx/tx macros, codec, sound all deferred; no q6 audio modules loaded. Restarted the ADSP through its remoteproc (stop, 3 s, start): card X3 registered, suite 20261118-202945 healthy (44 pass, 3 known gaps: fingerprint, two cameras). So the 12 failing claims of run 191339 were that boot, not the kernel; reclaimed 11 as done/partial from 202945, image-sensor-identified stays failing (0 sensors bound, real).
+
+Considered
+: next: why that boot (after the author's power cycle) came up without the ADSP audio services - a boot-time health check plus ADSP restart as the way back is worth a backlog item. Not run: the PMIC bite (attended)
+
+About
+: audio-speaker
+
+---
+
+
+<a id="2026-11-18-2040-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: kept kernel 7.1.0-sm7150-calls+ and stock fallback; healthy: suite 20261118-202945 44 pass, 3 known gaps, 0 fail; ADSP restarted once to bring the sound card back; no kernel change; steps reclaimed from that run
+
+Considered
+: next: surya-kernel-pmic-wdt bite is attended; surya-steps-map-history mapping of the 82 unknown is still to do (repo/records only); surya-adsp-audio-boot-race
+
+About
+: deep-sleep
