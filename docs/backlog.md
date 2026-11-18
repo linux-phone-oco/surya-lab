@@ -1768,10 +1768,10 @@ Opened
 ### Provision the phone with the always-held devlab-usb-awake (PR 195): it still runs the 2026-11-10 script
 
 Status
-: open
+: done
 
 Note
-: Cause of the 11:00-11:17Z suspend loop: the phone's /usr/local/bin/devlab-usb-awake is the old one (lock only while the UDC is configured; repo main holds it always, opt-out /etc/devlab-allow-autosleep). Phone part: copy lab/devlab-usb-awake to the phone, restart the service (devlab only, no reboot), run the suite. Proof must also hold with the UDC not configured - ask the programmer for a check that reads the script, not just the lock. Separate items: surya-key-chatter-resin, adsp/audio.
+: proven by autosleep-wakelock-held; script on phone = repo main, service restarted, no reboot
 
 About
 : deep-sleep

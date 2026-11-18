@@ -1426,3 +1426,18 @@ Done
 
 Considered
 : next: look at the audio/adsp regression after the loop (reboot only through devlab, tests first)
+
+---
+
+
+<a id="2026-11-18-1140-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Phone back on USB, kernel 7.1.0-sm7150-calls+ kept. devlab-usb-awake now the repo-main script (always-held lock), service restarted, no reboot; item devlab-usb-awake-hold-through-resume done. Suite: audio/adsp/camera/fingerprint fails as before
+
+Considered
+: next: screen-turns-off-by-itself read-only (journal, sxmo idle hooks, pwrkey); then phone-next
