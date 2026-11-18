@@ -2620,3 +2620,28 @@ Needs
 
 Rank
 : 1
+
+
+<a id="calls2-vs-calls-fails"></a>
+### Compare calls2+'s two suite fails against calls+ (boot-warnings clk.c:1047, one bt controller-crash line)
+
+Status
+: open
+
+Note
+: Before kept-kernel-with-pmic-wdt may promote calls2+ (7.1.0-sm7150-calls2+, PMIC wdt series incl. 6/6; surya-lab PR 312): its one-shot try ended with 2 suite fails: boot-warnings (clk.c:1047) and 1 bt controller-crash line - not yet compared with calls+. READ ONLY, no suspend, no bite: for each, is it also in calls+'s boots (the stored boot logs/suite runs of the kept kernel: tests/results, journal of earlier boots) - same warning at the same place and count? A bt controller-crash line in a boot with the pmic wdt kernel: new, or the known irq 157 / QCA SSR family (research 2026-11-18-bt-trace-20x15-no-crash)? Then say: PASS (same as calls+: not caused by the series) or NEW (caused by the series: say how and queue it for the upstreams lane). If you cannot tell from stored runs, boot calls+ one more time and read its boot-warnings (the kept kernel, no try needed: it is the running one) - and the suite once. Record; land; tell the surya coordinator.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Proof
+: soc-sleeps
+
+Rank
+: 0
