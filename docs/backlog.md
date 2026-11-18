@@ -1983,7 +1983,7 @@ Status
 : open
 
 Note
-: RUN 2026-11-18 13:57 with the author's go: phone dropped off USB ~35 s after arming (same boot until 13:58:14) and did not return in 6+ min; reset vs hang unread (research 2026-11-18-health-cycle-probe-phone-did-not-return). Waits on the author's power hold, then pstore and previous journal
+: RUN 2026-11-18 13:57 with the author's go; read after his power hold: previous journal ends 'watchdog0: pretimeout event' 12:58:15, pstore empty - the fuse bit (reset), the phone did not reboot itself (research 2026-11-18-probe-previous-journal-pretimeout-then-silence). Open: why no self-boot after the bite - needs an attended window (fastboot/reset reason). No more unattended tries.
 
 About
 : deep-sleep
