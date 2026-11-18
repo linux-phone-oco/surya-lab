@@ -1007,3 +1007,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-18-screen-off-while-typing-key-events"></a>
+### 2026-11-18-screen-off-while-typing-key-events
+
+Date
+: 2026-11-18
+
+Brief
+: Screen-off in use is not suspend or a job of ours; sxmo state follows key events and the volume-down key (pm8941_resin) chatters in 6 ms bursts
+
+Question
+: Why does the screen go off while the author is using sxmo (not idle)?
+
+Found
+: Read-only, 11:22-11:30Z, wake lock devlab-usb held, suspends steady at 24: not suspend. No lpoco job runs (lpoco-health timer ran once at 08:22; the 11:20 run was mine). sxmo state went lock->screenoff at 11:27:42 with no key, then screenoff->lock->unlock after a real power key at 11:27:49. Key capture: pm8941_resin (KEY_VOLUMEDOWN, event1) shows press/release pairs 6 ms apart in bursts (11:27:57 eight events; 11:25:03 and 11:25:09 alike), and at 11:27:26 and 11:29:16 power, volume-up and volume-down edges land within 20 ms of each other, not a finger. So cause (a) fits: phantom key edges on the PMIC keys that sxmo's input handler turns into state changes; (b) and (c) not seen. Not settled: whether the author touched the keys during the bursts; needs a capture with hands off, and the screenoff transition caught with its sxmo caller.
+
+About
+: deep-sleep
