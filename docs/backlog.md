@@ -2334,3 +2334,25 @@ Needs
 
 Rank
 : 4
+
+
+<a id="sxmo-config-migration"></a>
+### sxmo says 'configs need migration' after the sxmo-utils@lab install: decide per file, record why, clear it
+
+Status
+: open
+
+Note
+: The author sees an sxmo notification on surya: 'configs need migration' (user config files in ~/.config/sxmo - hooks, sway/xinit config, profile - differ from the defaults of the newly installed sxmo-utils@lab). Without disturbing a running build/try (read-only first; keep the wake lock held; no sxmo restart that would let autosuspend act): (1) sxmo_migrate.sh state (or the .needs-migration markers): list which files; (2) diff each against the new default; (3) decide per file - take the new default, or keep ours when it carries a deliberate lab change (e.g. a hook modified for sleep) - and record why (research/log); sxmo_migrate.sh is interactive: drive it per file or do the copy by hand with a backup, the notification should then clear. Then THE CLASS: a copy drifted from its source when the package upgraded. Our own lab changes to sxmo hooks belong in our FORK's package (grenudi/sxmo-utils lab series), not in user config edits, so the next install does not drift again: for each file we keep, say whether it should move into the fork (and open the item for the upstreams lane) or stay a device overlay (device.toml). Report what it found to the surya coordinator.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Rank
+: 5
