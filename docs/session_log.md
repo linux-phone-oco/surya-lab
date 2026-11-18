@@ -2026,3 +2026,21 @@ Considered
 
 About
 : audio-speaker
+
+---
+
+
+<a id="2026-11-19-0100-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: kept kernel 7.1.0-sm7150-calls+ with stock fallback, unchanged, healthy. Landed PR 299: devlab-audio-heal boot unit (restarts ADSP when no sound card), installed and enabled on the phone, card-present path run ok; restart path unproven by the script; surya-adsp-audio-boot-race stays open (cause unread).
+
+Considered
+: next: surya-kernel-pmic-wdt and kept-kernel-with-pmic-wdt need the attended window (never defuse unattended); unattended: surya-step-checks, root cause of the boot race
+
+About
+: deep-sleep
