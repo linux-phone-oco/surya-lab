@@ -2213,31 +2213,6 @@ Rank
 : 1
 
 
-<a id="ramoops-reserved-dt"></a>
-### Reserve ramoops in the device tree so a way-back panic is kept (way-back-ramoops-present)
-
-Status
-: open
-
-Note
-: Keeper 2026-11-18 (unattended run): not taken. A dt change on a one-shot dtb try reboots the phone; the 2026-11-18-cts-pulldown-dtb-hangs try left it off USB past the 30 s fuse, and the brief forbids an unattended try without the fuse. Waits for an attended window (author present) and the lane coordinator's go.
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-18
-
-Needs
-: phone
-
-Proof
-: way-back-ramoops-present
-
-Rank
-: 2
-
-
 <a id="surya-sxmo-suspend-series"></a>
 ### surya runs sxmo-utils from our fork (sxmo-utils@lab): suspend retries back off, the sensors daemon is stopped and started around each suspend
 
@@ -2263,3 +2238,30 @@ Proof
 
 Rank
 : 3
+
+
+<a id="ramoops-reserved-dt"></a>
+### Reserve ramoops in the device tree so a way-back panic is kept (way-back-ramoops-present)
+
+Status
+: open
+
+Note
+: Keeper 2026-11-18 (unattended run): not taken. A dt change on a one-shot dtb try reboots the phone; the 2026-11-18-cts-pulldown-dtb-hangs try left it off USB past the 30 s fuse, and the brief forbids an unattended try without the fuse. Waits for an attended window (author present) and the lane coordinator's go.
+
+GO GIVEN 2026-11-18 by the author ('Go'), at the lab, having read the plain-words description (what happens: one-shot dtb with a reserved crash-log region booted once by boot counting; sees: reboot, USB back in 1-2 min; checks: way-back-ramoops-present passes, /sys/fs/pstore, suite healthy; way back: boot counting makes the next boot the kept kernel; if no return in ~5 min the author holds power ~10 s). Watchdog armed. Take it NOW. REPORT AT ONCE: if the phone is not back within ~5 min of the reboot, message the surya coordinator (local_0ecf107e-d955-49ff-aefb-b0ecaa3bcbdd) immediately - do not wait for your turn to end. After it passes: install the kept dtb with the region only if proven; record; land.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: way-back-ramoops-present
+
+Rank
+: 0
