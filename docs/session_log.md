@@ -2044,3 +2044,18 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-0200-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: kept kernel 7.1.0-sm7150-calls+ with stock fallback, unchanged, healthy, watchdog untouched. Settled sxmo-migration-diff (read only): the 4 configs equal the package defaults, package newer, no lab change lost.
+
+Considered
+: next: surya-kernel-pmic-wdt and kept-kernel-with-pmic-wdt need the attended window (never defuse unattended); unattended: surya-step-checks, boot race root cause
