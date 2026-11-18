@@ -649,3 +649,28 @@ About
 
 Research
 : 2026-11-17-sensors-lasting-install-three-boots
+
+
+<a id="2026-11-18-bt-suspend-way"></a>
+### 2026-11-18-bt-suspend-way
+
+Date
+: 2026-11-18
+
+Brief
+: Bluetooth stays on through s2idle: measure first, then the mainline CTS bias, then a serdev unbind hook as the fallback, and a suspend gate for the wedge; never rfkill block
+
+Decision
+: The way, in this order, each step one phone item measured on way-back.sh cycles with the watchdog armed and the serial's wakeup switch left ON (production state): (1) bt-trace-cycles: 20 cycles of 15 s and 3 of 120 s with dyndbg on hci_qca and trace_geni_serial_irq, to read whether the irq 157 storm comes before or after the controller crash; (2) bt-sleep-cts-pulldown: a one-shot dtb with CTS pull-down in qup-uart3-sleep like sc7180-trogdor, the same cycles; (3) if (1) or (2) still lose the controller: bt-unbind-hook, a sleep hook that unbinds only 88c000.serial:0 from hci_uart_qca before suspend and binds it after (SteamOS 2845's workaround), the same cycles plus a BT audio reconnect; (4) bt-suspend-gate, always: sxmo's autosleep does not call rtcwake while hci0 is not UP or an rfkill is in D state, so the r4 wedge cannot recur whatever the controller does. Proof: tests/health/base/bt-suspend.sh passes after the cycles (no storm, no crash lines, hci0 up, no stuck rfkill, wakeup on).
+
+Why
+: Surya's device tree already equals the one mainline phone-class wiring that sleeps (sc7180-trogdor) except CTS bias, so a device-tree rewrite or a driver patch would be a guess; the failures are a 200 ms sleep wait that times out and a level irq that storms once the port is suspended, whose order nothing has measured; the r4 wedge was sxmo's suspend loop on a controller in SSR, which a gate removes independently; the only user-space remedies others report are power off or a serdev unbind.
+
+Rejected
+: rfkill block or hci down before sleep: BT blocked hung suspend entry hard twice and its mutex wedged r4; noirqdebug or disabling irq 157: hides the storm, r4 showed it did not stop it; keeping the serial's wakeup off as the product: it is the test switch, RX wake is the design; BT permanently off in standby (bluetoothctl power off): drops BT peripherals, kept only as the last fallback; patching hci_qca timeouts first: upstream-shaped but needs the cause measured, queued after step 1.
+
+About
+: deep-sleep
+
+Research
+: 2026-11-18-bt-suspend-how-it-stands

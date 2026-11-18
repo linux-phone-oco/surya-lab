@@ -922,3 +922,28 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-18-bt-suspend-how-it-stands"></a>
+### 2026-11-18-bt-suspend-how-it-stands
+
+Date
+: 2026-11-18
+
+Brief
+: Surya's BT device tree already equals mainline's s2idle-capable sc7180 wiring (CTS bias aside); failures are sleep/SSR timeouts and a level irq storm; others fix it in user space
+
+Question
+: How do other mainline Qualcomm phones with QCA UART Bluetooth survive s2idle, and what is surya missing?
+
+Found
+: Read 2026-11-18. (1) Surya's device tree already is the mainline pattern: the live /sys/firmware/devicetree node serial@88c000 has interrupts-extended (GIC 604 + tlmm 41 edge falling), pinctrl default+sleep, bluetooth compatible qcom,wcn3998-bt. Its sleep state: CTS gpio38 bias-bus-hold, RTS gpio39 pull-down, TX gpio40 pull-up, RX gpio41 pull-up. The only mainline QCA UART Bluetooth built to sleep in s2idle, sc7180-trogdor (same GPIO 38-41, same qup03), has the same wiring; its sleep state differs in one pin: CTS gets bias-pull-down 'to match the pull of the Bluetooth module' (surya: bus-hold). So the DT is not what is missing; one pin bias is the only measured-nowhere difference. (2) Mechanism of the failures, from the code: qca_suspend waits only 200 ms for the chip's own HCI_IBS_SLEEP_IND and returns -ETIMEDOUT (suspend then refuses, as in r4 'qca_suspend returned -110'); during SSR it waits up to memdump+3 s then times out. qcom_geni_serial_isr returns IRQ_NONE while uport->suspended, and irq 157 is a level irq: any RX/CTS activity from the chip after the port is suspended, or while a crashed controller keeps talking, is the 'nobody cared' storm. Not measured: whether the storm comes before or after the controller crash (r4 shows both within 8 s, order unread). (3) What others do: mainline gives no hook - Chromebooks (trogdor) rely on in-band sleep plus the RX wake; every desktop/distro remedy found is user space: bluetoothctl power off before sleep (ArchWiki), rfkill block in a sleep hook (pop-os, which breaks BT peripherals and needs a power cycle), and for a QCA UART controller that loses state, unbinding only the serdev from hci_uart_qca before sleep and binding it after (SteamOS 2845, worked across S4). No postmarketOS/Mobian/Droidian rule for qca UART Bluetooth across s2idle was found in two searches (only our earlier note of a pmOS hook stopping Bluetooth for the Pixel 3a FastRPC crash); not found is not absent. (4) Local facts that bound the choice: wakeup off + BT up passed 4 of 4 15 s cycles (irq157-quiet-with-wakeup-off) yet r4 failed at its first long off-USB run; BT blocked (rfkill) hung suspend entry hard twice (surya-s2idle-bt-blocked-hang, sh0-bt-blocked-cycle-resets) - so closing the port is not safe; unbind and power-off by serdev remove were never tried; the r4 wedge was sxmo calling rtcwake in a 1-20 s loop while the controller sat in SSR, with three rfkill processes on the misc_open mutex, not a kernel panic. Ways it could go: A mirror trogdor exactly (CTS pull-down in sleep) and run with the wakeup switch on; B unbind hci_uart_qca (serdev) before suspend, bind after - a clean controller power-off and a full re-setup, never rfkill; C gate sxmo's autosleep on a healthy hci0 (no suspend while SSR or rfkill busy), which cannot fix the storm but removes the wedge; D take Bluetooth off the standby profile (bluetoothctl power off) - the ArchWiki remedy, loses BT peripherals; E patch hci_qca (longer sleep wait, reset on timeout) - upstream-shaped but needs the cause first.
+
+Sources
+: src-linux-hci-qca,src-linux-qcom-geni-serial,src-linux-sc7180-trogdor-uart3,src-steamos-2845-qca-uart-resume,src-archwiki-bluetooth-s2idle
+
+About
+: deep-sleep
+
+Material
+: research/deep-sleep/2026-11-18/
