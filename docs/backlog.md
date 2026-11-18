@@ -1682,8 +1682,7 @@ Status
 
 Note
 : Read-only on the phone apart from trace switches; watchdog armed, no unplug. Decision 2026-11-18-bt-suspend-way step 1.
-
-2026-11-18 coordinator: YOU write the cycle wrapper yourself (sleep/bt-trace.sh, shell, in surya-lab; not a builder item): it wraps way-back.sh cycles with hci_qca dyndbg + the geni irq trace, collects the trace per cycle, keeps the watchdog armed, sxmo autosleep stopped, sensorspd stopped around the cycle, a short RTC alarm (15 s; 3 x 120 s only if the fuse allows it - otherwise note why and skip them), starts under systemd-run (not nohup), restores everything on any end. Then run the 20 x 15 s cycles and record what the traces show (which comes first: the irq 157 storm or the controller crash). The author is at hand (attended window), no unplug needed. Land, hand over.
+2026-11-18 coordinator (one roof, no new scripts): run these cycles through 'lpoco-health suspend plan|cycle' (lab-tools 0.4.1, installed), not a second cycle script. Read its --help: if it has no step to switch on hci_qca dyndbg and the geni irq trace around a cycle, record the missing hook as a surya-lab backlog item needs=build (a lab-tools build item for orchestration: pre/post hooks or a --trace option) and meanwhile use a STOPGAP shell wrapper (sleep/bt-trace.sh) recorded as a probe to remove (say so in its header and in the item). Watchdog armed, sxmo autosleep stopped, sensorspd stopped around the cycle, 15 s alarm; 3 x 120 s only if the fuse allows. Then run 20 x 15 s and record which comes first: the irq 157 storm or the controller crash. The author is at hand; no unplug.
 
 About
 : deep-sleep
