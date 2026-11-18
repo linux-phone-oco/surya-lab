@@ -1922,3 +1922,75 @@ Needs
 
 Rank
 : 0
+
+
+<a id="surya-kernel-pmic-wdt"></a>
+### surya's kernel with the PMIC watchdog series (linux-phone-oco/linux topic/pmic-wdt-wake-in-suspend) and &pm6150_wdt enabled, wakeup-source
+
+Status
+: open
+
+Note
+: docs decision 2026-11-18-upstream-forks, research pmic-wdt-way-back. The four commits are on v7.3 (local worktree ~/Projects/linux-phone-oco/linux-topics until the upstreams lane pushes the branch); pick them onto surya's v7.2 test branch (pm8916_wdt.c and its binding are the same in v7.2; pm6150.dtsi differs - apply that hunk by hand), CONFIG_PM8916_WATCHDOG=y, board: &pm6150_wdt { status = "okay"; wakeup-source; }. Built with the lab's kernel route; nothing flashed by this item.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: build
+
+Proof
+: pmic-wdt-bites
+
+
+<a id="surya-pmic-wdt-proof"></a>
+### Prove the PMIC watchdog way back on surya: it bites unpetted, and its bark wakes a suspend with nothing else to wake it
+
+Status
+: open
+
+Note
+: Script https://github.com/linux-phone-oco/docs/blob/main/research/upstream-forks/2026-11-18/tests/pmic-wdt-way-back.sh (devlab phone put): check; first read PON_HLOS 0x854-0x858 and 0x810 through regmap debugfs (writable by HLOS? the bark bit?); bite 20 (dry run, nothing suspended), after the boot check says CARDRESET; then wake, with way-back.sh's APSS fuse armed as the second way back. Settles: HLOS writes the PMIC watchdog, the gen2 bark interrupt index (6 assumed), POFF_REASON1 bit 2, the bark waking through PDC. Proves docs upstream item pmic-wdt-wake-in-suspend; until it passes, keep_armed_in_suspend stays the lab's s2idle-only guard (it does not cover a real suspend: try 4).
+
+Blocked by
+: surya-kernel-pmic-wdt,surya-unreachable-after-try4
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: pmic-wdt-bites,pmic-wdt-wakes-in-suspend
+
+
+<a id="surya-sxmo-suspend-series"></a>
+### surya runs sxmo-utils from our fork (sxmo-utils@lab): suspend retries back off, the sensors daemon is stopped and started around each suspend
+
+Status
+: open
+
+Note
+: With the gadget configured surya's suspend aborts (the original symptom): sxmo.log must show 'next try in' 1 2 4 .. 64 s and the host count at most 8 reconnects in 5 minutes (26 before); after one real suspend hexagonrpcd-adsp-sensorspd was stopped before and runs after, and proximity reads. Proves docs upstream items sxmo-autosuspend-backoff, sxmo-suspend-stop-by-profile, sxmo-surya-sensors-suspend (decision 2026-11-18-upstream-forks).
+
+Waits
+: the lab apk: docs item sxmo-utils-lab-apk (lab-tools)
+
+About
+: sensors
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: suspend-retry-backs-off,sensors-after-suspend
