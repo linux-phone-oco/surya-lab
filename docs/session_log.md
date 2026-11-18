@@ -1276,3 +1276,24 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-bt-suspend-research"></a>
+### surya-research: Bluetooth suspend-proof researched, decision and phone steps queued
+
+Entry date
+: 2026-11-18
+
+Done
+: Read mainline hci_qca, qcom_geni_serial, sc7180-trogdor and the live surya node; surya's DT already equals trogdor's except CTS bias. Decision 2026-11-18-bt-suspend-way; backlog bt-trace-cycles, bt-sleep-cts-pulldown, bt-unbind-hook, bt-suspend-gate; check tests/health/base/bt-suspend.sh.
+
+Considered
+: serdev unbind, CTS pull-down, suspend gate, power off
+
+Rejected
+: rfkill block, noirqdebug, BT off for good
+
+About
+: deep-sleep

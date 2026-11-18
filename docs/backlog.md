@@ -1480,10 +1480,10 @@ Rank
 ### Research: make the Bluetooth UART (QCA, serial@88c000, hci0) suspend-proof
 
 Status
-: open
+: done
 
 Note
-: Bluetooth ended every standby run (r2, r3, r4): irq 157 'nobody cared' (the RX wake pin storm), the QCA controller crashes (SSR, qca_suspend -110), the retry loop hangs rfkill (misc_open mutex) and the phone. Blocked BT hung suspend entry hard in an earlier try. Question: how do other mainline Qualcomm phones with QCA UART Bluetooth (WCN3990/WCN399x, hci_qca serdev) survive s2idle: the serial's wakeup / oob-wakeup gpio, pinctrl sleep state of the RX pin, qca power sequencing across suspend (btqca, hci_qca suspend/resume, vendor firmware needing a controller reset), the RX pin pull/mux in the device tree vs ours, and what postmarketOS/Mobian do (unbinding hci_uart around suspend, rfkill block + hci down in a sleep hook). Ends with a decision and phone items measured on way-back.sh cycles with the watchdog armed (no unplug).
+: Researched 2026-11-18: decision 2026-11-18-bt-suspend-way; steps queued as bt-trace-cycles, bt-sleep-cts-pulldown, bt-unbind-hook, bt-suspend-gate.
 
 About
 : deep-sleep
@@ -1544,3 +1544,131 @@ Proof
 
 Rank
 : 4
+
+
+<a id="bt-trace-cycles"></a>
+### Bluetooth s2idle: 20x15 s and 3x120 s way-back cycles bt-on, wakeup ON, with hci_qca dyndbg and geni irq trace; read storm vs crash order
+
+Status
+: open
+
+Note
+: Read-only on the phone apart from trace switches; watchdog armed, no unplug. Decision 2026-11-18-bt-suspend-way step 1.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: bt-no-irq-storm
+
+Rank
+: 1
+
+
+<a id="bt-sleep-cts-pulldown"></a>
+### One-shot dtb: CTS pull-down in qup-uart3-sleep like sc7180-trogdor; same cycles as bt-trace-cycles
+
+Status
+: open
+
+Note
+: Step 2. Keep the dtb out of the kept kernel until it measures better.
+
+Blocked by
+: bt-trace-cycles
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: bt-no-controller-crash
+
+Rank
+: 2
+
+
+<a id="bt-unbind-hook"></a>
+### Sleep hook: unbind 88c000.serial:0 from hci_uart_qca before suspend, bind after (never rfkill); same cycles plus BT audio reconnect
+
+Status
+: open
+
+Note
+: Step 3, only if steps 1-2 leave controller crashes. Hazard: BT-off s2idle hung twice; run with watchdog and ramoops armed.
+
+Blocked by
+: bt-sleep-cts-pulldown
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: bt-hci0-up
+
+Rank
+: 3
+
+
+<a id="bt-suspend-gate"></a>
+### sxmo autosleep gate: no rtcwake while hci0 is not UP or an rfkill is in D state
+
+Status
+: open
+
+Note
+: Step 4, independent of the others: removes the r4 wedge whatever the controller does.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: bt-rfkill-not-stuck
+
+Rank
+: 2
+
+
+<a id="bt-suspend-test-land"></a>
+### tests/health/base/bt-suspend.sh in the suite, pushed to the phone with the runner
+
+Status
+: open
+
+Note
+: Landed with the research; the keeper puts it on the phone with lpoco lab suite put now.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: bt-hci0-up
