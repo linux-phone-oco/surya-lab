@@ -1,8 +1,8 @@
--- What changed about a piece of hardware: it arrived (status), it was tried on this phone (fit, with the evidence), how
+-- What changed about a piece of hardware: it arrived (status), it was tried on the machine (fit, with the evidence), how
 -- many there are, a note; what is not given is kept as it was, and the day it was checked is today.
 -- --id       string   the hardware
 -- --status   string?  wanted, ordered, owned, lent, broken or retired
--- --fit      string?  claimed, confirmed or refuted on this phone; confirmed needs evidence (--fit-ref, or one already there)
+-- --fit      string?  claimed, confirmed or refuted on the machine; confirmed needs evidence (--fit-ref, or one already there)
 -- --fit-ref  string?  the evidence: a run id, a log, a link
 -- --qty      integer?  how many the lab has
 -- --note     string?  what else is known (replaces the note)

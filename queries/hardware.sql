@@ -1,4 +1,4 @@
--- The hardware this device's work needs: what it is, whether the lab has it (status), whether it works on this phone
+-- The hardware the work needs: what it is, whether the lab has it (status), whether it works on the machine
 -- (fit: claimed is only a claim), its price and when that was quoted, and how many days ago its facts were checked -
 -- the longest-unchecked first within what is not owned yet. Then row --id ID for one whole.
 -- --status  string?  only this status (wanted, ordered, owned, lent, broken, retired)

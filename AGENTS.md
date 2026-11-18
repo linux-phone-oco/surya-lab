@@ -44,6 +44,7 @@ Ask a query; never read `data/` or `docs/` to answer - they are the database's f
 |---|---|
 | how a subject stands, then all that is known of it | `tad q about --subject S` (`--whole true` for every record in full; `tad q about` lists the subjects, and where a summary is due) |
 | the work ahead | `tad q next` (`--about S` for one subject) |
+| what you may take now, and why the rest may not | `tad q ready --for keeper\|builder\|research` (`--show ready` for the picks only) - the one picking query; a brief names it and carries no picking SQL |
 | where something is said | `tad q find --text WORDS` |
 | one record whole | `tad q row --id ID` |
 | what was recorded lately | `tad q recent` (`--days N`) |
