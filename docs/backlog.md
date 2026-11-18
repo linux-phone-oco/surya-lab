@@ -1299,31 +1299,6 @@ Rank
 : 1
 
 
-<a id="surya-unreachable-after-try4"></a>
-### surya did not return from real suspend try 4: the author's power cycle, then read /var/tmp/sus-try, pstore, journalctl -b -1
-
-Status
-: open
-
-Note
-: Phone work PARKED. Facts (research 2026-11-18-real-suspend-try4-phone-did-not-return): fuse armed, 15 s RTC alarm, usb-awake stopped, UDC disconnected; no watchdog reset in over an hour. So the fuse did not bite during a real systemctl suspend (it bites in way-back cycles): the weak link is how the real suspend path differs from way-back.sh (suspend-to-mem vs s2idle? the wdt kept-armed patch active? the RTC alarm set on the wrong rtc?). When it answers: read /var/tmp/sus-try/*, pstore, journalctl -b -1; no further real systemctl suspend until the fuse is proven to bite on that path (a dry run that suspends nothing).
-
-Waits
-: the author back: power-cycle surya (gone since ~11:46Z; fuse 30 s armed but no reset)
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-18
-
-Needs
-: phone
-
-Rank
-: 0
-
-
 <a id="bt-unbind-hook"></a>
 ### Sleep hook: unbind 88c000.serial:0 from hci_uart_qca before suspend, bind after (never rfkill); same cycles plus BT audio reconnect
 
@@ -1925,3 +1900,33 @@ Opened
 
 Needs
 : phone
+
+
+<a id="surya-unreachable-after-try4"></a>
+### surya did not return from real suspend try 4: the author's power cycle, then read /var/tmp/sus-try, pstore, journalctl -b -1
+
+Status
+: open
+
+Note
+: Phone work PARKED. Facts (research 2026-11-18-real-suspend-try4-phone-did-not-return): fuse armed, 15 s RTC alarm, usb-awake stopped, UDC disconnected; no watchdog reset in over an hour. So the fuse did not bite during a real systemctl suspend (it bites in way-back cycles): the weak link is how the real suspend path differs from way-back.sh (suspend-to-mem vs s2idle? the wdt kept-armed patch active? the RTC alarm set on the wrong rtc?). When it answers: read /var/tmp/sus-try/*, pstore, journalctl -b -1; no further real systemctl suspend until the fuse is proven to bite on that path (a dry run that suspends nothing).
+
+THE CLASS (coordinator, 2026-11-18, three lines): 
+1. Class: a fallback proven on one path was trusted on another - the watchdog fuse bites in way-back.sh cycles (s2idle by rtcwake, proven 3+ times) but was never proven on a real systemctl suspend; a try that can take the only link away ran on the unproven path, so a fallback that missed became unplanned hands (try 4; tries 1-3 the same shape).
+2. Where else: any try whose way back was proven by a neighbouring path - the one-shot dtb tries (boot counting proven for a kernel, not every dtb: the CTS pull-down try), the standby runs (r2-r4: the fuse proven for 15 s cycles, not for the Bluetooth retry loop that overran it), and any keeper step run 'through the real thing' instead of the proven cycle.
+3. Root: I gave the go. The keeper held back after tries 1-2 left the phone unreachable; I overrode that caution in the item note ('GO ... the two causes are gone') because the two known causes (autosleep alarm, defused fuse) were fixed, but I never asked whether the fuse had been proven on THAT path; the keeper's caution was the signal, and the go treated 'known causes removed' as 'way back proven'. Rule that follows: a go for a try that can drop the only link names the dry run that proved the way back on that exact path (a fuse bite with nothing suspended, on the same entry point), or it does not go.
+
+Waits
+: the author back: power-cycle surya (gone since ~11:46Z; fuse 30 s armed but no reset)
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Rank
+: 0
