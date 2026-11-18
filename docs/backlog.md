@@ -1546,34 +1546,6 @@ Rank
 : 4
 
 
-<a id="bt-sleep-cts-pulldown"></a>
-### One-shot dtb: CTS pull-down in qup-uart3-sleep like sc7180-trogdor; same cycles as bt-trace-cycles
-
-Status
-: open
-
-Note
-: 2026-11-18 tried once: dtb booted healthy, then the phone hung in the first 15 s bt-on cycle and did not return (research 2026-11-18-cts-pulldown-dtb-hangs); needs a power hold; then decide: read pstore/journal, or repeat once to tell a one-off from the dtb
-
-Blocked by
-: bt-trace-cycles
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-18
-
-Needs
-: phone
-
-Proof
-: bt-no-controller-crash
-
-Rank
-: 2
-
-
 <a id="bt-unbind-hook"></a>
 ### Sleep hook: unbind 88c000.serial:0 from hci_uart_qca before suspend, bind after (never rfkill); same cycles plus BT audio reconnect
 
@@ -1718,3 +1690,33 @@ Proof
 
 Rank
 : 1
+
+
+<a id="bt-sleep-cts-pulldown"></a>
+### One-shot dtb: CTS pull-down in qup-uart3-sleep like sc7180-trogdor; same cycles as bt-trace-cycles
+
+Status
+: open
+
+Note
+: 2026-11-18 tried once: dtb booted healthy, then the phone hung in the first 15 s bt-on cycle and did not return (research 2026-11-18-cts-pulldown-dtb-hangs); needs a power hold; then decide: read pstore/journal, or repeat once to tell a one-off from the dtb
+
+2026-11-18 coordinator: NOT repeated now. One try hung the phone beyond the fuse; a repeat costs another power hold and tells little. bt-suspend-gate (no dtb change) is next; come back here only if the gate leaves the storm.
+
+Waits
+: a deeper decision: the pull-down dtb left the phone off USB past the 30 s fuse (one try, research 2026-11-18-cts-pulldown-dtb-hangs); not repeated - bt-suspend-gate first
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: bt-no-controller-crash
+
+Rank
+: 2
