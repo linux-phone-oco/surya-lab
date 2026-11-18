@@ -1730,14 +1730,10 @@ Rank
 ### A lab phone must not idle-suspend: sxmo autosleep off through provisioning, with a health check
 
 Status
-: in-progress
+: done
 
 Note
-: 2026-11-18 keeper: repo part written - lab/devlab-usb-awake holds the devlab-usb wake lock always (opt-out /etc/devlab-allow-autosleep), so sxmo_autosuspend.sh blocks on wakeup_count; health check tests/health/base/autosleep-off.sh. Phone part waits: install the overlay (reflash or copy) and run the suite.
-
-2026-11-18 11:10Z, the author pressed power; the phone should be awake: FIRST provision this item (the repo part landed in PR 195), run the suite. THEN his question: the screen turns off by itself, as if the power button were tapped, and turns back on some time later with no touch - is that our doing? Find out with the phone in hand, read-only first: journalctl around those moments, sxmo's idle/blanking/autosleep hooks (sxmo_autosuspend.sh, the idle daemon, sxmo_screenoff), our wake-lock/devlab-usb-awake changes, any lpoco-health suspend cycle or way-back run, and spurious power-key input events (evtest/libinput on the pmic pwrkey, the volume/power keys; a pwrkey that bounces). Report the cause in plain words (record research); if it is ours, fix it through the queue; if sxmo's, record it. Never defuse the watchdog.
-
-2026-11-18 ~11:20Z: the author reports surya is in a suspend/resume LOOP (lock screen on/off every 5-10 s, USB flapping in step) - so the phone answers only in short windows. Do NOT end on one silent probe: POLL for a window (a tight loop: devlab probe every 1-2 s for up to 10 min, in the foreground), and in the first window run ONE command that stops the loop (stop/kill sxmo_autosuspend.sh and the idle suspend, hold a wake lock: e.g. 'echo lab > /sys/power/wake_lock' - read the working form from the repo's devlab-usb-awake and the phone's sxmo scripts) - then everything else on a stable phone. If no window opens in 10 min, record that and end.
+: proven by autosleep-off.sh on the phone 2026-11-18 11:21Z: wake lock devlab-usb held, devlab-usb-awake active, suspends steady at 24 over 20 s. Follow-up: audio (sound-card, mic, call-audio-path) fails and adsp crashed 4x after the suspend loop - check on next boot.
 
 About
 : deep-sleep

@@ -988,3 +988,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-18-screen-blanks-by-itself"></a>
+### 2026-11-18-screen-blanks-by-itself
+
+Date
+: 2026-11-18
+
+Brief
+: Screen blanking/relight was sxmo's autosuspend loop (swayidle 3 s idle, rtcwake mem) failing on USB; the devlab-usb wake lock stops it
+
+Question
+: Why does the screen turn off by itself and come back with no touch; is it ours?
+
+Found
+: Read-only, 11:20Z: the phone has devlab-usb-awake active and wake lock devlab-usb held. Boot suspend count 24 (fail 0) did not move over 20 s, so no loop now. sxmo runs swayidle (timeout 3 releases sxmo_not_suspendable) and sxmo_autosuspend.sh: idle blanks the screen and tries rtcwake mem; on USB a suspend aborts and the link drops, giving the lock-screen flicker the author saw. logind shows only the author's power-key presses (11:09-11:13), no bouncing keys. Cause: sxmo idle suspend, not our change; our wake lock is the fix. Plain idle screen-off by sxmo remains normal. soc-sleeps fails by design while awake (24 suspends, cxsd 0). Also seen, not this item: sound card, mic and call-audio-path checks now fail and adsp crashed 4 times after the loop; worth a look.
+
+About
+: deep-sleep
