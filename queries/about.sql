@@ -1,7 +1,7 @@
 -- Everything known of one subject, the short answer first: how it stands (its summary, dated), then what was
 -- recorded since - each record by its brief, its one line - the work open and the sources, and the records the
 -- summary condenses by id only. --whole gives every record in full; row --id one. Read deeper only when the
--- task needs it. Research a later one supersedes leaves the answer; find and row reach it.
+-- task needs it. Research or a decision a later one supersedes leaves the answer; find and row reach it.
 -- A word before a dash names a family (modem: modem-data, modem-calls). Without a subject: every subject,
 -- with how many records it has, what they weigh, its summary's date and whether a summary is due - when
 -- they weigh over 8 KB with none, or over 4 KB were recorded since it (open work is never condensed).
@@ -15,6 +15,7 @@ rec AS (
       FROM research WHERE id NOT IN (SELECT supersedes FROM research WHERE supersedes IS NOT NULL)
     UNION ALL SELECT 'decision', id, about, date, decision || coalesce(' Rejected: ' || rejected, ''),
            coalesce(brief, CASE WHEN strpos(decision, '. ') > 0 THEN left(decision, strpos(decision, '. ')) ELSE decision END) FROM decisions
+      WHERE id NOT IN (SELECT supersedes FROM decisions WHERE supersedes IS NOT NULL)
     UNION ALL SELECT 'log', id, about, entry_date, title || ' - ' || done, title FROM session_log
 ),
 hit AS (SELECT a FROM (SELECT about AS a FROM rec UNION SELECT about FROM backlog UNION SELECT about FROM summaries), s

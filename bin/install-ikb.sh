@@ -2,7 +2,7 @@
 # Installs ikb, the recording command, from its pinned release (grenudi/ideal-knowledge-base): the binary
 # for this machine, checked against the release's own checksums before it is installed.
 set -eu
-version="${IKB_VERSION:-0.4.0}"
+version="${IKB_VERSION:-0.6.1}"
 arch=$(uname -m)
 case "$arch" in x86_64 | aarch64) ;; *) echo "install-ikb: no ikb build for $arch" >&2; exit 1 ;; esac
 target="$arch-unknown-linux-musl"; name="ikb-v$version-$target"

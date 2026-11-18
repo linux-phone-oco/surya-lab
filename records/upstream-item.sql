@@ -18,11 +18,13 @@
 -- --version           string?       v2, v3 ... when sent again
 -- --supersedes        string?       the item it is a later version of
 -- --applied-upstream  string?       the version, commit or link where it landed
+-- --carried-in        string?       the fork and branch that carries it until the upstream has it (an upstreams id of the fork, then a branch)
+-- --reviewed-by       string?       who reviewed or acked it, as the replies name them
 -- --waits             string?       what it waits on (a person's word, a reply)
 -- --note              string?       where it stands, and the next step
 -- --last-update       date = today  when
 DELETE FROM upstream_items WHERE id = $id;
-INSERT INTO upstream_items (id, upstream, title, form, state, from_work, domain, tags, about, local_ref, file, sent_on, forwarded, bug, version, supersedes, applied_upstream, waits, note, last_update)
-SELECT $id, $upstream, $title, $form, $state, $from_work, $domain, $tags, $about, $local_ref, $file, $sent_on, $forwarded, $bug, $version, $supersedes, $applied_upstream, $waits, $note, $last_update
+INSERT INTO upstream_items (id, upstream, title, form, state, from_work, domain, tags, about, local_ref, file, sent_on, forwarded, bug, version, supersedes, applied_upstream, waits, note, last_update, carried_in, reviewed_by)
+SELECT $id, $upstream, $title, $form, $state, $from_work, $domain, $tags, $about, $local_ref, $file, $sent_on, $forwarded, $bug, $version, $supersedes, $applied_upstream, $waits, $note, $last_update, $carried_in, $reviewed_by
 WHERE CASE WHEN NOT EXISTS (SELECT 1 FROM backlog WHERE id = $from_work) AND NOT EXISTS (SELECT 1 FROM decisions WHERE id = $from_work) AND NOT EXISTS (SELECT 1 FROM research WHERE id = $from_work)
       THEN error('from-work ' || $from_work || ' is no backlog item, decision or research of this base (tad q find --text finds one)') ELSE true END;
