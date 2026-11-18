@@ -4676,3 +4676,255 @@ Gaps
 
 Skipped
 : 6
+
+
+<a id="20261118-140813"></a>
+### 20261118-140813
+
+Device id
+: xiaomi-surya
+
+Run at
+: 2026-11-18 14:08:13
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+Passed
+: 44
+
+Failed
+: 0
+
+Gaps
+: 3
+
+Skipped
+: 6
+
+
+<a id="20261118-142912"></a>
+### 20261118-142912
+
+Device id
+: xiaomi-surya
+
+Run at
+: 2026-11-18 14:29:12
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+Passed
+: 44
+
+Failed
+: 0
+
+Gaps
+: 3
+
+Skipped
+: 6
+
+
+<a id="20261118-143021"></a>
+### 20261118-143021
+
+Device id
+: xiaomi-surya
+
+Run at
+: 2026-11-18 14:30:21
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+Passed
+: 44
+
+Failed
+: 0
+
+Gaps
+: 3
+
+Skipped
+: 6
+
+
+<a id="20261118-174958"></a>
+### 20261118-174958
+
+Device id
+: xiaomi-surya
+
+Run at
+: 2026-11-18 17:49:58
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+Passed
+: 44
+
+Failed
+: 0
+
+Gaps
+: 3
+
+Skipped
+: 6
+
+
+<a id="20261118-181312"></a>
+### 20261118-181312
+
+Device id
+: xiaomi-surya
+
+Run at
+: 2026-11-18 18:13:12
+
+Kernel
+: 7.1.0-sm7150-pmicwdt+
+
+Shell
+: swmo
+
+Passed
+: 44
+
+Failed
+: 0
+
+Gaps
+: 3
+
+Skipped
+: 6
+
+
+<a id="20261118-181640"></a>
+### 20261118-181640
+
+Device id
+: xiaomi-surya
+
+Run at
+: 2026-11-18 18:16:40
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+Passed
+: 44
+
+Failed
+: 0
+
+Gaps
+: 3
+
+Skipped
+: 6
+
+
+<a id="20261118-182313"></a>
+### 20261118-182313
+
+Device id
+: xiaomi-surya
+
+Run at
+: 2026-11-18 18:23:13
+
+Kernel
+: 7.1.0-sm7150-pmicwdt+
+
+Shell
+: swmo
+
+Passed
+: 44
+
+Failed
+: 0
+
+Gaps
+: 3
+
+Skipped
+: 6
+
+
+<a id="20261118-182659"></a>
+### 20261118-182659
+
+Device id
+: xiaomi-surya
+
+Run at
+: 2026-11-18 18:26:59
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+Passed
+: 44
+
+Failed
+: 0
+
+Gaps
+: 3
+
+Skipped
+: 6
+
+
+<a id="20261118-182911"></a>
+### 20261118-182911
+
+Device id
+: xiaomi-surya
+
+Run at
+: 2026-11-18 18:29:11
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+Passed
+: 44
+
+Failed
+: 0
+
+Gaps
+: 3
+
+Skipped
+: 6

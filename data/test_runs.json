@@ -165,3 +165,12 @@
 {"id":"20261118-121800","device_id":"xiaomi-surya","run_at":"2026-11-18 12:18:00","kernel":"7.1.0-sm7150-calls+","shell":"swmo","passed":44,"failed":0,"gaps":3,"skipped":6}
 {"id":"20261118-131125","device_id":"xiaomi-surya","run_at":"2026-11-18 13:11:25","kernel":"7.1.0-sm7150-calls+","shell":"swmo","passed":44,"failed":0,"gaps":3,"skipped":6}
 {"id":"20261118-132001","device_id":"xiaomi-surya","run_at":"2026-11-18 13:20:01","kernel":"7.1.0-sm7150-calls+","shell":"swmo","passed":44,"failed":0,"gaps":3,"skipped":6}
+{"id":"20261118-140813","device_id":"xiaomi-surya","run_at":"2026-11-18 14:08:13","kernel":"7.1.0-sm7150-calls+","shell":"swmo","passed":44,"failed":0,"gaps":3,"skipped":6}
+{"id":"20261118-142912","device_id":"xiaomi-surya","run_at":"2026-11-18 14:29:12","kernel":"7.1.0-sm7150-calls+","shell":"swmo","passed":44,"failed":0,"gaps":3,"skipped":6}
+{"id":"20261118-143021","device_id":"xiaomi-surya","run_at":"2026-11-18 14:30:21","kernel":"7.1.0-sm7150-calls+","shell":"swmo","passed":44,"failed":0,"gaps":3,"skipped":6}
+{"id":"20261118-174958","device_id":"xiaomi-surya","run_at":"2026-11-18 17:49:58","kernel":"7.1.0-sm7150-calls+","shell":"swmo","passed":44,"failed":0,"gaps":3,"skipped":6}
+{"id":"20261118-181312","device_id":"xiaomi-surya","run_at":"2026-11-18 18:13:12","kernel":"7.1.0-sm7150-pmicwdt+","shell":"swmo","passed":44,"failed":0,"gaps":3,"skipped":6}
+{"id":"20261118-181640","device_id":"xiaomi-surya","run_at":"2026-11-18 18:16:40","kernel":"7.1.0-sm7150-calls+","shell":"swmo","passed":44,"failed":0,"gaps":3,"skipped":6}
+{"id":"20261118-182313","device_id":"xiaomi-surya","run_at":"2026-11-18 18:23:13","kernel":"7.1.0-sm7150-pmicwdt+","shell":"swmo","passed":44,"failed":0,"gaps":3,"skipped":6}
+{"id":"20261118-182659","device_id":"xiaomi-surya","run_at":"2026-11-18 18:26:59","kernel":"7.1.0-sm7150-calls+","shell":"swmo","passed":44,"failed":0,"gaps":3,"skipped":6}
+{"id":"20261118-182911","device_id":"xiaomi-surya","run_at":"2026-11-18 18:29:11","kernel":"7.1.0-sm7150-calls+","shell":"swmo","passed":44,"failed":0,"gaps":3,"skipped":6}
