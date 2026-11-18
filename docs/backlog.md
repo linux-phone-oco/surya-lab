@@ -1067,31 +1067,6 @@ Needs
 : build
 
 
-<a id="sleep-fastrpc-helpers"></a>
-### FastRPC helpers stopped across suspend; the sensors back
-
-Status
-: open
-
-Note
-: 2026-11-18 keeper: stop/start around suspend measured 3/3 crash-free with sensors back (research 2026-11-18-sensorspd-stopped-no-adsp-crash). Left: same via sxmo/systemctl suspend, then done.
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-17
-
-Needs
-: phone
-
-Proof
-: motion-and-light
-
-Rank
-: 4
-
-
 <a id="floor-sh0-owner"></a>
 ### Find who holds the SH0 x=1,y=3 sleep vote and drop it
 
@@ -1542,3 +1517,30 @@ Needs
 
 Rank
 : 0
+
+
+<a id="sleep-fastrpc-helpers"></a>
+### FastRPC helpers stopped across suspend; the sensors back
+
+Status
+: open
+
+Note
+: 2026-11-18 keeper: stop/start around suspend measured 3/3 crash-free with sensors back (research 2026-11-18-sensorspd-stopped-no-adsp-crash). Left: same via sxmo/systemctl suspend, then done.
+
+2026-11-18 coordinator, next step: the phone vanished after the 3rd real suspend because sxmo autosleep ran rtcwake -m mem -s 99999999 (a ~3-year alarm) right after systemctl suspend - it slept, no crash proof (research 2026-11-18-unreachable-after-suspend-journal). Before any real suspend: stop sxmo autosleep, arm the fuse (watchdog stays armed through the suspend, way-back.sh), use a short RTC alarm (<=15 s). Then finish this item: the sensorspd restore across a real systemctl suspend (a delayed start; research 2026-11-18-systemctl-suspend-leaves-sensors-stopped) and prove sensors back after it. The author is at hand now (attended window).
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-17
+
+Needs
+: phone
+
+Proof
+: motion-and-light
+
+Rank
+: 4
