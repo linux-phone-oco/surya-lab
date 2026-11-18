@@ -1150,3 +1150,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-r4-scored"></a>
+### r4 scored: aborted partial, hang explained
+
+Entry date
+: 2026-11-18
+
+Done
+: Scored r4 from /var/tmp/standby-r4 (4 clean samples, median 120 mA, 63% asleep, aborted by irq 157 + Bluetooth SSR); read journalctl -b -1 for the hang (sxmo suspend loop with a stuck QCA Bluetooth SSR, rfkill D-state, journal ends 22:45:01); recorded research 2026-11-18-r4-aborted-partial-and-the-hang
+
+Considered
+: next: r4 is unscorable, so arm r5 with Bluetooth OFF in the cycle (rfkill block before, unblock after) or irq 157 handled; stop sxmo autosleep (sxmo_wm / rtcwake loop) during the run so a failed run cannot wedge the phone; needs the author's unplug
+
+About
+: deep-sleep

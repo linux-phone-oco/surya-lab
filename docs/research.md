@@ -846,3 +846,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-18-r4-aborted-partial-and-the-hang"></a>
+### 2026-11-18-r4-aborted-partial-and-the-hang
+
+Date
+: 2026-11-18
+
+Brief
+: r4 ABORTED (partial): 4 clean samples, median 120 mA, 63% asleep; irq 157 + Bluetooth SSR stopped it at 22:40:48, then sxmo's own suspend loop wedged the phone at ~22:45
+
+Question
+: Score r4 and find why surya hung after the run
+
+Found
+: r4 (log /var/tmp/standby-r4): USB gone 22:28:35Z (sensorspd stopped), settle 600 s, measure began mono 1319 s. Run stopped itself 22:40:48Z: Bluetooth failed (irq 157 'nobody cared' at 22:40:40 inside the 15 s cycle, hci0 cmd 0x0c01 timeout, controller crash). So the plan's 'no noirqdebug' did not stop irq 157 firing in a bt-on cycle. SCORE: aborted/partial, NOT scorable: only 4 post-settle samples (charger_online 0): current_now 125.9/114.1/60.0/142.4 mA, median 120, mean 111; gauge current_avg 29.4 mA; suspended 51 s of 81 s (63%) in the measure window, 442 s of ~702 s since USB left; instantaneous reads taken awake so biased high; vs 15/9 mA targets: unknown; Android reference not measured; sensorspd restore: never ran (run ended aborted; reboot restored it). HANG: after the stop, sxmo's own autosleep kept calling 'rtcwake -m mem -s 99999999' every 1-20 s while the QCA Bluetooth was in SSR/retry (setting up wcn399x, 'SSR or FW download time out', qca_suspend returned -110 at 22:41:05). Three 'rfkill' processes sat in D state on the misc_open mutex (26697, 26727, 26892; trace repeated every 21 s) until the journal ends at 22:45:01; no pstore, no panic, no hung-task panic: the phone wedged with the USB gadget gone, until the author's forced reboot at 23:56. Cause: a Bluetooth SSR stuck in hci_uart_qca holding the misc/rfkill path while sxmo kept suspending. Not shown: which exact lock holder; why USB died (journal shows no panic).
+
+About
+: deep-sleep
