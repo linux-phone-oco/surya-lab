@@ -2484,7 +2484,7 @@ Status
 : open
 
 Note
-: 2026-11-18: boot 19:12 (after a power cycle) had adsp running but no q6 audio modules and lpass-lpi pinctrl never bound; ADSP stop/start through remoteproc0 fixed it (log 2026-11-18-2035-adsp-audio-restart). Same class as surya-adsp-audio-after-suspend-loop. Next: read the first-boot ordering (adsp up vs pinctrl/glink), then a boot unit that restarts the ADSP when sound-card is missing.
+: 2026-11-18 20:45 keeper: devlab-audio-heal unit written, on the phone, card-present path run (ok); restart path unproven by the script; cause not read. Left open.
 
 About
 : audio-speaker
