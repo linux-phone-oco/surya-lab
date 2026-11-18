@@ -1,12 +1,12 @@
--- A piece of hardware this device's work needs - a cable, an adapter, a breakout, a meter, a setup made of them (a
+-- A piece of hardware the work needs - a cable, an adapter, a breakout, a meter, a setup made of them (a
 -- hardware of that id is replaced): what it is, whether this lab wants, has or lacks it, and whether it is CONFIRMED to
--- work on this phone or only claimed (a retailer's page, a blog). Facts go stale: give the day a price was quoted
+-- work on the machine or only claimed (a retailer's page, a blog). Facts go stale: give the day a price was quoted
 -- and the day the sources were read.
 -- --id          string        a-short-name
 -- --kind        string        cable, adapter, breakout, meter, tool, part or setup
 -- --name        string        what it is called, with the chip or conductors that tell variants apart
 -- --status      string = wanted  wanted, ordered, owned, lent, broken or retired (general: the docs catalogue only)
--- --fit         string?       claimed, confirmed or refuted - on THIS phone; confirmed needs --fit-ref
+-- --fit         string?       claimed, confirmed or refuted - on THIS machine; confirmed needs --fit-ref
 -- --fit-ref     string?       the evidence of the fit: a run id, a log, a link
 -- --spec        string?       one line: chip, logic level, connector
 -- --wiring      string?       pins, voltage, baud, orientation, the commands on the phone - what this phone needs
