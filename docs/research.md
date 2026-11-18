@@ -1045,3 +1045,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-18-real-suspend-try4-phone-did-not-return"></a>
+### 2026-11-18-real-suspend-try4-phone-did-not-return
+
+Date
+: 2026-11-18
+
+Brief
+: Try 4: real systemctl suspend, fuse 30 s armed, 15 s RTC alarm: the phone left USB and did not return in over an hour; the fuse did not reset it
+
+Question
+: Does a real systemctl suspend, with the watchdog armed and a 15 s alarm, return on its own and restore the sensors?
+
+Found
+: Run as transient unit sus-try (all of: way-back check ok; enable; devlab-usb-awake stopped, wake locks dropped, serial wakeup disabled, rtcwake -m no -s 15, way-back fuse 30, UDC soft_connect disconnect, systemctl suspend). The phone did not answer on any address nor appear on USB from ~11:46 to 12:49 (CET); no 30 s watchdog reset, no return. Sensors/ADSP not proven. Per the coordinator's rule it was not retried. Unknown: whether the fuse armed (the fuse ran just before the UDC disconnect; the unit's results in /var/tmp/sus-try could not be read) or whether the SoC wedged in a state where qcom_wdt does not bite. Next: an attended window - the author's power cycle, then read /var/tmp/sus-try/*, pstore, and last boot's journal.
+
+About
+: deep-sleep
