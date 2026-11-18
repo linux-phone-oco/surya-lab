@@ -1,0 +1,31 @@
+# tracer: nop
+#
+# entries-in-buffer/entries-written: 19/19   #P:8
+#
+#                                _-----=> irqs-off/BH-disabled
+#                               / _----=> need-resched
+#                              | / _---=> hardirq/softirq
+#                              || / _--=> preempt-depth
+#                              ||| / _-=> migrate-disable
+#                              |||| /     delay
+#           TASK-PID     CPU#  |||||  TIMESTAMP  FUNCTION
+#              | |         |   |||||     |         |
+         rtcwake-33271   [000] d.h1.  1980.545298: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-33271   [000] d.h1.  1980.545305: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-33271   [000] d.h1.  1980.545308: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-33271   [000] d.h..  1980.545312: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-33271   [000] d.h..  1980.545315: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-33271   [000] d.h..  1980.545318: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-33271   [000] d.h..  1980.545320: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-33271   [000] d.h..  1980.545323: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-33271   [000] d.h..  1980.545326: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         rtcwake-33271   [000] d.h..  1980.545328: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+   kworker/u32:2-69      [000] d.h..  1980.573746: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+    ModemManager-1372    [000] d.h..  1980.898731: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+     dbus-broker-760     [000] d.h..  1980.901726: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+           gdbus-33277   [000] d.h2.  1980.901925: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+           gdbus-33277   [000] d.h..  1980.902076: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+           gdbus-33277   [000] d.h..  1980.902215: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+     dbus-broker-760     [000] d.h..  1980.906878: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         systemd-1       [000] d.h..  1980.946916: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1982.930658: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0

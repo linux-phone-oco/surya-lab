@@ -1,0 +1,150 @@
+[ 1694.467108] hu 00000000e7669be6 want to wake up
+[ 1694.467147] hu 00000000e7669be6 wq awake rx
+[ 1694.467155] hu 00000000e7669be6 send hci ibs cmd 0xfc
+[ 1694.473149] PM: suspend exit
+[ 1694.512012] hu 00000000e7669be6 recv hci ibs cmd 0xfe
+[ 1694.512023] hu 00000000e7669be6 want to sleep in 1 state
+[ 1694.512033] hu 00000000e7669be6 rx clock vote off
+[ 1696.105546] wlan0: authenticate with e8:df:70:7a:0b:01 (local address=02:20:43:87:8d:c8)
+[ 1696.105592] wlan0: send auth to e8:df:70:7a:0b:01 (try 1/3)
+[ 1696.113485] wlan0: authenticated
+[ 1696.115371] wlan0: associate with e8:df:70:7a:0b:01 (try 1/3)
+[ 1696.121654] wlan0: RX AssocResp from e8:df:70:7a:0b:01 (capab=0x1431 status=0 aid=2)
+[ 1696.195877] wlan0: associated
+[ 1696.196402] wlan0: Limiting TX power to 20 (20 - 0) dBm as advertised by e8:df:70:7a:0b:01
+[ 1696.511729] hu 00000000e7669be6 idle timeout in 2 state
+[ 1696.511806] hu 00000000e7669be6 send hci ibs cmd 0xfe
+[ 1696.511904] hu 00000000e7669be6 tx clock vote off
+[ 1696.511930] Vote serial clock false(true)
+[ 1718.722872] way-back: cycle: sleep 15 s, fuse 30 s, bt-on
+[ 1721.829094] watchdog: watchdog0: watchdog did not stop!
+[ 1721.906210] PM: suspend entry (s2idle)
+[ 1721.923421] Filesystems sync: 0.017 seconds
+[ 1722.041622] Freezing user space processes
+[ 1722.044598] Freezing user space processes completed (elapsed 0.002 seconds)
+[ 1722.044625] OOM killer disabled.
+[ 1722.044634] Freezing remaining freezable tasks
+[ 1722.045951] Freezing remaining freezable tasks completed (elapsed 0.001 seconds)
+[ 1722.045974] printk: Suspending console(s) (use no_console_suspend to debug)
+[ 1722.054462] wlan0: deauthenticating from e8:df:70:7a:0b:01 by local choice (Reason: 3=DEAUTH_LEAVING)
+[ 1722.596238] dwc3-qcom-legacy a6f8800.usb: port-1 HS-PHY not in L2
+[ 1722.632227] qcom_geni_serial 88c000.serial: desired_rate = 102400000, clk_rate = 102400000, clk_div = 1, clk_idx = 10
+[ 1722.632943] qcom_geni_serial a88000.serial: desired_rate = 3686400, clk_rate = 7372800, clk_div = 2, clk_idx = 0
+[ 1722.634677] qcom_geni_serial a88000.serial: desired_rate = 3686400, clk_rate = 7372800, clk_div = 2, clk_idx = 0
+[ 1722.988672] OOM killer enabled.
+[ 1722.988690] Restarting tasks: Starting
+[ 1722.992527] Restarting tasks: Done
+[ 1722.992607] hu 00000000e7669be6 qca enq skb 00000000ee9b02df tx_ibs_state 0
+[ 1722.992621] Device asleep, waking up and queueing packet
+[ 1722.992685] hu 00000000e7669be6 wq awake device
+[ 1722.992692] Vote serial clock true(true)
+[ 1722.992699] hu 00000000e7669be6 send hci ibs cmd 0xfd
+[ 1722.995921] hu 00000000e7669be6 recv hci ibs cmd 0xfc
+[ 1722.995946] hu 00000000e7669be6 woke up
+[ 1722.996252] hu 00000000e7669be6 recv hci ibs cmd 0xfd
+[ 1722.996267] hu 00000000e7669be6 want to wake up
+[ 1722.996288] hu 00000000e7669be6 wq awake rx
+[ 1722.996293] hu 00000000e7669be6 send hci ibs cmd 0xfc
+[ 1723.001242] PM: suspend exit
+[ 1723.041101] hu 00000000e7669be6 recv hci ibs cmd 0xfe
+[ 1723.041112] hu 00000000e7669be6 want to sleep in 1 state
+[ 1723.041123] hu 00000000e7669be6 rx clock vote off
+[ 1724.628314] wlan0: authenticate with e8:df:70:7a:0b:01 (local address=02:20:43:87:8d:c8)
+[ 1724.628360] wlan0: send auth to e8:df:70:7a:0b:01 (try 1/3)
+[ 1724.639727] wlan0: authenticated
+[ 1724.643521] wlan0: associate with e8:df:70:7a:0b:01 (try 1/3)
+[ 1724.650067] wlan0: RX AssocResp from e8:df:70:7a:0b:01 (capab=0x1431 status=0 aid=2)
+[ 1724.723486] wlan0: associated
+[ 1724.723985] wlan0: Limiting TX power to 20 (20 - 0) dBm as advertised by e8:df:70:7a:0b:01
+[ 1725.054508] hu 00000000e7669be6 idle timeout in 2 state
+[ 1725.054528] hu 00000000e7669be6 send hci ibs cmd 0xfe
+[ 1725.054664] hu 00000000e7669be6 tx clock vote off
+[ 1725.054729] Vote serial clock false(true)
+[ 1741.341521] way-back: cycle: sleep 15 s, fuse 30 s, bt-on
+[ 1744.439945] watchdog: watchdog0: watchdog did not stop!
+[ 1744.488973] PM: suspend entry (s2idle)
+[ 1744.503620] Filesystems sync: 0.014 seconds
+[ 1744.622757] Freezing user space processes
+[ 1744.626485] Freezing user space processes completed (elapsed 0.003 seconds)
+[ 1744.626526] OOM killer disabled.
+[ 1744.626534] Freezing remaining freezable tasks
+[ 1744.628529] Freezing remaining freezable tasks completed (elapsed 0.001 seconds)
+[ 1744.628550] printk: Suspending console(s) (use no_console_suspend to debug)
+[ 1744.633853] wlan0: deauthenticating from e8:df:70:7a:0b:01 by local choice (Reason: 3=DEAUTH_LEAVING)
+[ 1746.652285] dwc3-qcom-legacy a6f8800.usb: port-1 HS-PHY not in L2
+[ 1746.683099] qcom_geni_serial 88c000.serial: desired_rate = 102400000, clk_rate = 102400000, clk_div = 1, clk_idx = 10
+[ 1746.683914] qcom_geni_serial a88000.serial: desired_rate = 3686400, clk_rate = 7372800, clk_div = 2, clk_idx = 0
+[ 1746.684602] qcom_geni_serial a88000.serial: desired_rate = 3686400, clk_rate = 7372800, clk_div = 2, clk_idx = 0
+[ 1747.027540] OOM killer enabled.
+[ 1747.027558] Restarting tasks: Starting
+[ 1747.031300] Restarting tasks: Done
+[ 1747.031452] hu 00000000e7669be6 qca enq skb 00000000e4457582 tx_ibs_state 0
+[ 1747.031461] Device asleep, waking up and queueing packet
+[ 1747.031484] hu 00000000e7669be6 wq awake device
+[ 1747.031490] Vote serial clock true(true)
+[ 1747.031493] hu 00000000e7669be6 send hci ibs cmd 0xfd
+[ 1747.035173] hu 00000000e7669be6 recv hci ibs cmd 0xfc
+[ 1747.035191] hu 00000000e7669be6 woke up
+[ 1747.035684] hu 00000000e7669be6 recv hci ibs cmd 0xfd
+[ 1747.035691] hu 00000000e7669be6 want to wake up
+[ 1747.035712] hu 00000000e7669be6 wq awake rx
+[ 1747.035718] hu 00000000e7669be6 send hci ibs cmd 0xfc
+[ 1747.040690] PM: suspend exit
+[ 1747.080604] hu 00000000e7669be6 recv hci ibs cmd 0xfe
+[ 1747.080629] hu 00000000e7669be6 want to sleep in 1 state
+[ 1747.080646] hu 00000000e7669be6 rx clock vote off
+[ 1748.679146] wlan0: authenticate with e8:df:70:7a:0b:01 (local address=02:20:43:87:8d:c8)
+[ 1748.679176] wlan0: send auth to e8:df:70:7a:0b:01 (try 1/3)
+[ 1748.683081] wlan0: authenticated
+[ 1748.684766] wlan0: associate with e8:df:70:7a:0b:01 (try 1/3)
+[ 1748.690597] wlan0: RX AssocResp from e8:df:70:7a:0b:01 (capab=0x1431 status=0 aid=2)
+[ 1748.764029] wlan0: associated
+[ 1748.764144] wlan0: Limiting TX power to 20 (20 - 0) dBm as advertised by e8:df:70:7a:0b:01
+[ 1749.047684] hu 00000000e7669be6 idle timeout in 2 state
+[ 1749.047713] hu 00000000e7669be6 send hci ibs cmd 0xfe
+[ 1749.047777] hu 00000000e7669be6 tx clock vote off
+[ 1749.047834] Vote serial clock false(true)
+[ 1765.426036] way-back: cycle: sleep 15 s, fuse 30 s, bt-on
+[ 1768.530836] watchdog: watchdog0: watchdog did not stop!
+[ 1768.626317] PM: suspend entry (s2idle)
+[ 1768.628400] Filesystems sync: 0.002 seconds
+[ 1768.745934] Freezing user space processes
+[ 1768.749207] Freezing user space processes completed (elapsed 0.003 seconds)
+[ 1768.749252] OOM killer disabled.
+[ 1768.749263] Freezing remaining freezable tasks
+[ 1768.751337] Freezing remaining freezable tasks completed (elapsed 0.002 seconds)
+[ 1768.751365] printk: Suspending console(s) (use no_console_suspend to debug)
+[ 1768.760703] wlan0: deauthenticating from e8:df:70:7a:0b:01 by local choice (Reason: 3=DEAUTH_LEAVING)
+[ 1770.288151] dwc3-qcom-legacy a6f8800.usb: port-1 HS-PHY not in L2
+[ 1770.321583] qcom_geni_serial 88c000.serial: desired_rate = 102400000, clk_rate = 102400000, clk_div = 1, clk_idx = 10
+[ 1770.322591] qcom_geni_serial a88000.serial: desired_rate = 3686400, clk_rate = 7372800, clk_div = 2, clk_idx = 0
+[ 1770.324153] qcom_geni_serial a88000.serial: desired_rate = 3686400, clk_rate = 7372800, clk_div = 2, clk_idx = 0
+[ 1770.667608] OOM killer enabled.
+[ 1770.667624] Restarting tasks: Starting
+[ 1770.670995] Restarting tasks: Done
+[ 1770.671186] hu 00000000e7669be6 qca enq skb 0000000041650248 tx_ibs_state 0
+[ 1770.671205] Device asleep, waking up and queueing packet
+[ 1770.671792] hu 00000000e7669be6 wq awake device
+[ 1770.671816] Vote serial clock true(true)
+[ 1770.671824] hu 00000000e7669be6 send hci ibs cmd 0xfd
+[ 1770.676152] hu 00000000e7669be6 recv hci ibs cmd 0xfc
+[ 1770.676183] hu 00000000e7669be6 woke up
+[ 1770.676493] hu 00000000e7669be6 recv hci ibs cmd 0xfd
+[ 1770.676510] hu 00000000e7669be6 want to wake up
+[ 1770.676531] hu 00000000e7669be6 wq awake rx
+[ 1770.676538] hu 00000000e7669be6 send hci ibs cmd 0xfc
+[ 1770.681507] PM: suspend exit
+[ 1770.721416] hu 00000000e7669be6 recv hci ibs cmd 0xfe
+[ 1770.721427] hu 00000000e7669be6 want to sleep in 1 state
+[ 1770.721437] hu 00000000e7669be6 rx clock vote off
+[ 1772.316464] wlan0: authenticate with e8:df:70:7a:0b:01 (local address=02:20:43:87:8d:c8)
+[ 1772.316504] wlan0: send auth to e8:df:70:7a:0b:01 (try 1/3)
+[ 1772.320024] wlan0: authenticated
+[ 1772.321132] wlan0: associate with e8:df:70:7a:0b:01 (try 1/3)
+[ 1772.327465] wlan0: RX AssocResp from e8:df:70:7a:0b:01 (capab=0x1431 status=0 aid=2)
+[ 1772.400093] wlan0: associated
+[ 1772.400220] wlan0: Limiting TX power to 20 (20 - 0) dBm as advertised by e8:df:70:7a:0b:01
+[ 1772.718127] hu 00000000e7669be6 idle timeout in 2 state
+[ 1772.718162] hu 00000000e7669be6 send hci ibs cmd 0xfe
+[ 1772.718374] hu 00000000e7669be6 tx clock vote off
+[ 1772.718462] Vote serial clock false(true)

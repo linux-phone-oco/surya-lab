@@ -1,0 +1,21 @@
+# tracer: nop
+#
+# entries-in-buffer/entries-written: 9/9   #P:8
+#
+#                                _-----=> irqs-off/BH-disabled
+#                               / _----=> need-resched
+#                              | / _---=> hardirq/softirq
+#                              || / _--=> preempt-depth
+#                              ||| / _-=> migrate-disable
+#                              |||| /     delay
+#           TASK-PID     CPU#  |||||  TIMESTAMP  FUNCTION
+#              | |         |   |||||     |         |
+          <idle>-0       [000] dNh1.  2027.182011: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+  wpa_supplicant-822     [000] d.h..  2027.542576: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+  wpa_supplicant-822     [000] d.h..  2027.545573: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+  wpa_supplicant-822     [000] d.h..  2027.545796: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+  wpa_supplicant-822     [000] dNh..  2027.545952: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+  wpa_supplicant-822     [000] d.h1.  2027.546098: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+  NetworkManager-801     [000] d.h..  2027.550759: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  2027.590796: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+     kworker/0:0-22023   [000] d.h1.  2029.602465: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0

@@ -1678,11 +1678,10 @@ Rank
 ### Bluetooth s2idle: 20x15 s and 3x120 s way-back cycles bt-on, wakeup ON, with hci_qca dyndbg and geni irq trace; read storm vs crash order
 
 Status
-: open
+: in-progress
 
 Note
-: Read-only on the phone apart from trace switches; watchdog armed, no unplug. Decision 2026-11-18-bt-suspend-way step 1.
-2026-11-18 coordinator (one roof, no new scripts): run these cycles through 'lpoco-health suspend plan|cycle' (lab-tools 0.4.1, installed), not a second cycle script. Read its --help: if it has no step to switch on hci_qca dyndbg and the geni irq trace around a cycle, record the missing hook as a surya-lab backlog item needs=build (a lab-tools build item for orchestration: pre/post hooks or a --trace option) and meanwhile use a STOPGAP shell wrapper (sleep/bt-trace.sh) recorded as a probe to remove (say so in its header and in the item). Watchdog armed, sxmo autosleep stopped, sensorspd stopped around the cycle, 15 s alarm; 3 x 120 s only if the fuse allows. Then run 20 x 15 s and record which comes first: the irq 157 storm or the controller crash. The author is at hand; no unplug.
+: 20x15 s done: no crash, storm in 1 of 20 (research 2026-11-18-bt-trace-20x15-no-crash); proof bt-no-irq-storm not passed; 3x120 s impossible under the 30 s fuse - needs a longer-fuse way-back
 
 About
 : deep-sleep
@@ -1698,3 +1697,22 @@ Proof
 
 Rank
 : 1
+
+
+<a id="lpoco-health-suspend-trace-hook"></a>
+### lpoco-health suspend cycle: pre/post hooks or a --trace option (dyndbg, irq trace) so probes need no wrapper
+
+Status
+: open
+
+Note
+: sleep/bt-trace.sh is the stopgap probe to remove once this exists
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: build

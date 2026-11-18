@@ -1,0 +1,29 @@
+# tracer: nop
+#
+# entries-in-buffer/entries-written: 17/17   #P:8
+#
+#                                _-----=> irqs-off/BH-disabled
+#                               / _----=> need-resched
+#                              | / _---=> hardirq/softirq
+#                              || / _--=> preempt-depth
+#                              ||| / _-=> migrate-disable
+#                              |||| /     delay
+#           TASK-PID     CPU#  |||||  TIMESTAMP  FUNCTION
+#              | |         |   |||||     |         |
+          <idle>-0       [000] d.h1.  2169.368525: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  2169.368535: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  2169.368541: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  2169.368547: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  2169.368551: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  2169.368556: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  2169.368561: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  2169.368567: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] dNh1.  2169.408615: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+  NetworkManager-801     [000] d.h..  2169.772437: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+            grep-37500   [000] d.h..  2169.775483: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+ devlab-call-upl-37498   [000] d.h1.  2169.775711: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+ devlab-call-upl-37498   [000] d.h1.  2169.775862: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+ devlab-call-upl-37498   [000] d.h1.  2169.775997: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+            grep-37508   [000] d.h..  2169.780669: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+ systemd-journal-489     [000] d.h..  2169.820696: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  2171.832468: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0

@@ -1,0 +1,24 @@
+# tracer: nop
+#
+# entries-in-buffer/entries-written: 12/12   #P:8
+#
+#                                _-----=> irqs-off/BH-disabled
+#                               / _----=> need-resched
+#                              | / _---=> hardirq/softirq
+#                              || / _--=> preempt-depth
+#                              ||| / _-=> migrate-disable
+#                              |||| /     delay
+#           TASK-PID     CPU#  |||||  TIMESTAMP  FUNCTION
+#              | |         |   |||||     |         |
+          <idle>-0       [000] d.h1.  1815.372360: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1815.372374: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1815.372379: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] dNh1.  1815.416437: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+ sxmo_run_aligne-1695    [000] d.h..  1815.763939: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+   sxmo_modem.sh-29939   [000] d.h..  1815.766983: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+   sxmo_modem.sh-29939   [000] d.h..  1815.767214: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+   sxmo_modem.sh-29939   [000] d.h..  1815.767365: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+   sxmo_modem.sh-29939   [000] d.h..  1815.767508: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+           gdbus-2039    [000] d.h..  1815.772185: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         systemd-1       [000] d.h..  1815.812224: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1817.798600: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0

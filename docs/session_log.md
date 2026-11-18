@@ -1315,3 +1315,18 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-18-0905-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-18
+
+Done
+: Ran bt-trace-cycles: 20 x 15 s bt-on s2idle cycles through stopgap sleep/bt-trace.sh, all clean, hci0 up, no crash; kept kernel 7.1.0-sm7150-calls+ unchanged, suite as before
+
+Considered
+: next: the author or research decides from the storm-without-crash finding; 3x120 s needs a longer fuse; remove sleep/bt-trace.sh when the lpoco-health hook lands

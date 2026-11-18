@@ -947,3 +947,25 @@ About
 
 Material
 : research/deep-sleep/2026-11-18/
+
+
+<a id="2026-11-18-bt-trace-20x15-no-crash"></a>
+### 2026-11-18-bt-trace-20x15-no-crash
+
+Date
+: 2026-11-18
+
+Brief
+: 20 x 15 s bt-on s2idle cycles with hci_qca dyndbg and irq 157 trace: no controller crash in any; irq 157 storm in 1 (443 events), bursts of 29-72 in 3 more
+
+Question
+: In bt-on s2idle cycles, which comes first: the irq 157 storm or the Bluetooth controller crash (decision 2026-11-18-bt-suspend-way step 1)?
+
+Found
+: 20 cycles of 15 s (way-back.sh cycle bt-on stop-sensors, fuse 30 s, sxmo autosleep stopped) through the stopgap sleep/bt-trace.sh: all 20 returned rc 0 with hci0 present. irq 157 (qcom_geni_serial_uart0) entries per cycle: 9-13 in 14 cycles (normal wake exchange), 17-19 in two, 29/48/72 in three, 443 in cycle 10; none saw SSR, 'nobody cared' or a crash, hci0 up. With sensorspd stopped the storm is intermittent and led to no crash here, so there is no crash to order against it. Not done: 3 x 120 s (the fuse is 30 s; way-back.sh allows 15 s at most). Suite after: unchanged. Probe to remove: sleep/bt-trace.sh.
+
+About
+: deep-sleep
+
+Material
+: research/deep-sleep/2026-11-18-bt-trace-20x15/

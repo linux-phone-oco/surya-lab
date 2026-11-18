@@ -1,0 +1,21 @@
+# tracer: nop
+#
+# entries-in-buffer/entries-written: 9/9   #P:8
+#
+#                                _-----=> irqs-off/BH-disabled
+#                               / _----=> need-resched
+#                              | / _---=> hardirq/softirq
+#                              || / _--=> preempt-depth
+#                              ||| / _-=> migrate-disable
+#                              |||| /     delay
+#           TASK-PID     CPU#  |||||  TIMESTAMP  FUNCTION
+#              | |         |   |||||     |         |
+          <idle>-0       [000] dNh1.  1884.584660: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         sugov:6-96      [000] d.h..  1884.951076: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         lslocks-31425   [000] d.h..  1884.954086: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         lslocks-31425   [000] d.h..  1884.954312: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         lslocks-31425   [000] d.h..  1884.954461: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         lslocks-31425   [000] d.h..  1884.954596: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+         lslocks-31425   [000] d.h..  1884.959363: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1884.999398: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
+          <idle>-0       [000] d.h1.  1886.975516: irq_handler_entry: irq=157 name=qcom_geni_serial_uart0
