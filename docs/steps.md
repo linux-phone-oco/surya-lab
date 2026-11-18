@@ -245,30 +245,6 @@ Updated
 ### Row 17
 
 Step
-: pd-mapper-before-remoteproc
-
-Status
-: failing
-
-Proof
-: sound-card
-
-Run
-: 20261118-191339
-
-Proven on
-: 7.1.0-sm7150-calls+
-
-Notes
-: suite run 20261118-191339: sound-card=fail
-
-Updated
-: 2026-11-18
-
-
-### Row 18
-
-Step
 : panel-lit
 
 Status
@@ -290,7 +266,7 @@ Updated
 : 2026-11-18
 
 
-### Row 19
+### Row 18
 
 Step
 : camera-bus-bound
@@ -305,7 +281,7 @@ Updated
 : 2026-11-18
 
 
-### Row 20
+### Row 19
 
 Step
 : banner-on-console
@@ -320,7 +296,7 @@ Updated
 : 2026-11-18
 
 
-### Row 21
+### Row 20
 
 Step
 : usb-network
@@ -335,7 +311,7 @@ Updated
 : 2026-11-18
 
 
-### Row 22
+### Row 21
 
 Step
 : remoteprocs-running
@@ -359,7 +335,7 @@ Updated
 : 2026-11-18
 
 
-### Row 23
+### Row 22
 
 Step
 : touch-input
@@ -383,7 +359,7 @@ Updated
 : 2026-11-18
 
 
-### Row 24
+### Row 23
 
 Step
 : gpu-renders
@@ -398,7 +374,7 @@ Updated
 : 2026-11-18
 
 
-### Row 25
+### Row 24
 
 Step
 : bt-controller-up
@@ -422,31 +398,7 @@ Updated
 : 2026-11-18
 
 
-### Row 26
-
-Step
-: image-sensor-identified
-
-Status
-: failing
-
-Proof
-: image-sensor
-
-Run
-: 20261118-191339
-
-Proven on
-: 7.1.0-sm7150-calls+
-
-Notes
-: suite run 20261118-191339: image-sensor=fail
-
-Updated
-: 2026-11-18
-
-
-### Row 27
+### Row 25
 
 Step
 : shell-on-console
@@ -461,7 +413,7 @@ Updated
 : 2026-11-18
 
 
-### Row 28
+### Row 26
 
 Step
 : lab-link-held-awake
@@ -485,31 +437,7 @@ Updated
 : 2026-11-18
 
 
-### Row 29
-
-Step
-: audio-codec-attached
-
-Status
-: failing
-
-Proof
-: sound-card,mic-records
-
-Run
-: 20261118-191339
-
-Proven on
-: 7.1.0-sm7150-calls+
-
-Notes
-: suite run 20261118-191339: sound-card=fail mic-records=fail
-
-Updated
-: 2026-11-18
-
-
-### Row 30
+### Row 27
 
 Step
 : wifi-joins
@@ -533,7 +461,7 @@ Updated
 : 2026-11-18
 
 
-### Row 31
+### Row 28
 
 Step
 : raw-frame-captured
@@ -548,7 +476,7 @@ Updated
 : 2026-11-18
 
 
-### Row 32
+### Row 29
 
 Step
 : first-dmesg-mapped
@@ -563,7 +491,7 @@ Updated
 : 2026-11-18
 
 
-### Row 33
+### Row 30
 
 Step
 : shell-autosleep-tamed
@@ -578,31 +506,7 @@ Updated
 : 2026-11-18
 
 
-### Row 34
-
-Step
-: sound-card-registered
-
-Status
-: failing
-
-Proof
-: sound-card
-
-Run
-: 20261118-191339
-
-Proven on
-: 7.1.0-sm7150-calls+
-
-Notes
-: suite run 20261118-191339: sound-card=fail
-
-Updated
-: 2026-11-18
-
-
-### Row 35
+### Row 31
 
 Step
 : camera-stream-viewable
@@ -617,7 +521,7 @@ Updated
 : 2026-11-18
 
 
-### Row 36
+### Row 32
 
 Step
 : dmesg-clean
@@ -632,7 +536,7 @@ Updated
 : 2026-11-18
 
 
-### Row 37
+### Row 33
 
 Step
 : pmic-bound
@@ -647,7 +551,7 @@ Updated
 : 2026-11-18
 
 
-### Row 38
+### Row 34
 
 Step
 : speaker-amps-fed
@@ -671,31 +575,7 @@ Updated
 : 2026-11-18
 
 
-### Row 39
-
-Step
-: mic-captures
-
-Status
-: failing
-
-Proof
-: mic-records
-
-Run
-: 20261118-191339
-
-Proven on
-: 7.1.0-sm7150-calls+
-
-Notes
-: suite run 20261118-191339: mic-records=fail
-
-Updated
-: 2026-11-18
-
-
-### Row 40
+### Row 35
 
 Step
 : focus-and-flash
@@ -710,7 +590,7 @@ Updated
 : 2026-11-18
 
 
-### Row 41
+### Row 36
 
 Step
 : charger-online
@@ -725,7 +605,7 @@ Updated
 : 2026-11-18
 
 
-### Row 42
+### Row 37
 
 Step
 : watchdog-way-back
@@ -740,7 +620,7 @@ Updated
 : 2026-11-18
 
 
-### Row 43
+### Row 38
 
 Step
 : battery-gauge-reads
@@ -755,7 +635,7 @@ Updated
 : 2026-11-18
 
 
-### Row 44
+### Row 39
 
 Step
 : pon-reason-read
@@ -770,7 +650,7 @@ Updated
 : 2026-11-18
 
 
-### Row 45
+### Row 40
 
 Step
 : storage-readonly
@@ -785,7 +665,7 @@ Updated
 : 2026-11-18
 
 
-### Row 46
+### Row 41
 
 Step
 : reset-types-right
@@ -800,7 +680,7 @@ Updated
 : 2026-11-18
 
 
-### Row 47
+### Row 42
 
 Step
 : reset-state-survives
@@ -815,7 +695,7 @@ Updated
 : 2026-11-18
 
 
-### Row 48
+### Row 43
 
 Step
 : key-reset-recovers
@@ -830,7 +710,7 @@ Updated
 : 2026-11-18
 
 
-### Row 49
+### Row 44
 
 Step
 : rootfs-boots
@@ -845,7 +725,7 @@ Updated
 : 2026-11-18
 
 
-### Row 50
+### Row 45
 
 Step
 : suspend-way-back
@@ -860,7 +740,7 @@ Updated
 : 2026-11-18
 
 
-### Row 51
+### Row 46
 
 Step
 : power-off-stays-off
@@ -875,7 +755,7 @@ Updated
 : 2026-11-18
 
 
-### Row 52
+### Row 47
 
 Step
 : thermal-zones-sane
@@ -890,7 +770,7 @@ Updated
 : 2026-11-18
 
 
-### Row 53
+### Row 48
 
 Step
 : health-suite-runs
@@ -905,7 +785,7 @@ Updated
 : 2026-11-18
 
 
-### Row 54
+### Row 49
 
 Step
 : fastrpc-helpers-stable
@@ -929,7 +809,7 @@ Updated
 : 2026-11-18
 
 
-### Row 55
+### Row 50
 
 Step
 : buttons-report
@@ -944,7 +824,7 @@ Updated
 : 2026-11-18
 
 
-### Row 56
+### Row 51
 
 Step
 : haptics-buzz
@@ -968,31 +848,7 @@ Updated
 : 2026-11-18
 
 
-### Row 57
-
-Step
-: ucm-hifi-profile
-
-Status
-: failing
-
-Proof
-: default-output,speaker-stereo
-
-Run
-: 20261118-191339
-
-Proven on
-: 7.1.0-sm7150-calls+
-
-Notes
-: suite run 20261118-191339: default-output=fail speaker-stereo=fail
-
-Updated
-: 2026-11-18
-
-
-### Row 58
+### Row 52
 
 Step
 : modem-file-services
@@ -1016,7 +872,7 @@ Updated
 : 2026-11-18
 
 
-### Row 59
+### Row 53
 
 Step
 : nfc-reads-tag
@@ -1031,7 +887,7 @@ Updated
 : 2026-11-18
 
 
-### Row 60
+### Row 54
 
 Step
 : usb-host-works
@@ -1055,7 +911,7 @@ Updated
 : 2026-11-18
 
 
-### Row 61
+### Row 55
 
 Step
 : s2idle-cycle-returns
@@ -1070,7 +926,7 @@ Updated
 : 2026-11-18
 
 
-### Row 62
+### Row 56
 
 Step
 : charger-mode-entered
@@ -1085,7 +941,7 @@ Updated
 : 2026-11-18
 
 
-### Row 63
+### Row 57
 
 Step
 : rtc-alarm-powers-on
@@ -1100,7 +956,7 @@ Updated
 : 2026-11-18
 
 
-### Row 64
+### Row 58
 
 Step
 : speaker-heard
@@ -1115,55 +971,7 @@ Updated
 : 2026-11-18
 
 
-### Row 65
-
-Step
-: earpiece-plays
-
-Status
-: failing
-
-Proof
-: earpiece-heard
-
-Run
-: 20261118-191339
-
-Proven on
-: 7.1.0-sm7150-calls+
-
-Notes
-: suite run 20261118-191339: earpiece-heard=fail
-
-Updated
-: 2026-11-18
-
-
-### Row 66
-
-Step
-: headset-jack
-
-Status
-: failing
-
-Proof
-: jack-detector,headset-loop
-
-Run
-: 20261118-191339
-
-Proven on
-: 7.1.0-sm7150-calls+
-
-Notes
-: suite run 20261118-191339: headset-loop=- jack-detector=fail
-
-Updated
-: 2026-11-18
-
-
-### Row 67
+### Row 59
 
 Step
 : modem-seen
@@ -1187,7 +995,7 @@ Updated
 : 2026-11-18
 
 
-### Row 68
+### Row 60
 
 Step
 : bt-pairs-carries-audio
@@ -1202,7 +1010,7 @@ Updated
 : 2026-11-18
 
 
-### Row 69
+### Row 61
 
 Step
 : sensor-hub-stable
@@ -1226,7 +1034,7 @@ Updated
 : 2026-11-18
 
 
-### Row 70
+### Row 62
 
 Step
 : suspend-wakes-quiet
@@ -1250,7 +1058,7 @@ Updated
 : 2026-11-18
 
 
-### Row 71
+### Row 63
 
 Step
 : radios-survive-suspend
@@ -1265,7 +1073,7 @@ Updated
 : 2026-11-18
 
 
-### Row 72
+### Row 64
 
 Step
 : shell-runs-with-hardware
@@ -1280,7 +1088,7 @@ Updated
 : 2026-11-18
 
 
-### Row 73
+### Row 65
 
 Step
 : update-applies
@@ -1295,7 +1103,7 @@ Updated
 : 2026-11-18
 
 
-### Row 74
+### Row 66
 
 Step
 : kernel-upgrade-keeps-steps
@@ -1310,7 +1118,7 @@ Updated
 : 2026-11-18
 
 
-### Row 75
+### Row 67
 
 Step
 : linux-runs
@@ -1325,7 +1133,7 @@ Updated
 : 2026-11-18
 
 
-### Row 76
+### Row 68
 
 Step
 : off-mode-charging
@@ -1340,31 +1148,7 @@ Updated
 : 2026-11-18
 
 
-### Row 77
-
-Step
-: mic-hears-speaker
-
-Status
-: failing
-
-Proof
-: mic-hears-speaker,mic-top-hears-speaker
-
-Run
-: 20261118-191339
-
-Proven on
-: 7.1.0-sm7150-calls+
-
-Notes
-: suite run 20261118-191339: mic-top-hears-speaker=- mic-hears-speaker=fail
-
-Updated
-: 2026-11-18
-
-
-### Row 78
+### Row 69
 
 Step
 : sim-ready
@@ -1379,7 +1163,7 @@ Updated
 : 2026-11-18
 
 
-### Row 79
+### Row 70
 
 Step
 : emergency-numbers-known
@@ -1394,31 +1178,7 @@ Updated
 : 2026-11-18
 
 
-### Row 80
-
-Step
-: sensors-exposed
-
-Status
-: failing
-
-Proof
-: motion-and-light
-
-Run
-: 20261118-191339
-
-Proven on
-: 7.1.0-sm7150-calls+
-
-Notes
-: suite run 20261118-191339: motion-and-light=fail
-
-Updated
-: 2026-11-18
-
-
-### Row 81
+### Row 71
 
 Step
 : gnss-fix
@@ -1433,7 +1193,7 @@ Updated
 : 2026-11-18
 
 
-### Row 82
+### Row 72
 
 Step
 : fingerprint-unlocks
@@ -1448,7 +1208,7 @@ Updated
 : 2026-11-18
 
 
-### Row 83
+### Row 73
 
 Step
 : photo-taken
@@ -1463,7 +1223,7 @@ Updated
 : 2026-11-18
 
 
-### Row 84
+### Row 74
 
 Step
 : soc-floor-reached
@@ -1487,7 +1247,7 @@ Updated
 : 2026-11-18
 
 
-### Row 85
+### Row 75
 
 Step
 : on-screen-keyboard
@@ -1502,7 +1262,7 @@ Updated
 : 2026-11-18
 
 
-### Row 86
+### Row 76
 
 Step
 : lock-and-unlock
@@ -1517,7 +1277,7 @@ Updated
 : 2026-11-18
 
 
-### Row 87
+### Row 77
 
 Step
 : update-rolls-back
@@ -1532,7 +1292,7 @@ Updated
 : 2026-11-18
 
 
-### Row 88
+### Row 78
 
 Step
 : modem-registered
@@ -1556,31 +1316,7 @@ Updated
 : 2026-11-18
 
 
-### Row 89
-
-Step
-: proximity-reads
-
-Status
-: failing
-
-Proof
-: proximity-reads
-
-Run
-: 20261118-191339
-
-Proven on
-: 7.1.0-sm7150-calls+
-
-Notes
-: suite run 20261118-191339: proximity-reads=fail
-
-Updated
-: 2026-11-18
-
-
-### Row 90
+### Row 79
 
 Step
 : auto-rotate-follows
@@ -1595,7 +1331,7 @@ Updated
 : 2026-11-18
 
 
-### Row 91
+### Row 80
 
 Step
 : brightness-follows-light
@@ -1610,7 +1346,7 @@ Updated
 : 2026-11-18
 
 
-### Row 92
+### Row 81
 
 Step
 : video-recorded
@@ -1625,7 +1361,7 @@ Updated
 : 2026-11-18
 
 
-### Row 93
+### Row 82
 
 Step
 : sensors-across-suspend
@@ -1640,7 +1376,7 @@ Updated
 : 2026-11-18
 
 
-### Row 94
+### Row 83
 
 Step
 : sms-both-ways
@@ -1664,7 +1400,7 @@ Updated
 : 2026-11-18
 
 
-### Row 95
+### Row 84
 
 Step
 : mobile-data
@@ -1688,31 +1424,7 @@ Updated
 : 2026-11-18
 
 
-### Row 96
-
-Step
-: call-audio-path
-
-Status
-: failing
-
-Proof
-: call-audio-path
-
-Run
-: 20261118-191339
-
-Proven on
-: 7.1.0-sm7150-calls+
-
-Notes
-: suite run 20261118-191339: call-audio-path=fail
-
-Updated
-: 2026-11-18
-
-
-### Row 97
+### Row 85
 
 Step
 : resume-without-stall
@@ -1727,7 +1439,7 @@ Updated
 : 2026-11-18
 
 
-### Row 98
+### Row 86
 
 Step
 : coprocessor-restart-recovers
@@ -1742,7 +1454,7 @@ Updated
 : 2026-11-18
 
 
-### Row 99
+### Row 87
 
 Step
 : mms-both-ways
@@ -1757,7 +1469,7 @@ Updated
 : 2026-11-18
 
 
-### Row 100
+### Row 88
 
 Step
 : voice-call-both-ways
@@ -1781,7 +1493,7 @@ Updated
 : 2026-11-18
 
 
-### Row 101
+### Row 89
 
 Step
 : hotspot-shares-data
@@ -1796,7 +1508,7 @@ Updated
 : 2026-11-18
 
 
-### Row 102
+### Row 90
 
 Step
 : real-suspend-under-shell
@@ -1811,7 +1523,7 @@ Updated
 : 2026-11-18
 
 
-### Row 103
+### Row 91
 
 Step
 : notifications-arrive
@@ -1826,7 +1538,7 @@ Updated
 : 2026-11-18
 
 
-### Row 104
+### Row 92
 
 Step
 : cycles-repeat-clean
@@ -1841,7 +1553,7 @@ Updated
 : 2026-11-18
 
 
-### Row 105
+### Row 93
 
 Step
 : proximity-blanks-in-call
@@ -1856,7 +1568,7 @@ Updated
 : 2026-11-18
 
 
-### Row 106
+### Row 94
 
 Step
 : volte-call
@@ -1871,7 +1583,7 @@ Updated
 : 2026-11-18
 
 
-### Row 107
+### Row 95
 
 Step
 : call-wakes-from-sleep
@@ -1886,7 +1598,7 @@ Updated
 : 2026-11-18
 
 
-### Row 108
+### Row 96
 
 Step
 : standby-current
@@ -1901,7 +1613,7 @@ Updated
 : 2026-11-18
 
 
-### Row 109
+### Row 97
 
 Step
 : alarm-wakes-from-sleep
@@ -1916,7 +1628,7 @@ Updated
 : 2026-11-18
 
 
-### Row 110
+### Row 98
 
 Step
 : all-day-battery
@@ -1931,7 +1643,7 @@ Updated
 : 2026-11-18
 
 
-### Row 111
+### Row 99
 
 Step
 : days-without-reboot
@@ -1946,7 +1658,7 @@ Updated
 : 2026-11-18
 
 
-### Row 112
+### Row 100
 
 Step
 : daily-usable-phone
@@ -1961,7 +1673,7 @@ Updated
 : 2026-11-18
 
 
-### Row 113
+### Row 101
 
 Step
 : complete-phone
@@ -1971,6 +1683,294 @@ Status
 
 Notes
 : no suite result for its proof in this base's runs; nobody checked
+
+Updated
+: 2026-11-18
+
+
+### Row 102
+
+Step
+: pd-mapper-before-remoteproc
+
+Status
+: done
+
+Proof
+: sound-card
+
+Run
+: 20261118-202945
+
+Proven on
+: 7.1.0-sm7150-calls+
+
+Notes
+: suite run 20261118-202945: sound-card=pass (the 19:13 run failed on a boot whose ADSP came up without its audio services; see log 2026-11-18-2035-adsp-audio-restart)
+
+Updated
+: 2026-11-18
+
+
+### Row 103
+
+Step
+: audio-codec-attached
+
+Status
+: done
+
+Proof
+: sound-card,mic-records
+
+Run
+: 20261118-202945
+
+Proven on
+: 7.1.0-sm7150-calls+
+
+Notes
+: suite run 20261118-202945: sound-card=pass mic-records=pass
+
+Updated
+: 2026-11-18
+
+
+### Row 104
+
+Step
+: sound-card-registered
+
+Status
+: done
+
+Proof
+: sound-card
+
+Run
+: 20261118-202945
+
+Proven on
+: 7.1.0-sm7150-calls+
+
+Notes
+: suite run 20261118-202945: sound-card=pass, 2 cards
+
+Updated
+: 2026-11-18
+
+
+### Row 105
+
+Step
+: mic-captures
+
+Status
+: done
+
+Proof
+: mic-records
+
+Run
+: 20261118-202945
+
+Proven on
+: 7.1.0-sm7150-calls+
+
+Notes
+: suite run 20261118-202945: mic-records=pass
+
+Updated
+: 2026-11-18
+
+
+### Row 106
+
+Step
+: ucm-hifi-profile
+
+Status
+: done
+
+Proof
+: default-output,speaker-stereo
+
+Run
+: 20261118-202945
+
+Proven on
+: 7.1.0-sm7150-calls+
+
+Notes
+: suite run 20261118-202945: default-output=pass speaker-stereo=pass
+
+Updated
+: 2026-11-18
+
+
+### Row 107
+
+Step
+: earpiece-plays
+
+Status
+: partial
+
+Proof
+: earpiece-heard
+
+Run
+: 20261118-202945
+
+Proven on
+: 7.1.0-sm7150-calls+
+
+Notes
+: suite run 20261118-202945: earpiece-heard=pass (played: yes); heard by a person is a witnessed test, not claimed
+
+Updated
+: 2026-11-18
+
+
+### Row 108
+
+Step
+: headset-jack
+
+Status
+: partial
+
+Proof
+: jack-detector
+
+Run
+: 20261118-202945
+
+Proven on
+: 7.1.0-sm7150-calls+
+
+Notes
+: suite run 20261118-202945: jack-detector=pass; headset-loop not measured (witnessed)
+
+Updated
+: 2026-11-18
+
+
+### Row 109
+
+Step
+: mic-hears-speaker
+
+Status
+: done
+
+Proof
+: mic-hears-speaker,mic-top-hears-speaker
+
+Run
+: 20261118-202945
+
+Proven on
+: 7.1.0-sm7150-calls+
+
+Notes
+: suite run 20261118-202945: both pass
+
+Updated
+: 2026-11-18
+
+
+### Row 110
+
+Step
+: sensors-exposed
+
+Status
+: done
+
+Proof
+: motion-and-light
+
+Run
+: 20261118-202945
+
+Proven on
+: 7.1.0-sm7150-calls+
+
+Notes
+: suite run 20261118-202945: motion-and-light=pass
+
+Updated
+: 2026-11-18
+
+
+### Row 111
+
+Step
+: proximity-reads
+
+Status
+: done
+
+Proof
+: proximity-reads
+
+Run
+: 20261118-202945
+
+Proven on
+: 7.1.0-sm7150-calls+
+
+Notes
+: suite run 20261118-202945: proximity-reads=pass
+
+Updated
+: 2026-11-18
+
+
+### Row 112
+
+Step
+: call-audio-path
+
+Status
+: done
+
+Proof
+: call-audio-path
+
+Run
+: 20261118-202945
+
+Proven on
+: 7.1.0-sm7150-calls+
+
+Notes
+: suite run 20261118-202945: call-audio-path=pass
+
+Updated
+: 2026-11-18
+
+
+### Row 113
+
+Step
+: image-sensor-identified
+
+Status
+: failing
+
+Proof
+: image-sensor
+
+Run
+: 20261118-202945
+
+Proven on
+: 7.1.0-sm7150-calls+
+
+Notes
+: suite run 20261118-202945: image-sensor=fail (0 sensors bound): a real gap on this kernel, not a stale run
 
 Updated
 : 2026-11-18
