@@ -65,7 +65,7 @@ while :; do
 	if [ "$rc" != 0 ]; then fails=$((fails + 1)); sleep 5; [ "$fails" -ge 10 ] && { echo "stopped: 10 failed cycles" > "$d/STOPPED"; break; }; fi
 	sleep 2
 done
-printf V > /dev/watchdog0 2>/dev/null; echo 0 > /sys/module/qcom_wdt/parameters/keep_armed_in_suspend 2>/dev/null
+sh /var/tmp/way-back.sh defuse >/dev/null 2>&1; echo 0 > /sys/module/qcom_wdt/parameters/keep_armed_in_suspend 2>/dev/null
 if grep -q "Bluetooth failed" "$d/STOPPED" 2>/dev/null; then
 	# decision 2026-11-17-r4-quiets-irq-157-and-stops-bluetooth-retries: no QCA retry loop left behind
 	systemctl stop bluetooth.service 2>/dev/null; rfkill block bluetooth; echo "bluetooth stopped and blocked at $(date -u +%FT%TZ)" >> "$d/STOPPED"

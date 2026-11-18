@@ -2431,12 +2431,10 @@ Rank
 ### way-back.sh picks the APSS watchdog by identity, not /dev/watchdog0
 
 Status
-: open
+: done
 
 Note
-: From the upstreams lane: sleep/way-back.sh line 30 hardcodes wd=/dev/watchdog0 as the APSS fuse. On kernel pmicwdt+ the PMIC watchdog (identity 'QCOM PM8916 PON WDT') is watchdog0 and qcom_wdt is watchdog1, so 'way-back.sh fuse' would arm the device under test and leave no second way back. Fix: choose the node by /sys/class/watchdog/*/identity (qcom_wdt = the one that is NOT 'QCOM PM8916 PON WDT'; refuse with a clear message if none), in way-back.sh and anything else that opens /dev/watchdog0 (lpoco-health suspend guard, standby-run.sh, the sysctl way back); a test for it. The class (a name that shifts when a driver is added): any device node taken by number, look for others. Do it after the PMIC bite; repo + one dry run (fuse arms the APSS node, nothing suspended).
-
-Also (the author, 2026-11-18): in sleep/way-back.sh mark the bite-related rule as a comment 'WORKAROUND(kept-kernel-with-pmic-wdt): after a PMIC bite boot a kernel carrying pm8916_wdt' wherever the script or its header states it, so scripts/workarounds finds it.
+: repo + dry run: way-back.sh picks qcom_wdt by parent 17c10000.watchdog (never an identity of PM8916), standby-run.sh defuses through it, health check way-back-apss-watchdog-by-identity; on kernel calls+ fuse 10 armed watchdog0 and defuse stopped it, seen; not yet run on pmicwdt+ (where the numbers swap)
 
 About
 : deep-sleep
