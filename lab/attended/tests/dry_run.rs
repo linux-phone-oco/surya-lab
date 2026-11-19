@@ -70,7 +70,7 @@ fn the_calls_plus_part_holds_no_bite_no_wake_in_suspend_and_no_unplug() {
         "the pon reason is read",
         "the step checks hold",
         "the standby script is reachable as root",
-        "end on a healthy kernel",
+        "end on the kept kernel",
     ];
     let mut at = 0;
     for s in order {
@@ -85,6 +85,7 @@ fn the_calls_plus_part_holds_no_bite_no_wake_in_suspend_and_no_unplug() {
         "wake in suspend",
         "unplug",
         "standby current",
+        "end on a healthy kernel",
     ] {
         assert!(
             !text.contains(s),
