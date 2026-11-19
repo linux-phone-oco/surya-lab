@@ -1533,3 +1533,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-19-calls4-boot-nothing-arms-pmic-wdt"></a>
+### 2026-11-19-calls4-boot-nothing-arms-pmic-wdt
+
+Date
+: 2026-11-19
+
+Brief
+: Booting calls4 arms nothing: pm8916_wdt is watchdog1, PON S2_CTL2 (0x857) stays 00; calls+ back healthy
+
+Question
+: Is booting calls4 risky by itself: does anything arm the PMIC watchdog?
+
+Found
+: On calls+: no systemd watchdog config, no holder of /dev/watchdog*, 0x857=00. One-shot try of calls4 (64 s): pm8916_wdt registered as watchdog1 (qcom_wdt stays watchdog0; way-back picks by identity), 0x857 still 00, way-back check ok; one bt-no-controller-crash fail (1 line). Return by lpoco lab phone reboot: calls+ healthy, suite 20261119-135028 (86 pass, 0 fail).
+
+About
+: deep-sleep
