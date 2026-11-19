@@ -2953,3 +2953,21 @@ Rejected
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-1810-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: unattended scheduled run: phone untouched, kept 7.1.0-sm7150-calls+, suite 20261119-152121 healthy (skips: no SIM). Go window open to 19:23 on surya-kernel-pmic-wdt, but no one confirmed at the phone; attended-session dry run passes 19 steps (step 3 boots a kernel before the first ask, so not run unattended)
+
+Considered
+: next: surya-kernel-pmic-wdt when the Top Coordinator relays that the author is at the phone within the go window
+
+About
+: deep-sleep
