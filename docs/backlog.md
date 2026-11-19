@@ -3097,10 +3097,10 @@ Rank
 ### Is booting calls4 risky by itself? Check what arms the PMIC watchdog; if nothing, run the boot, read-probe and return to calls+ unattended
 
 Status
-: open
+: done
 
 Note
-: Top Coordinator's question 2026-11-19. Driver (8b2283da3): pm8916_wdt probe sets WDOG_HW_RUNNING only if S2 is ALREADY enabled (bootloader or an earlier bite left it), else it does not start; it starts only when something opens its /dev/watchdogN. So read on the phone (calls+, read-only): systemd RuntimeWatchdogSec / WatchdogDevice / ShutdownWatchdogSec in /etc/systemd (system.conf.d), anything holding /dev/watchdog* open (fuser/lsof), and WHICH index calls4's pm8916_wdt would take versus the qcom_wdt that way-back.sh's fuse uses (by identity 17c10000.watchdog). Also PON S2_CTL2 now (0x857; is S2 enabled at boot after a clean boot? the last bite was long ago and S2 stays enabled across a restart - read it on calls+ first). Decide, record: if NOTHING arms it and S2 is clear, then run (way back armed, one boot-counted one-shot try of calls4): boot, read_probe (driver registered, timeout, S2 not running), way_back_in_place, and a clean return to calls+ by boot counting; the try falls back by itself. If S2 is already set, or systemd would open it: STOP, record why, and leave the boot for the attended run (a hang then loops on calls+). If the try does not come back in 10 minutes, do NOT hold, retry or power-cycle: park and tell the surya coordinator (a power-off from eOS recovery is the author's). Use phone root for root-owned files.
+: proven by unattended try 2026-11-19: calls4 booted in 64 s, read-probe ok (watchdog1 = pm8916_wdt, S2 clear), returned to calls+, suite 20261119-135028 healthy
 
 About
 : deep-sleep

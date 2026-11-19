@@ -2668,3 +2668,18 @@ Rejected
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-1355-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: runs kept kernel 7.1.0-sm7150-calls+, suite 20261119-135028 healthy (86 pass, 0 fail); took surya-attended-calls4-boot-unattended and finished it: calls4 boots without arming the PMIC watchdog
+
+Considered
+: next: surya-kernel-pmic-wdt attended window still needs the author's go; the other ready items need a suspend or a witness
