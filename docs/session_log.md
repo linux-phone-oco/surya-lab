@@ -2488,3 +2488,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-2010-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: phone untouched, kept 7.1.0-sm7150-calls+; landed [layer.kernel] pinned by exact commit 29d92793b with kernel/surya.config (repo only, build tree read-only)
+
+Considered
+: next: rebuild from the fragment to prove it; release tag when wanted; standby-current waits an attended window; test-layer entry waits on lab-tools
+
+About
+: deep-sleep

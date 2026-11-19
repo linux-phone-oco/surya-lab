@@ -1476,3 +1476,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="surya-kernel-pin-and-config"></a>
+### surya-kernel-pin-and-config
+
+Date
+: 2026-11-19
+
+Brief
+: The running kernel is commit 29d92793b (tip of test/surya-calls, already on origin); its config reduces to a 1061-line defconfig that round-trips exactly
+
+Question
+: Which exact commit and config does surya run, as [layer.kernel] needs them?
+
+Found
+: uname -v '#5 ... Nov 17 10:18:53' follows the commit of 10:12:38 (reflog) = 29d92793b81fd563a875ab6d36c27cf0b852155f, on origin as test/surya-calls. Config read from the phone's /proc/config.gz, savedefconfig'd in a scratch worktree (build tree untouched): 1061 lines, olddefconfig gives the same config back. The tracked arch/arm64/configs/sm7150.config is NOT what runs: 615 of its 1019 options differ in the running config, so it was not used. Not done: no tag pushed (the schema's tag field takes the exact sha); no rebuild from the fragment yet.
+
+About
+: deep-sleep
