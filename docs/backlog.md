@@ -3152,14 +3152,44 @@ Rank
 : 5
 
 
+<a id="surya-attended-fix-faults"></a>
+### attended program: two faults found by the real run - sysfs driver name pm8916-wdt (hyphen), and pon-reason.sh missing on the phone
+
+Status
+: open
+
+Note
+: Found by the keeper's real run (surya-lab PR 412). (1) lab/attended/src/session.rs:51 probes /sys/bus/platform/drivers/pm8916_wdt (underscore) but the sysfs dir is pm8916-wdt (hyphen): check 4 fails though calls4 boots fine (205 s, pm8916-wdt = watchdog1, way-back ok); fix the path and take the name from device.toml/one constant. (2) --part calls-plus fails check 3: /usr/lib/lpoco-health/pon-reason.sh is not on the phone even after suite put (surya's tests/health/base/pon-reason.sh is not in the put): make the program put it (phone root) or the suite include it - decide which by how the other health checks reach the phone (read lpoco lab suite put). Also: finish_healthy's read_probe needs a pm8916 kernel, so on calls+ in --part calls-plus it must not probe the driver (probe only after a calls4 boot); check the part's order. Keep main.rs a checklist. Dry-run both modes, fmt, clippy, test; land; then the keeper reruns surya-attended-real-dry-pieces.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: build
+
+Proof
+: surya-attended-dry-run
+
+Rank
+: 0
+
+
 <a id="surya-attended-real-dry-pieces"></a>
 ### Run surya-attended's unattended modes for real on surya (no author): --until FIRST_PROMPT, then --part calls-plus; report timings and what passed
 
 Status
-: in-progress
+: open
 
 Note
 : 2026-11-19 15:12 keeper (unattended, run 1795097112): ran both unattended modes for real; each stops at a program fault, no code edited. (1) --until FIRST_PROMPT: steps 1-3 pass (phone answers 1 s, way-back.sh put 1 s, calls4 one-shot boot 205 s, phone came up on 7.1.0-sm7150-calls4+, pm8916-wdt bound as watchdog1, way-back check ok); check 4 FAILS 'pm8916_wdt is not registered': lab/attended/src/session.rs:51 tests /sys/bus/platform/drivers/pm8916_wdt (underscore), the sysfs dir is pm8916-wdt (hyphen) - builder fix. (2) --part calls-plus: steps 1-2 pass; check 3 FAILS: /usr/lib/lpoco-health/pon-reason.sh missing on the phone even after 'lpoco lab suite put now' (lpoco-health 0.29.6, 31 checks): the file is surya's own tests/health/base/pon-reason.sh, not in the put - builder fix (where the program reads it, or put it). Prep I did: removed the stale root-owned /var/tmp/standby-run.sh; reinstalled calls4 (same sha256 as PR 404; its one try was spent), then rebooted back to calls+. Phone: calls+, way-back check ok. Rerun after the two fixes.
+
+2026-11-19 keeper run 1 (PR 412): stopped at two program faults, see item surya-attended-fix-faults; rerun after it lands. The keeper also removed the stale root-owned /var/tmp/standby-run.sh and reinstalled calls4 (same sha256).
+
+Blocked by
+: surya-attended-fix-faults
 
 About
 : deep-sleep
@@ -3174,4 +3204,4 @@ Proof
 : surya-attended-dry-run
 
 Rank
-: 0
+: 1
