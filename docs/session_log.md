@@ -2272,3 +2272,21 @@ Done
 
 Considered
 : next: pon-reason-read, standby-current, host-check-stale-pieces; RTC holds no real date (finding)
+
+---
+
+
+<a id="2026-11-19-1900-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: kept calls+ running, no phone change; added tests/health/base/pon-reason.sh (read only, skips: no PON reason exposed by mainline). Lease released.
+
+Considered
+: next: standby-current (attended suspend with fuse), host-check-stale-pieces, licences
+
+About
+: deep-sleep
