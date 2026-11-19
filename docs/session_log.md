@@ -2470,3 +2470,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-0815-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: phone untouched, kept 7.1.0-sm7150-calls+ (default graphical.target, tinydm inactive). Took surya-test-layer-entry: fetched the kept kernel's vmlinuz/dtb/modules from the phone (sha256 equal to /boot), tried 'lpoco lab kernel install testlayer ... --cmdline systemd.unit=multi-user.target': REFUSED, 'is the running kernel's version: its modules would replace the stock ones'. Nothing installed.
+
+Considered
+: next: the route cannot make a second entry of the SAME kernel release with another cmdline; needs lab-tools (install --entry-only / reuse of kept kernel's files with --cmdline, no module replace) - or a rebuild with a different LOCALVERSION. Turning point, sent to the surya coordinator.
+
+About
+: deep-sleep
