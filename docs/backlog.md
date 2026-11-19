@@ -2790,3 +2790,25 @@ Needs
 
 Rank
 : 2
+
+
+<a id="surya-licences"></a>
+### Licences for surya-lab: LICENSE files, SPDX/REUSE coverage, README line, a CI check that every tracked file is covered
+
+Status
+: open
+
+Note
+: From orchestration; the author said 'Yes, as suggested' (docs decision 2026-11-19-licences-for-our-repositories). REPO-ONLY change, one landing, no phone: (1) surya-lab's scripts and code: MIT OR Apache-2.0 (LICENSE-MIT, LICENSE-APACHE); (2) its data, docs and research: CC-BY-SA-4.0; (3) device trees and dts patches WE wrote: GPL-2.0-only OR BSD-2-Clause with SPDX headers; (4) anything third-party keeps its own licence (UCM files from alsa-ucm-conf, firmware, kernel patches based on upstream files: record each in REUSE.toml with its true licence and the source). Texts from SPDX license-list-data (fetch the exact texts; do not paraphrase). Cover every tracked file by SPDX headers on code or REUSE.toml annotations per path (patterns); a README line saying so; a CI shell check (in the repo's existing checks; reuse orchestration's licence check from docs/template once it lands - ask via the surya coordinator) that every tracked file is covered: it must FAIL on today's main and PASS after the change (show both). Do not mislabel third-party files: when unsure of a file's origin, mark it as 'unknown, to be checked' in a list rather than choosing a licence; tell the surya coordinator when it lands (orchestration waits).
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Rank
+: 3
