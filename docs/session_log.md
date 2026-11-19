@@ -2176,3 +2176,21 @@ Done
 
 Considered
 : next: clk-1047-bisect-pmic-wdt-series (unattended)
+
+---
+
+
+<a id="2026-11-19-0215-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: runs kept kernel calls+, back after one one-shot try of calls4+ (PM8916_WATCHDOG=m): clk.c warnings stay, healthy 76 pass/0 fail; calls4 entry removed
+
+Considered
+: next: clk-1047-bisect-pmic-wdt-series continues: build the series' parent, then bisect dtsi commits (unattended); obj-calls4 kept
+
+About
+: deep-sleep
