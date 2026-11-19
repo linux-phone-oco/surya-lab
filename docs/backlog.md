@@ -3017,20 +3017,42 @@ Rank
 : 1
 
 
-<a id="surya-attended-real-dry-pieces"></a>
-### Run surya-attended's unattended pieces for real on surya (no author): steps 1-3 as a one-shot try, read-probe, way-back check; then report timings
+<a id="surya-attended-entry-name"></a>
+### attended program: name the pmicwdt kernel entry calls4 (no '+'), keep the release string separate
 
 Status
 : open
 
 Note
-: 2026-11-19 14:20 keeper (unattended): put way-back.sh ok, way-back check passes on the kept calls+ kernel (watchdog, RTC, ramoops, pstore, patched qcom_wdt). 'lpoco lab kernel try calls4+' is refused: "calls4+": not a test kernel name (the '+' in the name; also no calls4+ entry installed). standby-run.sh on the phone is root-owned (Nov 17), 'lpoco lab phone put' as user is denied: use 'phone root'. Steps 3-5 not run; phone untouched, still on calls+.
+: lpoco lab kernel try refuses a NAME with '+' ('not a test kernel name'), and no calls4+ entry is installed. The entry NAME is only the boot entry's name; the release inside it can keep its +. In lab/attended/src/session.rs PMICWDT_KERNEL = "calls4+" is used as the entry name: make it "calls4" (and compare the probed release separately, checks.rs). Dry run, fmt, clippy, test; land. Then the keeper installs the entry (item surya-attended-install-calls4).
 
-Waits
-: lab-tools: lpoco lab kernel install/try accept a release name with '+' (devlab-kernel-try-cmdline)
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: build
+
+Proof
+: surya-attended-dry-run
+
+Rank
+: 0
+
+
+<a id="surya-attended-install-calls4"></a>
+### Install the calls4 kernel entry (pm8916_wdt, patch 6/6) as a boot entry named calls4, not tried
+
+Status
+: open
+
+Note
+: Keeper: lpoco lab kernel install calls4 VMLINUZ DTB MODULES from ~/Projects/surya-audio (obj-calls4, scratch-calls4: modules.tgz there; take the vmlinuz and dtb of the SAME build, check the release says calls4 and that pm8916_wdt is in it, record sha256). Install only; do NOT try it unattended with a bite - the try is the read-probe of step 1 in the attended program. The kept kernel stays calls+. Then run surya-attended-real-dry-pieces to the first ask_author (the program runs the try as a boot-counted one-shot with way-back armed). Use 'phone root' for files that root owns.
 
 Blocked by
-: surya-attended-one-command
+: surya-attended-entry-name
 
 About
 : deep-sleep
@@ -3046,3 +3068,31 @@ Proof
 
 Rank
 : 0
+
+
+<a id="surya-attended-real-dry-pieces"></a>
+### Run surya-attended's unattended pieces for real on surya (no author): steps 1-3 as a one-shot try, read-probe, way-back check; then report timings
+
+Status
+: open
+
+Note
+: 2026-11-19 14:20 keeper (unattended): put way-back.sh ok, way-back check passes on the kept calls+ kernel (watchdog, RTC, ramoops, pstore, patched qcom_wdt). 'lpoco lab kernel try calls4+' is refused: "calls4+": not a test kernel name (the '+' in the name; also no calls4+ entry installed). standby-run.sh on the phone is root-owned (Nov 17), 'lpoco lab phone put' as user is denied: use 'phone root'. Steps 3-5 not run; phone untouched, still on calls+. 2026-11-19 coordinator: the '+' is avoided by naming the entry calls4 (items surya-attended-entry-name, surya-attended-install-calls4); no wait on lab-tools.
+
+Blocked by
+: surya-attended-install-calls4
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Proof
+: surya-attended-dry-run
+
+Rank
+: 1
