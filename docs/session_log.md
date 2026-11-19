@@ -2323,3 +2323,18 @@ Done
 
 Considered
 : next: re-read lpoco host check after next boot; surya-step-checks needs attended suspend
+
+---
+
+
+<a id="2026-11-19-1945-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: kept 7.1.0-sm7150-calls+ running, healthy (86 pass, 0 fail); stale pieces reconciled (PR 357), 3 files reinstalled by comment only
+
+Considered
+: next: re-read lpoco host check after the next boot; standby-current needs attended suspend; surya-user-config-declared, licences, suspend-stop-config are repo-only
