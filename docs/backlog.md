@@ -2694,31 +2694,6 @@ Rank
 : 0
 
 
-<a id="calls2-rebuild-with-clang"></a>
-### Rebuild the calls2+ tree (c88ed67e0) with calls+'s clang + LTO/CFI config, then compare the clk warning
-
-Status
-: open
-
-Note
-: From research clk-1047-calls2-stable-built-with-gcc-not-clang (surya-lab PR 322): calls2+ was built from ~/Projects/surya-audio/wt-pmic-wdt2 (detached c88ed67e0196e49bbd8a7a10412de1c477224e20 = calls+'s source 29d92793b + the 7 PMIC wdt commits; diff touches 5 files, 0 lines of drivers/clk) with GCC 16.2.0, no LTO/CFI, PM8916_WATCHDOG=y; calls+ is clang 23.1.5 with LTO_CLANG_THIN, CFI and SCS. clk.c:1047 'already unprepared' shows on calls2+ in 3 of 3 boots, on calls+ 0 of 1 (0 of ~45); the DSI PLL 'lock failed' and clk.c:1188 are old and in both. Lead: the BUILD, not a patch. Do: build c88ed67e0 with calls+'s EXACT clang config (take calls+'s .config, set only PM8916_WATCHDOG=y and what the 7 commits need; same toolchain), release name distinct (e.g. 7.1.0-sm7150-calls3+); install, ONE one-shot try (no bite, no suspend, PMIC wdt never opened/armed), dmesg saved: is clk.c:1047 gone? the 2 suite fails gone? Then say: promotable as kept (attended promotion stays separate: kept-kernel-with-pmic-wdt) or what differs. Free space: /home is at 92%: the new build dir replaces calls2+'s (remove the gcc obj afterwards only if nothing references it). Record; land; tell the surya coordinator.
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-19
-
-Needs
-: phone
-
-Proof
-: soc-sleeps
-
-Rank
-: 0
-
-
 <a id="surya-base-image-named"></a>
 ### Name surya's base image: sha256, source URL and Nura version, and KEEP the file
 
@@ -2812,3 +2787,53 @@ Needs
 
 Rank
 : 3
+
+
+<a id="calls2-rebuild-with-clang"></a>
+### Rebuild the calls2+ tree (c88ed67e0) with calls+'s clang + LTO/CFI config, then compare the clk warning
+
+Status
+: done
+
+Note
+: proven by one try of calls3+ (research clk-1047-calls3-clang-still-warns): warning stays under clang
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Proof
+: soc-sleeps
+
+Rank
+: 0
+
+
+<a id="clk-1047-bisect-pmic-wdt-series"></a>
+### Find which of the 7 PMIC wdt commits (or PM8916_WATCHDOG=y) brings clk.c:1047 on boot
+
+Status
+: open
+
+Note
+: From research clk-1047-calls3-clang-still-warns: toolchain ruled out. Build c88ed67e0 with PM8916_WATCHDOG=m (like calls+) first, one one-shot try each, unattended (no suspend, wdt never armed); then bisect the dtsi commits. Tree wt-pmic-wdt2, objs obj-calls3.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Proof
+: soc-sleeps
+
+Rank
+: 0
