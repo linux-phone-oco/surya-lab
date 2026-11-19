@@ -3042,34 +3042,6 @@ Rank
 : 0
 
 
-<a id="surya-attended-install-calls4"></a>
-### Install the calls4 kernel entry (pm8916_wdt, patch 6/6) as a boot entry named calls4, not tried
-
-Status
-: open
-
-Note
-: Keeper: lpoco lab kernel install calls4 VMLINUZ DTB MODULES from ~/Projects/surya-audio (obj-calls4, scratch-calls4: modules.tgz there; take the vmlinuz and dtb of the SAME build, check the release says calls4 and that pm8916_wdt is in it, record sha256). Install only; do NOT try it unattended with a bite - the try is the read-probe of step 1 in the attended program. The kept kernel stays calls+. Then run surya-attended-real-dry-pieces to the first ask_author (the program runs the try as a boot-counted one-shot with way-back armed). Use 'phone root' for files that root owns.
-
-Blocked by
-: surya-attended-entry-name
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-19
-
-Needs
-: phone
-
-Proof
-: surya-attended-dry-run
-
-Rank
-: 0
-
-
 <a id="surya-attended-real-dry-pieces"></a>
 ### Run surya-attended's unattended pieces for real on surya (no author): steps 1-3 as a one-shot try, read-probe, way-back check; then report timings
 
@@ -3096,3 +3068,33 @@ Proof
 
 Rank
 : 1
+
+
+<a id="surya-attended-install-calls4"></a>
+### Install the calls4 kernel entry (pm8916_wdt, patch 6/6) as a boot entry named calls4, not tried
+
+Status
+: open
+
+Note
+: Keeper: lpoco lab kernel install calls4 VMLINUZ DTB MODULES from ~/Projects/surya-audio (obj-calls4, scratch-calls4: modules.tgz there; take the vmlinuz and dtb of the SAME build, check the release says calls4 and that pm8916_wdt is in it, record sha256). Install only; do NOT try it unattended with a bite - the try is the read-probe of step 1 in the attended program. The kept kernel stays calls+. Then run surya-attended-real-dry-pieces to the first ask_author (the program runs the try as a boot-counted one-shot with way-back armed). Use 'phone root' for files that root owns.
+
+2026-11-19 orchestration: the refusal of '+' in a NAME is deliberate, so calls4 is the right way (no WORKAROUND marker): devlab writes a try as /boot/loader/entries/pmos-NAME+1-0.conf (boot counting) and cleans pmos-NAME+*.conf, so a + in NAME reads as the counter and a try named 'calls' would remove the kept calls+ entries. NEVER name a try 'calls'. The kept calls+ and calls2+ predate the rule and lpoco cannot keep/unkeep them: leave them as they are; when a kernel is next KEPT it gets a plain name (calls4) and the + ones are retired only in an attended window. The release string may end in + freely.
+
+Blocked by
+: surya-attended-entry-name
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Proof
+: surya-attended-dry-run
+
+Rank
+: 0
