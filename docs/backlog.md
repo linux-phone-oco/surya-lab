@@ -3046,10 +3046,10 @@ Rank
 ### Install the calls4 kernel entry (pm8916_wdt, patch 6/6) as a boot entry named calls4, not tried
 
 Status
-: in-progress
+: done
 
 Note
-: 2026-11-19 keeper (unattended): INSTALLED pmos-calls4+1-0.conf, kernel 7.1.0-sm7150-calls4+, 838 modules (Image sha256 5d924cc6..., huaxing dtb 2dfa0606..., modules.tgz 245512bf...; from surya-audio obj-calls4/scratch-calls4; Image not Image.gz - lpoco wants the EFI image). Not tried, not kept; running and kept kernel stay calls+. Left: surya-attended-real-dry-pieces to the first ask_author, needs the author at the phone.
+: 2026-11-19 keeper (PR 404): installed as pmos-calls4+1-0.conf, 7.1.0-sm7150-calls4+, 838 modules, pm8916_wdt; not tried, not kept; running/kept stays calls+.
 
 Blocked by
 : surya-attended-entry-name
