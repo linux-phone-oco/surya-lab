@@ -3007,6 +3007,8 @@ TEST IT BEFORE THE AUTHOR IS ASKED: a dry run against a stand-in (a fake phone /
 
 ENTRY FILE (the author, 2026-11-19, verbatim: 'make sure the rust program reads cleanly and simply on the top entry file level, like any other simple scripted procedure would read'): the entry file (main.rs or the rust-script itself) reads top to bottom like a checklist, the whole procedure in one screen: one call per step with a plain name (boot_pmicwdt_kernel, read_probe, ask_author("..."), bite, wait_for_restart, ...), each returning a Result that stops the run, with NO plumbing, parsing or retries inline. All of that lives in helper modules or lpoco's shared runner.
 
+SHARED RUNNER (orchestration, 2026-11-19): write the program against crate lpoco-attended in linux-phone-oco/lab-tools (dir attended/, example in attended/examples/), used from a rust-script entry file with a cargo git dep on linux-phone-oco/lab-tools at tag lpoco-attended-vX.Y.Z (the tag comes from orchestration when the lab-tools builder's first slice lands; until then write against these names). Shape: use lpoco_attended::prelude::*; then in order procedure("name", "xiaomi-surya"); step("boot pmicwdt kernel", || ...); check("what must hold", || ...); ask_author("what to do, what to check") - each stops the run on failure; phone() reaches surya through devlab; --dry-run and the log come from the library. Do NOT write your own plumbing: leave anything that looks like plumbing out, and record what is missing (tell the surya coordinator, who tells orchestration).
+
 About
 : deep-sleep
 
