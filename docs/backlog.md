@@ -3230,14 +3230,14 @@ Rank
 : 0
 
 
-<a id="surya-unreachable-after-calls4-try"></a>
-### surya does not answer after the unattended calls4 one-shot try (run 3): needs the author's power cycle, then read pstore and the journal before any retry
+<a id="surya-initramfs-stuck-read-only"></a>
+### Read-only look at surya stuck in the initramfs after the calls4 try: gadget interfaces, any port answering, host dmesg - change nothing
 
 Status
 : open
 
 Note
-: 2026-11-19 keeper run 3 (surya-lab PR 418): 'lpoco lab kernel try calls4' ended 'no new boot answered within ten minutes'. Surya answers at no address, is not on USB; no self-fallback, no watchdog reset seen. Runs before booted calls4 fine (64 s, 205 s). PARKED: no phone work until the author's hands: power cycle (hold power 15 s; if it loops, power off from eOS recovery, wait 30 s USB out). After it is back: FIRST read pstore/ramoops and the journal of the failed boot (what hung: boot counting should have fallen back), then record, then decide. Do not retry calls4 before that; no defuse.
+: Top Coordinator, 2026-11-19: on the lab host surya is on USB at 3-1 as 18d1:d001 'Qualcomm SM7150 Device', serial 'post...': the postmarketOS initramfs gadget. enp10s0f3u1 is up as 172.16.42.2 but 172.16.42.1 does not ping. So calls4 got as far as the initramfs and sits there (no root found, or initramfs/module mismatch for calls4); not dead, not a watchdog loop. KEEPER, READ-ONLY, change NOTHING (no fastboot, no reboot, no write to the gadget, no power action): (1) the gadget's interfaces: lsusb -v for 18d1:d001 (mass storage? serial? rndis? log?), /sys/bus/usb devices, what the host bound; (2) does the initramfs answer on ANY port: ping 172.16.42.1, nc/ssh probe of 22, 23, telnet 23, the pmOS debug port (initramfs telnet 23 / ssh 22 when debug-shell or hooks), serial ttyACM*/ttyUSB* if any; (3) host dmesg (journalctl -k) from when it enumerated: timing, gadget type, any later disconnect; (4) record what the screen is said to show only if the author tells (do not ask for his hands here). Then record the finding on item surya-unreachable-after-calls4-try (stuck-in-initramfs, evidence, what each probe returned) and decide: if any read channel answers, read the initramfs log and the kernel messages from it; else a power hold is needed (it returns through boot counting to calls+ either way). Report to the surya coordinator in a few lines.
 
 About
 : deep-sleep
@@ -3250,6 +3250,33 @@ Needs
 
 Rank
 : 0
+
+
+<a id="surya-unreachable-after-calls4-try"></a>
+### surya does not answer after the unattended calls4 one-shot try (run 3): needs the author's power cycle, then read pstore and the journal before any retry
+
+Status
+: open
+
+Note
+: 2026-11-19 keeper run 3 (surya-lab PR 418): 'lpoco lab kernel try calls4' ended 'no new boot answered within ten minutes'. Surya answers at no address, is not on USB; no self-fallback, no watchdog reset seen. Runs before booted calls4 fine (64 s, 205 s). PARKED: no phone work until the author's hands: power cycle (hold power 15 s; if it loops, power off from eOS recovery, wait 30 s USB out). After it is back: FIRST read pstore/ramoops and the journal of the failed boot (what hung: boot counting should have fallen back), then record, then decide. Do not retry calls4 before that; no defuse.
+
+2026-11-19 Top Coordinator: NOT dead and not on a watchdog loop: surya is in the pmOS initramfs gadget (USB 3-1 18d1:d001). The keeper looks read-only first (item surya-initramfs-stuck-read-only); only then is a power hold decided.
+
+Blocked by
+: surya-initramfs-stuck-read-only
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Rank
+: 1
 
 Witness
 : person
