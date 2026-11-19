@@ -4,6 +4,7 @@
 
 use crate::checks::*;
 use lpoco_attended::{phone, retry};
+use std::path::{Path, PathBuf};
 use std::process::Command;
 
 const WAY_BACK: &str = "/var/tmp/way-back.sh";
@@ -15,8 +16,14 @@ const PON_REASON: &str = "/var/tmp/pon-reason.sh";
 const WDT_DRIVER: &str = "pm8916-wdt";
 const RUN_ID: &str = "attended";
 
+/// The base this program lives in: every relative path (sleep/way-back.sh, device.toml) is read from here, whatever the cwd.
+fn base_root() -> PathBuf {
+    Path::new(env!("CARGO_MANIFEST_DIR")).join("../..")
+}
+
 fn lab(args: &[&str]) -> Result<String, String> {
     let out = Command::new("lpoco")
+        .current_dir(base_root())
         .arg("lab")
         .args(args)
         .output()
@@ -53,13 +60,55 @@ pub fn put_way_back() -> Result<(), String> {
     Ok(())
 }
 
-/// The read-probe: the sysfs driver dir (hyphen, as the kernel names it), the watchdog's timeout, the kernel release.
+/// The read-probe: the sysfs driver dir (hyphen, as the kernel names it) and the kernel release; this kernel gives the watchdog no sysfs timeout to read.
 fn probe_script() -> String {
     format!(
         "echo driver=$([ -d /sys/bus/platform/drivers/{WDT_DRIVER} ] && echo 1 || echo 0); \
-         for w in /sys/class/watchdog/*; do grep -q PM8916 $w/identity 2>/dev/null && echo timeout=$(cat $w/timeout); done; \
          echo kernel=$(uname -r)"
     )
+}
+
+/// The calls4 build on this lab machine, each file with the start of its sha256 (the files the keeper installed).
+const PMICWDT_FILES: [(&str, &str); 3] = [
+    ("surya-audio/obj-calls4/arch/arm64/boot/Image", "5d924cc6"),
+    (
+        "surya-audio/obj-calls4/arch/arm64/boot/dts/qcom/sm7150-xiaomi-surya-huaxing.dtb",
+        "2dfa0606",
+    ),
+    ("surya-audio/scratch-calls4/modules.tgz", "245512bf"),
+];
+
+/// Every try is spent by a boot: put the entry back with its one try, from files whose checksums are known.
+pub fn install_pmicwdt_kernel() -> Result<(), String> {
+    let home = std::env::var("HOME").map_err(|e| format!("HOME: {e}"))?;
+    let mut paths = Vec::new();
+    for (rel, sha) in PMICWDT_FILES {
+        let path = format!("{home}/Projects/{rel}");
+        verify_sha256(&path, sha)?;
+        paths.push(path);
+    }
+    lab(&[
+        "kernel",
+        "install",
+        PMICWDT_KERNEL,
+        &paths[0],
+        &paths[1],
+        &paths[2],
+    ])
+    .map(|_| ())
+}
+
+fn verify_sha256(path: &str, prefix: &str) -> Result<(), String> {
+    let out = Command::new("sha256sum")
+        .arg(path)
+        .output()
+        .map_err(|e| format!("sha256sum {path}: {e}"))?;
+    let text = String::from_utf8_lossy(&out.stdout);
+    if text.starts_with(prefix) {
+        Ok(())
+    } else {
+        Err(format!("{path}: sha256 is not {prefix}..: {text}"))
+    }
 }
 
 pub fn boot_pmicwdt_kernel() -> Result<(), String> {
@@ -117,8 +166,9 @@ pub fn wake_in_suspend() -> Result<(), String> {
         .map(|_| ())
 }
 
+/// The phone's own health suite (surya has no tests/automatic/checks.sh: its checks are tests/health, put on the phone by the suite).
 pub fn step_checks() -> Result<(), String> {
-    lab(&["health"]).map(|_| ())
+    lab(&["suite", "run"]).map(|_| ())
 }
 
 pub fn standby_current() -> Result<(), String> {
@@ -142,7 +192,7 @@ pub fn finish_healthy() -> Result<(), String> {
 
 /// calls+ keeps its own kernel, which has no pm8916 driver: no probe of it, only health and the lease.
 pub fn finish_on_kept_kernel() -> Result<(), String> {
-    lab(&["health"])?;
+    lab(&["suite", "run"])?;
     lab(&["keeper", "release"]).map(|_| ())
 }
 

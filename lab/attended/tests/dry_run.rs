@@ -102,3 +102,11 @@ fn a_part_the_session_has_not_got_is_refused() {
         .unwrap();
     assert_eq!(out.status.code(), Some(2));
 }
+
+#[test]
+fn the_calls4_kernel_is_installed_with_its_one_try_before_it_is_booted() {
+    let text = dry(&["--until", "FIRST_PROMPT"]);
+    let install = text.find("install the pmicwdt kernel").expect(&text);
+    let boot = text.find("boot the pmicwdt kernel once").expect(&text);
+    assert!(install < boot, "{text}");
+}

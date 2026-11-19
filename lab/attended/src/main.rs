@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT OR Apache-2.0
-//! surya's attended session, one command: `cargo run --release -p surya-attended` (from lab/attended).
+//! surya's attended session, one command: `cargo run --release -p surya-attended` (from anywhere: it reads its own base).
 //! `--dry-run` walks every step and prompt and touches nothing; `--log FILE` keeps the log; `--help` says the rest.
 //! Decision 2026-11-19-attended-only-when-one-command-away. After a bite the next boot is a pm8916_wdt kernel,
 //! never calls+; the run ends on one, healthy, with the lease released.
@@ -25,6 +25,10 @@ fn main() {
 fn whole_session() {
     step("the phone answers", wait_for_phone);
     step("way-back.sh is on the phone", put_way_back);
+    step(
+        "install the pmicwdt kernel with its one try",
+        install_pmicwdt_kernel,
+    );
     step("boot the pmicwdt kernel once", boot_pmicwdt_kernel);
     check("the pmic watchdog is registered", read_probe);
     check("the way back is in place", way_back_in_place);
