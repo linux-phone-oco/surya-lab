@@ -2232,12 +2232,10 @@ Rank
 ### lpoco-health suspend cycle: pre/post hooks or a --trace option (dyndbg, irq trace) so probes need no wrapper
 
 Status
-: open
+: done
 
 Note
-: sleep/bt-trace.sh is the stopgap probe to remove once this exists
-
-2026-11-19: moved to docs as a lab-tools item (project lab-tools, rank 8), owned by orchestration's builder, which also owns its proof; this copy only waits. sleep/bt-trace.sh stays as the stopgap (marked a probe to remove) until it lands; then retire it.
+: lab-tools PR 257 (landed): lpoco-health suspend cycle --before CMD / --after CMD (sh -c; before refuses the cycle on failure, after always runs, both in the report's hooks; hook stdout to stderr). Tests health/tests/suspend_cycle.rs. Next: sleep/bt-trace.sh uses them, then is removed; standing manifest hooks not built.
 
 Waits
 : lab-tools lpoco-health-suspend-trace-hook (docs, project lab-tools, rank 8), built by the lab-tools builder

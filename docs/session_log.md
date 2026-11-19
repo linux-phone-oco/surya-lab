@@ -2647,3 +2647,24 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-lpoco-health-suspend-hooks-built"></a>
+### lpoco-health suspend hooks built
+
+Entry date
+: 2026-11-19
+
+Done
+: Built lpoco-health suspend cycle --before/--after (lab-tools PR 257, merged): one-off sh -c hooks around the suspend, so probes need no wrapper. Test first, seen failing; programmer review fixed hook stdout leaking into the JSON report.
+
+Considered
+: Standing hooks in the manifest [health] (suspend_before/after): touches manifest, devlab and schema.
+
+Rejected
+: Manifest hooks for now: CLI flags cover the probe with one crate changed; add when a standing hook is wanted. Hook timeout and Option<String> for the flags: left, recoverable (Stopped/Quieted restore on the next run).
+
+About
+: deep-sleep
