@@ -2419,3 +2419,18 @@ Done
 
 Considered
 : next: phone step of user-config (a boot reporting, then migrate-or-accept the drifted three); step-checks remainder waits an attended window; test-layer entry; adsp boot race
+
+---
+
+
+<a id="2026-11-19-0710-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: phone untouched, kept 7.1.0-sm7150-calls+, up 5h34, sound card present, devlab-audio-heal ran ok at boot (card present path); suite latest all pass bar SIM skips. Item surya-user-config-declared: only a decision left (migrate or accept drifted live conky/bonsai/profile; 'lpoco lab prepare' no longer exists in 0.24.0). adsp-audio-boot-race: no race seen this boot, restart path not provoked unattended.
+
+Considered
+: next: coordinator decides migrate-vs-accept for user configs; boot-race restart path needs an attended window; surya-test-layer-entry (rank 4) is next ready
