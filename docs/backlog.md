@@ -3279,3 +3279,25 @@ Needs
 
 Rank
 : 1
+
+
+<a id="surya-read-failed-calls4-boot"></a>
+### Read the calls4 boot that looked stuck: journal, pstore, boot counter, way-back check, health suite - then decide the retry
+
+Status
+: open
+
+Note
+: Keeper's read-only look (research 2026-11-19-initramfs-stuck-read-only-look, PRs 422/423): after the author's restart surya is UP on 7.1.0-sm7150-calls4+ (boot 14:48 UTC), pings, ssh open, phone sh/root work; kept kernel is still calls+. So calls4 does boot; the earlier 'no answer within ten minutes' + initramfs gadget + black screen needs explaining (a slow/failed first attempt that the restart then completed? the usb/net came up late? the try counted down?). KEEPER, read-only unless noted: (1) now: way-back.sh check (watchdog state, S2_CTL2 0x857, the qcom_wdt fuse by identity) - run it first, calls4 is running with the driver; (2) the boot record of the failed attempt: journalctl -b -1 and -b 0 (timings, when usb/rndis/ssh came up, any errors), /sys/fs/pstore (console-ramoops of an earlier crash), the boot-counter state of /boot/loader/entries/pmos-calls4+*.conf and the ESP log (lpoco lab kernel log calls4); (3) health suite run (lpoco lab suite) and report; (4) do NOT retry calls4 or the attended program; the running calls4 falls back to calls+ at its next boot by counting - only reboot it (lpoco lab phone reboot, way back armed) if the health suite is clean, then confirm calls+ and healthy. Record the finding on surya-unreachable-after-calls4-try (what hung, how long calls4 takes to answer: 64 s, 205 s, then >10 min / black screen). Report in a few lines.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Rank
+: 0
