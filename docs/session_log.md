@@ -2797,3 +2797,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-1548-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: Read-only look at the initramfs report: surya is up on the try kernel 7.1.0-sm7150-calls4+ (boot 14:48 UTC), ping and ssh port answer, lab phone sh works; nothing changed, no fastboot, no reboot, no write. Watchdog not touched (way-back check not run).
+
+Considered
+: next: read the calls4 boot journal and pstore before any retry (surya-attended-real-dry-pieces); run lpoco lab suite run to get a health report on calls4; kept kernel stays calls+, boot counting decides the next boot; no attended work taken
+
+About
+: deep-sleep
