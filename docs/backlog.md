@@ -3589,3 +3589,22 @@ Proof
 
 Rank
 : 1
+
+
+<a id="waits-on-landed-usb-timeline"></a>
+### surya-host-usb-timeline still waits on lab-tools, whose kernel try USB timeline has landed
+
+Status
+: open
+
+Note
+: sign seen by patrol 2026-11-20: surya-host-usb-timeline waits on the lab-tools builder, but lab-tools #291 (v0.35.1) landed it and docs #692 marks kernel-try-usb-timeline done; the pin (v0.37.3) has it. Owner: surya coordinator - clear the wait or close the item, then its proof run.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: build
