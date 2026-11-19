@@ -1473,6 +1473,9 @@ Rank
 Witness
 : person
 
+Go until
+: 2026-11-19T19:23:59+01:00
+
 
 <a id="ramoops-reserved-dt"></a>
 ### Reserve ramoops in the device tree so a way-back panic is kept (way-back-ramoops-present)
@@ -1696,7 +1699,7 @@ Witness
 : person
 
 Go until
-: 2026-11-19T12:13:18+01:00
+: 2026-11-19T19:23:58+01:00
 
 
 <a id="surya-steps-claimed"></a>
@@ -2133,6 +2136,9 @@ Rank
 
 Witness
 : person
+
+Go until
+: 2026-11-19T19:23:59+01:00
 
 
 <a id="surya-suspend-stop-config"></a>
@@ -2954,40 +2960,7 @@ Witness
 : person
 
 Go until
-: 2026-11-19T12:13:17+01:00
-
-
-<a id="surya-kernel-pmic-wdt"></a>
-### surya's kernel with the PMIC watchdog series (linux-phone-oco/linux topic/pmic-wdt-wake-in-suspend) and &pm6150_wdt enabled, wakeup-source
-
-Status
-: open
-
-Note
-: 2026-11-19 unattended keeper run (12:08): not taken - the author is not at the phone and no relayed go is open; the 'attended session now' note above was for the earlier window. Waits for the next attended window; the order in the note stands.
-
-2026-11-19 12:15 GO WINDOW OPEN (author said go for step 1; relayed by the Top Coordinator). THIS KEEPER IS ATTENDED: take the lease, run the pre-checks (way back armed: fuse by watchdog identity, serial wakeup off, sysctls, health ok), then message the Top Coordinator (SendMessage to local_12b18c70-1b6d-4783-bb6f-50113ab63250) with exactly 'surya step 1 ready' and what you will do. Boot the pmicwdt kernel ONLY after a message from the Top Coordinator saying go. Same before each later step (bite, proof): message, wait for the relayed go. Never end the session mid-way; stay until the Top Coordinator says done. If the send fails (cap), write the text as your last message and wait.
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-18
-
-Needs
-: phone
-
-Proof
-: pmic-wdt-bites
-
-Rank
-: 0
-
-Witness
-: person
-
-Go until
-: 2026-11-19T12:13:16+01:00
+: 2026-11-19T19:23:57+01:00
 
 
 <a id="surya-attended-one-command"></a>
@@ -3426,3 +3399,41 @@ Proof
 
 Rank
 : 4
+
+
+<a id="surya-kernel-pmic-wdt"></a>
+### surya's kernel with the PMIC watchdog series (linux-phone-oco/linux topic/pmic-wdt-wake-in-suspend) and &pm6150_wdt enabled, wakeup-source
+
+Status
+: open
+
+Note
+: 2026-11-19 unattended keeper run (12:08): not taken - the author is not at the phone and no relayed go is open; the 'attended session now' note above was for the earlier window. Waits for the next attended window; the order in the note stands.
+
+2026-11-19 12:15 GO WINDOW OPEN (author said go for step 1; relayed by the Top Coordinator). THIS KEEPER IS ATTENDED: take the lease, run the pre-checks (way back armed: fuse by watchdog identity, serial wakeup off, sysctls, health ok), then message the Top Coordinator (SendMessage to local_12b18c70-1b6d-4783-bb6f-50113ab63250) with exactly 'surya step 1 ready' and what you will do. Boot the pmicwdt kernel ONLY after a message from the Top Coordinator saying go. Same before each later step (bite, proof): message, wait for the relayed go. Never end the session mid-way; stay until the Top Coordinator says done. If the send fails (cap), write the text as your last message and wait.
+
+2026-11-19 ATTENDED RUN NOW (the author said 'Yes now'; at the phones with the power hold ready; ~25 min; relayed by the Top Coordinator). YOU ARE THE ATTENDED KEEPER. Take the lease. Do NOT archive/end the session until the Top Coordinator says done.
+(1) Run, from any directory: lpoco-attended run attended-session --until <the first confirm/physical step> --log FILE (lpoco-attended run attended-session --help first; use --until FIRST_PROMPT if that is the name). If anything in that part fails, FIX it or STOP and tell the Top Coordinator in a few lines; do not call the author.
+(2) At the first physical step send the Top Coordinator that prompt WORD FOR WORD (SendMessage to local_12b18c70-1b6d-4783-bb6f-50113ab63250): what he does, what he watches for, what he does if it goes wrong. Then WAIT. A message from the Top Coordinator carries the author's words after his act; go on only then.
+(3) Continue one step at a time through the program (calls4 boot, bite, wait_for_restart, pon_reason, wake-in-suspend, step checks, standby with the unplug), each physical step the same way. LANE RULE: after any bite the next boot is a pm8916_wdt kernel (calls4), never calls+. The reboot out of calls+ froze once (power hold = recovery); a try that does not return in the program's wait: stop, tell the Top Coordinator, do not retry. Record each result on its own item (surya-pmic-wdt-proof, surya-step-checks, sleep-standby-current, kept-kernel-with-pmic-wdt) and report each step's result to the Top Coordinator in a line. Leave surya on a pm8916_wdt kernel or the kept kernel, healthy, lease released, at the end.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: pmic-wdt-bites
+
+Rank
+: 0
+
+Witness
+: person
+
+Go until
+: 2026-11-19T19:23:57+01:00
