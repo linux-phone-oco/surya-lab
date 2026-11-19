@@ -5,6 +5,8 @@
 -- is ready only while a person's go is open (`go_until` still ahead). A blocker this base no longer holds is not clear: the
 -- item is skipped and says so. Each skipped item names why. The one query every base shares: a brief names it
 -- and carries no picking SQL of its own.
+-- An item that needs a witness shows `witness` (person) and, while a person's go is open, `go_until` - when it ends;
+-- ready with a witness and no go_until cannot be (the go is read here, not from the note).
 -- --for    string?          keeper (needs phone), builder (needs build) or research (needs research); every lane when not given
 -- --about  string?          only the work about this subject (a word before a dash names a family)
 -- --show   string = all     ready, skipped or all
@@ -21,7 +23,8 @@ WITH w AS (
               WHERE trim(t.x) <> '' AND NOT EXISTS (SELECT 1 FROM hardware h WHERE h.id = trim(t.x) AND h.status = 'owned' AND coalesce(h.fit, '') <> 'refuted'))
         ) AS why
     FROM backlog b)
-SELECT b.id, CASE WHEN w.why = '' THEN 'ready' ELSE 'skipped' END AS stands, w.why,
+SELECT b.id, CASE WHEN w.why = '' THEN 'ready' ELSE 'skipped' END AS stands, w.why, b.witness,
+       CASE WHEN b.witness IS NOT NULL AND try_cast(b.go_until AS TIMESTAMPTZ) > now() THEN b.go_until END AS go_until,
        b.status, b.rank, coalesce(b.proof, '') AS proof, coalesce(b.about, '') AS about, b.title, b.note
 FROM backlog b JOIN w USING (id)
 WHERE b.status NOT IN ('done', 'dropped')
