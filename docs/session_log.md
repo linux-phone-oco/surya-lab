@@ -2353,3 +2353,21 @@ Done
 
 Considered
 : next: surya-step-checks has only attended-suspend parts left; user-config-declared waits on lab v0.22.0 prepare; suggest second copy of image-fresh-stock/ on another disk (author)
+
+---
+
+
+<a id="2026-11-19-2230-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: phone untouched, kept 7.1.0-sm7150-calls+ as before (lab lpoco is 0.17.1); landed surya-licences (repo only). Skipped: surya-step-checks (only attended-suspend parts left), user-config-declared and test-layer-entry (wait on lab >= 0.22 prepare)
+
+Considered
+: next: user-config-declared repo edit once lab v0.22 prepare; step-checks in an attended window; adsp-audio-boot-race
+
+About
+: deep-sleep

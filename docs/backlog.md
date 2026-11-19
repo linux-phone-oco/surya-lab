@@ -2766,12 +2766,10 @@ Rank
 ### Licences for surya-lab: LICENSE files, SPDX/REUSE coverage, README line, a CI check that every tracked file is covered
 
 Status
-: open
+: done
 
 Note
-: From orchestration; the author said 'Yes, as suggested' (docs decision 2026-11-19-licences-for-our-repositories). REPO-ONLY change, one landing, no phone: (1) surya-lab's scripts and code: MIT OR Apache-2.0 (LICENSE-MIT, LICENSE-APACHE); (2) its data, docs and research: CC-BY-SA-4.0; (3) device trees and dts patches WE wrote: GPL-2.0-only OR BSD-2-Clause with SPDX headers; (4) anything third-party keeps its own licence (UCM files from alsa-ucm-conf, firmware, kernel patches based on upstream files: record each in REUSE.toml with its true licence and the source). Texts from SPDX license-list-data (fetch the exact texts; do not paraphrase). Cover every tracked file by SPDX headers on code or REUSE.toml annotations per path (patterns); a README line saying so; a CI shell check (in the repo's existing checks; reuse orchestration's licence check from docs/template once it lands - ask via the surya coordinator) that every tracked file is covered: it must FAIL on today's main and PASS after the change (show both). Do not mislabel third-party files: when unsure of a file's origin, mark it as 'unknown, to be checked' in a list rather than choosing a licence; tell the surya coordinator when it lands (orchestration waits).
-
-MODEL (orchestration): copy device-template #33 (github linux-phone-oco/device-template PR 33): LICENSE (CC-BY-SA-4.0 for data and docs), LICENSE-MIT and LICENSE-APACHE (scripts), LICENSES/, a REUSE.toml with paths annotated (adjust to surya-lab's paths), a README line, and bin/licence-check - ideal-agent's script copied BYTE FOR BYTE - run from make verify and check.yml. Third-party files keep their own licence: UCM from alsa-ucm-conf, firmware, and patches against upstream files (they carry the licence of the files they change): annotate those paths in REUSE.toml with their true licence, never mislabel; unsure = list as 'unknown, to be checked'. Docs' device layer carries no licence files: this one is ours to land. Show the check failing on main and passing after.
+: 2026-11-19 keeper: LICENSE (CC-BY-SA-4.0), LICENSE-MIT/APACHE, LICENSES/ (GPL-2.0-only, GPL-3.0-or-later, BSD-3-Clause, CC-BY-SA symlink), REUSE.toml per path, README line, bin/licence-check byte-copied from device-template (make verify + CI). Check FAILS on main (461 uncovered, rc 1), PASSES after. Third-party: kernel patches GPL-2.0-only; hexagonrpcd patch GPL-3.0-or-later (its headers); UCM BSD-3-Clause (alsa-ucm-conf) - UNKNOWN, TO BE CHECKED: whether UCM lines were carried from another author's upstream file.
 
 About
 : deep-sleep

@@ -68,3 +68,10 @@ After a flash, `lpoco lab provision now` installs the packages in `provision/pac
 i2c-tools) over the PC's internet connection: the PC shares it only for the install - forwarding and
 a masquerade rule in an nftables table of its own, all undone on exit - so a phone without Wi-Fi
 set up still gets them.
+
+## Licence
+
+Data, docs and research: [CC-BY-SA-4.0](LICENSE). Scripts, statements and configuration: MIT OR Apache-2.0, at your option
+([`LICENSE-MIT`](LICENSE-MIT), [`LICENSE-APACHE`](LICENSE-APACHE)). Patches to someone else's files keep their licence
+(GPL-2.0-only for the kernel, GPL-3.0-or-later for hexagonrpcd) and the UCM profiles keep alsa-ucm-conf's (BSD-3-Clause).
+[`REUSE.toml`](REUSE.toml) says it per path, and `bin/licence-check` (`make verify`, CI) keeps every tracked file covered.

@@ -15,6 +15,7 @@ canon:            ## rewrite the data in canonical form
 render:           ## render the pages from the data
 	$(TAD) render
 verify: check     ## what CI runs: data is valid and canonical, docs are fresh
+	@sh bin/licence-check
 	@before="$$(find data docs -type f -print0 2>/dev/null | sort -z | xargs -0 sha256sum 2>/dev/null)"; \
 	$(TAD) canon && $(TAD) render; \
 	after="$$(find data docs -type f -print0 | sort -z | xargs -0 sha256sum)"; \

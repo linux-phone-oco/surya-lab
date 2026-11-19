@@ -17,3 +17,11 @@ jobs:
           git ls-files -z '*.sh' | xargs -0 -n1 sh -n
           git ls-files -z '*.sh' | xargs -0 shellcheck -S error -s sh
           echo "checked: $(git ls-files '*.sh' | wc -l) scripts"
+  licences:
+    name: every file under a licence
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # a header or a REUSE.toml annotation per tracked file, and the text of every licence named
+      # (ideal-agent's scripts/licence-check, copied as it is: grenudi/ideal-agent#101)
+      - run: sh bin/licence-check
