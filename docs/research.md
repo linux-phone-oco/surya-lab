@@ -1432,3 +1432,28 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="surya-base-image-source-recorded"></a>
+### surya-base-image-source-recorded
+
+Date
+: 2026-11-19
+
+Brief
+: Base image source: images.nura.eco/bpo/v26.06/qcom-sm7150/sxmo-de-sway/BUILD/; our build 20261030-1151 rotated off; image-fresh-stock/ is the only copy
+
+Question
+: Where does surya's base image come from, and can it be fetched again?
+
+Found
+: Source pattern (given by orchestration, checked 2026-11-19): https://images.nura.eco/bpo/v26.06/qcom-sm7150/sxmo-de-sway/BUILD/ (the old images.postmarketos.org name also answers). The server keeps only the two newest builds: 20261106-0727 and 20261113-1159 answer 200; 20261030-1151, the build surya was flashed from, answers 404.
+So ~/Projects/surya-audio/image-fresh-stock/ (sha256 202298d9c2eba1aaa8265044072d91e07169a254c7daa0d99c6ca14bb0a31c85) is the ONLY copy left of that image; it is not to be deleted or touched. image/ (sha256 f0261713...7f06) was written since download; whether it may go is the author's call.
+The nearest replacement is a newer v26.06 build from that folder; using it means re-measuring every proof. Suggestion for the author (through the coordinator): a second copy of image-fresh-stock/ on another disk, off this machine.
+Other facts stand: file 20261030-1151-nura-v26.06-sxmo-de-sway-qcom-sm7150.img, 2845835264 bytes.
+
+About
+: deep-sleep
+
+Supersedes
+: surya-base-image-named

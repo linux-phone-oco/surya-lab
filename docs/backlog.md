@@ -2741,10 +2741,10 @@ Rank
 ### Record the base image's source pattern and that it has rotated off: image-fresh-stock/ is the ONLY copy
 
 Status
-: open
+: done
 
 Note
-: From orchestration: the source is Nura's image server https://images.nura.eco/bpo/v26.06/qcom-sm7150/sxmo-de-sway/BUILD/ (the old images.postmarketos.org name also answers). It keeps only the two newest builds, 20261106-0727 and 20261113-1159; 20261030-1151 returns 404. So image-fresh-stock/ (sha256 202298d9...1c85) is the ONLY copy left of the image surya was flashed from. REPO/RECORDS ONLY: add to the research row of surya-base-image-named (and device.toml's base-image comment): the URL pattern, the rotation fact, the date checked, that image-fresh-stock/ is the only copy, and that the nearest replacement is a newer v26.06 build from that folder, which means re-measuring every proof. Do NOT delete image-fresh-stock/ and do not touch it. Suggest in the report (the author decides, through the coordinator) a second copy off this machine (another disk). Whether image/ (written since, f0261713...7f06) may go is the author's call.
+: proven by research surya-base-image-source-recorded; image-fresh-stock untouched
 
 About
 : deep-sleep
