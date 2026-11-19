@@ -3020,10 +3020,12 @@ Proof
 ### Phantom key edges on pm8941_resin/pwrkey: screen goes off during use
 
 Status
-: open
+: done
 
 Note
-: Keeper 2026-11-19 08:30: idle capture 22 min + IRQ counts 0 since boot: NO hardware key edges (research key-chatter-idle-capture-no-edges). Open: capture while author uses the phone (attended), sxmo idle/screenoff hook read, DT nodes read.
+: CLOSED 2026-11-19 (coordinator): no hardware edges - a 22 min read-only capture saw 0 key events on pwrkey/resin/gpio-keys and both PMIC key IRQ counts at 0 since boot (6.7 h) (research key-chatter-idle-capture-no-edges, PR 377). The screen going off by itself was software: sxmo's autosleep/autosuspend loop on USB, answered by screen-turns-off-by-itself (surya-lab#207) and the always-held wake lock (PR 296). If the author sees it again with the wake lock held: reopen with the time (then the attended capture + sxmo idle/screenoff hook read).
+
+Keeper 2026-11-19 08:30: idle capture 22 min + IRQ counts 0 since boot: NO hardware key edges (research key-chatter-idle-capture-no-edges). Open: capture while author uses the phone (attended), sxmo idle/screenoff hook read, DT nodes read.
 
 About
 : deep-sleep
