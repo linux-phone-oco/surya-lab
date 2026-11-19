@@ -2942,14 +2942,10 @@ Rank
 ### Find which of the 7 PMIC wdt commits (or PM8916_WATCHDOG=y) brings clk.c:1047 on boot
 
 Status
-: open
+: done
 
 Note
-: REPLAN (coordinator, after calls4+: =m, clang+LTO, same warning; research clk-1047-calls4-wdt-module-still-warns): a full commit bisect is 3+ kernel builds for little value. Cheaper last discriminator, NO kernel build: the one-shot DTB try - calls4+'s kernel with a copy of its dtb in which the &pm6150_wdt node (the surya-only enable, c88ed67e0, +5 lines in sm7150-xiaomi-common.dtsi) is status = disabled (dtc the decompiled dtb, 'lpoco lab kernel try calls4 --dtb ...' - the earlier cluster-params dtb try is the recipe). If clk.c:1048/1047 disappears with the node disabled and the driver module present: it is the node's PROBE/enable that shifts the deferred-probe timing (not the series' code): say so. If it stays: it is display-side noise (the DSI PLL lock failure) independent of the series: stop here, do not bisect. Either way: write the plain conclusion for the upstreams coordinator (the series is cleared of authorship of the display bug) and point to the item dsi-pll-lock-failed-sm7150 (research) for the real fix. No bite, no suspend.
-
-2026-11-19 calls4+ (PM8916_WATCHDOG=m) tried once: warning stays (research clk-1047-calls4-wdt-module-still-warns). Next: build the parent of the series (then bisect the dtsi commits), one try each, unattended; tree wt-pmic-wdt2, objs obj-calls4.
-
-2026-11-19 coordinator DECISION after the first dtb try (PR 342): the control dtb (same dtc round trip, node okay) boots and warns; the dtb with the pm6150 wdt node DISABLED fell back to stock after 1 try, cause unseen. ONE more try, read first: (1) READ the failed try's log from the ESP ('lpoco lab kernel log calls4' or the name the entry has; the stalled initramfs saves its log after 5 min) and say why it did not boot (a dependency on the disabled node? a wakeup/ref in another node? dtc dropping a label?); (2) if the cause is trivial to fix in the dtb copy (e.g. a label reference), fix it and make ONE second try; (3) if the cause is not trivial or unseen again: STOP the discriminator, and conclude from what is in hand: the lock failure and the clk warnings are on the kept calls+ (no driver) too, calls3+ (clang) and calls4+ (=m) keep them, so the display side is the root and the series is cleared as far as measurable; record that plainly for the upstreams coordinator. No suspend, no bite, watchdog as is.
+: proven by: calls+/calls3+/calls4+ all show the warning; dtb discriminator unbootable with no log; stopped per coordinator decision; see research clk-1047-display-side-series-cleared. Real fix: dsi-pll-lock-failed-sm7150.
 
 About
 : deep-sleep
