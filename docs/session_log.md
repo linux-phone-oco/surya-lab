@@ -2227,3 +2227,18 @@ Done
 
 Considered
 : next: surya-steps-map-history / surya-step-checks (unattended); second dtb try rejected (cause unseen, no log)
+
+---
+
+
+<a id="2026-11-19-0215-how-the-phone-stands-step-claims"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: kept calls+ kernel running, unchanged this run (no phone change). Claimed 4 steps done and 3 partial from run 20261119-013649; closed surya-steps-map-history.
+
+Considered
+: next: surya-step-checks (new checks, code); host-check-stale-pieces; surya-base-image-source-recorded
