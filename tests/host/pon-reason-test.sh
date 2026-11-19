@@ -10,4 +10,10 @@ out=$(PON_REGMAP_REGISTERS="$tmp/registers" sh "$tmp/check.sh")
 case "$out" in *" pass "*"PMIC_WD"*) ;; *) echo "FAIL a bite is not named: $out"; exit 1 ;; esac
 out=$(PON_REGMAP_REGISTERS="$tmp/none" sh "$tmp/check.sh")
 case "$out" in *" skip "*) ;; *) echo "FAIL no regmap is not a skip: $out"; exit 1 ;; esac
+printf '0808: 00\n' > "$tmp/partial"
+out=$(PON_REGMAP_REGISTERS="$tmp/partial" sh "$tmp/check.sh")
+case "$out" in *"POFF_REASON1=0x?? (unread)"*) ;; *) echo "FAIL unread register not shown as unread: $out"; exit 1 ;; esac
+printf '0100: 12\n' > "$tmp/other"
+out=$(PON_REGMAP_REGISTERS="$tmp/other" sh "$tmp/check.sh")
+case "$out" in *" skip "*) ;; *) echo "FAIL a non-PON regmap is not a skip: $out"; exit 1 ;; esac
 echo ok
