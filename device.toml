@@ -220,3 +220,17 @@ expect = "/usr/share/sxmo/appcfg/profile_template"
 [[user_config]]
 path = "/home/user/.config/sxmo/sway"
 expect = "/usr/share/sxmo/appcfg/sway_template"
+
+# What only the attended session (procedures/attended-session.rs) needs, read at the top of its main (decision
+# 2026-11-19-attended-keys-in-the-manifest). The calls4 files are outside this repo (../../surya-audio, the keeper's
+# build), so they cannot be [images.NAME]: that table refuses a path with "..". Each carries its full sha256.
+[procedures.surya-attended-session]
+way_back = "/var/tmp/way-back.sh"
+standby = "/var/tmp/standby-run.sh"
+pon_reason = "/var/tmp/pon-reason.sh"
+calls4_image = "../../surya-audio/obj-calls4/arch/arm64/boot/Image"
+calls4_image_sha256 = "5d924cc66944693c23e1d4218baf9875f2ea75c26eb20ab459220f5edcd69672"
+calls4_dtb = "../../surya-audio/obj-calls4/arch/arm64/boot/dts/qcom/sm7150-xiaomi-surya-huaxing.dtb"
+calls4_dtb_sha256 = "2dfa06062b14d0719790ccf3d7e594eeb602de073b9502eca9531f418aa28338"
+calls4_modules = "../../surya-audio/scratch-calls4/modules.tgz"
+calls4_modules_sha256 = "245512bf460e6ebf54b4a04095313827f04c6c22b7f6e909ac9cbb09bc0ab707"

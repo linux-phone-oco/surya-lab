@@ -2932,3 +2932,24 @@ Rejected
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-attended-session-reads-device-toml-pin-v0-32-0"></a>
+### attended session reads device.toml, pin v0.32.0
+
+Entry date
+: 2026-11-19
+
+Done
+: Moved the remote script paths and the sha256-pinned calls4 files out of consts into [procedures.surya-attended-session]; Facts read at main's top and handed to steps; full sha256 replaces 8-digit prefixes; pin v0.32.0; dry run caught a wrong table name (surya-attended-session, not attended-session).
+
+Considered
+: [images.NAME] for the calls4 files
+
+Rejected
+: [images.NAME]: it refuses a path with '..' and the files live outside the repo in ../../surya-audio.
+
+About
+: deep-sleep

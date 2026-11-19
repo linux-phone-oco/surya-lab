@@ -3,15 +3,12 @@
 //! host's side) and returns a Result that stops the run. Nothing here reads like the procedure; main does.
 
 use crate::checks::*;
-use lpoco_attended::{phone, retry};
+use lpoco_attended::{phone, proc, retry};
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
-const WAY_BACK: &str = "/var/tmp/way-back.sh";
-const STANDBY: &str = "/var/tmp/standby-run.sh";
 /// the boot entry NAME of the kernel carrying pm8916_wdt (patch 6/6): plain, lpoco refuses a "+"; the release inside it keeps its +
 pub const PMICWDT_KERNEL: &str = "calls4";
-const PON_REASON: &str = "/var/tmp/pon-reason.sh";
 /// the sysfs name of the PMIC watchdog driver: a hyphen (the module is pm8916_wdt)
 const WDT_DRIVER: &str = "pm8916-wdt";
 const RUN_ID: &str = "attended";
@@ -45,16 +42,45 @@ fn phone_answers() -> Result<(), String> {
     retry(40, 5, || phone().sh("true"))
 }
 
-/// What the session puts on the phone: (file in this base, its place on the phone). The pon reason check is surya's
-/// own and the suite's put does not carry it.
-const PUTS: [(&str, &str); 3] = [
-    ("sleep/way-back.sh", WAY_BACK),
-    ("sleep/standby-run.sh", STANDBY),
-    ("tests/health/base/pon-reason.sh", PON_REASON),
-];
+/// What the session reads from `[procedures.surya-attended-session]` of device.toml: read once at the top of main, where
+/// `--dry-run` finds a missing key, and handed to the steps.
+#[derive(Clone)]
+pub struct Facts {
+    way_back: String,
+    standby: String,
+    pon_reason: String,
+    /// (path relative to this base, full sha256): the image, the dtb and the modules of the pmicwdt kernel
+    kernel_files: [(String, String); 3],
+}
 
-pub fn put_way_back() -> Result<(), String> {
-    for (local, remote) in PUTS {
+impl Facts {
+    pub fn from_device() -> Facts {
+        let file = |name: &str| (proc(name).text(), proc(&format!("{name}_sha256")).text());
+        Facts {
+            way_back: proc("way_back").text(),
+            standby: proc("standby").text(),
+            pon_reason: proc("pon_reason").text(),
+            kernel_files: [
+                file("calls4_image"),
+                file("calls4_dtb"),
+                file("calls4_modules"),
+            ],
+        }
+    }
+
+    /// What the session puts on the phone: (file in this base, its place on the phone). The pon reason check is
+    /// surya's own and the suite's put does not carry it.
+    fn puts(&self) -> [(&'static str, &str); 3] {
+        [
+            ("sleep/way-back.sh", &self.way_back),
+            ("sleep/standby-run.sh", &self.standby),
+            ("tests/health/base/pon-reason.sh", &self.pon_reason),
+        ]
+    }
+}
+
+pub fn put_way_back(f: &Facts) -> Result<(), String> {
+    for (local, remote) in f.puts() {
         lab(&["phone", "put", local, remote])?;
     }
     Ok(())
@@ -68,22 +94,11 @@ fn probe_script() -> String {
     )
 }
 
-/// The calls4 build on this lab machine, each file with the start of its sha256 (the files the keeper installed).
-const PMICWDT_FILES: [(&str, &str); 3] = [
-    ("surya-audio/obj-calls4/arch/arm64/boot/Image", "5d924cc6"),
-    (
-        "surya-audio/obj-calls4/arch/arm64/boot/dts/qcom/sm7150-xiaomi-surya-huaxing.dtb",
-        "2dfa0606",
-    ),
-    ("surya-audio/scratch-calls4/modules.tgz", "245512bf"),
-];
-
 /// Every try is spent by a boot: put the entry back with its one try, from files whose checksums are known.
-pub fn install_pmicwdt_kernel() -> Result<(), String> {
-    let home = std::env::var("HOME").map_err(|e| format!("HOME: {e}"))?;
+pub fn install_pmicwdt_kernel(f: &Facts) -> Result<(), String> {
     let mut paths = Vec::new();
-    for (rel, sha) in PMICWDT_FILES {
-        let path = format!("{home}/Projects/{rel}");
+    for (rel, sha) in &f.kernel_files {
+        let path = base_root().join(rel).to_string_lossy().to_string();
         verify_sha256(&path, sha)?;
         paths.push(path);
     }
@@ -98,16 +113,16 @@ pub fn install_pmicwdt_kernel() -> Result<(), String> {
     .map(|_| ())
 }
 
-fn verify_sha256(path: &str, prefix: &str) -> Result<(), String> {
+fn verify_sha256(path: &str, expected: &str) -> Result<(), String> {
     let out = Command::new("sha256sum")
         .arg(path)
         .output()
         .map_err(|e| format!("sha256sum {path}: {e}"))?;
     let text = String::from_utf8_lossy(&out.stdout);
-    if text.starts_with(prefix) {
+    if text.starts_with(expected) {
         Ok(())
     } else {
-        Err(format!("{path}: sha256 is not {prefix}..: {text}"))
+        Err(format!("{path}: sha256 is not {expected}: {text}"))
     }
 }
 
@@ -116,12 +131,14 @@ pub fn read_probe() -> Result<(), String> {
     probe_holds(&parse_probe(&text))
 }
 
-pub fn way_back_in_place() -> Result<(), String> {
-    phone().root(&format!("sh {WAY_BACK} check")).map(|_| ())
+pub fn way_back_in_place(f: &Facts) -> Result<(), String> {
+    let way_back = &f.way_back;
+    phone().root(&format!("sh {way_back} check")).map(|_| ())
 }
 
-pub fn bite() -> Result<(), String> {
-    phone().root(&format!("sh {WAY_BACK} fuse 20")).map(|_| ())
+pub fn bite(f: &Facts) -> Result<(), String> {
+    let way_back = &f.way_back;
+    phone().root(&format!("sh {way_back} fuse 20")).map(|_| ())
 }
 
 pub fn wait_for_restart() -> Result<(), String> {
@@ -130,9 +147,10 @@ pub fn wait_for_restart() -> Result<(), String> {
     read_probe()
 }
 
-pub fn pon_reason() -> Result<(), String> {
+pub fn pon_reason(f: &Facts) -> Result<(), String> {
+    let pon_reason = &f.pon_reason;
     let pon = phone().root(&format!(
-        "sh {PON_REASON} 2>&1; dmesg | grep -i -E 'pon|S2_CTL|reset' | tail -20"
+        "sh {pon_reason} 2>&1; dmesg | grep -i -E 'pon|S2_CTL|reset' | tail -20"
     ))?;
     if bite_seen(&pon) {
         Ok(())
@@ -142,22 +160,25 @@ pub fn pon_reason() -> Result<(), String> {
 }
 
 /// calls+ reads the reason the phone has NOW and says it: no bite is asked of it (that is the full session).
-pub fn pon_reason_now() -> Result<(), String> {
-    let pon = phone().root(&format!("sh {PON_REASON} 2>&1"))?;
+pub fn pon_reason_now(f: &Facts) -> Result<(), String> {
+    let pon_reason = &f.pon_reason;
+    let pon = phone().root(&format!("sh {pon_reason} 2>&1"))?;
     println!("  pon reason now: {}", pon.trim());
     Ok(())
 }
 
 /// The standby script is on the phone and readable by root, as the standby run will need it (put there by put_way_back).
-pub fn standby_script_reachable() -> Result<(), String> {
+pub fn standby_script_reachable(f: &Facts) -> Result<(), String> {
+    let standby = &f.standby;
     phone()
-        .root(&format!("test -r {STANDBY} && sh -n {STANDBY}"))
+        .root(&format!("test -r {standby} && sh -n {standby}"))
         .map(|_| ())
 }
 
-pub fn wake_in_suspend() -> Result<(), String> {
+pub fn wake_in_suspend(f: &Facts) -> Result<(), String> {
+    let way_back = &f.way_back;
     phone()
-        .root(&format!("sh {WAY_BACK} cycle 10 bt-on stop-sensors"))
+        .root(&format!("sh {way_back} cycle 10 bt-on stop-sensors"))
         .map(|_| ())
 }
 
@@ -166,9 +187,10 @@ pub fn step_checks() -> Result<(), String> {
     lab(&["suite", "run"]).map(|_| ())
 }
 
-pub fn start_standby() -> Result<(), String> {
+pub fn start_standby(f: &Facts) -> Result<(), String> {
+    let standby = &f.standby;
     phone().root(&format!(
-        "systemd-run --unit=standby-{RUN_ID} sh {STANDBY} {RUN_ID} 300 600"
+        "systemd-run --unit=standby-{RUN_ID} sh {standby} {RUN_ID} 300 600"
     ))?;
     Ok(())
 }
@@ -205,13 +227,60 @@ mod tests {
         assert!(probe_script().contains("/sys/bus/platform/drivers/pm8916-wdt "));
     }
 
+    fn device_text() -> String {
+        std::fs::read_to_string(base_root().join("device.toml")).unwrap()
+    }
+
+    fn facts_from_the_device_file() -> Facts {
+        let text = device_text();
+        let at = text
+            .find("[procedures.surya-attended-session]")
+            .expect("device.toml has no [procedures.surya-attended-session]");
+        let value = |key: &str| {
+            text[at..]
+                .lines()
+                .find_map(|l| l.strip_prefix(key)?.trim_start().strip_prefix('='))
+                .map(|v| v.trim().trim_matches('"').to_string())
+                .unwrap_or_else(|| panic!("no {key} in [procedures.surya-attended-session]"))
+        };
+        let file = |name: &str| (value(name), value(&format!("{name}_sha256")));
+        Facts {
+            way_back: value("way_back"),
+            standby: value("standby"),
+            pon_reason: value("pon_reason"),
+            kernel_files: [
+                file("calls4_image"),
+                file("calls4_dtb"),
+                file("calls4_modules"),
+            ],
+        }
+    }
+
     #[test]
     fn every_file_put_on_the_phone_exists_in_the_base() {
-        let base = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
-        for (local, _) in PUTS {
-            assert!(base.join(local).is_file(), "{local} is not in the base");
+        let f = facts_from_the_device_file();
+        for (local, remote) in f.puts() {
+            assert!(
+                base_root().join(local).is_file(),
+                "{local} is not in the base"
+            );
+            assert!(remote.starts_with("/var/tmp/"), "{remote}");
         }
-        assert!(PUTS.iter().any(|(_, remote)| *remote == PON_REASON));
+        assert!(f.puts().iter().any(|(_, r)| *r == f.pon_reason));
+    }
+
+    #[test]
+    fn the_kernel_files_are_named_with_a_full_checksum() {
+        for (path, sha) in facts_from_the_device_file().kernel_files {
+            assert!(
+                path.starts_with("../../") && !path.starts_with('/'),
+                "{path}"
+            );
+            assert!(
+                sha.len() == 64 && sha.chars().all(|c| c.is_ascii_hexdigit()),
+                "{sha}"
+            );
+        }
     }
 
     #[test]
