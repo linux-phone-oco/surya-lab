@@ -1631,3 +1631,28 @@ Sources
 
 About
 : deep-sleep
+
+
+<a id="bite-pon-and-calls4-choice"></a>
+### bite-pon-and-calls4-choice
+
+Date
+: 2026-11-19
+
+Brief
+: 0x03 = HARD_RESET+SMPL; the fuse arms the APSS wdt, never the PMIC one; the one try of calls4 was spent by the boot, so any reset lands on calls+
+
+Question
+: Would a pm8916-wdt bite read as PON 0x03, and why did calls4 not boot after the reset?
+
+Found
+: The reset was an APSS qcom_wdt bite (pick_wd refuses the PM8916 node), not a PMIC bite: POFF 0x00 has no PMIC_WD bit. PON_REASON1 0x03 = bit0 HARD_RESET + bit1 SMPL (qpnp table, ffs-1). What an APSS bite leaves on PM6150 is not known yet: settle by comparing with a plain reboot. calls4 not chosen: kernel try boots pmos-calls4+1-0, systemd-boot counts it to +0-1 and it sorts last, so every later reset boots calls+; the program's belief 'after a bite the next boot is a pm8916_wdt kernel' is false with one try. The pon_reason check (bite_seen) looks for strings the script never prints. Details: material README.
+
+Sources
+: qpnp-power-on-android-msm,linux-v7-3-pm8916-wdt
+
+About
+: deep-sleep
+
+Material
+: research/deep-sleep/2026-11-19-bite-pon/
