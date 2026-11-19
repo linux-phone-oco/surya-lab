@@ -2371,3 +2371,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-2330-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: phone untouched, kept 7.1.0-sm7150-calls+ as before; landed surya-suspend-stop-config (device.toml [health] suspend_stop = hexagonrpcd-adsp-sensorspd.service; repo only, manifest check not run: lpoco-manifest not installed on this host)
+
+Considered
+: next: surya-layer-declared (repo-only), user-config-declared repo edit (phone step waits lab v0.22 prepare), step-checks and the first suspend_stop cycle in an attended window; the sensors-after-suspend 'under Sxmo' wording is in docs/data/tests.json, orchestration's
+
+About
+: deep-sleep
