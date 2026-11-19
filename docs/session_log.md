@@ -2704,3 +2704,21 @@ Rejected
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-1512-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: unattended: ran surya-attended --until FIRST_PROMPT and --part calls-plus on surya (item surya-attended-real-dry-pieces); both stop at program faults (probe checks pm8916_wdt underscore vs sysfs pm8916-wdt; pon-reason.sh not on the phone). calls4 reinstalled and tried once (fell back by reboot to calls+). Phone on kept 7.1.0-sm7150-calls+, way-back check ok, watchdog/ramoops/pstore ok; lpoco-health 0.29.6 put on the phone.
+
+Considered
+: next: builder fixes for the two faults, then rerun surya-attended-real-dry-pieces; surya-kernel-pmic-wdt still needs an attended go window
+
+About
+: deep-sleep
