@@ -2893,3 +2893,21 @@ Rejected
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-1530-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: unattended: surya-pon-reason-every-boot done (pon-reason-read pass after suite put, no reboot or suspend); phone kept 7.1.0-sm7150-calls+, suite 20261119-152121 healthy 89 pass 0 fail, watchdog untouched
+
+Considered
+: next: surya-kernel-pmic-wdt when an attended go window opens; the rest need suspend or a witness. Follow-up: record PON_REASON1=0x03 (HARD_RESET SMPL) against research 2026-11-19-calls4-hang-was-the-reboot-out-of-calls-plus
+
+About
+: deep-sleep
