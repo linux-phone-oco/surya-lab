@@ -1,0 +1,44 @@
+# Who may use which file, and under what (REUSE: https://reuse.software/spec-3.3/#reusetoml), by path; later annotations win
+# where they overlap. Decision 2026-11-19-licences-for-our-repositories (linux-phone-oco/docs): data and docs are
+# CC-BY-SA-4.0 (LICENSE), scripts, statements and configuration MIT OR Apache-2.0 (LICENSE-MIT, LICENSE-APACHE); a file
+# of someone else's, or a patch to one, keeps that file's licence. bin/licence-check (make verify, CI) is ideal-agent's
+# scripts/licence-check, copied as it is: it reads one `path = [...]` per line, and `*` for it crosses folders.
+version = 1
+
+# The data, docs and research (measurements, traces, captured logs we took from our own phone).
+[[annotations]]
+path = ["LICENSE", "README.md", "AGENTS.md", "data/**", "docs/**", "research/**", "tests/results/**", "tests/health/README.md", "device.toml", "ucm/README.md"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 grenudi"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+# The scripts, statements and configuration.
+[[annotations]]
+path = [".github/**", "bin/**", "queries/**", "records/**", "tests/health/**", "provision/**", "adsp/**", "dt/**", "sleep/**", "ui/**", "lab/**", "tables.toml", "Makefile", "devicebase.toml", "idealkb.toml", "oco.toml", ".gitignore", "REUSE.toml"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 grenudi"
+SPDX-License-Identifier = "MIT OR Apache-2.0"
+
+# Patches to someone else's files carry the licence of the files they change (checked 2026-11-19 against the source).
+# The two kernel drivers: GPL-2.0-only (their SPDX line upstream; the lpass-lpi sibling pinctrl-sm8250-lpass-lpi.c is the same).
+[[annotations]]
+path = ["patches/qcom-wdt-keep-armed-in-suspend.patch", "patches/pinctrl-sm7150-lpass-lpi-swr-mux.patch"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 grenudi; the Linux kernel's authors"
+SPDX-License-Identifier = "GPL-2.0-only"
+
+# hexagonrpcd (linux-msm/hexagonrpc, "sensh"): its headers say GPL-3.0 or later.
+[[annotations]]
+path = ["patches/hexagonrpcd-sns-reg-version.patch"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 grenudi; The Sensor Shell Contributors"
+SPDX-License-Identifier = "GPL-3.0-or-later"
+
+# The UCM profiles are written from alsa-ucm-conf's (github.com/alsa-project/alsa-ucm-conf, BSD-3-Clause; they replace its
+# files, and are meant for it). UNKNOWN, TO BE CHECKED: whether any line of them is carried over from an upstream file by
+# another author; until then they keep the upstream licence.
+[[annotations]]
+path = ["ucm/Xiaomi/**", "ucm/conf.d/**"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 grenudi; alsa-ucm-conf authors"
+SPDX-License-Identifier = "BSD-3-Clause"
