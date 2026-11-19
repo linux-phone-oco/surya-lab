@@ -3287,31 +3287,6 @@ Rank
 : 1
 
 
-<a id="surya-host-usb-timeline"></a>
-### lpoco lab kernel try (and any reboot it waits on) prints the host's USB timeline for the phone's port: frozen vs re-enumerating vs absent
-
-Status
-: open
-
-Note
-: lab-tools. The lab machine's own journalctl -k --utc already says what the phone did on USB (measured 2026-11-19: device 38 stayed connected 14:25:54-14:47:45, so the phone froze after calls+ stopped clean; a normal boot shows d001 twice 12 s apart). When no new boot answers in the wait, print the events since the reboot for the phone's port (found by the device.toml address/serial, not a bus number): 'frozen: device N connected since T, no re-enumeration', 'absent', or the sequence of IDs. Read-only, no phone change. The failing test feeds the 14:25-14:48 excerpt (research 2026-11-19-calls4-hang-was-the-reboot-out-of-calls-plus) and expects 'frozen'. Pass the time range as arguments, never spliced into a shell string.
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-19
-
-Needs
-: build
-
-Proof
-: kernel-try-reports-usb-timeline
-
-Rank
-: 1
-
-
 <a id="surya-pon-reason-every-boot"></a>
 ### Every boot's health report carries the PMIC's last reset reason (power-on and power-off reason), so a power cycle, a bite and a PS_HOLD reset tell apart
 
@@ -3426,3 +3401,33 @@ Proof
 
 Rank
 : 3
+
+
+<a id="surya-host-usb-timeline"></a>
+### lpoco lab kernel try (and any reboot it waits on) prints the host's USB timeline for the phone's port: frozen vs re-enumerating vs absent
+
+Status
+: open
+
+Note
+: lab-tools. The lab machine's own journalctl -k --utc already says what the phone did on USB (measured 2026-11-19: device 38 stayed connected 14:25:54-14:47:45, so the phone froze after calls+ stopped clean; a normal boot shows d001 twice 12 s apart). When no new boot answers in the wait, print the events since the reboot for the phone's port (found by the device.toml address/serial, not a bus number): 'frozen: device N connected since T, no re-enumeration', 'absent', or the sequence of IDs. Read-only, no phone change. The failing test feeds the 14:25-14:48 excerpt (research 2026-11-19-calls4-hang-was-the-reboot-out-of-calls-plus) and expects 'frozen'. Pass the time range as arguments, never spliced into a shell string.
+
+2026-11-19 surya coordinator: this is lab-tools work; the surya builder skips it. Orchestration: please put it on the lab-tools build queue (the host USB timeline per boot: enumeration/disconnect times from the host log, so a hang shows as 'gadget stayed connected after a clean stop').
+
+Waits
+: lab-tools builder (orchestration queues it in docs, project lab-tools): lab-tools' AGENTS.md lets only the lab-tools builder land there
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: build
+
+Proof
+: kernel-try-reports-usb-timeline
+
+Rank
+: 1
