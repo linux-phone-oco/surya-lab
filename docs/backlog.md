@@ -3111,8 +3111,10 @@ Note
 
 Library: lpoco-attended-v0.29.2 has dmesg_clean, check_probe, wait_for_phone, read_dmesg, wait_for_usb (lab-tools #250, #251); boot_once and back_to_known_good come next, then lpoco attended new|run|check. Switch the inline read_dmesg and wait_for_usb to the library when moving.
 
+2026-11-19 orchestration (docs decision 2026-11-19-procedure-values-from-the-named-device): the procedure names its device; lpoco-attended loads that device.toml; library steps read named keys from it; a missing key fails --dry-run; devlab gets --device explicitly. With the move: surya's consts in lab/attended/session.rs (PMICWDT_KERNEL, WAY_BACK, STANDBY and the rest) go into surya-lab's device.toml under the tables that already hold those facts (kernel entries, the kept kernel and way back, [health]); a new key only where none exists. Blocked by lab-tools attended-device-values (building next, before the scaffold).
+
 Waits
-: lab-tools attended-scaffold (lpoco attended new|run|check) released
+: lab-tools attended-scaffold (lpoco attended new|run|check) and attended-device-values released
 
 About
 : deep-sleep
