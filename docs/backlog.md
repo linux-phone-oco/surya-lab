@@ -2958,3 +2958,25 @@ Needs
 
 Rank
 : 4
+
+
+<a id="surya-suspend-stop-config"></a>
+### device.toml [health] suspend_stop = ["sensorspd"]; the sensors-after-suspend wording drops 'under Sxmo'
+
+Status
+: open
+
+Note
+: From orchestration (lab-tools #209): lpoco-health's suspend cycle can stop and restart NAMED units around suspend, taking over the job sxmo's profile did (the sensors daemon around suspend). REPO-ONLY edit, one landing: (1) device.toml gets [health] suspend_stop = ["sensorspd"] (the unit name as the phone knows it: hexagonrpcd-adsp-sensorspd.service - read the exact name from the phone's units / sleep/way-back.sh's stop-sensors, do not guess; keep the existing suspend_guard / suspend_quiet keys); (2) the test sensors-after-suspend drops 'under Sxmo' from its wording (docs/tests description and the test file); its proof now comes from 'lpoco-health suspend cycle' in the test layer. Nothing has run on the phone yet: the first cycle after surya-test-layer-entry is the proof (attended, witness: with surya-sxmo-suspend-series). No phone step for this edit; tad check green; land.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Rank
+: 5
