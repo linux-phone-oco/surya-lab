@@ -3156,10 +3156,10 @@ Rank
 ### attended program: two faults found by the real run - sysfs driver name pm8916-wdt (hyphen), and pon-reason.sh missing on the phone
 
 Status
-: open
+: done
 
 Note
-: Found by the keeper's real run (surya-lab PR 412). (1) lab/attended/src/session.rs:51 probes /sys/bus/platform/drivers/pm8916_wdt (underscore) but the sysfs dir is pm8916-wdt (hyphen): check 4 fails though calls4 boots fine (205 s, pm8916-wdt = watchdog1, way-back ok); fix the path and take the name from device.toml/one constant. (2) --part calls-plus fails check 3: /usr/lib/lpoco-health/pon-reason.sh is not on the phone even after suite put (surya's tests/health/base/pon-reason.sh is not in the put): make the program put it (phone root) or the suite include it - decide which by how the other health checks reach the phone (read lpoco lab suite put). Also: finish_healthy's read_probe needs a pm8916 kernel, so on calls+ in --part calls-plus it must not probe the driver (probe only after a calls4 boot); check the part's order. Keep main.rs a checklist. Dry-run both modes, fmt, clippy, test; land; then the keeper reruns surya-attended-real-dry-pieces.
+: Landed in surya-lab PR 414: probe reads drivers/pm8916-wdt (one constant); put_way_back also puts tests/health/base/pon-reason.sh at /var/tmp/pon-reason.sh and both pon checks run it from there; --part calls-plus ends with finish_on_kept_kernel (no pm8916 probe). fmt, clippy, 11 tests, both dry-runs pass; programmer review clean. Not run on the phone: the keeper reruns surya-attended-real-dry-pieces.
 
 About
 : deep-sleep
