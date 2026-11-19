@@ -1,0 +1,9 @@
+[package]
+name = "surya-steps"
+version = "0.1.0"
+edition = "2021"
+description = "surya's own steps for its attended procedures: the pmicwdt kernel, the bite, the standby current"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+lpoco-attended = { git = "https://github.com/linux-phone-oco/lab-tools", tag = "lpoco-attended-v0.31.1" }

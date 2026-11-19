@@ -2911,3 +2911,24 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-attended-session-moved-to-procedures"></a>
+### attended session moved to procedures/
+
+Entry date
+: 2026-11-19
+
+Done
+: lab/attended became procedures/attended-session.rs plus procedures/steps; lpoco-attended pinned v0.31.1; device.toml declares [kernels]; ask_author replaced by look_for, unplug_usb, replug_usb; the standby run split into start_standby and read_standby so the unplug falls inside it; the old dry_run tests dropped for lpoco-attended check, their three cases re-run by hand.
+
+Considered
+: wait_for_gadget with [[host.gadget]] usb_id 18d1:d001
+
+Rejected
+: [[host.gadget]] now: it needs a serial and access list; only 'starts post' is known, and a made-up serial would mislead the host plan. Add it when the real serial is read, with the first step that waits for the gadget.
+
+About
+: deep-sleep

@@ -3404,22 +3404,13 @@ Witness
 ### Move lab/attended (#394) to procedures/attended-session.rs plus procedures/steps, per docs decision 2026-11-19-procedures-one-shape
 
 Status
-: open
+: in-progress
 
 Note
-: From orchestration 2026-11-19: one shape for procedures: procedures/NAME.rs in the device repo, one rust-script each over lpoco-attended, plus at most one procedures/steps crate for surya-only steps; lpoco attended new|run|check (lab-tools) scaffolds, runs and dry-runs them, so no per-procedure Cargo.toml, lock or dry-run test. Move lab/attended to procedures/attended-session.rs (main.rs's chain) + procedures/steps (session.rs, checks.rs minus boot_once, wait_for_usb, back_to_known_good, read_dmesg, which lab-tools' step library takes). Keep the entry file a checklist (decision 2026-11-19-attended-only-when-one-command-away). No hurry before the real run.
+: 2026-11-19 surya-builder: the move is done and dry-run green (procedures/attended-session.rs + procedures/steps on lpoco-attended v0.31.1, lab/attended gone, [kernels] test = calls4, calls / kept = calls in device.toml, physical steps in place; run: lpoco-attended run attended-session [--dry-run] [--until FIRST_PROMPT | --part calls-plus], lpoco-attended check). Not run on the phone. Left: the consts and the gadget named in waits.
 
-Library: lpoco-attended-v0.29.2 has dmesg_clean, check_probe, wait_for_phone, read_dmesg, wait_for_usb (lab-tools #250, #251); boot_once and back_to_known_good come next, then lpoco attended new|run|check. Switch the inline read_dmesg and wait_for_usb to the library when moving.
-
-2026-11-19 orchestration (docs decision 2026-11-19-procedure-values-from-the-named-device): the procedure names its device; lpoco-attended loads that device.toml; library steps read named keys from it; a missing key fails --dry-run; devlab gets --device explicitly. With the move: surya's consts in lab/attended/session.rs (PMICWDT_KERNEL, WAY_BACK, STANDBY and the rest) go into surya-lab's device.toml under the tables that already hold those facts (kernel entries, the kept kernel and way back, [health]); a new key only where none exists. Blocked by lab-tools attended-device-values (building next, before the scaffold).
-
-2026-11-19 orchestration (docs decision 2026-11-19-attended-steps-name-the-physical-act): ask_author is being replaced by steps that name the physical act: press_power(secs), hold_button(name, secs), unplug_usb, replug_usb, touch, swipe, look_for(".."), listen_for(".."), confirm("..") - done by a person today, by a rig later when the lab declares one. ask_author keeps working one release as confirm. No change needed now; when lpoco-attended releases the names, use them in the procedure (the unplug for standby is unplug_usb/replug_usb; the bite watch is look_for; the hold-power recovery is hold_button(power, 15)).
-
-2026-11-19 orchestration: lpoco-attended v0.30.0 (lab-tools #263): procedure() loads the named device.toml and hands devlab --device; [[host.gadget]] usb_id and steps::wait_for_gadget read the device's USB id; a missing key ends the run, dry run too. The move of session.rs consts into surya-lab's device.toml can start once boot_once/back_to_known_good read kernel names from it (lab-tools builder, running). Surya's USB id for the gadget: 18d1:d001 'Qualcomm SM7150 Device' (pmOS initramfs gadget, serial starts 'post').
-
-2026-11-19 orchestration: lpoco-attended v0.31.0 (lab-tools #266) is out: physical steps over a Bench (press_power, hold_button, unplug_usb, replug_usb, touch, swipe, look_for, listen_for, confirm; a person by default, --dry-run lists the doer; ask_author is confirm), boot_once/back_to_known_good read device.toml [kernels] test/kept; a missing key or unlisted name exits 2 naming it, dry run too. UNBLOCKED: declare [kernels] (test = calls4, kept = calls+; plain names, see decision on entry names) and [[host.gadget]] usb_id (18d1:d001) in surya-lab's device.toml, move session.rs consts there (PMICWDT_KERNEL, WAY_BACK, STANDBY, ...), swap ask_author for the physical steps (unplug_usb/replug_usb for standby, look_for for the bite watch, hold_button(power,15) for recovery), then move to procedures/. Until the move is done stay pinned to v0.29.0 (the new release fails procedures calling those steps without [kernels]); bump the pin IN the move. Keep the entry file a checklist.
-
-2026-11-19 orchestration: lpoco-attended v0.31.1 (lab-tools #269) has the scaffold: 'lpoco-attended new NAME' writes procedures/NAME.rs, 'run NAME [--dry-run] [--log FILE]', 'check' dry-runs them all (for CI). Until the binary ships with the lab tools, install it: cargo install --git https://github.com/linux-phone-oco/lab-tools --tag lpoco-attended-v0.31.1 lpoco-attended (build output under $AGENT_BUILD, not /tmp). UNBLOCKED: start the move now (pin v0.31.1 in it).
+Waits
+: lab-tools manifest keys (decision 2026-11-19-attended-keys-in-the-manifest): WAY_BACK, STANDBY, PON_REASON (and the sha-pinned calls4 files, RUN_ID) stay inline in procedures/steps/src/session.rs until the tag arrives, then move to the table that owns each fact or [procedures.attended-session]; [[host.gadget]] usb_id 18d1:d001 waits for the gadget's real serial (only 'starts post' is known)
 
 About
 : deep-sleep

@@ -10,7 +10,7 @@ use std::process::Command;
 const WAY_BACK: &str = "/var/tmp/way-back.sh";
 const STANDBY: &str = "/var/tmp/standby-run.sh";
 /// the boot entry NAME of the kernel carrying pm8916_wdt (patch 6/6): plain, lpoco refuses a "+"; the release inside it keeps its +
-const PMICWDT_KERNEL: &str = "calls4";
+pub const PMICWDT_KERNEL: &str = "calls4";
 const PON_REASON: &str = "/var/tmp/pon-reason.sh";
 /// the sysfs name of the PMIC watchdog driver: a hyphen (the module is pm8916_wdt)
 const WDT_DRIVER: &str = "pm8916-wdt";
@@ -41,7 +41,7 @@ fn lab(args: &[&str]) -> Result<String, String> {
     }
 }
 
-pub fn wait_for_phone() -> Result<(), String> {
+fn phone_answers() -> Result<(), String> {
     retry(40, 5, || phone().sh("true"))
 }
 
@@ -111,11 +111,6 @@ fn verify_sha256(path: &str, prefix: &str) -> Result<(), String> {
     }
 }
 
-pub fn boot_pmicwdt_kernel() -> Result<(), String> {
-    lab(&["kernel", "try", PMICWDT_KERNEL])?;
-    wait_for_phone()
-}
-
 pub fn read_probe() -> Result<(), String> {
     let text = phone().sh(&probe_script())?;
     probe_holds(&parse_probe(&text))
@@ -131,7 +126,7 @@ pub fn bite() -> Result<(), String> {
 
 pub fn wait_for_restart() -> Result<(), String> {
     std::thread::sleep(std::time::Duration::from_secs(30));
-    wait_for_phone()?;
+    phone_answers()?;
     read_probe()
 }
 
@@ -171,10 +166,15 @@ pub fn step_checks() -> Result<(), String> {
     lab(&["suite", "run"]).map(|_| ())
 }
 
-pub fn standby_current() -> Result<(), String> {
+pub fn start_standby() -> Result<(), String> {
     phone().root(&format!(
         "systemd-run --unit=standby-{RUN_ID} sh {STANDBY} {RUN_ID} 300 600"
     ))?;
+    Ok(())
+}
+
+/// Wait out the run (the phone is unplugged meanwhile: devlab retries until the cable is back), then print the mean current.
+pub fn read_standby() -> Result<(), String> {
     retry(200, 10, || {
         phone().sh(&format!("[ ! -d /run/systemd/transient/standby-{RUN_ID}.service ] || ! systemctl is-active standby-{RUN_ID}"))
     })?;
@@ -212,6 +212,18 @@ mod tests {
             assert!(base.join(local).is_file(), "{local} is not in the base");
         }
         assert!(PUTS.iter().any(|(_, remote)| *remote == PON_REASON));
+    }
+
+    #[test]
+    fn the_device_lists_the_kernel_the_session_boots() {
+        let toml = std::fs::read_to_string(base_root().join("device.toml")).unwrap();
+        let at = toml
+            .find("[kernels]")
+            .expect("device.toml has no [kernels]");
+        assert!(toml[at..]
+            .lines()
+            .take(4)
+            .any(|l| l.starts_with("test") && l.contains(&format!("\"{PMICWDT_KERNEL}\""))));
     }
 
     #[test]

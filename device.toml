@@ -28,6 +28,12 @@ to = "/usr/bin/sxmo_deviceprofile_{compatible}.sh"
 mode = "755"
 when = "command -v sxmo_init.sh"
 
+# the kernels the lab boots by name (lpoco-attended's boot_once and back_to_known_good read them): plain entry names, no "+"
+# (systemd-boot's try counter). calls4 carries pm8916_wdt (patch 6/6); calls is the kept kernel, 7.1.0-sm7150-calls+ inside it.
+[kernels]
+test = ["calls4", "calls"]
+kept = "calls"
+
 [flash]
 sector_size = 4096
 dtb = "esp:dtbs/qcom/sm7150-xiaomi-surya-huaxing.dtb"
