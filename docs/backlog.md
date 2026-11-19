@@ -2300,39 +2300,14 @@ Rank
 : 2
 
 
-<a id="surya-test-layer-entry"></a>
-### A second boot entry of the same Nura v26.06 image at multi-user.target (the hardware-test layer), through lpoco's test-kernel route with its fallback
-
-Status
-: open
-
-Note
-: 2026-11-19 keeper: lpoco lab kernel install refuses a second entry of the running kernel's release (modules would replace); needs lab-tools change (entry-only install with --cmdline) or a differently-versioned build; coordinator decides
-
-Waits
-: lab-tools: an entry-only install or 'kernel try --cmdline' for the RUNNING release (asked of orchestration 2026-11-19); surya-lab#373 has the refusal text
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-19
-
-Needs
-: phone
-
-Rank
-: 4
-
-
 <a id="devlab-kernel-try-cmdline"></a>
 ### devlab kernel try NAME --cmdline: a one-shot kernel command line
 
 Status
-: open
+: done
 
 Note
-: lab-tools change (coordinator routing it): one-shot entry NAME-cmd falling back by itself like --dtb; needed for noirqdebug in r4
+: 2026-11-19: landed in lab-tools #272 (v0.32.1, installed on the host): kernel try --cmdline. Surya's use of it is surya-test-layer-entry. (Not yet seen booting with the cmdline once on surya: that is that item's run.)
 
 Waits
 : lab-tools: an entry-only install or 'kernel try --cmdline' for the RUNNING release (asked of orchestration 2026-11-19); surya-lab#373 has the refusal text
@@ -3540,3 +3515,27 @@ Proof
 
 Witness
 : person
+
+
+<a id="surya-test-layer-entry"></a>
+### A second boot entry of the same Nura v26.06 image at multi-user.target (the hardware-test layer), through lpoco's test-kernel route with its fallback
+
+Status
+: open
+
+Note
+: 2026-11-19 keeper: lpoco lab kernel install refuses a second entry of the running kernel's release (modules would replace); needs lab-tools change (entry-only install with --cmdline) or a differently-versioned build; coordinator decides
+
+2026-11-19: the wait is gone - 'kernel try --cmdline' landed in lab-tools #272 (lpoco family 0.32.1, on the host). The lane is paused by the author; next in the phone queue after the attended run.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Rank
+: 4
