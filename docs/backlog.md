@@ -2946,7 +2946,7 @@ Status
 : open
 
 Note
-: 2026-11-19 keeper: boot-basics.sh (PR 348) done; five steps claimed from run 20261119-042511 (programmer-reviewed). STILL TO DO: checks for steps with no proof test (sim-ready, standby-current, pon-reason...).
+: 2026-11-19 keeper: boot-basics.sh (PR 348) and buttons-rtc-sim.sh done: buttons-report, rtc-alarm-present (RTC date reads 1970: time is kept by the shell), sim-ready (skips, no SIM; modem failed/sim-missing). Run on phone, read only. STILL TO DO: pon-reason-read (needs root dmesg/pstore), standby-current, reset-types.
 
 About
 : deep-sleep
