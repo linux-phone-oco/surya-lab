@@ -2989,3 +2989,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-1845-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: attended run on surya-kernel-pmic-wdt: calls4 booted once (first try froze, power hold; second try fine), fuse armed, phone reset itself back to kept calls+, PON 0x03 (hard reset), pstore empty - bite not proven; run stopped at the look-for when the author paused the lane. Phone on kept kernel calls+, healthy (0 fail), way back check passes, lease released.
+
+Considered
+: next: when the author resumes, rerun lpoco-attended run attended-session; builder gaps: --from point, skip when the test kernel runs, --until then rerun doubles reboots. Why the reset left on calls+ and not calls4 (one-shot consumed by the boot) is unexplained: read first
+
+About
+: deep-sleep
