@@ -2946,7 +2946,7 @@ Status
 : open
 
 Note
-: 2026-11-19 keeper: boot-basics.sh (PR 348) and buttons-rtc-sim.sh done: buttons-report, rtc-alarm-present (RTC date reads 1970: time is kept by the shell), sim-ready (skips, no SIM; modem failed/sim-missing). Run on phone, read only. STILL TO DO: pon-reason-read (needs root dmesg/pstore), standby-current, reset-types.
+: 2026-11-19 keeper: pon-reason.sh added (skip: mainline qcom-pon exposes no reason; needs driver or SDAM read). standby-current needs a suspend: attended window only (fuse). reset-types: nothing readable in sysfs, not written.
 
 About
 : deep-sleep
