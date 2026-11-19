@@ -2452,3 +2452,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-0820-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: phone untouched this round, kept 7.1.0-sm7150-calls+, healthy (86 pass, 0 fail, 9 not measured, no-sim); surya-user-config-declared done (4 user configs match package defaults)
+
+Considered
+: next: surya-test-layer-entry (rank 4, ready, boot entry via kernel try route, fuse/watchdog as is), surya-layer-kernel-pinned (repo only); standby-current/reset-types wait an attended window
+
+About
+: deep-sleep

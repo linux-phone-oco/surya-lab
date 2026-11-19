@@ -3010,10 +3010,10 @@ Rank
 ### Declare the sxmo user configs the lab cares about as [[user_config]] in device.toml
 
 Status
-: open
+: done
 
 Note
-: 2026-11-19 keeper (b-migrate per coordinator decision): live conky.conf/bonsai_tree.json/profile differed only by older package (conky own_window_argb->colour, bonsai delay units + power_released, profile typo): no deliberate lab change. Backed up to phone ~/migration-backup-20261119, replaced by package defaults (owner user:root), sxmo_migrate.sh state: all up to date (no 'clean' mode in this version). lpoco host check: no DRIFTED. No sxmo restart done (files read at next session start). Remaining: a boot report showing the pieces match, then done.
+: proven by the phone 2026-11-19 ~08:15: suite run 20261119-071125 healthy (86 pass, 0 fail); conky.conf, bonsai_tree.json, profile, sway each byte-identical to its package default (cmp on the phone); device.toml declares all four
 
 About
 : deep-sleep
