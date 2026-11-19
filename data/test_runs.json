@@ -198,3 +198,10 @@
 {"id":"20261118-235413","device_id":"xiaomi-surya","run_at":"2026-11-18 23:54:13","kernel":"7.1.0-sm7150-calls+","shell":"swmo","passed":76,"failed":0,"gaps":3,"skipped":6}
 {"id":"20261119-003156","device_id":"xiaomi-surya","run_at":"2026-11-19 00:31:56","kernel":"7.1.0-sm7150-calls3+","shell":"swmo","passed":76,"failed":0,"gaps":3,"skipped":6}
 {"id":"20261119-003543","device_id":"xiaomi-surya","run_at":"2026-11-19 00:35:43","kernel":"7.1.0-sm7150-calls+","shell":"swmo","passed":76,"failed":0,"gaps":3,"skipped":6}
+{"id":"20261119-011341","device_id":"xiaomi-surya","run_at":"2026-11-19 01:13:41","kernel":"7.1.0-sm7150-calls4+","shell":"swmo","passed":76,"failed":0,"gaps":3,"skipped":6}
+{"id":"20261119-011723","device_id":"xiaomi-surya","run_at":"2026-11-19 01:17:23","kernel":"7.1.0-sm7150-calls+","shell":"swmo","passed":76,"failed":0,"gaps":3,"skipped":6}
+{"id":"20261119-012409","device_id":"xiaomi-surya","run_at":"2026-11-19 01:24:09","kernel":"7.1.0-sm7150-calls4+","shell":"swmo","passed":75,"failed":1,"gaps":3,"skipped":6}
+{"id":"20261119-012836","device_id":"xiaomi-surya","run_at":"2026-11-19 01:28:36","kernel":"7.1.0-sm7150-calls+","shell":"swmo","passed":76,"failed":0,"gaps":3,"skipped":6}
+{"id":"20261119-013205","device_id":"xiaomi-surya","run_at":"2026-11-19 01:32:05","kernel":"7.1.0-sm7150-calls4+","shell":"swmo","passed":73,"failed":3,"gaps":3,"skipped":6}
+{"id":"20261119-013511","device_id":"xiaomi-surya","run_at":"2026-11-19 01:35:11","kernel":"7.1.0-sm7150-calls+","shell":"swmo","passed":76,"failed":0,"gaps":3,"skipped":6}
+{"id":"20261119-013649","device_id":"xiaomi-surya","run_at":"2026-11-19 01:36:49","kernel":"7.1.0-sm7150-calls+","shell":"swmo","passed":76,"failed":0,"gaps":3,"skipped":6}
