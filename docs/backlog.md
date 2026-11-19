@@ -3545,10 +3545,10 @@ Rank
 ### CI job that checks device.toml with the newest lpoco-lab release, copied from device-template #36
 
 Status
-: open
+: done
 
 Note
-: From orchestration 2026-11-19 (decision 2026-11-19-host-follows-releases (c)): device-template #36 adds a CI job that checks device.toml with the newest lpoco-lab release (sha256-checked, no secret), so a device.toml the lab's tools cannot read cannot land (the surya-lab #444 [kernels] incident). Copy into surya-lab: bin/check-device-toml.sh, tests/ci/check-device-toml.sh and the device-toml job in .github/workflows/check.yml (GH_TOKEN: github.token). Copy from the merged device-template files, not from memory; the new job must pass on main's device.toml; shell glue is already written there, no new logic scripts.
+: device-toml job copied from device-template #36 (bin/check-device-toml.sh, tests/ci/check-device-toml.sh, check.yml job); proof: its 6-case test passes, the real check passes on main's device.toml with lpoco-lab 0.37.0 and fails on a [kernelz] device.toml; the CI job is the landing check
 
 About
 : deep-sleep

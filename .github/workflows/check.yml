@@ -25,3 +25,13 @@ jobs:
       # a header or a REUSE.toml annotation per tracked file, and the text of every licence named
       # (ideal-agent's scripts/licence-check, copied as it is: grenudi/ideal-agent#101)
       - run: sh bin/licence-check
+  device-toml:
+    name: device.toml is read by the newest lpoco-lab
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # the script's own proof against a stand-in release, then the real check with the newest lpoco-lab release asset
+      - run: sh tests/ci/check-device-toml.sh
+      - run: sh bin/check-device-toml.sh
+        env:
+          GH_TOKEN: ${{ github.token }}

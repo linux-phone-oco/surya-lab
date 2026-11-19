@@ -3049,3 +3049,21 @@ Rejected
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-surya-device-toml-ci"></a>
+### device-toml CI job in surya-lab
+
+Entry date
+: 2026-11-19
+
+Done
+: Copied bin/check-device-toml.sh, tests/ci/check-device-toml.sh and the device-toml job from the merged device-template files (#36); ran the 6-case proof, the real check on device.toml (passes, lpoco-lab 0.37.0), and a broken device.toml (fails naming the key); licence-check covers the new files.
+
+Rejected
+: Writing the check anew or pinning a release: the decision 2026-11-19-host-follows-releases (c) wants the newest release, copied as it is.
+
+About
+: deep-sleep
