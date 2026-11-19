@@ -8,8 +8,8 @@ use std::process::Command;
 
 const WAY_BACK: &str = "/var/tmp/way-back.sh";
 const STANDBY: &str = "/var/tmp/standby-run.sh";
-/// the kernel entry carrying pm8916_wdt (patch 6/6); lane rule: after a bite never calls+
-const PMICWDT_KERNEL: &str = "calls4+";
+/// the boot entry NAME of the kernel carrying pm8916_wdt (patch 6/6): plain, lpoco refuses a "+"; the release inside it keeps its +
+const PMICWDT_KERNEL: &str = "calls4";
 const RUN_ID: &str = "attended";
 
 fn lab(args: &[&str]) -> Result<String, String> {
@@ -105,4 +105,17 @@ pub fn finish_healthy() -> Result<(), String> {
     read_probe()?;
     lab(&["health"])?;
     lab(&["keeper", "release"]).map(|_| ())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn entry_name_is_plain_for_lpoco_kernel_try() {
+        assert!(
+            !PMICWDT_KERNEL.contains('+'),
+            "lpoco refuses a NAME with '+'"
+        );
+    }
 }

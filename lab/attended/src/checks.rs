@@ -33,6 +33,9 @@ pub fn probe_holds(p: &Probe) -> Result<(), String> {
     if p.kernel.is_empty() {
         return Err("no kernel release read".into());
     }
+    if !p.kernel.contains("calls4") {
+        return Err(format!("not the calls4 kernel: {}", p.kernel));
+    }
     Ok(())
 }
 
@@ -63,7 +66,12 @@ mod tests {
         let ok = parse_probe("driver=1\ntimeout=32\nkernel=7.0.0-calls4+");
         assert_eq!(probe_holds(&ok), Ok(()));
         assert!(probe_holds(&parse_probe("driver=0\ntimeout=32\nkernel=x")).is_err());
-        assert!(probe_holds(&parse_probe("driver=1\nkernel=x")).is_err());
+        assert!(probe_holds(&parse_probe("driver=1\nkernel=7.0.0-calls4+")).is_err());
+    }
+
+    #[test]
+    fn probe_refuses_a_kernel_that_is_not_calls4() {
+        assert!(probe_holds(&parse_probe("driver=1\ntimeout=32\nkernel=6.1-other")).is_err());
     }
 
     #[test]

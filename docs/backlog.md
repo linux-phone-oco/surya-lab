@@ -3021,10 +3021,10 @@ Rank
 ### attended program: name the pmicwdt kernel entry calls4 (no '+'), keep the release string separate
 
 Status
-: open
+: done
 
 Note
-: lpoco lab kernel try refuses a NAME with '+' ('not a test kernel name'), and no calls4+ entry is installed. The entry NAME is only the boot entry's name; the release inside it can keep its +. In lab/attended/src/session.rs PMICWDT_KERNEL = "calls4+" is used as the entry name: make it "calls4" (and compare the probed release separately, checks.rs). Dry run, fmt, clippy, test; land. Then the keeper installs the entry (item surya-attended-install-calls4).
+: PMICWDT_KERNEL = calls4 (entry name, no '+'); probe_holds now requires the release to contain calls4; fmt, clippy, 5+1 tests pass (name test seen failing first). Next: keeper installs the entry (surya-attended-install-calls4).
 
 About
 : deep-sleep

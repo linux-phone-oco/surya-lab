@@ -2611,3 +2611,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-surya-attended-plain-entry-name-calls4"></a>
+### surya attended: plain entry name calls4
+
+Entry date
+: 2026-11-19
+
+Done
+: Renamed the pmicwdt kernel entry to calls4 in lab/attended; the probed release is checked separately (must contain calls4). Test seen failing, then passing; fmt, clippy, tests clean.
+
+Rejected
+: Teaching lpoco to accept '+' in a NAME: the entry name is only a name, and plain names are the lane's rule.
+
+About
+: deep-sleep
