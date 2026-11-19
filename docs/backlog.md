@@ -1162,19 +1162,6 @@ Rank
 : 1
 
 
-<a id="surya-key-chatter-resin"></a>
-### Phantom key edges on pm8941_resin/pwrkey: screen goes off during use
-
-Status
-: open
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-18
-
-
 <a id="devlab-usb-awake-hold-through-resume"></a>
 ### Provision the phone with the always-held devlab-usb-awake (PR 195): it still runs the 2026-11-10 script
 
@@ -3027,3 +3014,25 @@ Needs
 
 Proof
 : devlab kernel try NAME --cmdline noirqdebug boots with it in /proc/cmdline once, then stock/kept
+
+
+<a id="surya-key-chatter-resin"></a>
+### Phantom key edges on pm8941_resin/pwrkey: screen goes off during use
+
+Status
+: open
+
+Note
+: Seen (earlier keeper notes; the author's symptom: 'something turns the screen off by itself, as if the power button were tapped, and later turns it on'): phantom key events from the PMIC power key / RESIN input (pm8941_resin, pm8941_pwrkey) while the phone is in use; sxmo reads the power key as screen off/on. READ-ONLY first, unattended, no suspend: (1) which input devices and which events: ls /dev/input/by-path /proc/bus/input/devices; log key events with a timestamp for ~20 min (evtest/libinput debug-events or a read of /dev/input/eventN: only reads; run it under systemd-run so it ends by itself) with and without USB attached (the lab link is always on; check charger_online and temperature in the same window); (2) correlate with the journal (sxmo_screenoff / sxmo_hook lines at those instants, swaymsg output power); (3) the device tree: is the RESIN node (pm8941-resin: debounce, bias, 'linux,code' = KEY_VOLUMEDOWN? or power) and the pwrkey node's pull-up/debounce as on sm7150/sc7180 phones; is the IRQ firing without a press (a level/edge or a stuck line, 'nobody cared' lines?). Say plainly: real presses (the author at the phone), phantom edges, or software (sxmo idle blanking). Record research; if phantom: queue the device-tree fix (debounce/pull) for the surya coordinator. Watchdog as is.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Rank
+: 3
