@@ -149,16 +149,15 @@ why = "the LPASS LPI pin controller registered from 0x62b40000 includes the sens
 
 # The device layer (decision 2026-11-19-device-layer-declared-once): what is OURS and a base must carry, whichever
 # distro packs it (lpoco-manifest's [layer]). What only this lab phone needs (devlab-* units, the edge repository
-# list, the audio-heal helper) stays a [[flash.overlay]] above. Not yet a tagged release: the kernel is the branch
-# test/surya-calls of linux-phone-oco/linux, with no config fragment kept in this base (the build's .config lives
-# in ~/Projects/surya-audio); both are to be fixed when the packer's first real run needs them.
+# list, the audio-heal helper) stays a [[flash.overlay]] above. Not yet a tagged release: the kernel is pinned by its exact commit and its config kept in kernel/surya.config.
 [layer]
 name = "xiaomi-surya"
 needs = ["qrtr", "rmtfs", "tqftpserv>=1.2", "hexagonrpcd", "q6voiced", "pd-mapper"]
 
 [layer.kernel]
 tree = "https://github.com/linux-phone-oco/linux"
-tag = "test/surya-calls"      # a branch until a release is tagged
+tag = "29d92793b81fd563a875ab6d36c27cf0b852155f"   # exact commit of the running 7.1.0-sm7150-calls+ (tip of test/surya-calls on 2026-11-19); a release tag replaces it
+config = "kernel/surya.config"   # the running kernel config, minimal defconfig form
 dtbs = ["qcom/sm7150-xiaomi-surya-huaxing.dtb", "qcom/sm7150-xiaomi-surya-tianma.dtb"]
 
 [layer.boot]
