@@ -1350,3 +1350,25 @@ Canonical copy: image-fresh-stock/ (provisional). Whether image/ may go later is
 
 About
 : deep-sleep
+
+
+<a id="clk-1047-calls4-wdt-module-still-warns"></a>
+### clk-1047-calls4-wdt-module-still-warns
+
+Date
+: 2026-11-19
+
+Brief
+: calls4+ (c88ed67e0, clang+LTO, PM8916_WATCHDOG=m) still warns clk.c:1188/1048 with the DSI PLL lock failure: not timing of a built-in wdt
+
+Question
+: Does c88ed67e0 built with PM8916_WATCHDOG=m (clang+LTO, like calls+) lose the clk.c:1047 warning, i.e. is it timing?
+
+Found
+: No. One one-shot try of calls4+ (unattended, no suspend, wdt never armed): DSI PLL(0) lock failed at 0.84 s, then 'already disabled' (clk.c:1188) and 'already unprepared' (clk.c:1048, the line moved by one) at 0.87 s; pm8916_wdt loaded as a module. Healthy 76 pass/0 fail. So the =y vs =m and toolchain explanations are both out; the warning stays with c88ed67e0's source. Next: build the parent of the series, then bisect the 7 dtsi commits; the root is the display-side DSI PLL lock failure either way.
+
+About
+: deep-sleep
+
+Material
+: research/deep-sleep/2026-11-19-clk1047/
