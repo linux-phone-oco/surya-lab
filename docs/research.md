@@ -1514,3 +1514,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-19-surya-cmdline-source"></a>
+### 2026-11-19-surya-cmdline-source
+
+Date
+: 2026-11-19
+
+Brief
+: surya boot-deploy: deviceinfo_kernel_cmdline, when non-empty, is used alone; else generate-kernel-cmdline reads kernel-cmdline.d. Never both, no doubling
+
+Question
+: Which kernel cmdline source does Nura's boot-deploy read on surya, and do both together double it?
+
+Found
+: Read only, no reboot. /usr/share/boot-deploy/boot-deploy-functions.sh get_cmdline(): if deviceinfo_kernel_cmdline is non-empty it is the cmdline (the _append variable is deprecated, warned); otherwise generate-kernel-cmdline builds it from kernel-cmdline.d files. The two are exclusive, so lpoco-layer-pack writing both does not double: deviceinfo wins and the .d files are then ignored. Phone now: /etc/deviceinfo has no cmdline line, /usr/lib/kernel-cmdline.d holds 00-base.conf (quiet) and 20-plymouth.conf; /proc/cmdline shows exactly those, once, plus fstab-derived pmos_boot_uuid/root_uuid/rootfsopts. Consequence: set only one; if deviceinfo is also set, the .d files are silently dropped. Not read: the generate-kernel-cmdline directory list (binary); /etc/kernel-cmdline.d is named by the boot-deploy warning.
+
+About
+: deep-sleep
