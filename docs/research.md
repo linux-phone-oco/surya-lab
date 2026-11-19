@@ -1552,3 +1552,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-19-initramfs-stuck-read-only-look"></a>
+### 2026-11-19-initramfs-stuck-read-only-look
+
+Date
+: 2026-11-19
+
+Brief
+: calls4 was not stuck in the initramfs: it boots to a full system, up and answering by 14:48 UTC; ssh port open, 23 closed
+
+Question
+: Is surya stuck in the initramfs after the calls4 try? Which channels answer?
+
+Found
+: Read-only look 2026-11-19 15:48 CET, nothing changed. Host saw 18d1:d001 'Qualcomm SM7150 Device' serial postmarketOS: one config, CDC NCM only (no mass storage, serial or log); it re-enumerated at 15:47:45 and 15:48:08 (booting systemd re-creates the gadget). 172.16.42.1 pings (1.8-3.8 ms), tcp 22 open, 23/2323/8080 closed; no ttyACM/ttyUSB. lpoco lab phone sh/root answered: kernel 7.1.0-sm7150-calls4+, boot 1b066a91 from 14:48:04 UTC, full systemd to Graphical Interface, cmdline initrd=initramfs-calls4, so the initramfs was passed. Earlier 'no answer' and the initramfs gadget were the boot window (or the earlier state before a cycle). Previous boot (calls+ dc2066a4) ended cleanly 14:32:00 UTC (reboot, sshd stopped); pstore console-ramoops from it is the old calls+ run, no panic. Not known: why calls4 sat unreachable on 2026-11-19 run 3 for 10 min, and whether this boot was a power cycle or boot counting; the earlier boots 14:06-14:25 are in journal -2..-4. Phone is now on calls4+ (the try), not the kept calls+; boot counting returns it.
+
+About
+: deep-sleep
