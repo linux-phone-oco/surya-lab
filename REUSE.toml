@@ -14,7 +14,7 @@ SPDX-License-Identifier = "CC-BY-SA-4.0"
 
 # The scripts, statements and configuration.
 [[annotations]]
-path = [".github/**", "bin/**", "queries/**", "records/**", "tests/health/**", "provision/**", "adsp/**", "dt/**", "sleep/**", "ui/**", "lab/**", "tables.toml", "Makefile", "devicebase.toml", "idealkb.toml", "oco.toml", ".gitignore", "REUSE.toml"]
+path = [".github/**", "bin/**", "queries/**", "records/**", "tests/health/**", "tests/host/**", "provision/**", "adsp/**", "dt/**", "sleep/**", "ui/**", "lab/**", "tables.toml", "Makefile", "devicebase.toml", "idealkb.toml", "oco.toml", ".gitignore", "REUSE.toml"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 grenudi"
 SPDX-License-Identifier = "MIT OR Apache-2.0"

@@ -3291,10 +3291,10 @@ Rank
 ### Every boot's health report carries the PMIC's last reset reason (power-on and power-off reason), so a power cycle, a bite and a PS_HOLD reset tell apart
 
 Status
-: open
+: in-progress
 
 Note
-: surya-lab tests/health + lab/. A hang ended by the author's power cycle leaves no software trace; the PMIC's POFF/PON reason registers do. A pon-reason.sh is named by the attended run's fault list but is not on the phone: reuse or write it, read-only. Failing test: the check exists and reports a reason on the next boot. Result is a fact for research 2026-11-19-calls4-hang-was-the-reboot-out-of-calls-plus (which reset ended the freeze).
+: Built 2026-11-19 (surya-builder): tests/health/base/pon-reason.sh reads PON_REASON1/POFF_REASON1/WARM/SOFT (0x808/0x80c/0x80a/0x80e) from the debugfs regmap 0-00, raw and named; host proof tests/host/pon-reason-test.sh passes on a fixture. Not yet seen on the phone: keeper, after the next boot and suite put, confirm the health report carries pon-reason-read as pass (regmap path 0-00 is from research 2026-11-18-surya-pon-s2-ctl-read), then mark done and record the reason for research 2026-11-19-calls4-hang-was-the-reboot-out-of-calls-plus.
 
 About
 : deep-sleep
@@ -3303,7 +3303,7 @@ Opened
 : 2026-11-19
 
 Needs
-: build
+: phone
 
 Proof
 : pon-reason-recorded
