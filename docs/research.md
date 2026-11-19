@@ -1495,3 +1495,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="key-chatter-idle-capture-no-edges"></a>
+### key-chatter-idle-capture-no-edges
+
+Date
+: 2026-11-19
+
+Brief
+: 22 min idle capture on surya: 0 key events on pwrkey/resin/gpio-keys, both PMIC key IRQ counts 0 since boot (6.7 h): no phantom edges seen
+
+Question
+: Does pm8941_pwrkey/pm8941_resin produce phantom key edges (screen off by itself)?
+
+Found
+: Read-only, no suspend, USB charger online (chg=1) all along, temp 26-28 C. evtest on event0 (pwrkey), event1 (resin), event3 (gpio-keys) 08:08-08:30: no EV_KEY events. /proc/interrupts: pm8941_pwrkey (21) and pm8941_resin (22) at 0 on all CPUs after 6h37 uptime, so no edge at all since boot at 01:33, incl. while lab-used. No 'nobody cared'. Limits: author not using the phone in the window; screen was off (swaymsg probe printed 0, unreliable); sxmo screenoff lines not in journal at those times; DT nodes not read (kernel tree not checked here). Reading: the PMIC key lines are not the source of the author's symptom as far as measured; remaining candidates are software (sxmo idle blanking/proximity/other input) or an attended-use event. Backlog item stays open.
+
+About
+: deep-sleep
