@@ -2814,31 +2814,6 @@ Rank
 : 0
 
 
-<a id="clk-1047-bisect-pmic-wdt-series"></a>
-### Find which of the 7 PMIC wdt commits (or PM8916_WATCHDOG=y) brings clk.c:1047 on boot
-
-Status
-: open
-
-Note
-: 2026-11-19 calls4+ (PM8916_WATCHDOG=m) tried once: warning stays (research clk-1047-calls4-wdt-module-still-warns). Next: build the parent of the series (then bisect the dtsi commits), one try each, unattended; tree wt-pmic-wdt2, objs obj-calls4.
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-19
-
-Needs
-: phone
-
-Proof
-: soc-sleeps
-
-Rank
-: 0
-
-
 <a id="surya-base-image-source-recorded"></a>
 ### Record the base image's source pattern and that it has rotated off: image-fresh-stock/ is the ONLY copy
 
@@ -2881,3 +2856,30 @@ Needs
 
 Rank
 : 40
+
+
+<a id="clk-1047-bisect-pmic-wdt-series"></a>
+### Find which of the 7 PMIC wdt commits (or PM8916_WATCHDOG=y) brings clk.c:1047 on boot
+
+Status
+: open
+
+Note
+: REPLAN (coordinator, after calls4+: =m, clang+LTO, same warning; research clk-1047-calls4-wdt-module-still-warns): a full commit bisect is 3+ kernel builds for little value. Cheaper last discriminator, NO kernel build: the one-shot DTB try - calls4+'s kernel with a copy of its dtb in which the &pm6150_wdt node (the surya-only enable, c88ed67e0, +5 lines in sm7150-xiaomi-common.dtsi) is status = disabled (dtc the decompiled dtb, 'lpoco lab kernel try calls4 --dtb ...' - the earlier cluster-params dtb try is the recipe). If clk.c:1048/1047 disappears with the node disabled and the driver module present: it is the node's PROBE/enable that shifts the deferred-probe timing (not the series' code): say so. If it stays: it is display-side noise (the DSI PLL lock failure) independent of the series: stop here, do not bisect. Either way: write the plain conclusion for the upstreams coordinator (the series is cleared of authorship of the display bug) and point to the item dsi-pll-lock-failed-sm7150 (research) for the real fix. No bite, no suspend.
+
+2026-11-19 calls4+ (PM8916_WATCHDOG=m) tried once: warning stays (research clk-1047-calls4-wdt-module-still-warns). Next: build the parent of the series (then bisect the dtsi commits), one try each, unattended; tree wt-pmic-wdt2, objs obj-calls4.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Proof
+: soc-sleeps
+
+Rank
+: 0
