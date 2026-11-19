@@ -2434,3 +2434,21 @@ Done
 
 Considered
 : next: coordinator decides migrate-vs-accept for user configs; boot-race restart path needs an attended window; surya-test-layer-entry (rank 4) is next ready
+
+---
+
+
+<a id="2026-11-19-0709-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: kept kernel 7.1.0-sm7150-calls+ unchanged, healthy, watchdog untouched. Migrated 3 drifted sxmo user configs to package defaults with backup on phone; migrate state up to date; host check ok
+
+Considered
+: next: a boot reporting the pieces closes surya-user-config-declared; then surya-test-layer-entry (rank 4)
+
+About
+: deep-sleep
