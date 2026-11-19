@@ -2768,3 +2768,25 @@ Needs
 
 Rank
 : 2
+
+
+<a id="surya-user-config-declared"></a>
+### Declare the sxmo user configs the lab cares about as [[user_config]] in device.toml
+
+Status
+: open
+
+Note
+: From orchestration (lab-tools #201, v0.22.0; the lab gets it at its next prepare): in device.toml declare each user config the lab cares about as [[user_config]] with path plus either expect (the package default it should equal, e.g. under /usr/share/sxmo/...) or from (a copy kept in surya-lab). lab-pieces then reports their blob ids at boot, and 'lpoco host check' names any that differ as DRIFTED - no hand diff again. surya is the first device to use it. Add the sxmo hooks and profile diffed in PR 302 (research sxmo-migration-diff: the 4 files that carried .needs-migration; the result was 'ours equal the package defaults' so use expect = the package path for each; add any file we deliberately changed with from = a copy in lab/). Check the exact schema in lab-tools v0.22.0 (lpoco lab / lpoco-pieces --help, the device.toml docs in lab-tools) - do not guess keys. Wait for the lab's v0.22.0 prepare (orchestration says when) before the phone step: put the manifest, boot (or lab-pieces run) once; say WHEN A BOOT HAS REPORTED THEM and what lpoco host check reads (none DRIFTED expected). The repo edit may land before. Tell the surya coordinator.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Rank
+: 2
