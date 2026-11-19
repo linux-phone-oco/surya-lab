@@ -3437,3 +3437,19 @@ Witness
 
 Go until
 : 2026-11-19T19:23:57+01:00
+
+
+<a id="waits-on-landed-kernel-try-cmdline"></a>
+### Two items still wait on lab-tools' kernel try --cmdline, which has landed
+
+Status
+: open
+
+Note
+: sign seen by patrol 2026-11-19 17:10 UTC: devlab-kernel-try-cmdline and surya-test-layer-entry name 'lab-tools: an entry-only install or kernel try --cmdline' in waits. It landed (lab-tools #272, in release v0.32.1; the host's lpoco is 0.32.1 per lpoco host check; docs #665 records kernel-try-cmdline done). Owner: the surya coordinator - re-read both items against the installed lpoco (does kernel try --cmdline still refuse the running release? surya-lab#373 has the old refusal text), then clear or update the waits.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
