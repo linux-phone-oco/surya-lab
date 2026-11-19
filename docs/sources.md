@@ -104,3 +104,55 @@ By
 
 Takes
 : A fatal error of the ADSP is handled as a recovery (stop, reload, start) while the audio drivers above it stay bound
+
+
+<a id="uapi-boot-loader-spec-boot-counting"></a>
+### UAPI.1 The Boot Loader Specification - Boot counting
+
+Url
+: https://uapi-group.org/specifications/specs/boot_loader_specification/
+
+By
+: UAPI Group
+
+Takes
+: The boot loader decrements 'tries left' each time it boots an entry, before the OS runs; an entry at 0 is 'bad' and sorts after all others; the counter is a file rename on the ESP.
+
+
+<a id="nura-wiki-initramfs-inspecting"></a>
+### Initramfs/Inspecting (postmarketOS wiki, Nura mirror)
+
+Url
+: https://wiki.nura.eco/wiki/Initramfs/Inspecting
+
+By
+: postmarketOS
+
+Takes
+: pmos.debug-shell halts the boot and opens a shell on the USB serial gadget (CONFIG_USB_CONFIGFS_ACM) and telnet 172.16.42.1; that is the only built-in initramfs channel, and it stops the boot.
+
+
+<a id="kernel-doc-ramoops"></a>
+### Ramoops oops/panic logger (kernel documentation)
+
+Url
+: https://docs.kernel.org/admin-guide/ramoops.html
+
+By
+: Linux kernel
+
+Takes
+: Ramoops keeps console/panic records in reserved RAM; they survive a reset that keeps DRAM powered and are read from pstore on the next boot.
+
+
+<a id="systemd-system-conf-rebootwatchdog"></a>
+### systemd-system.conf(5): RuntimeWatchdogSec, RebootWatchdogSec
+
+Url
+: https://www.freedesktop.org/software/systemd/man/systemd-system.conf.html
+
+By
+: systemd
+
+Takes
+: RebootWatchdogSec (default 10 min) arms the hardware watchdog in systemd-shutdown, the second phase of a reboot, so a stuck reboot is reset; no effect without a watchdog device.

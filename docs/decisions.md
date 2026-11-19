@@ -733,3 +733,31 @@ Scope
 
 Tracked by
 : surya-attended-one-command
+
+
+<a id="2026-11-19-hang-trace-host-first"></a>
+### 2026-11-19-hang-trace-host-first
+
+Date
+: 2026-11-19
+
+Brief
+: Trace a freeze from the host first (USB timeline, PMIC reset reason), bound the reboot, and give a try kernel ESP breadcrumbs from second one; no debug-shell, no serial yet
+
+Decision
+: The next calls4 try gets four small things, in this order: (1) the host's own USB timeline printed when no new boot answers (surya-host-usb-timeline); (2) the PMIC's last reset reason in every boot's report (surya-pon-reason-every-boot); (3) a bounded reboot on the kept kernel, RebootWatchdogSec=20s, proven by 20 reboots (surya-reboot-watchdog-bound), and if a freeze still needs a power cycle, the PMIC watchdog kernel (surya-kernel-pmic-wdt) is the way; (4) breadcrumbs from the try's own initramfs hook to the ESP from its first second (surya-try-heartbeat-to-esp), for a hang inside a try kernel. calls4 is retried only with (1) and (2) in place. The calls4 'hang' itself is not a calls4 fault: it was the reboot out of calls+.
+
+Why
+: Measured: the host's USB log shows the phone frozen and connected for 15 min after calls+ stopped clean, and the boot counter shows calls4 was counted once (the cold boot), so calls4 never ran on the frozen boot; nothing an initramfs hook or a try-kernel console carries could have seen it. The host timeline and the PMIC reason need no phone change and answer 'frozen or looping, and what reset it'. The ESP is the one store that survives a power cycle on its own.
+
+Rejected
+: pmos.debug-shell: halts the boot for a person, never unattended (lane rule). Serial console / earlycon on uart8: needs a cable and breakout nobody owns (tad q hardware is empty); queue it only if (1)-(4) leave a hang unexplained. USB ACM serial gadget from the initramfs: needs the debug-shell hook and the freeze happened with no initramfs running. Relying on ramoops alone: needs a DRAM-keeping reset; the freeze produced none, and the saved console ends 142 s into the boot, long before the reboot. Retrying calls4 first 'to see if it repeats': costs the author a power cycle each time and teaches nothing without the host timeline. Blaming calls4's image: no evidence, it booted healthy twice.
+
+About
+: deep-sleep
+
+Research
+: 2026-11-19-calls4-hang-was-the-reboot-out-of-calls-plus
+
+Tracked by
+: surya-host-usb-timeline

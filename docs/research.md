@@ -1609,3 +1609,25 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-19-calls4-hang-was-the-reboot-out-of-calls-plus"></a>
+### 2026-11-19-calls4-hang-was-the-reboot-out-of-calls-plus
+
+Date
+: 2026-11-19
+
+Brief
+: The calls4 'hang' was the reboot OUT OF calls+: the phone froze after a clean userspace stop, USB still up, calls4 never selected; no initramfs trace could have caught it
+
+Question
+: What would capture the next occurrence of the failed calls4 boot (initramfs console, serial, ramoops, earlycon, ESP hook, boot counting) - and what exactly hung?
+
+Found
+: Read-only, 2026-11-19, nothing changed. (1) Host USB log (journalctl -k --utc on the lab machine, port 3-1): the calls+ boot -2 (phone journal 14:25:48-14:32:00 UTC, clean stop) enumerated d001 at 14:25:41, re-enumerated at 14:25:54 (device 38, the switch_root pattern every normal boot shows 12 s apart) and then device 38 stayed connected, no disconnect, until the author's power cycle at 14:47:45. After 14:32:00 the host saw NO new enumeration: the gadget of the stopped calls+ stayed pulled up for 15 min, the SoC frozen, black screen. The 'initramfs gadget 18d1:d001 postmarketOS' the Top Coordinator saw is the same ID the RUNNING system uses (the initramfs and systemd both make it), so it did not show an initramfs. (2) Counter arithmetic: the boot loader decrements 'tries left' before the kernel starts (UAPI spec); pmos-calls4+0-1 means ONE boot of calls4 was counted, and the 14:48:04 cold boot is it (it booted fully, journal and suite fine). So the frozen boot never reached systemd-boot's entry choice: calls4's kernel and initramfs never ran. (3) The earlier questions fall away: why no stock fallback (the entry was never tried), why no journal/pstore/ESP log (calls4 never ran; calls+ stopped clean at 14:32:00). (4) Where it froze: after userspace shutdown, in the kernel's reboot or the reset into the boot chain (PSCI/PMIC/firmware) - not known which. systemd's RebootWatchdogSec defaults to 10 min yet the freeze lasted 15 min, so either the APSS watchdog was not armed in systemd-shutdown (the phone's /dev/watchdog0 and its timeout were not read at that moment) or a bite cannot reset this freeze (as at 13:58 on 2026-11-18: pretimeout fired, no reset) - not known yet. (5) pstore: /var/lib/systemd/pstore/console-ramoops-0 (5.7 KB) survived the power cycle (RAM kept across the long-press reset), but its tail stops at kernel time 142 s with no shutdown line - the console ring does not hold the reboot path, so it cannot answer where it froze; mtime 14:31:30 and the boot it belongs to are not settled. (6) Channels for a hang INSIDE a try kernel or its initramfs: pmos.debug-shell is the only built-in one and it halts the boot (never unattended); a serial console (earlycon / console=ttyMSM0 on uart8) needs a cable no one has (tad q hardware is empty); ramoops needs a reset that keeps DRAM (a panic, a bark, a PMIC hard reset - the author's power cycle did keep it); the lab's own 5-minute hook (lab-tools devlab/src/kernel.rs TIMEOUT_HOOK) writes to the ESP only after 300 s and only from the initramfs, so a hang before the initramfs or during the first minutes leaves nothing - the ESP (FAT) is the one store that survives a power cycle with no reset help. Not known: whether the reboot freeze repeats on calls+ (about 1 in 10 reboots today: one freeze, the others returned) or is tied to the try (reboot right after kernel try's install).
+
+Sources
+: uapi-boot-loader-spec-boot-counting,nura-wiki-initramfs-inspecting,kernel-doc-ramoops,systemd-system-conf-rebootwatchdog
+
+About
+: deep-sleep

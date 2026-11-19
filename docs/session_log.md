@@ -2851,3 +2851,24 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-surya-research-calls4-hang-trace"></a>
+### surya-research: the calls4 hang was the reboot out of calls+
+
+Entry date
+: 2026-11-19
+
+Done
+: Read the host's USB log and the boot counter against the earlier rows: the phone froze after calls+ stopped clean, calls4 never ran. Recorded research, decision and four backlog items (host USB timeline, PMIC reset reason, bounded reboot, ESP breadcrumbs).
+
+Considered
+: debug-shell, serial, ramoops alone, initramfs ACM gadget
+
+Rejected
+: retrying calls4 first
+
+About
+: deep-sleep

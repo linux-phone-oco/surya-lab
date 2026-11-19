@@ -3219,7 +3219,7 @@ Status
 : open
 
 Note
-: 2026-11-19 read: failed boot left no journal or pstore; calls4 booted fine after the author's cold power cycle; not reproduced, cause unknown (research 2026-11-19-calls4-failed-boot-read)
+: Cause narrowed 2026-11-19: not calls4 - the freeze came after calls+'s clean stop at 14:32:00 with USB still up (research 2026-11-19-calls4-hang-was-the-reboot-out-of-calls-plus). Follow surya-reboot-watchdog-bound.
 
 About
 : deep-sleep
@@ -3269,10 +3269,10 @@ Rank
 ### A trace that survives a hang for the next calls4 try: the first warm boot reached the initramfs gadget (18d1:d001 'post...') and stayed, with a black screen, leaving no journal, pstore or ESP log
 
 Status
-: open
+: done
 
 Note
-: From keeper research 2026-11-19-calls4-failed-boot-read and the Top Coordinator's USB reading. Facts: on that boot the host saw the pmOS initramfs gadget but 172.16.42.1 did not answer; the author saw a black screen; the initramfs' own 5-minute log to the ESP (lpoco lab kernel log) was empty; pstore empty; boot counter 0 left, 1 tried. After a cold start the same image booted. Question: what would capture the next occurrence - initramfs console to the USB gadget serial (a debug channel that answers from the initramfs), pmos.debug / console=ttyMSM0 over the uart8 serial, a ramoops console record from the initramfs (does pstore mount there?), earlycon, a hook that writes dmesg to the ESP before the root search, boot counting that also falls back when the initramfs never reaches the rootfs. Also why the stock fallback did not happen (the counter was spent: 0 left, but the entry was never marked bad since it never reached the userspace). Read-only research; propose the smallest hook, never pmos.debug-shell unattended. Result: a recommended hook and an item for lab-tools or surya-lab.
+: Answered by research 2026-11-19-calls4-hang-was-the-reboot-out-of-calls-plus and decision 2026-11-19-hang-trace-host-first: the hang was the reboot out of calls+, calls4 never ran. Split into surya-host-usb-timeline, surya-pon-reason-every-boot, surya-reboot-watchdog-bound, surya-try-heartbeat-to-esp.
 
 About
 : deep-sleep
@@ -3321,3 +3321,103 @@ Proof
 
 Rank
 : 5
+
+
+<a id="surya-host-usb-timeline"></a>
+### lpoco lab kernel try (and any reboot it waits on) prints the host's USB timeline for the phone's port: frozen vs re-enumerating vs absent
+
+Status
+: open
+
+Note
+: lab-tools. The lab machine's own journalctl -k --utc already says what the phone did on USB (measured 2026-11-19: device 38 stayed connected 14:25:54-14:47:45, so the phone froze after calls+ stopped clean; a normal boot shows d001 twice 12 s apart). When no new boot answers in the wait, print the events since the reboot for the phone's port (found by the device.toml address/serial, not a bus number): 'frozen: device N connected since T, no re-enumeration', 'absent', or the sequence of IDs. Read-only, no phone change. The failing test feeds the 14:25-14:48 excerpt (research 2026-11-19-calls4-hang-was-the-reboot-out-of-calls-plus) and expects 'frozen'. Pass the time range as arguments, never spliced into a shell string.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: build
+
+Proof
+: kernel-try-reports-usb-timeline
+
+Rank
+: 1
+
+
+<a id="surya-pon-reason-every-boot"></a>
+### Every boot's health report carries the PMIC's last reset reason (power-on and power-off reason), so a power cycle, a bite and a PS_HOLD reset tell apart
+
+Status
+: open
+
+Note
+: surya-lab tests/health + lab/. A hang ended by the author's power cycle leaves no software trace; the PMIC's POFF/PON reason registers do. A pon-reason.sh is named by the attended run's fault list but is not on the phone: reuse or write it, read-only. Failing test: the check exists and reports a reason on the next boot. Result is a fact for research 2026-11-19-calls4-hang-was-the-reboot-out-of-calls-plus (which reset ended the freeze).
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: build
+
+Proof
+: pon-reason-recorded
+
+Rank
+: 2
+
+
+<a id="surya-reboot-watchdog-bound"></a>
+### Bound the reboot: RebootWatchdogSec=20s on the kept kernel, then 20 reboots, each back within 90 s or a recorded watchdog reset
+
+Status
+: open
+
+Note
+: Keeper. Default RebootWatchdogSec is 10 min and the freeze outlasted 15 min, so either the APSS watchdog was not armed in systemd-shutdown or a bite cannot reset this freeze (research 2026-11-19-calls4-hang-was-the-reboot-out-of-calls-plus). Step 1 (read only): which /dev/watchdog* systemd-shutdown would take (qcom_wdt 17c10000.watchdog vs pm8916_wdt) and its max timeout. Step 2: a system.conf.d drop-in with RebootWatchdogSec=20s as a flash overlay in device.toml, then 20 reboots with the host timeline (surya-host-usb-timeline). If a freeze still ends only by power cycle, the answer is the PMIC watchdog (surya-kernel-pmic-wdt, pmicwdt kernel), not this. Test to write: reboot-returns-by-itself (suite check: boot id changed within 90 s of a reboot request). Unattended.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Proof
+: reboot-returns-by-itself
+
+Rank
+: 3
+
+
+<a id="surya-try-heartbeat-to-esp"></a>
+### A test kernel's own hook writes breadcrumbs to the ESP from the first second: initramfs start, then a heartbeat of uptime and the last kernel lines every 10 s
+
+Status
+: open
+
+Note
+: lab-tools devlab/src/kernel.rs TIMEOUT_HOOK. Today it sleeps 300 s first, so a hang before that leaves nothing. For a hang INSIDE a try kernel or its initramfs (not the calls4 case, which was never reached): mount the ESP by pmos_boot_uuid as soon as the block device shows, append 'initramfs start, uptime' to test-boot.stage, then every 10 s append uptime and dmesg | tail -3, sync, until PID 1 is systemd. FAT survives a power cycle with no reset needed, ramoops does not always. Only the try's second initramfs carries it, so stock and kept kernels never run it. Never pmos.debug-shell unattended; serial/earlycon wait on a cable (no hardware owned). Failing test: the hook text writes the stage line before any sleep; one keeper try of a kernel whose initramfs is held leaves the heartbeat on the ESP, read by lpoco lab kernel log.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: build
+
+Proof
+: test-boot-heartbeat
+
+Rank
+: 4
