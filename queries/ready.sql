@@ -24,7 +24,7 @@ WITH w AS (
 SELECT b.id, CASE WHEN w.why = '' THEN 'ready' ELSE 'skipped' END AS stands, w.why,
        b.status, b.rank, coalesce(b.proof, '') AS proof, coalesce(b.about, '') AS about, b.title, b.note
 FROM backlog b JOIN w USING (id)
-WHERE b.status <> 'done'
+WHERE b.status NOT IN ('done', 'dropped')
   AND ($for IS NULL OR b.needs = CASE $for WHEN 'keeper' THEN 'phone' WHEN 'builder' THEN 'build' WHEN 'research' THEN 'research' ELSE $for END)
   AND ($about IS NULL OR b.about = $about OR b.about LIKE $about || '-%' OR b.id = $about)
   AND ($show = 'all' OR ($show = 'ready' AND w.why = '') OR ($show = 'skipped' AND w.why <> ''))

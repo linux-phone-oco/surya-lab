@@ -31,7 +31,7 @@ known AS (
            CASE WHEN s.whole THEN says ELSE brief END FROM shown, s
     UNION ALL SELECT 3, 'work', id, about, status, opened,
            CASE WHEN s.whole THEN title || coalesce(' - ' || note, '') || coalesce(' Waits: ' || waits, '') ELSE title || coalesce(' Waits: ' || waits, '') END
-      FROM backlog, s WHERE status <> 'done' AND (about IN (SELECT a FROM hit) OR id IN (SELECT a FROM hit))
+      FROM backlog, s WHERE status NOT IN ('done', 'dropped') AND (about IN (SELECT a FROM hit) OR id IN (SELECT a FROM hit))
     UNION ALL SELECT DISTINCT 5, 'source', id, NULL, NULL, NULL, title || ' <' || url || '>'
       FROM sources WHERE id IN (SELECT trim(unnest(string_split(r.sources, ','))) FROM research r WHERE r.id IN (SELECT id FROM shown))
     UNION ALL SELECT 6, 'condensed', c.about, c.about, count(*)::VARCHAR, NULL, string_agg(c.id, ', ' ORDER BY c.id)
@@ -42,7 +42,7 @@ subjects AS (
     SELECT r.about AS a, count(*) AS n, sum(length(r.says)) AS weight,
            sum(CASE WHEN c.id IS NULL AND r.kind <> 'work' THEN length(r.says) ELSE 0 END) AS since
       FROM (SELECT kind, id, about, says FROM rec
-            UNION ALL SELECT 'work', id, about, title || coalesce(' - ' || note, '') FROM backlog WHERE status <> 'done') r
+            UNION ALL SELECT 'work', id, about, title || coalesce(' - ' || note, '') FROM backlog WHERE status NOT IN ('done', 'dropped')) r
       LEFT JOIN cond_all c ON c.id = r.id AND c.about = r.about
      WHERE r.about IS NOT NULL GROUP BY r.about
 )

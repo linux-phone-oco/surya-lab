@@ -7,6 +7,7 @@
 SELECT d.id, d.date,
   CASE WHEN s.id IS NOT NULL THEN 'superseded by ' || s.id
        WHEN b.status = 'done' THEN 'carried out'
+       WHEN b.status = 'dropped' THEN 'dropped, not carried out'
        WHEN b.id IS NOT NULL THEN 'in work'
        ELSE 'no item named' END AS stands,
   d.scope, d.amends, (SELECT string_agg(a.id, ', ' ORDER BY a.id) FROM decisions a WHERE a.amends = d.id) AS amended_by,
