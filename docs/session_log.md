@@ -2683,3 +2683,24 @@ Done
 
 Considered
 : next: surya-kernel-pmic-wdt attended window still needs the author's go; the other ready items need a suspend or a witness
+
+---
+
+
+<a id="2026-11-19-attended-split-unattended-and-calls-plus"></a>
+### attended split: unattended and calls-plus
+
+Entry date
+: 2026-11-19
+
+Done
+: lpoco-attended got --until FIRST_PROMPT and --part NAME (lab-tools 259, v0.29.5, review fixed a --part silently ignored by a procedure without parts). surya-attended uses them: main.rs is a checklist per mode; calls-plus part and tests per mode (dry run).
+
+Considered
+: pon_reason in calls-plus as a current-value read, since no bite is asked of it.
+
+Rejected
+: Putting the split in surya's own argenv: the library had no flag, so it got one for every lane. Standing tests on the phone: not run here, the keeper does that.
+
+About
+: deep-sleep

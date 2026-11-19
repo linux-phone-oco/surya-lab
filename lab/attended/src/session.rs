@@ -78,6 +78,20 @@ pub fn pon_reason() -> Result<(), String> {
     }
 }
 
+/// calls+ reads the reason the phone has NOW and says it: no bite is asked of it (that is the full session).
+pub fn pon_reason_now() -> Result<(), String> {
+    let pon = phone().root("sh /usr/lib/lpoco-health/pon-reason.sh 2>&1")?;
+    println!("  pon reason now: {}", pon.trim());
+    Ok(())
+}
+
+/// The standby script is on the phone and readable by root, as the standby run will need it (put there by put_way_back).
+pub fn standby_script_reachable() -> Result<(), String> {
+    phone()
+        .root(&format!("test -r {STANDBY} && sh -n {STANDBY}"))
+        .map(|_| ())
+}
+
 pub fn wake_in_suspend() -> Result<(), String> {
     phone()
         .root(&format!("sh {WAY_BACK} cycle 10 bt-on stop-sensors"))

@@ -3072,10 +3072,10 @@ Rank
 ### attended program: run everything that is not risky unattended (--until FIRST_PROMPT and a calls+ part), only the bite, wake-in-suspend and the unplug wait for the author
 
 Status
-: open
+: done
 
 Note
-: The author (2026-11-19, via the Top Coordinator): 'but other steps of procedure are ran and tested already ? with only risky parts waiting attending ?' - today only 'phone answers', 'way-back on phone' and the calls4 install ran for real. Rule: only the risky parts wait for him. Change lab/attended (keep main.rs a checklist, decision 2026-11-19-attended-only-when-one-command-away): (1) a mode the keeper runs unattended: --until FIRST_PROMPT (stop cleanly at the first ask_author, never answering it) so the boot of calls4, read_probe and way_back_in_place run for real; (2) a calls+ part that needs no calls4 and no bite: step_checks, pon_reason (read the CURRENT value), the standby script reachable as root (use phone root: /var/tmp/standby-run.sh is root-owned), finish_healthy - runnable by the keeper on the kept kernel; (3) only bite, wait_for_restart after a bite, wake_in_suspend with the watchdog armed and the unplug for standby stay behind the author's prompts. Test: dry run for each mode, fmt, clippy, tests; land. If the library's attended runner lacks a --until or --only flag, do it in the program's own argenv and name what you want in the library.
+: lab-tools PR 259 (released as lpoco-attended-v0.29.5): --until FIRST_PROMPT and --part NAME. surya-attended: --until FIRST_PROMPT runs the boot of calls4, read_probe and way_back_in_place for real and stops before the first prompt; --part calls-plus runs put_way_back, pon reason now, step_checks, standby script reachable as root, finish_healthy. Only the bite, wait_for_restart, wake_in_suspend and the unplug stay behind the author. Proof: lab/attended/tests/dry_run.rs, a dry run per mode. Not run on the phone: the keeper's first real --until and --part calls-plus runs are the next step. finish_healthy still needs a calls4/pm8916 kernel (read_probe).
 
 About
 : deep-sleep
