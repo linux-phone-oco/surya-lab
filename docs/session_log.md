@@ -2389,3 +2389,18 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-2359-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: phone untouched, kept 7.1.0-sm7150-calls+; landed device.toml [layer] (surya-layer-declared, repo only)
+
+Considered
+: next: surya-user-config-declared repo edit; step-checks remainder (standby-current, reset-types) waits an attended window; kernel tag + config fragment for [layer.kernel]

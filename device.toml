@@ -146,3 +146,53 @@ why = "dumps every GPIO chip, the LPASS LPI pins among them; with an LPI driver 
 [[hazard]]
 path = "/sys/kernel/debug/pinctrl/62b40000"
 why = "the LPASS LPI pin controller registered from 0x62b40000 includes the sensor DSP's pins; reading its pins or pinconf there faults the bus and hangs the phone (2026-11-17). The branch driver's controller at 62b52000 maps only the 14 pins after them"
+
+# The device layer (decision 2026-11-19-device-layer-declared-once): what is OURS and a base must carry, whichever
+# distro packs it (lpoco-manifest's [layer]). What only this lab phone needs (devlab-* units, the edge repository
+# list, the audio-heal helper) stays a [[flash.overlay]] above. Not yet a tagged release: the kernel is the branch
+# test/surya-calls of linux-phone-oco/linux, with no config fragment kept in this base (the build's .config lives
+# in ~/Projects/surya-audio); both are to be fixed when the packer's first real run needs them.
+[layer]
+name = "xiaomi-surya"
+needs = ["qrtr", "rmtfs", "tqftpserv>=1.2", "hexagonrpcd", "q6voiced", "pd-mapper"]
+
+[layer.kernel]
+tree = "https://github.com/linux-phone-oco/linux"
+tag = "test/surya-calls"      # a branch until a release is tagged
+dtbs = ["qcom/sm7150-xiaomi-surya-huaxing.dtb", "qcom/sm7150-xiaomi-surya-tianma.dtb"]
+
+[layer.boot]
+method = "efi-kernel-install"   # kernel-install reads the dtb path from /usr/lib/kernel/devicetree
+
+[layer.firmware]
+method = "extract-from-partitions"
+
+[[layer.file]]
+from = "ucm/Xiaomi/surya/HiFi.conf"
+to = "/usr/share/alsa/ucm2/Xiaomi/surya/HiFi.conf"
+kind = "data"
+
+[[layer.file]]
+from = "ucm/Xiaomi/surya/VoiceCall.conf"
+to = "/usr/share/alsa/ucm2/Xiaomi/surya/VoiceCall.conf"
+kind = "data"
+
+[[layer.file]]
+from = "ucm/conf.d/sm8250/POCO-X3.conf"
+to = "/usr/share/alsa/ucm2/conf.d/sm8250/POCO X3.conf"
+kind = "data"
+
+[[layer.file]]
+from = "lab/devlab-pd-mapper.conf"
+to = "/usr/lib/modprobe.d/xiaomi-surya-pd-mapper.conf"
+kind = "data"
+
+[[layer.file]]
+from = "lab/90-lpoco-way-back.conf"
+to = "/usr/lib/sysctl.d/90-xiaomi-surya-way-back.conf"
+kind = "config"
+
+[[layer.file]]
+from = "lab/q6voiced.conf"
+to = "/usr/share/xiaomi-surya/q6voiced.conf"
+kind = "config"
