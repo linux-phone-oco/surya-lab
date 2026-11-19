@@ -2404,3 +2404,18 @@ Done
 
 Considered
 : next: surya-user-config-declared repo edit; step-checks remainder (standby-current, reset-types) waits an attended window; kernel tag + config fragment for [layer.kernel]
+
+---
+
+
+<a id="2026-11-19-1100-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: phone untouched, kept 7.1.0-sm7150-calls+; landed 4 [[user_config]] in device.toml (surya-user-config-declared, repo part); live conky/bonsai/profile found older than the new package
+
+Considered
+: next: phone step of user-config (a boot reporting, then migrate-or-accept the drifted three); step-checks remainder waits an attended window; test-layer entry; adsp boot race
