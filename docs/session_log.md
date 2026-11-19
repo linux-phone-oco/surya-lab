@@ -2779,3 +2779,21 @@ Rejected
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-1640-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: unattended run 3 of surya-attended-real-dry-pieces (after PR 417): steps 1-3 pass; step 4 'lpoco lab kernel try calls4' ended 'no new boot answered within ten minutes'; surya answers at no address (not on USB), no self-fallback seen. Phone NOT known-working: needs the author's power cycle. Nothing flashed, no defuse.
+
+Considered
+: next: author power-cycles surya, then read pstore/journal for why calls4 hung (calls4 booted before in run 2); do not retry calls4 unattended until read; surya-attended-real-dry-pieces stays open
+
+About
+: deep-sleep

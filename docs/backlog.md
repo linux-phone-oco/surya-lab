@@ -3184,7 +3184,7 @@ Status
 : open
 
 Note
-: 2026-11-19 keeper run 2 (unattended): reinstalled calls4 (same sha256), --until FIRST_PROMPT: steps 1-3 pass, hyphen probe fixed, check 4 stops (no watchdog sysfs attributes on this kernel) ; --part calls-plus: pon-reason passes, check 4 stops (tests/automatic/checks.sh missing). Faults filed as surya-attended-fix-faults-2 (builder). Phone back on kept calls+, way-back check ok. Rerun after it lands.
+: 2026-11-19 run 3 (unattended, after PR 417): --until FIRST_PROMPT stopped at step 4: kernel try calls4 got no boot in 10 min, phone unreachable, needs power cycle. Run 2 booted calls4 fine, so read pstore/journal after the cycle before retrying.
 
 Blocked by
 : surya-attended-fix-faults
