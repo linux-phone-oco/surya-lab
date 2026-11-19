@@ -2758,3 +2758,24 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-surya-attended-three-faults-from-run-2"></a>
+### surya-attended: three faults from run 2
+
+Entry date
+: 2026-11-19
+
+Done
+: Dropped the timeout from the probe, step checks via suite run, base-root cwd, calls4 reinstall step with checksums; dry-run test for install-before-boot.
+
+Considered
+: A tests/automatic/checks.sh of surya's own
+
+Rejected
+: A checks.sh: it would duplicate tests/health which the suite already runs on the phone.
+
+About
+: deep-sleep

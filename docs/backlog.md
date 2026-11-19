@@ -3209,10 +3209,10 @@ Rank
 ### attended program: three more faults from the second real run - timeout read from sysfs (absent), steps need tests/automatic/checks.sh (cwd), cwd for relative paths
 
 Status
-: open
+: done
 
 Note
-: 2026-11-19 keeper run 2: (1) --until FIRST_PROMPT passes steps 1-3 and the hyphen probe, then check 4 stops: 'the pmic watchdog's timeout was not read' - this kernel has no watchdog sysfs attributes (/sys/class/watchdog/watchdog{0,1} hold only dev, device, power, subsystem, uevent; no identity, timeout), so session.rs:60 can never read it; read the timeout another way or drop it from the probe. (2) --part calls-plus: pon-reason check passes now; check 4 'the step checks hold' fails reading tests/automatic/checks.sh, which is not in the worktree (lab-tools' lpoco-attended expects it); give the program its own file or point it. (3) the program must be run from the worktree root (relative sleep/way-back.sh), not lab/attended as its header says; and calls4's one try is spent by each run, so the program or the keeper must reinstall it (Image/dtb/modules.tgz from surya-audio obj-calls4/scratch-calls4, sha256 5d924cc6 / 2dfa0606 / 245512bf).
+: surya-builder 2026-11-19: (1) probe no longer asks for the watchdog timeout (no sysfs for it on calls4); (2) step_checks and finish use lpoco lab suite run (the phone's own tests/health), not lab health which wants tests/automatic/checks.sh; (3) lpoco runs in the base root (program runs from anywhere) and a new step installs calls4 with its one try, checking sha256 5d924cc6/2dfa0606/245512bf first. Proof: lab/attended tests (13 pass), fmt, clippy -D warnings. Not run on the phone: the keeper's next --until FIRST_PROMPT is the real test.
 
 About
 : deep-sleep

@@ -5,7 +5,6 @@
 #[derive(Debug, PartialEq)]
 pub struct Probe {
     pub driver: bool,
-    pub timeout_s: Option<u32>,
     pub kernel: String,
 }
 
@@ -17,18 +16,14 @@ pub fn parse_probe(text: &str) -> Probe {
     };
     Probe {
         driver: get("driver") == Some("1"),
-        timeout_s: get("timeout").and_then(|v| v.parse().ok()),
         kernel: get("kernel").unwrap_or("").to_string(),
     }
 }
 
-/// The driver is registered, its timeout is read, and the kernel is a pmic-wdt one, never calls+ alone.
+/// The driver is registered and the kernel is a pmic-wdt one, never calls+ alone.
 pub fn probe_holds(p: &Probe) -> Result<(), String> {
     if !p.driver {
         return Err("pm8916_wdt is not registered".into());
-    }
-    if p.timeout_s.is_none() {
-        return Err("the pmic watchdog's timeout was not read".into());
     }
     if p.kernel.is_empty() {
         return Err("no kernel release read".into());
@@ -62,16 +57,24 @@ mod tests {
     use super::*;
 
     #[test]
-    fn probe_needs_driver_and_timeout() {
-        let ok = parse_probe("driver=1\ntimeout=32\nkernel=7.0.0-calls4+");
+    fn probe_needs_the_driver_and_a_kernel() {
+        let ok = parse_probe("driver=1\nkernel=7.0.0-calls4+");
         assert_eq!(probe_holds(&ok), Ok(()));
-        assert!(probe_holds(&parse_probe("driver=0\ntimeout=32\nkernel=x")).is_err());
-        assert!(probe_holds(&parse_probe("driver=1\nkernel=7.0.0-calls4+")).is_err());
+        assert!(probe_holds(&parse_probe("driver=0\nkernel=x")).is_err());
+        assert!(probe_holds(&parse_probe("driver=1\nkernel=")).is_err());
+    }
+
+    #[test]
+    fn probe_does_not_ask_for_a_timeout_this_kernel_has_no_sysfs_for() {
+        assert_eq!(
+            probe_holds(&parse_probe("driver=1\nkernel=7.0.0-calls4+")),
+            Ok(())
+        );
     }
 
     #[test]
     fn probe_refuses_a_kernel_that_is_not_calls4() {
-        assert!(probe_holds(&parse_probe("driver=1\ntimeout=32\nkernel=6.1-other")).is_err());
+        assert!(probe_holds(&parse_probe("driver=1\nkernel=6.1-other")).is_err());
     }
 
     #[test]
