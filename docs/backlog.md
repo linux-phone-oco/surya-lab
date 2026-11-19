@@ -3373,31 +3373,6 @@ Rank
 : 2
 
 
-<a id="surya-reboot-watchdog-bound"></a>
-### Bound the reboot: RebootWatchdogSec=20s on the kept kernel, then 20 reboots, each back within 90 s or a recorded watchdog reset
-
-Status
-: open
-
-Note
-: Keeper. Default RebootWatchdogSec is 10 min and the freeze outlasted 15 min, so either the APSS watchdog was not armed in systemd-shutdown or a bite cannot reset this freeze (research 2026-11-19-calls4-hang-was-the-reboot-out-of-calls-plus). Step 1 (read only): which /dev/watchdog* systemd-shutdown would take (qcom_wdt 17c10000.watchdog vs pm8916_wdt) and its max timeout. Step 2: a system.conf.d drop-in with RebootWatchdogSec=20s as a flash overlay in device.toml, then 20 reboots with the host timeline (surya-host-usb-timeline). If a freeze still ends only by power cycle, the answer is the PMIC watchdog (surya-kernel-pmic-wdt, pmicwdt kernel), not this. Test to write: reboot-returns-by-itself (suite check: boot id changed within 90 s of a reboot request). Unattended.
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-19
-
-Needs
-: phone
-
-Proof
-: reboot-returns-by-itself
-
-Rank
-: 3
-
-
 <a id="surya-try-heartbeat-to-esp"></a>
 ### A test kernel's own hook writes breadcrumbs to the ESP from the first second: initramfs start, then a heartbeat of uptime and the last kernel lines every 10 s
 
@@ -3421,3 +3396,34 @@ Proof
 
 Rank
 : 4
+
+
+<a id="surya-reboot-watchdog-bound"></a>
+### Bound the reboot: RebootWatchdogSec=20s on the kept kernel, then 20 reboots, each back within 90 s or a recorded watchdog reset
+
+Status
+: open
+
+Note
+: Keeper. Default RebootWatchdogSec is 10 min and the freeze outlasted 15 min, so either the APSS watchdog was not armed in systemd-shutdown or a bite cannot reset this freeze (research 2026-11-19-calls4-hang-was-the-reboot-out-of-calls-plus). Step 1 (read only): which /dev/watchdog* systemd-shutdown would take (qcom_wdt 17c10000.watchdog vs pm8916_wdt) and its max timeout. Step 2: a system.conf.d drop-in with RebootWatchdogSec=20s as a flash overlay in device.toml, then 20 reboots with the host timeline (surya-host-usb-timeline). If a freeze still ends only by power cycle, the answer is the PMIC watchdog (surya-kernel-pmic-wdt, pmicwdt kernel), not this. Test to write: reboot-returns-by-itself (suite check: boot id changed within 90 s of a reboot request). Unattended.
+
+Waits
+: an attended window: the reboot out of calls+ froze once (author power cycle needed); 20 unattended reboots can freeze it again; no unattended reboot until the author is at hand with the power hold (PR 427)
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Proof
+: reboot-returns-by-itself
+
+Rank
+: 3
+
+Witness
+: person
