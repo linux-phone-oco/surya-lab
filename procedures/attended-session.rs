@@ -2,7 +2,11 @@
 //! surya attended session: pmicwdt boot and probe, with(&facts, bite), wake-in-suspend, step checks, standby current.
 //! `lpoco-attended run attended-session --dry-run` walks every step and prompt and touches nothing; `--log FILE` keeps the log.
 //! Decision 2026-11-19-attended-only-when-one-command-away. After a bite the next boot is a pm8916_wdt kernel,
-//! never calls+; the run ends on one, healthy, with the lease released.
+//! never calls+: calls4 is kept for the bite (its one try was spent by the boot that used it), after the prompt so a refusal
+//! keeps nothing, and given back by the last step before the health read; a run stopped in between resumes with
+//! `--from "give the default back (unkeep calls4)"`, or `lpoco lab kernel unkeep calls4 now`. The run ends
+//! on one, healthy, with the lease released. The bite arms the PMIC watchdog (15 s) and the APSS one (20 s); the check reads
+//! POFF_REASON1 PMIC_WD from pon-reason.sh.
 //! The keeper runs what is not risky without the author: `--until FIRST_PROMPT` (the boot of the pmicwdt kernel
 //! and the probes, stopping at the first prompt) and `--part calls-plus` (the checks that need neither the bite
 //! nor the cable). Only the with(&facts, bite), the restart after it, wake in suspend and the unplug wait for the author.
@@ -51,7 +55,9 @@ fn whole_session(facts: Facts) {
     check("the way back is in place", with(&facts, way_back_in_place));
 
     confirm("the cable stays in, hands off the phone: it will restart by itself in about 30 s; not back in 3 min, hold power 15 s / ready");
-    step("arm the apss fuse and let the pmic watchdog bite", with(&facts, bite));
+    // The try boot above spent calls4's one try: kept as the default, the reset the bite causes boots it again.
+    step("keep calls4 as the default boot for the bite", keep_pmicwdt_kernel);
+    step("arm the pmic and apss watchdogs and let them bite", with(&facts, bite));
     look_for("the screen going dark and the phone restarting on its own");
     step(
         "the phone restarts on a pm8916_wdt kernel",
@@ -67,6 +73,7 @@ fn whole_session(facts: Facts) {
     replug_usb("the host lists the phone again, when the run is over (about 15 min)");
     step("the standby current", read_standby);
 
+    step("give the default back (unkeep calls4)", unkeep_pmicwdt_kernel);
     step("end on a healthy kernel, lease released", finish_healthy);
 }
 

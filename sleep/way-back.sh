@@ -14,6 +14,7 @@
 #   disable
 #   fuse SECONDS      (10 to 30: the qcom watchdog counts 32 s at most) arm the watchdog for SECONDS and let go of it unpetted: the phone resets in SECONDS, whatever it
 #                     is doing - the dry run, nothing suspends. A marker goes to the kernel log first
+#   fuse-pmic SECONDS (5 to 30) the same on the PMIC watchdog (pm8916_wdt, found by its identity PM8916): its bite leaves POFF_REASON1 PMIC_WD
 #   defuse            stop an armed watchdog by the magic close
 #   collect DIR       copy what pstore kept (the last boot's console and panic log) into DIR, then clear it
 #   cycle SLEEP [probe|bt-on [stop-sensors]]   (stop-sensors: sensorspd stopped before, started after, as suspend.target does)
@@ -40,7 +41,7 @@ pick_wd() {
 	done
 	return 1
 }
-wd=$(pick_wd) || { [ $# -eq 0 ] || { printf "%s\n" "way-back: no APSS watchdog (qcom_wdt, 17c10000.watchdog) found: refusing to take another" >&2; exit 1; }; wd=; }
+wd=$(pick_wd) || { [ $# -eq 0 ] || [ "$1" = fuse-pmic ] || { printf "%s\n" "way-back: no APSS watchdog (qcom_wdt, 17c10000.watchdog) found: refusing to take another" >&2; exit 1; }; wd=; }
 param=/sys/module/qcom_wdt/parameters/keep_armed_in_suspend
 say() { printf '%s\n' "$*"; }
 usage() { sed -n '2,/^set -eu/p' "$0" | sed '$d;s/^# \{0,1\}//'; }
@@ -65,9 +66,17 @@ do_check() {
 	command -v rtcwake >/dev/null && command -v watchdog >/dev/null || { say "FAIL rtcwake or watchdog missing"; bad=1; }
 	[ "$bad" = 0 ]
 }
+# The PMIC watchdog (pm8916_wdt, S2_CTL 0x56 = 0x07, S2_CTL2 0x57 bit 7) is the node whose identity says PM8916; none: refuse.
+pick_pmic_wd() {
+	for w in /sys/class/watchdog/watchdog*; do
+		[ -e "$w" ] || continue
+		case "$(cat "$w/identity" 2>/dev/null)" in *PM8916*) echo "/dev/${w##*/}"; return 0 ;; esac
+	done
+	return 1
+}
 # BusyBox's watchdog sets the timeout and is then killed hard: no magic close, so the device stays armed unpetted
-arm_and_release() {
-	watchdog -F -T "$1" -t 2 "$wd" &
+arm_and_release() {   # SECONDS [DEVICE: the APSS watchdog when none]
+	watchdog -F -T "$1" -t 2 "${2:-$wd}" &
 	p=$!; sleep 3; kill -9 "$p"; wait "$p" 2>/dev/null || true
 }
 
@@ -82,6 +91,11 @@ case ${1:-} in
 	fuse) need "${2:-0}" 10 "fuse needs SECONDS >= 10" ; need 30 "${2:-0}" "fuse needs SECONDS <= 30 (the watchdog counts 32 s at most)"
 		say "way-back: marker before the fuse of $2 s" > /dev/kmsg; sync
 		arm_and_release "$2"; say "armed: the phone resets in about $2 s unless defused" ;;
+	fuse-pmic) need "${2:-0}" 5 "fuse-pmic needs SECONDS >= 5"; need 30 "${2:-0}" "fuse-pmic needs SECONDS <= 30"
+		pw=$(pick_pmic_wd) || { say "way-back: no PMIC watchdog (pm8916_wdt, identity PM8916) found: boot a kernel that carries it" >&2; exit 1; }
+		say "way-back: marker before the PMIC fuse of $2 s" > /dev/kmsg; sync
+		arm_and_release "$2" "$pw"
+		say "armed: the PMIC watchdog $pw resets the phone in about $2 s unless defused" ;;
 	defuse) printf V > "$wd"; say "watchdog stopped" ;;
 	collect) [ -n "${2:-}" ] || { say "way-back: collect needs a directory" >&2; exit 2; }
 		mkdir -p "$2"; n=0; for f in /sys/fs/pstore/*; do [ -f "$f" ] || continue; cp "$f" "$2/"; rm -f "$f"; n=$((n + 1)); done
