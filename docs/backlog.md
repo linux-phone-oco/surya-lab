@@ -2885,3 +2885,81 @@ Needs
 
 Rank
 : 3
+
+
+<a id="surya-test-layer-entry"></a>
+### A second boot entry of the same Nura v26.06 image at multi-user.target (the hardware-test layer), through lpoco's test-kernel route with its fallback
+
+Status
+: open
+
+Note
+: From orchestration; the author said yes (docs decision 2026-11-19-hardware-test-layer; session-log 2026-11-19-author-yes-test-layer-and-distro-later): 'yes, if archiving will still leave the repo as openly available, searchable and publicly visible' - holds: grenudi/sxmo-utils is archived, still public and read-only, its lab tag still serves. Step: AFTER A READ-ONLY LOOK at how the image boots today (default target, services, what sxmo/superd/tinydm bring), add a SECOND boot entry of the same image (image-fresh-stock/ is the only pristine copy: never touch it; work on a copy) at multi-user.target (no graphical session: the layer where hardware tests run quiet) through lpoco's test-kernel route with its fallback (boot-counted, one-shot, falls back by itself - the normal route: kernel install/try with an extra cmdline or entry). Proof: one boot of it reaches multi-user.target, the suite's checks run (the ones that need no UI), the next boot is the normal one. Watchdog as is, no suspend, wake lock held.
+
+Waits
+: lab-tools health-test-layer-quiet (the builder takes it next, rank 2)
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Rank
+: 12
+
+
+<a id="surya-test-layer-default"></a>
+### The test layer becomes surya's default boot (attended)
+
+Status
+: open
+
+Note
+: From orchestration, second of three: once surya-test-layer-entry is proven, make the multi-user.target entry the DEFAULT boot for the lab phone (the sxmo session then only on request), recorded in device.toml. It changes what the phone shows at power-on: attended window with the eOS-recovery power-off as the way back; plain-words ask through the coordinator first (witness=person).
+
+Waits
+: surya-test-layer-entry proven; the author's go (it changes what the phone boots by default)
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Rank
+: 13
+
+Witness
+: person
+
+
+<a id="surya-sxmo-from-nura"></a>
+### Back to Nura's own sxmo-utils (leave the lab apk sxmo-utils@lab)
+
+Status
+: open
+
+Note
+: From orchestration, third of three: return surya to Nura's own sxmo-utils package (remove sxmo-utils@lab, the pinned lab apk with the suspend series, repository tag @lab) once the suspend series' proofs are done and the test layer is the default. Wake lock held through the swap (no gap), ModemManager still installed, migration markers read after, the suite once. grenudi/sxmo-utils stays archived/public (the lab tag still serves for anyone). Keep shell-free-base (open, yours) alongside: these three carry it.
+
+Waits
+: surya-test-layer-default (and the upstreams lane's sxmo suspend series, which uses sxmo-utils@lab for its proofs)
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Rank
+: 14
