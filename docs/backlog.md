@@ -3024,7 +3024,10 @@ Status
 : open
 
 Note
-: Keeper: from lab/attended run the pieces up to the first ask_author (cargo run -- --log FILE, answer nothing: the run stops at the ask). Needs lab-tools entry/try support (devlab-kernel-try-cmdline) only if 'lpoco lab kernel try calls4+' refuses.
+: 2026-11-19 14:20 keeper (unattended): put way-back.sh ok, way-back check passes on the kept calls+ kernel (watchdog, RTC, ramoops, pstore, patched qcom_wdt). 'lpoco lab kernel try calls4+' is refused: "calls4+": not a test kernel name (the '+' in the name; also no calls4+ entry installed). standby-run.sh on the phone is root-owned (Nov 17), 'lpoco lab phone put' as user is denied: use 'phone root'. Steps 3-5 not run; phone untouched, still on calls+.
+
+Waits
+: lab-tools: lpoco lab kernel install/try accept a release name with '+' (devlab-kernel-try-cmdline)
 
 Blocked by
 : surya-attended-one-command
