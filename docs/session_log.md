@@ -2506,3 +2506,18 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-0835-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: phone untouched (kept 7.1.0-sm7150-calls+, healthy, watchdog as is); read-only key capture done, no phantom edges, recorded
+
+Considered
+: next: key-chatter needs an attended capture + sxmo idle hook read; surya-user-config-declared; step-checks remainder waits attended window
