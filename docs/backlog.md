@@ -2694,30 +2694,6 @@ Rank
 : 0
 
 
-<a id="surya-audio-cleanup"></a>
-### Careful, read-first cleanup of ~/Projects/surya-audio (56 GB; /home is at 94%)
-
-Status
-: open
-
-Note
-: From orchestration (patrol): /home 94%, about 65 GB free; ~/Projects/surya-audio is 56 GB, the largest tree. ORDER: (1) MEASURE: du by top-level dir and by worktree/obj dir (du -sh, sorted), list git worktrees (git -C ~/Projects/surya-audio/linux worktree list) with status (clean?), branch, merged/pushed?, last use; list the kernel entries installed on the phone/ESP and which obj dir/release each came from (kept calls+, pmicwdt+, calls2+ ...). (2) PLAN in a research row BEFORE deleting: every path, its size, the proof it is unused (what references it: none/entry/keeper), and what regenerates it. (3) REMOVE ONLY what is provably unused: (a) build output dirs (obj-*) of kernel builds no installed entry, try, or kept kernel references, AND not needed to promote calls2+ (keep calls+'s and calls2+'s trees and objs until kept-kernel-with-pmic-wdt is done); (b) worktrees that are CLEAN (git status empty), whose branch is landed or pushed - use 'git worktree remove' (it refuses a dirty one; never rm -rf a worktree, never --force), then 'git worktree prune'; (c) regenerable caches (ccache/pip-less caches) if they exist and the next build only gets slower. NEVER: the kept kernel's and calls2+'s source+obj, the current try, any tree a running keeper uses (wt-surya-keeper-*, a lease held), the .git dirs, the dtb/vmlinuz/modules the entries were installed from (keep the artefacts needed to reinstall the kept kernel), anything with uncommitted work or an unpushed branch. Doubt = keep and list it. (4) Report what was freed (GB per category) and the free space of /home before and after to the surya coordinator; land the research row (the deletion list).
-
-CAUTION (top coordinator, after orchestration's cleanup removed a worktree of a builder that was still running: clean, nothing lost, but its next command failed): an idle mtime is NOT proof a worktree is unused. BEFORE removing ANY worktree or build dir: (1) the worktree name's run id (wt-surya-keeper-<run>, wt-... ) against the RUNNING sessions (mcp list_sessions running / ListAgents; a Launcher: ... session whose turn is in progress); (2) any lease held (lpoco lab keeper status); (3) lsof/fuser +D on the path (no process has it open or as cwd); (4) a build in progress (ps for make/ninja/clang/rustc/cargo under the path). Only when ALL are clear remove it - and not in the same hour a keeper is running. Doubt = keep and list it.
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-19
-
-Needs
-: phone
-
-Rank
-: 2
-
-
 <a id="calls2-rebuild-with-clang"></a>
 ### Rebuild the calls2+ tree (c88ed67e0) with calls+'s clang + LTO/CFI config, then compare the clk warning
 
@@ -2741,3 +2717,54 @@ Proof
 
 Rank
 : 0
+
+
+<a id="surya-base-image-named"></a>
+### Name surya's base image: sha256, source URL and Nura version, and KEEP the file
+
+Status
+: open
+
+Note
+: From orchestration (urgent, before any cleanup): the base image 20261030-1151-nura-v26.06-sxmo-de-sway-qcom-sm7150.img (Nura v26.06) is in ~/Projects/surya-audio - two copies: image/ and image-fresh-stock/ - and no hash of it is recorded anywhere (docs research nura-relation, decision 2026-11-19-nura-relation). DO: sha256sum both copies (equal?), size; find the SOURCE URL (the Nura/postmarketOS download page or the build's release; shell history/notes/research in this base and docs may name it - do not guess: if unknown, say 'source not found' and where it was seen); the Nura version (v26.06); record it in surya-lab (a research row, and device.toml's [base image] or comment where the image is named) with ikb. KEEP BOTH FILES (cp --reflink or nothing; never delete). Then say which copy is canonical and whether the other may go later (that decision is the author's via the coordinator, not the cleanup's). Land; tell the surya coordinator.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Rank
+: -1
+
+
+<a id="surya-audio-cleanup"></a>
+### Careful, read-first cleanup of ~/Projects/surya-audio (56 GB; /home is at 94%)
+
+Status
+: open
+
+Note
+: From orchestration (patrol): /home 94%, about 65 GB free; ~/Projects/surya-audio is 56 GB, the largest tree. ORDER: (1) MEASURE: du by top-level dir and by worktree/obj dir (du -sh, sorted), list git worktrees (git -C ~/Projects/surya-audio/linux worktree list) with status (clean?), branch, merged/pushed?, last use; list the kernel entries installed on the phone/ESP and which obj dir/release each came from (kept calls+, pmicwdt+, calls2+ ...). (2) PLAN in a research row BEFORE deleting: every path, its size, the proof it is unused (what references it: none/entry/keeper), and what regenerates it. (3) REMOVE ONLY what is provably unused: (a) build output dirs (obj-*) of kernel builds no installed entry, try, or kept kernel references, AND not needed to promote calls2+ (keep calls+'s and calls2+'s trees and objs until kept-kernel-with-pmic-wdt is done); (b) worktrees that are CLEAN (git status empty), whose branch is landed or pushed - use 'git worktree remove' (it refuses a dirty one; never rm -rf a worktree, never --force), then 'git worktree prune'; (c) regenerable caches (ccache/pip-less caches) if they exist and the next build only gets slower. NEVER: the kept kernel's and calls2+'s source+obj, the current try, any tree a running keeper uses (wt-surya-keeper-*, a lease held), the .git dirs, the dtb/vmlinuz/modules the entries were installed from (keep the artefacts needed to reinstall the kept kernel), anything with uncommitted work or an unpushed branch. Doubt = keep and list it. (4) Report what was freed (GB per category) and the free space of /home before and after to the surya coordinator; land the research row (the deletion list).
+
+CAUTION (top coordinator, after orchestration's cleanup removed a worktree of a builder that was still running: clean, nothing lost, but its next command failed): an idle mtime is NOT proof a worktree is unused. BEFORE removing ANY worktree or build dir: (1) the worktree name's run id (wt-surya-keeper-<run>, wt-... ) against the RUNNING sessions (mcp list_sessions running / ListAgents; a Launcher: ... session whose turn is in progress); (2) any lease held (lpoco lab keeper status); (3) lsof/fuser +D on the path (no process has it open or as cwd); (4) a build in progress (ps for make/ninja/clang/rustc/cargo under the path). Only when ALL are clear remove it - and not in the same hour a keeper is running. Doubt = keep and list it.
+
+NEVER DELETE (orchestration, urgent): both copies of the Nura base image 20261030-1151-nura-v26.06-sxmo-de-sway-qcom-sm7150.img (~/Projects/surya-audio/image/ and image-fresh-stock/) and any other stock/base image or flashing artefact; the cleanup waits for surya-base-image-named (sha256 recorded).
+
+Waits
+: surya-base-image-named done (sha256 recorded first)
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Rank
+: 2
