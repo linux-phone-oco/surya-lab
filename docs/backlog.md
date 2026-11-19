@@ -3040,3 +3040,31 @@ Needs
 
 Proof
 : surya-attended-dry-run
+
+
+<a id="surya-procedures-one-shape"></a>
+### Move lab/attended (#394) to procedures/attended-session.rs plus procedures/steps, per docs decision 2026-11-19-procedures-one-shape
+
+Status
+: open
+
+Note
+: From orchestration 2026-11-19: one shape for procedures: procedures/NAME.rs in the device repo, one rust-script each over lpoco-attended, plus at most one procedures/steps crate for surya-only steps; lpoco attended new|run|check (lab-tools) scaffolds, runs and dry-runs them, so no per-procedure Cargo.toml, lock or dry-run test. Move lab/attended to procedures/attended-session.rs (main.rs's chain) + procedures/steps (session.rs, checks.rs minus boot_once, wait_for_usb, back_to_known_good, read_dmesg, which lab-tools' step library takes). Blocked by lab-tools attended-scaffold. No hurry before the real run: the current program still works. Keep the entry file a checklist (decision 2026-11-19-attended-only-when-one-command-away).
+
+Waits
+: lab-tools attended-scaffold (lpoco attended new|run|check) released
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: build
+
+Proof
+: surya-attended-dry-run
+
+Rank
+: 5
