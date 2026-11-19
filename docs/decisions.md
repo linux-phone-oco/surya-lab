@@ -705,3 +705,31 @@ Amends
 
 Tracked by
 : resume-stall-way-back
+
+
+<a id="2026-11-19-attended-only-when-one-command-away"></a>
+### 2026-11-19-attended-only-when-one-command-away
+
+Date
+: 2026-11-19
+
+Brief
+: Ask the author to attend only when the whole attended sequence is one command away and was tested without him first
+
+Decision
+: A session that needs the author (hands or eyes) is written as one Rust program run with one command, with its checks, stops, on-screen prompts and the way-back rule; it is dry-run and every safe unattended piece is run for real on the device before he is asked. surya's is surya-attended-one-command.
+
+Why
+: The author, 2026-11-19, verbatim: 'please, ask me to attent only when everything is preped 1 launch sequence away with test sequences being prepered as rust-script or something and they test them before asking me to attend'. The attended window opened at 12:15 had no ready program: the keeper skipped the item three times.
+
+Rejected
+: Keeping a keeper waiting for relayed per-step go messages (what we had): the author waits at the phone while sessions message each other, capped; shell sequences: practice 21.
+
+About
+: deep-sleep
+
+Scope
+: surya lane: coordinator, keeper, builder; every attended session
+
+Tracked by
+: surya-attended-one-command
