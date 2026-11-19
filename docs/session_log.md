@@ -2554,3 +2554,24 @@ Done
 
 Considered
 : next: surya-kernel-pmic-wdt when the author is at the phone and the Top Coordinator relays go
+
+---
+
+
+<a id="2026-11-19-surya-attended-one-command-built-dry-run-proven"></a>
+### surya attended one command built, dry-run proven
+
+Entry date
+: 2026-11-19
+
+Done
+: Wrote lab/attended: entry as checklist (main.rs), phone steps (session.rs), pure checks with unit tests, an integration test walking all 14 steps with --dry-run. fmt, clippy -D warnings, test pass. Phone untouched.
+
+Considered
+: an lpoco lab subcommand (lab-tools owns it, runner already there); a rust-script entry (cargo bin crate gives modules and tests)
+
+Rejected
+: own plumbing/arg parsing: the runner has it; running the pieces on the phone myself: the keeper holds the lease
+
+About
+: deep-sleep

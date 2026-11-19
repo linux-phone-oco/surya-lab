@@ -2996,22 +2996,10 @@ Go until
 ### Write the surya attended session as one program run with one command (steps: pmicwdt boot and probe, bite, wake-in-suspend, step checks, standby current), tested before the author attends
 
 Status
-: open
+: in-progress
 
 Note
-: Asked by the Top Coordinator 2026-11-19 (the author's standing rule, verbatim: 'please, ask me to attent only when everything is preped 1 launch sequence away with test sequences being prepered as rust-script or something and they test them before asking me to attend').
-
-BUILD the whole attended sequence as ONE program run with ONE command: a rust-script (or Rust bin) in surya-lab (suggest lab/attended/surya-attended.rs; or an lpoco lab subcommand if lab-tools has the place: look first, no shell - practice 21; arguments and env declared with argenv - practice 43). It reads the phone only through lpoco lab (never hand ssh). Steps: (1) boot the pmicwdt kernel (calls2+/calls4+ family with pm8916_wdt, patch 6/6) as a boot-counted one-shot try and read-probe it (driver registered, timeout, PON S2_CTL, reset type); (2) the bite (surya-pmic-wdt-proof: watchdog armed, APSS fuse by watchdog identity 17c10000.watchdog as the second way back, way-back.sh); (3) wake-in-suspend proof; (4) the step checks (surya-step-checks: sim-ready, pon-reason); (5) standby current (sleep-standby-current: author unplugs; BT off, sensorspd stopped, autosleep off). Each step has its checks and stops the run when one fails (practice 24). The program prints the author's on-screen prompts at each stop where he must act or watch (what will happen, what to watch, what to do if it goes wrong - hold power), waits for his Enter. LANE RULE after a bite: the next boot is a kernel with pm8916_wdt, never calls+; end state = a pm8916_wdt kernel or the kept kernel, healthy, lease released, results recorded.
-
-TEST IT BEFORE THE AUTHOR IS ASKED: a dry run against a stand-in (a fake phone / no phone: a --dry-run mode that walks every step and prompt with the phone calls stubbed), cargo/unit tests for the step logic, and every unattended piece RUN FOR REAL on surya where safe: step 1's boot plus read-probe as a one-shot try (needs lab-tools entry/try support: see devlab-kernel-try-cmdline; the keeper holds the lease for that, the builder does not touch the phone - queue the real run as a phone item and report). Report: the command, how long each step takes, what the author does, then the surya coordinator tells the Top Coordinator 'surya attended: ready, one command'.
-
-ENTRY FILE (the author, 2026-11-19, verbatim: 'make sure the rust program reads cleanly and simply on the top entry file level, like any other simple scripted procedure would read'): the entry file (main.rs or the rust-script itself) reads top to bottom like a checklist, the whole procedure in one screen: one call per step with a plain name (boot_pmicwdt_kernel, read_probe, ask_author("..."), bite, wait_for_restart, ...), each returning a Result that stops the run, with NO plumbing, parsing or retries inline. All of that lives in helper modules or lpoco's shared runner.
-
-SHARED RUNNER (orchestration, 2026-11-19): write the program against crate lpoco-attended in linux-phone-oco/lab-tools (dir attended/, example in attended/examples/), used from a rust-script entry file with a cargo git dep on linux-phone-oco/lab-tools at tag lpoco-attended-vX.Y.Z (the tag comes from orchestration when the lab-tools builder's first slice lands; until then write against these names). Shape: use lpoco_attended::prelude::*; then in order procedure("name", "xiaomi-surya"); step("boot pmicwdt kernel", || ...); check("what must hold", || ...); ask_author("what to do, what to check") - each stops the run on failure; phone() reaches surya through devlab; --dry-run and the log come from the library. Do NOT write your own plumbing: leave anything that looks like plumbing out, and record what is missing (tell the surya coordinator, who tells orchestration).
-
-CORRECTION (orchestration, 2026-11-19, runner released as lab-tools tag lpoco-v0.28.3, #243): it is NOT a crate lpoco-attended; it lives in lpoco-bringup. Dep: lpoco-bringup = { git = "https://github.com/linux-phone-oco/lab-tools", tag = "lpoco-v0.28.3" }; use lpoco_bringup::attended::*; entry = procedure("name").run(|p| { p.step("..", phone("..").retry(3,1))?; p.ask_author("what to do", "what to check")?; p.check("..", phone("..").expect(".."))?; Ok(()) }). phone(..) runs as user, phone_root(..) as root, sh(..) on the host; flags --dry-run, --log FILE, --help. Copy bringup/examples/attended.rs. Coming in lab-tools: small device-agnostic steps keyed to bring-up step ids (boot_once, read_dmesg, check_probe, wait_for_usb, back_to_known_good) with values from device.toml - write yours inline for now and NAME the ones you would want in the library (tell the surya coordinator).
-
-FINAL CORRECTION (orchestration, 2026-11-19, replaces the lpoco-bringup text above; that module is removed): the runner is its own crate, lab-tools tag lpoco-attended-v0.29.0 (#247). Cargo: lpoco-attended = { git = "https://github.com/linux-phone-oco/lab-tools", tag = "lpoco-attended-v0.29.0" }; use lpoco_attended::prelude::*; let _run = procedure("name", "xiaomi-surya"); (keep it bound); step("what", || ..); check("what", || ..) (returns (), bool or Result; false/Err stops and names the step); ask_author("what to do / what to check"); phone().sh(..) / phone().root(..); retry(tries, secs, || ..); --dry-run runs no closure; --log FILE. Copy attended/examples/attended.rs. Library steps (boot_once, read_dmesg, check_probe, wait_for_usb, back_to_known_good) are next in lab-tools: write yours inline for now and tell the surya coordinator which you need.
+: Built: lab/attended (crate surya-attended on lpoco-attended-v0.29.0): entry main.rs is the 14-step checklist, helpers in session.rs/checks.rs; cargo fmt/clippy/test green incl. --dry-run walk of all steps in order. NOT yet run on the phone: queued as surya-attended-real-dry-pieces. Step times unmeasured. Wanted from the library: boot_once, wait_for_usb, back_to_known_good, read_dmesg (written inline for now).
 
 About
 : deep-sleep
@@ -3027,3 +3015,28 @@ Proof
 
 Rank
 : 1
+
+
+<a id="surya-attended-real-dry-pieces"></a>
+### Run surya-attended's unattended pieces for real on surya (no author): steps 1-3 as a one-shot try, read-probe, way-back check; then report timings
+
+Status
+: open
+
+Note
+: Keeper: from lab/attended run the pieces up to the first ask_author (cargo run -- --log FILE, answer nothing: the run stops at the ask). Needs lab-tools entry/try support (devlab-kernel-try-cmdline) only if 'lpoco lab kernel try calls4+' refuses.
+
+Blocked by
+: surya-attended-one-command
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Proof
+: surya-attended-dry-run
