@@ -3005,6 +3005,8 @@ BUILD the whole attended sequence as ONE program run with ONE command: a rust-sc
 
 TEST IT BEFORE THE AUTHOR IS ASKED: a dry run against a stand-in (a fake phone / no phone: a --dry-run mode that walks every step and prompt with the phone calls stubbed), cargo/unit tests for the step logic, and every unattended piece RUN FOR REAL on surya where safe: step 1's boot plus read-probe as a one-shot try (needs lab-tools entry/try support: see devlab-kernel-try-cmdline; the keeper holds the lease for that, the builder does not touch the phone - queue the real run as a phone item and report). Report: the command, how long each step takes, what the author does, then the surya coordinator tells the Top Coordinator 'surya attended: ready, one command'.
 
+ENTRY FILE (the author, 2026-11-19, verbatim: 'make sure the rust program reads cleanly and simply on the top entry file level, like any other simple scripted procedure would read'): the entry file (main.rs or the rust-script itself) reads top to bottom like a checklist, the whole procedure in one screen: one call per step with a plain name (boot_pmicwdt_kernel, read_probe, ask_author("..."), bite, wait_for_restart, ...), each returning a Result that stops the run, with NO plumbing, parsing or retries inline. All of that lives in helper modules or lpoco's shared runner.
+
 About
 : deep-sleep
 

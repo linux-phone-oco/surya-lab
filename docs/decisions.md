@@ -717,13 +717,13 @@ Brief
 : Ask the author to attend only when the whole attended sequence is one command away and was tested without him first
 
 Decision
-: A session that needs the author (hands or eyes) is written as one Rust program run with one command, with its checks, stops, on-screen prompts and the way-back rule; it is dry-run and every safe unattended piece is run for real on the device before he is asked. surya's is surya-attended-one-command.
+: A session that needs the author (hands or eyes) is written as one Rust program run with one command, with its checks, stops, on-screen prompts and the way-back rule; it is dry-run and every safe unattended piece is run for real on the device before he is asked. surya's is surya-attended-one-command. The entry file reads like a checklist: one plainly named call per step (boot_pmicwdt_kernel, read_probe, ask_author, bite, wait_for_restart), each a Result that stops the run, the whole procedure in one screen; plumbing, parsing and retries live in helper modules or lpoco's shared runner.
 
 Why
-: The author, 2026-11-19, verbatim: 'please, ask me to attent only when everything is preped 1 launch sequence away with test sequences being prepered as rust-script or something and they test them before asking me to attend'. The attended window opened at 12:15 had no ready program: the keeper skipped the item three times.
+: The author, 2026-11-19, verbatim: 'please, ask me to attent only when everything is preped 1 launch sequence away with test sequences being prepered as rust-script or something and they test them before asking me to attend'. The attended window opened at 12:15 had no ready program: the keeper skipped the item three times. Added the same day, verbatim: 'make sure the rust program reads cleanly and simply on the top entry file level, like any other simple scripted procedure would read'.
 
 Rejected
-: Keeping a keeper waiting for relayed per-step go messages (what we had): the author waits at the phone while sessions message each other, capped; shell sequences: practice 21.
+: Keeping a keeper waiting for relayed per-step go messages (what we had): the author waits at the phone while sessions message each other, capped; shell sequences: practice 21. An entry file with the logic inline: unreadable to the author.
 
 About
 : deep-sleep
