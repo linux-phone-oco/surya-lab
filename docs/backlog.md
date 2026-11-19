@@ -2998,3 +2998,25 @@ Opened
 
 Needs
 : build
+
+
+<a id="surya-layer-kernel-pinned"></a>
+### Pin surya's kernel in [layer.kernel] by an exact commit and add a config fragment
+
+Status
+: open
+
+Note
+: From orchestration (follow-up of surya-layer-declared, PR 364). REPO + READ-ONLY on the build tree, one landing, no phone step: (1) [layer.kernel] pins the kernel by an EXACT COMMIT, not the branch test/surya-calls (a branch moves, so the packed layer could not be rebuilt the same): the sha of the kernel surya runs NOW (the kept 7.1.0-sm7150-calls+: read it from the tree it was built from (~/Projects/surya-audio/linux, the commit 29d92793b? - verify with the build's recorded commit / uname -v string / the tree's git log: do NOT guess), or a tag pushed on the kernel fork (e.g. surya-YYYYMMDD.N) if the schema wants a tag: read manifest/device.schema.json for the key. (2) A kernel CONFIG FRAGMENT in surya-lab (e.g. kernel/surya.config or where the schema says): the options surya needs on top of the defconfig, derived from the build tree's .config with scripts/diffconfig against the defconfig (or make savedefconfig); [layer.kernel] points at it. Self-contained layer: a distro kernel team can take the fragment upstream-first. Check with lpoco lab's parse and tad check; do not change the running kernel or the build tree (read only). Tell the surya coordinator; orchestration's packer (lpoco layer pack) takes this as its first real input.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Rank
+: 7
