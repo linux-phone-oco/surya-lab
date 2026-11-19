@@ -2257,3 +2257,18 @@ Done
 
 Considered
 : next: surya-step-checks remainder (sim-ready, standby-current, pon-reason); host-check-stale-pieces
+
+---
+
+
+<a id="2026-11-19-1700-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: kept calls+ kernel running, no phone change. Added tests/health/base/buttons-rtc-sim.sh (read only; ran on phone: buttons pass, rtc pass with date 1970, sim skip no SIM). Lease released.
+
+Considered
+: next: pon-reason-read, standby-current, host-check-stale-pieces; RTC holds no real date (finding)
