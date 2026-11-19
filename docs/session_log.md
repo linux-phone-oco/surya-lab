@@ -2740,3 +2740,21 @@ Rejected
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-2030-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: unattended run 2: reran surya-attended-real-dry-pieces after PR 414: faults moved on, three more program faults filed (surya-attended-fix-faults-2); calls4 reinstalled and tried once, phone returned to kept calls+ (7.1.0-sm7150-calls+), way-back check ok, no defuse, nothing flashed
+
+Considered
+: next: surya-attended-fix-faults-2 (builder), then rerun surya-attended-real-dry-pieces; surya-kernel-pmic-wdt still needs an attended go window
+
+About
+: deep-sleep

@@ -3184,9 +3184,7 @@ Status
 : open
 
 Note
-: 2026-11-19 15:12 keeper (unattended, run 1795097112): ran both unattended modes for real; each stops at a program fault, no code edited. (1) --until FIRST_PROMPT: steps 1-3 pass (phone answers 1 s, way-back.sh put 1 s, calls4 one-shot boot 205 s, phone came up on 7.1.0-sm7150-calls4+, pm8916-wdt bound as watchdog1, way-back check ok); check 4 FAILS 'pm8916_wdt is not registered': lab/attended/src/session.rs:51 tests /sys/bus/platform/drivers/pm8916_wdt (underscore), the sysfs dir is pm8916-wdt (hyphen) - builder fix. (2) --part calls-plus: steps 1-2 pass; check 3 FAILS: /usr/lib/lpoco-health/pon-reason.sh missing on the phone even after 'lpoco lab suite put now' (lpoco-health 0.29.6, 31 checks): the file is surya's own tests/health/base/pon-reason.sh, not in the put - builder fix (where the program reads it, or put it). Prep I did: removed the stale root-owned /var/tmp/standby-run.sh; reinstalled calls4 (same sha256 as PR 404; its one try was spent), then rebooted back to calls+. Phone: calls+, way-back check ok. Rerun after the two fixes.
-
-2026-11-19 keeper run 1 (PR 412): stopped at two program faults, see item surya-attended-fix-faults; rerun after it lands. The keeper also removed the stale root-owned /var/tmp/standby-run.sh and reinstalled calls4 (same sha256).
+: 2026-11-19 keeper run 2 (unattended): reinstalled calls4 (same sha256), --until FIRST_PROMPT: steps 1-3 pass, hyphen probe fixed, check 4 stops (no watchdog sysfs attributes on this kernel) ; --part calls-plus: pon-reason passes, check 4 stops (tests/automatic/checks.sh missing). Faults filed as surya-attended-fix-faults-2 (builder). Phone back on kept calls+, way-back check ok. Rerun after it lands.
 
 Blocked by
 : surya-attended-fix-faults
@@ -3205,3 +3203,28 @@ Proof
 
 Rank
 : 1
+
+
+<a id="surya-attended-fix-faults-2"></a>
+### attended program: three more faults from the second real run - timeout read from sysfs (absent), steps need tests/automatic/checks.sh (cwd), cwd for relative paths
+
+Status
+: open
+
+Note
+: 2026-11-19 keeper run 2: (1) --until FIRST_PROMPT passes steps 1-3 and the hyphen probe, then check 4 stops: 'the pmic watchdog's timeout was not read' - this kernel has no watchdog sysfs attributes (/sys/class/watchdog/watchdog{0,1} hold only dev, device, power, subsystem, uevent; no identity, timeout), so session.rs:60 can never read it; read the timeout another way or drop it from the probe. (2) --part calls-plus: pon-reason check passes now; check 4 'the step checks hold' fails reading tests/automatic/checks.sh, which is not in the worktree (lab-tools' lpoco-attended expects it); give the program its own file or point it. (3) the program must be run from the worktree root (relative sleep/way-back.sh), not lab/attended as its header says; and calls4's one try is spent by each run, so the program or the keeper must reinstall it (Image/dtb/modules.tgz from surya-audio obj-calls4/scratch-calls4, sha256 5d924cc6 / 2dfa0606 / 245512bf).
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: build
+
+Proof
+: surya-attended-dry-run
+
+Rank
+: 0
