@@ -3177,34 +3177,6 @@ Rank
 : 0
 
 
-<a id="surya-attended-real-dry-pieces"></a>
-### Run surya-attended's unattended modes for real on surya (no author): --until FIRST_PROMPT, then --part calls-plus; report timings and what passed
-
-Status
-: open
-
-Note
-: 2026-11-19 run 3 (unattended, after PR 417): --until FIRST_PROMPT stopped at step 4: kernel try calls4 got no boot in 10 min, phone unreachable, needs power cycle. Run 2 booted calls4 fine, so read pstore/journal after the cycle before retrying.
-
-Blocked by
-: surya-attended-fix-faults
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-19
-
-Needs
-: phone
-
-Proof
-: surya-attended-dry-run
-
-Rank
-: 1
-
-
 <a id="surya-attended-fix-faults-2"></a>
 ### attended program: three more faults from the second real run - timeout read from sysfs (absent), steps need tests/automatic/checks.sh (cwd), cwd for relative paths
 
@@ -3297,3 +3269,31 @@ Rank
 
 Witness
 : person
+
+
+<a id="surya-attended-real-dry-pieces"></a>
+### Run surya-attended's unattended modes for real on surya (no author): --until FIRST_PROMPT, then --part calls-plus; report timings and what passed
+
+Status
+: open
+
+Note
+: 2026-11-19 run 3 (unattended, after PR 417): --until FIRST_PROMPT stopped at step 4: kernel try calls4 got no boot in 10 min, phone unreachable, needs power cycle. Run 2 booted calls4 fine, so read pstore/journal after the cycle before retrying.
+
+Waits
+: the author's session: the first calls4 boot hung once with no trace (surya-unreachable-after-calls4-try); no unattended boot or reboot of surya until it is understood or he is at hand
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Proof
+: surya-attended-dry-run
+
+Rank
+: 1
