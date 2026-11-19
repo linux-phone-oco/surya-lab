@@ -3564,3 +3564,28 @@ Proof
 
 Rank
 : 1
+
+
+<a id="surya-land-regen"></a>
+### Makefile target land-regen so land rebases by itself when main moved (lab-machine PR 79)
+
+Status
+: open
+
+Note
+: From orchestration 2026-11-20: land now rebases by itself when main moved (lab-machine PR 79): keeps both sides' lines in data/*.json, regenerates the generated pages, stops only on a real conflict. A repo opts in with a Makefile target: add 'land-regen: canon render' to surya-lab's Makefile (docs and device-template have it; copy theirs). Live at the next host prepare. Check make land-regen runs clean on main.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-20
+
+Needs
+: build
+
+Proof
+: make land-regen runs canon and render clean
+
+Rank
+: 1
