@@ -2161,3 +2161,18 @@ Done
 
 Considered
 : next: clk-1047-bisect-pmic-wdt-series (PM8916_WATCHDOG=m build, then dtsi commits), unattended; obj-calls3 and scratch-calls3 kept for it
+
+---
+
+
+<a id="2026-11-19-1400-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: kept calls+ kernel running, unchanged this run (no phone change). Named the base image (research surya-base-image-named).
+
+Considered
+: next: clk-1047-bisect-pmic-wdt-series (unattended)

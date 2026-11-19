@@ -1326,3 +1326,27 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="surya-base-image-named"></a>
+### surya-base-image-named
+
+Date
+: 2026-11-19
+
+Brief
+: Base image Nura v26.06 sxmo 20261030-1151: two copies differ (image/ f0261713..., fresh-stock 20229807...); source URL not found
+
+Question
+: What is surya's base image: hashes, source, version, which copy is canonical?
+
+Found
+: File 20261030-1151-nura-v26.06-sxmo-de-sway-qcom-sm7150.img, Nura v26.06, 2845835264 bytes, in ~/Projects/surya-audio, two separate files (not hardlinked):
+- image-fresh-stock/ (written Nov 8 21:44, born Nov 8): sha256 202298d9c2eba1aaa8265044072d91e07169a254c7daa0d99c6ca14bb0a31c85
+- image/ (modified Nov 10 03:21, born Nov 5): sha256 f0261713e8366d659e05599694cc5362f300aba4b3203b646ba7bdf51e0b7f06
+The hashes DIFFER: image/ has been written to since download (booted/flashed/mounted). image-fresh-stock/ is the likelier pristine copy, named so, but NOT verified: no hash of the downloaded .xz exists to compare (only image-plasma has a .xz.sha256, for another image).
+Source URL: source not found. Not in shell history, surya-audio notes, the docs or surya-lab data; the Nura wiki page for xiaomi-surya (wiki.nura.eco) links no image download. nura.eco is the project site; the build is v26.06 sxmo-de-sway-qcom-sm7150 dated 2026-10-30 11:51.
+Canonical copy: image-fresh-stock/ (provisional). Whether image/ may go later is the author's call via the coordinator; both files kept, nothing deleted or copied.
+
+About
+: deep-sleep

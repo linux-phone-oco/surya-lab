@@ -2698,10 +2698,10 @@ Rank
 ### Name surya's base image: sha256, source URL and Nura version, and KEEP the file
 
 Status
-: open
+: done
 
 Note
-: From orchestration (urgent, before any cleanup): the base image 20261030-1151-nura-v26.06-sxmo-de-sway-qcom-sm7150.img (Nura v26.06) is in ~/Projects/surya-audio - two copies: image/ and image-fresh-stock/ - and no hash of it is recorded anywhere (docs research nura-relation, decision 2026-11-19-nura-relation). DO: sha256sum both copies (equal?), size; find the SOURCE URL (the Nura/postmarketOS download page or the build's release; shell history/notes/research in this base and docs may name it - do not guess: if unknown, say 'source not found' and where it was seen); the Nura version (v26.06); record it in surya-lab (a research row, and device.toml's [base image] or comment where the image is named) with ikb. KEEP BOTH FILES (cp --reflink or nothing; never delete). Then say which copy is canonical and whether the other may go later (that decision is the author's via the coordinator, not the cleanup's). Land; tell the surya coordinator.
+: proven by research surya-base-image-named: sha256s recorded, files kept, source not found
 
 About
 : deep-sleep
