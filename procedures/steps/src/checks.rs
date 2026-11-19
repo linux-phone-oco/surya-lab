@@ -34,11 +34,14 @@ pub fn probe_holds(p: &Probe) -> Result<(), String> {
     Ok(())
 }
 
-/// The lines of the PON reason that say the last reset was the PMIC watchdog's (S2 reset) or a hard reset.
+/// The PMIC's own watchdog bit: pon-reason.sh names POFF_REASON1's set bits (`last power off by: PMIC_WD`), and
+/// only that named bit counts. An APSS bite or a plain reset leaves it unset; "watchdog" anywhere else proves nothing.
 pub fn bite_seen(pon: &str) -> bool {
-    pon.contains("S2_CTL=0x07")
-        || pon.to_lowercase().contains("watchdog")
-        || pon.contains("reset_type=hard")
+    pon.lines().any(|l| {
+        l.split_once("last power off by:")
+            .and_then(|(_, rest)| rest.split(')').next())
+            .is_some_and(|names| names.split_whitespace().any(|n| n == "PMIC_WD"))
+    })
 }
 
 /// Standby current: the mean of the measure-phase samples (current_now_uA, column 5), in mA.
@@ -97,7 +100,12 @@ mod tests {
 
     #[test]
     fn bite_is_read_from_pon() {
-        assert!(bite_seen("S2_CTL=0x07"));
+        let bit = "pon-reason-read power-pon pass PON_REASON1=0x03 (power on by: HARD_RESET SMPL) POFF_REASON1=0x04 (last power off by: PMIC_WD) WARM_RESET_REASON1=0x00";
+        assert!(bite_seen(bit));
+        assert!(!bite_seen(&bit.replace("PMIC_WD", "PS_HOLD")));
+        assert!(!bite_seen(
+            "pm8916-wdt watchdog registered reset_type=hard S2_CTL=0x07"
+        ));
         assert!(!bite_seen("nothing"));
     }
 

@@ -176,17 +176,28 @@ pub fn way_back_in_place(f: &Facts) -> Result<(), String> {
     phone().root(&format!("sh {way_back} check")).map(|_| ())
 }
 
-/// The PON reason and the reset lines of the kernel log, as the phone says them now.
+/// The PON and POFF reasons the phone reads now (pon-reason.sh names the set bits).
 fn pon_text(f: &Facts) -> Result<String, String> {
     let pon_reason = &f.pon_reason;
-    phone().root(&format!(
-        "sh {pon_reason} 2>&1; dmesg | grep -i -E 'pon|S2_CTL|reset' | tail -20"
-    ))
+    phone().root(&format!("sh {pon_reason} 2>&1"))
 }
 
-/// Arm the fuse and let go.
+/// Keep calls4 as the default boot (`kernel keep`): its one try is spent by the boot that used it, so without this the
+/// reset the bite causes boots the kept calls+ and not a pm8916_wdt kernel (research bite-pon-and-calls4-choice).
+pub fn keep_pmicwdt_kernel() -> Result<(), String> {
+    lab(&["kernel", "keep", PMICWDT_KERNEL, "now"]).map(|_| ())
+}
+
+/// Give the default back to stock after the last step that can reset the phone; the entry stays installed.
+pub fn unkeep_pmicwdt_kernel() -> Result<(), String> {
+    lab(&["kernel", "unkeep", PMICWDT_KERNEL, "now"]).map(|_| ())
+}
+
+/// Arm both watchdogs: the PMIC one (the device under test) bites first at 15 s, the APSS one at 20 s is the way back
+/// if the PMIC one fails to. Which one bit is read from POFF_REASON1 afterwards.
 pub fn bite(f: &Facts) -> Result<(), String> {
     let way_back = &f.way_back;
+    phone().root(&format!("sh {way_back} fuse-pmic 15"))?;
     phone().root(&format!("sh {way_back} fuse 20")).map(|_| ())
 }
 

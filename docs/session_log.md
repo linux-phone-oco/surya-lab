@@ -3028,3 +3028,24 @@ Rejected
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-surya-attended-keep-calls4"></a>
+### Attended bite: keep calls4, arm the PMIC watchdog, read PMIC_WD
+
+Entry date
+: 2026-11-19
+
+Done
+: keep/unkeep steps around the bite; way-back.sh fuse-pmic; bite_seen rewritten on the named POFF_REASON1 bit
+
+Considered
+: re-arming a try with kernel install before the fuse; refusing when no try is left
+
+Rejected
+: keep over a re-installed try: a keep survives the reset by design and unkeep is one named step; the try path needs the counter read
+
+About
+: deep-sleep

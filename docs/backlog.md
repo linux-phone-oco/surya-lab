@@ -3496,10 +3496,10 @@ Rank
 ### Attended session: keep calls4 (kernel keep) for the bite, and arm the PMIC watchdog, not only the APSS fuse
 
 Status
-: open
+: done
 
 Note
-: From research bite-pon-and-calls4-choice. (1) one try is spent by the boot: keep calls4 (3 tries) before the bite, unkeep after; (2) the step arms qcom_wdt only: add arming pm8916_wdt (S2_CTL 0x56=0x07, S2_CTL2 0x57 bit7) via /dev/watchdog of the PM8916 node; (3) rewrite bite_seen: it matches strings pon-reason.sh never prints - match POFF_REASON1 bit2 (PMIC_WD) for a PMIC bite. No phone.
+: Dry-run: keep calls4 after the prompt, unkeep before the final health step; bite arms way-back.sh fuse-pmic 15 (new verb, PM8916 node by identity, exempt from the APSS refusal) then fuse 20; bite_seen reads only the named POFF_REASON1 PMIC_WD. fmt/clippy/12 tests green. Not run on the phone: fuse-pmic untried; the first attended run proves it.
 
 About
 : deep-sleep
