@@ -2134,37 +2134,6 @@ Witness
 : person
 
 
-<a id="surya-sxmo-suspend-series"></a>
-### surya runs sxmo-utils from our fork (sxmo-utils@lab): suspend retries back off, the sensors daemon is stopped and started around each suspend
-
-Status
-: in-progress
-
-Note
-: 2026-11-18 package part DONE (no suspend): sxmo-utils 1.18.1_p20261118-r0 @lab installed on surya (all 8 sxmo-utils* subpackages; modemmanager, mmsd-tng, vvmd pinned in world first - the new -common no longer pulls them and apk would have purged them; world backup /root/world.before-sxmo-lab). Wake lock devlab-usb held throughout; suite healthy 44 pass 0 fail. Left: the two suspend tests (suspend-retry-backs-off, sensors-after-suspend), attended window only, fuse armed, after ramoops-reserved-dt. Packaging note for lab-tools: sxmo-utils-common should depend on modemmanager (or keep the deps of -r4).
-
-Waits
-: attended window with the author
-
-About
-: sensors
-
-Opened
-: 2026-11-18
-
-Needs
-: phone
-
-Proof
-: suspend-retry-backs-off,sensors-after-suspend
-
-Rank
-: 3
-
-Witness
-: person
-
-
 <a id="ramoops-reserved-dt"></a>
 ### Reserve ramoops in the device tree so a way-back panic is kept (way-back-ramoops-present)
 
@@ -2977,3 +2946,30 @@ Needs
 
 Rank
 : 0
+
+
+<a id="surya-sxmo-suspend-series"></a>
+### surya runs sxmo-utils from our fork (sxmo-utils@lab): suspend retries back off, the sensors daemon is stopped and started around each suspend
+
+Status
+: done
+
+Note
+: WITHDRAWN 2026-11-19 (upstreams coordinator; docs #586, #599): the author's yes to the hardware-test layer (docs decision 2026-11-19-hardware-test-layer) withdrew the sxmo suspend series; grenudi/sxmo-utils is archived (still public), the lab apk is retired, surya goes back to Nura's own sxmo-utils (surya-sxmo-from-nura). suspend-retry-backs-off has no customer; sensors-after-suspend moves to lpoco-health's suspend cycle (surya-suspend-stop-config). No proof will run.
+
+2026-11-18 package part DONE (no suspend): sxmo-utils 1.18.1_p20261118-r0 @lab installed on surya (all 8 sxmo-utils* subpackages; modemmanager, mmsd-tng, vvmd pinned in world first - the new -common no longer pulls them and apk would have purged them; world backup /root/world.before-sxmo-lab). Wake lock devlab-usb held throughout; suite healthy 44 pass 0 fail. Left: the two suspend tests (suspend-retry-backs-off, sensors-after-suspend), attended window only, fuse armed, after ramoops-reserved-dt. Packaging note for lab-tools: sxmo-utils-common should depend on modemmanager (or keep the deps of -r4).
+
+About
+: sensors
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: suspend-retry-backs-off,sensors-after-suspend
+
+Rank
+: 3
