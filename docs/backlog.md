@@ -2990,3 +2990,32 @@ Witness
 
 Go until
 : 2026-11-19T13:40:50+01:00
+
+
+<a id="surya-attended-one-command"></a>
+### Write the surya attended session as one program run with one command (steps: pmicwdt boot and probe, bite, wake-in-suspend, step checks, standby current), tested before the author attends
+
+Status
+: open
+
+Note
+: Asked by the Top Coordinator 2026-11-19 (the author's standing rule, verbatim: 'please, ask me to attent only when everything is preped 1 launch sequence away with test sequences being prepered as rust-script or something and they test them before asking me to attend').
+
+BUILD the whole attended sequence as ONE program run with ONE command: a rust-script (or Rust bin) in surya-lab (suggest lab/attended/surya-attended.rs; or an lpoco lab subcommand if lab-tools has the place: look first, no shell - practice 21; arguments and env declared with argenv - practice 43). It reads the phone only through lpoco lab (never hand ssh). Steps: (1) boot the pmicwdt kernel (calls2+/calls4+ family with pm8916_wdt, patch 6/6) as a boot-counted one-shot try and read-probe it (driver registered, timeout, PON S2_CTL, reset type); (2) the bite (surya-pmic-wdt-proof: watchdog armed, APSS fuse by watchdog identity 17c10000.watchdog as the second way back, way-back.sh); (3) wake-in-suspend proof; (4) the step checks (surya-step-checks: sim-ready, pon-reason); (5) standby current (sleep-standby-current: author unplugs; BT off, sensorspd stopped, autosleep off). Each step has its checks and stops the run when one fails (practice 24). The program prints the author's on-screen prompts at each stop where he must act or watch (what will happen, what to watch, what to do if it goes wrong - hold power), waits for his Enter. LANE RULE after a bite: the next boot is a kernel with pm8916_wdt, never calls+; end state = a pm8916_wdt kernel or the kept kernel, healthy, lease released, results recorded.
+
+TEST IT BEFORE THE AUTHOR IS ASKED: a dry run against a stand-in (a fake phone / no phone: a --dry-run mode that walks every step and prompt with the phone calls stubbed), cargo/unit tests for the step logic, and every unattended piece RUN FOR REAL on surya where safe: step 1's boot plus read-probe as a one-shot try (needs lab-tools entry/try support: see devlab-kernel-try-cmdline; the keeper holds the lease for that, the builder does not touch the phone - queue the real run as a phone item and report). Report: the command, how long each step takes, what the author does, then the surya coordinator tells the Top Coordinator 'surya attended: ready, one command'.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: build
+
+Proof
+: surya-attended-dry-run
+
+Rank
+: 1
