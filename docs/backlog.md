@@ -3118,34 +3118,6 @@ Rank
 : 0
 
 
-<a id="surya-attended-real-dry-pieces"></a>
-### Run surya-attended's unattended pieces for real on surya (no author): steps 1-3 as a one-shot try, read-probe, way-back check; then report timings
-
-Status
-: open
-
-Note
-: 2026-11-19 14:20 keeper (unattended): put way-back.sh ok, way-back check passes on the kept calls+ kernel (watchdog, RTC, ramoops, pstore, patched qcom_wdt). 'lpoco lab kernel try calls4+' is refused: "calls4+": not a test kernel name (the '+' in the name; also no calls4+ entry installed). standby-run.sh on the phone is root-owned (Nov 17), 'lpoco lab phone put' as user is denied: use 'phone root'. Steps 3-5 not run; phone untouched, still on calls+. 2026-11-19 coordinator: the '+' is avoided by naming the entry calls4 (items surya-attended-entry-name, surya-attended-install-calls4); no wait on lab-tools. 2026-11-19: now runs the unattended modes of the split program (items surya-attended-split-unattended, surya-attended-calls4-boot-unattended); the rest of the sequence waits for the author.
-
-Blocked by
-: surya-attended-split-unattended,surya-attended-calls4-boot-unattended
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-19
-
-Needs
-: phone
-
-Proof
-: surya-attended-dry-run
-
-Rank
-: 1
-
-
 <a id="surya-procedures-one-shape"></a>
 ### Move lab/attended (#394) to procedures/attended-session.rs plus procedures/steps, per docs decision 2026-11-19-procedures-one-shape
 
@@ -3178,3 +3150,30 @@ Proof
 
 Rank
 : 5
+
+
+<a id="surya-attended-real-dry-pieces"></a>
+### Run surya-attended's unattended modes for real on surya (no author): --until FIRST_PROMPT, then --part calls-plus; report timings and what passed
+
+Status
+: open
+
+Note
+: 2026-11-19 14:20 keeper (unattended): put way-back.sh ok, way-back check passes on the kept calls+ kernel (watchdog, RTC, ramoops, pstore, patched qcom_wdt). 'lpoco lab kernel try calls4+' is refused: "calls4+": not a test kernel name (the '+' in the name; also no calls4+ entry installed). standby-run.sh on the phone is root-owned (Nov 17), 'lpoco lab phone put' as user is denied: use 'phone root'. Steps 3-5 not run; phone untouched, still on calls+. 2026-11-19 coordinator: the '+' is avoided by naming the entry calls4 (items surya-attended-entry-name, surya-attended-install-calls4); no wait on lab-tools. 2026-11-19: now runs the unattended modes of the split program (items surya-attended-split-unattended, surya-attended-calls4-boot-unattended); the rest of the sequence waits for the author.
+
+2026-11-19 coordinator: the program now has the unattended modes (surya-lab 410, lab-tools 259 v0.29.5): from lab/attended, 'cargo run --release -p surya-attended -- --until FIRST_PROMPT --log FILE' (boot calls4 one-shot, probe, way-back check, stops BEFORE the first prompt, never answers it; the manual run of the same boot already passed: PR 409) and then '--part calls-plus --log FILE' on the kept calls+ (put scripts, pon reason now, step checks, standby script reachable as root, finish_healthy). KNOWN: finish_healthy's read_probe needs a calls4/pm8916 kernel, so on calls+ it may fail: if so do not edit code; record it and tell the surya coordinator (a small builder fix). Way back armed as always; if the try does not return in 10 minutes park and tell me. Record per step: pass/fail, seconds. Never run past the first prompt: the bite, wake-in-suspend and the unplug are the author's.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Proof
+: surya-attended-dry-run
+
+Rank
+: 0
