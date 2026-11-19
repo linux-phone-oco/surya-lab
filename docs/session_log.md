@@ -3007,3 +3007,24 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-surya-attended-pin-0-34-1"></a>
+### Attended session pinned to lpoco-attended 0.34.1
+
+Entry date
+: 2026-11-19
+
+Done
+: Bumped pin 0.32.0 to 0.34.1; steps skip when state holds (files on phone same sha256, calls4 already running, bite already in this boot's PON reason); entry doc names --from and answer files; one new test.
+
+Considered
+: Skipping wait_for_restart and wake_in_suspend: no state that proves them done.
+
+Rejected
+: A skip for the bite on 'fuse armed' alone: armed state is not readable without arming, so only a read bite counts.
+
+About
+: deep-sleep

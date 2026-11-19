@@ -52,6 +52,11 @@ pub fn standby_ma(samples_tsv: &str) -> Option<f64> {
     (!v.is_empty()).then(|| v.iter().sum::<f64>() / v.len() as f64)
 }
 
+/// `sha256sum FILE` output (on the phone or here) names exactly this checksum: the file is already as it should be.
+pub fn sha_matches(sum_output: &str, expected: &str) -> bool {
+    expected.len() == 64 && sum_output.split_whitespace().next() == Some(expected)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -88,5 +93,17 @@ mod tests {
         let t = "0\tsettle\tx\t0\t900000\n1\tmeasure\tx\t0\t-30000\n2\tmeasure\tx\t0\t-50000\n";
         assert_eq!(standby_ma(t), Some(40.0));
         assert_eq!(standby_ma("0\tsettle\tx\t0\t1\n"), None);
+    }
+
+    #[test]
+    fn a_file_is_already_in_place_only_when_the_whole_checksum_matches() {
+        let sha = "a".repeat(64);
+        assert!(sha_matches(&format!("{sha}  /var/tmp/x\n"), &sha));
+        assert!(!sha_matches(
+            &format!("{}  /var/tmp/x\n", "b".repeat(64)),
+            &sha
+        ));
+        assert!(!sha_matches("sha256sum: /var/tmp/x: No such file", &sha));
+        assert!(!sha_matches("aa  x", "aa"));
     }
 }
