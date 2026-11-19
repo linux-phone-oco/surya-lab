@@ -2836,31 +2836,6 @@ Rank
 : 3
 
 
-<a id="surya-test-layer-entry"></a>
-### A second boot entry of the same Nura v26.06 image at multi-user.target (the hardware-test layer), through lpoco's test-kernel route with its fallback
-
-Status
-: open
-
-Note
-: From orchestration; the author said yes (docs decision 2026-11-19-hardware-test-layer; session-log 2026-11-19-author-yes-test-layer-and-distro-later): 'yes, if archiving will still leave the repo as openly available, searchable and publicly visible' - holds: grenudi/sxmo-utils is archived, still public and read-only, its lab tag still serves. Step: AFTER A READ-ONLY LOOK at how the image boots today (default target, services, what sxmo/superd/tinydm bring), add a SECOND boot entry of the same image (image-fresh-stock/ is the only pristine copy: never touch it; work on a copy) at multi-user.target (no graphical session: the layer where hardware tests run quiet) through lpoco's test-kernel route with its fallback (boot-counted, one-shot, falls back by itself - the normal route: kernel install/try with an extra cmdline or entry). Proof: one boot of it reaches multi-user.target, the suite's checks run (the ones that need no UI), the next boot is the normal one. Watchdog as is, no suspend, wake lock held.
-
-Waits
-: lab-tools health-test-layer-quiet (the builder takes it next, rank 2)
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-19
-
-Needs
-: phone
-
-Rank
-: 12
-
-
 <a id="surya-test-layer-default"></a>
 ### The test layer becomes surya's default boot (attended)
 
@@ -2959,3 +2934,27 @@ Needs
 
 Rank
 : 1
+
+
+<a id="surya-test-layer-entry"></a>
+### A second boot entry of the same Nura v26.06 image at multi-user.target (the hardware-test layer), through lpoco's test-kernel route with its fallback
+
+Status
+: open
+
+Note
+: From orchestration; the author said yes (docs decision 2026-11-19-hardware-test-layer; session-log 2026-11-19-author-yes-test-layer-and-distro-later): 'yes, if archiving will still leave the repo as openly available, searchable and publicly visible' - holds: grenudi/sxmo-utils is archived, still public and read-only, its lab tag still serves. Step: AFTER A READ-ONLY LOOK at how the image boots today (default target, services, what sxmo/superd/tinydm bring), add a SECOND boot entry of the same image (image-fresh-stock/ is the only pristine copy: never touch it; work on a copy) at multi-user.target (no graphical session: the layer where hardware tests run quiet) through lpoco's test-kernel route with its fallback (boot-counted, one-shot, falls back by itself - the normal route: kernel install/try with an extra cmdline or entry). Proof: one boot of it reaches multi-user.target, the suite's checks run (the ones that need no UI), the next boot is the normal one. Watchdog as is, no suspend, wake lock held.
+
+2026-11-19 UNBLOCKED (orchestration, docs #603): lab-tools released the quiet check as 95-test-layer.sh in v0.22.2 (proof test-layer-quiet; it reports how the phone booted); the new bring-up step is test-layer-boots (stage lab; shell is now the last stage before the goals; s2idle-cycle-returns hard-needs it). Check first that the lab is at lpoco >= 0.22.2 (lpoco host check) and that the check reaches the phone (suite put). After the entry boots at multi-user.target ONCE (one-shot, with fallback), CLAIM test-layer-boots done with --proof test-layer-quiet --run <that boot's run> --proven-on <image/kernel/dtb>; until then it stays open. Seven steps moved into the shell stage with ids kept; no claim needs redoing.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Rank
+: 4
