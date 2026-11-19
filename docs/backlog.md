@@ -2858,6 +2858,9 @@ Needs
 Rank
 : 1
 
+Witness
+: person
+
 
 <a id="surya-test-layer-entry"></a>
 ### A second boot entry of the same Nura v26.06 image at multi-user.target (the hardware-test layer), through lpoco's test-kernel route with its fallback
