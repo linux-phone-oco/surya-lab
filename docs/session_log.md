@@ -2575,3 +2575,39 @@ Rejected
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-1420-attended-dry-pieces-refused"></a>
+### Attended dry pieces: try refused
+
+Entry date
+: 2026-11-19
+
+Done
+: Tried surya-attended-real-dry-pieces: way-back.sh put and way-back check pass; kernel try calls4+ refused (not a test kernel name); standby-run.sh put denied (root-owned file). Phone untouched, kept calls+.
+
+Considered
+: next: lab-tools accepts '+' names, or surya-attended renames the entry; then the item runs steps 3-5 up to the first ask
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-19-1425-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: kept 7.1.0-sm7150-calls+, stock fallback untouched, way-back check passes, suite latest 20261119-071125 healthy; surya-attended-real-dry-pieces blocked on lab-tools naming; other ready items need a suspend or a witness; nothing changed on the phone
+
+Considered
+: next: surya-kernel-pmic-wdt in an attended window; surya-attended-real-dry-pieces once kernel try accepts calls4+
+
+About
+: deep-sleep
