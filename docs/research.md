@@ -1372,3 +1372,25 @@ About
 
 Material
 : research/deep-sleep/2026-11-19-clk1047/
+
+
+<a id="clk-1047-pm6150-wdt-disabled-dtb-does-not-boot"></a>
+### clk-1047-pm6150-wdt-disabled-dtb-does-not-boot
+
+Date
+: 2026-11-19
+
+Brief
+: calls4's dtb with the pm6150 watchdog node disabled: boot stops before any log (1 try); the same dtb round-tripped through dtc boots and still warns clk.c:1048
+
+Question
+: Does disabling the pm6150_wdt node in calls4+'s dtb remove clk.c:1047/1048?
+
+Found
+: calls4 had modules on the phone but no boot entry: installed (Image, huaxing dtb, scratch-calls4/modules.tgz), its own try booted calls4+ and warns. dtb try 1 (decompiled, node at dts line 3514 'watchdog' compatible qcom,pm8998-wdt, status disabled): entry chosen, nothing logged, stock came back. Control (same dts, status okay, 4 bytes shorter): boots, calls4+ warns clk.c:1048/1188 once, bt unhealthy (known on calls4). So the dtc round trip is fine; the disabled node stops the boot silently. Not answered: whether the warning depends on the node. One failed try, cause unseen: a second would be a turning point for the coordinator.
+
+About
+: deep-sleep
+
+Material
+: research/deep-sleep/2026-11-19/

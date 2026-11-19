@@ -2194,3 +2194,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-0230-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: Kept calls+ runs, healthy 76 pass 0 fail (suite 20261119-013649). Installed boot entry calls4 (pmos-calls4+, pmos-calls4-dt+). Tried item clk-1047-bisect-pmic-wdt-series: dtb with pm6150 wdt disabled did not boot (nothing logged), round-trip control booted. No suspend, no fuse touched.
+
+Considered
+: next: coordinator decides: retry the disabled-node dtb once more, or stop (display-side noise per dsi-pll-lock-failed-sm7150); item left open
+
+About
+: deep-sleep
