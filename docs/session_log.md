@@ -2815,3 +2815,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-1555-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: Phone runs calls4+ (boot 14:48 UTC), suite 20261119-145029 healthy 0 fail; read the failed boot's leftovers: no journal, no pstore, empty kernel log; nothing changed, no calls4 retry; watchdog not driven
+
+Considered
+: next: calls4 is the running try not the kept kernel; coordinator to say whether to keep or let a reboot go to stock; surya-attended-real-dry-pieces waits on an attended window
+
+About
+: deep-sleep
