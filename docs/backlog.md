@@ -3042,34 +3042,6 @@ Rank
 : 0
 
 
-<a id="surya-attended-real-dry-pieces"></a>
-### Run surya-attended's unattended pieces for real on surya (no author): steps 1-3 as a one-shot try, read-probe, way-back check; then report timings
-
-Status
-: open
-
-Note
-: 2026-11-19 14:20 keeper (unattended): put way-back.sh ok, way-back check passes on the kept calls+ kernel (watchdog, RTC, ramoops, pstore, patched qcom_wdt). 'lpoco lab kernel try calls4+' is refused: "calls4+": not a test kernel name (the '+' in the name; also no calls4+ entry installed). standby-run.sh on the phone is root-owned (Nov 17), 'lpoco lab phone put' as user is denied: use 'phone root'. Steps 3-5 not run; phone untouched, still on calls+. 2026-11-19 coordinator: the '+' is avoided by naming the entry calls4 (items surya-attended-entry-name, surya-attended-install-calls4); no wait on lab-tools.
-
-Blocked by
-: surya-attended-install-calls4
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-19
-
-Needs
-: phone
-
-Proof
-: surya-attended-dry-run
-
-Rank
-: 1
-
-
 <a id="surya-attended-install-calls4"></a>
 ### Install the calls4 kernel entry (pm8916_wdt, patch 6/6) as a boot entry named calls4, not tried
 
@@ -3128,3 +3100,81 @@ Proof
 
 Rank
 : 5
+
+
+<a id="surya-attended-split-unattended"></a>
+### attended program: run everything that is not risky unattended (--until FIRST_PROMPT and a calls+ part), only the bite, wake-in-suspend and the unplug wait for the author
+
+Status
+: open
+
+Note
+: The author (2026-11-19, via the Top Coordinator): 'but other steps of procedure are ran and tested already ? with only risky parts waiting attending ?' - today only 'phone answers', 'way-back on phone' and the calls4 install ran for real. Rule: only the risky parts wait for him. Change lab/attended (keep main.rs a checklist, decision 2026-11-19-attended-only-when-one-command-away): (1) a mode the keeper runs unattended: --until FIRST_PROMPT (stop cleanly at the first ask_author, never answering it) so the boot of calls4, read_probe and way_back_in_place run for real; (2) a calls+ part that needs no calls4 and no bite: step_checks, pon_reason (read the CURRENT value), the standby script reachable as root (use phone root: /var/tmp/standby-run.sh is root-owned), finish_healthy - runnable by the keeper on the kept kernel; (3) only bite, wait_for_restart after a bite, wake_in_suspend with the watchdog armed and the unplug for standby stay behind the author's prompts. Test: dry run for each mode, fmt, clippy, tests; land. If the library's attended runner lacks a --until or --only flag, do it in the program's own argenv and name what you want in the library.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: build
+
+Proof
+: surya-attended-dry-run
+
+Rank
+: 0
+
+
+<a id="surya-attended-calls4-boot-unattended"></a>
+### Is booting calls4 risky by itself? Check what arms the PMIC watchdog; if nothing, run the boot, read-probe and return to calls+ unattended
+
+Status
+: open
+
+Note
+: Top Coordinator's question 2026-11-19. Driver (8b2283da3): pm8916_wdt probe sets WDOG_HW_RUNNING only if S2 is ALREADY enabled (bootloader or an earlier bite left it), else it does not start; it starts only when something opens its /dev/watchdogN. So read on the phone (calls+, read-only): systemd RuntimeWatchdogSec / WatchdogDevice / ShutdownWatchdogSec in /etc/systemd (system.conf.d), anything holding /dev/watchdog* open (fuser/lsof), and WHICH index calls4's pm8916_wdt would take versus the qcom_wdt that way-back.sh's fuse uses (by identity 17c10000.watchdog). Also PON S2_CTL2 now (0x857; is S2 enabled at boot after a clean boot? the last bite was long ago and S2 stays enabled across a restart - read it on calls+ first). Decide, record: if NOTHING arms it and S2 is clear, then run (way back armed, one boot-counted one-shot try of calls4): boot, read_probe (driver registered, timeout, S2 not running), way_back_in_place, and a clean return to calls+ by boot counting; the try falls back by itself. If S2 is already set, or systemd would open it: STOP, record why, and leave the boot for the attended run (a hang then loops on calls+). If the try does not come back in 10 minutes, do NOT hold, retry or power-cycle: park and tell the surya coordinator (a power-off from eOS recovery is the author's). Use phone root for root-owned files.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Proof
+: surya-attended-dry-run
+
+Rank
+: 0
+
+
+<a id="surya-attended-real-dry-pieces"></a>
+### Run surya-attended's unattended pieces for real on surya (no author): steps 1-3 as a one-shot try, read-probe, way-back check; then report timings
+
+Status
+: open
+
+Note
+: 2026-11-19 14:20 keeper (unattended): put way-back.sh ok, way-back check passes on the kept calls+ kernel (watchdog, RTC, ramoops, pstore, patched qcom_wdt). 'lpoco lab kernel try calls4+' is refused: "calls4+": not a test kernel name (the '+' in the name; also no calls4+ entry installed). standby-run.sh on the phone is root-owned (Nov 17), 'lpoco lab phone put' as user is denied: use 'phone root'. Steps 3-5 not run; phone untouched, still on calls+. 2026-11-19 coordinator: the '+' is avoided by naming the entry calls4 (items surya-attended-entry-name, surya-attended-install-calls4); no wait on lab-tools. 2026-11-19: now runs the unattended modes of the split program (items surya-attended-split-unattended, surya-attended-calls4-boot-unattended); the rest of the sequence waits for the author.
+
+Blocked by
+: surya-attended-split-unattended,surya-attended-calls4-boot-unattended
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Proof
+: surya-attended-dry-run
+
+Rank
+: 1
