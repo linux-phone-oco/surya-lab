@@ -2996,10 +2996,10 @@ Go until
 ### Write the surya attended session as one program run with one command (steps: pmicwdt boot and probe, bite, wake-in-suspend, step checks, standby current), tested before the author attends
 
 Status
-: in-progress
+: done
 
 Note
-: Built: lab/attended (crate surya-attended on lpoco-attended-v0.29.0): entry main.rs is the 14-step checklist, helpers in session.rs/checks.rs; cargo fmt/clippy/test green incl. --dry-run walk of all steps in order. NOT yet run on the phone: queued as surya-attended-real-dry-pieces. Step times unmeasured. Wanted from the library: boot_once, wait_for_usb, back_to_known_good, read_dmesg (written inline for now).
+: 2026-11-19: built and landed by the surya builder (surya-lab #394): lab/attended on lpoco-attended-v0.29.0, main.rs a 14-step checklist, fmt/clippy/test green, --dry-run walks all steps. Not yet proven on the phone: see surya-attended-real-dry-pieces. The move to procedures/ is surya-procedures-one-shape.
 
 About
 : deep-sleep
