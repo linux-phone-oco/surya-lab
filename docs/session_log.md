@@ -2308,3 +2308,18 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-1930-stale-pieces"></a>
+### Stale pieces reconciled
+
+Entry date
+: 2026-11-19
+
+Done
+: device.toml drops devlab-usb-awake; 3 phone files reinstalled (comments); phone healthy
+
+Considered
+: next: re-read lpoco host check after next boot; surya-step-checks needs attended suspend

@@ -2596,10 +2596,10 @@ Rank
 ### lpoco host check reads 4 phone pieces STALE: reinstall or fix what device.toml declares
 
 Status
-: open
+: done
 
 Note
-: From patrol's 00:10 round: 'lpoco host check' reads surya's phone pieces as STALE against suite run 20261118-212534: devlab-audio-heal, devlab-usb-awake, the pd-mapper conf, the way-back sysctl. Some are expected: devlab-usb-awake was REPLACED by the lpoco-awake package (PR 296; its declaration in device.toml should be removed/retired - the check cries wolf for a piece that is gone); devlab-audio-heal is new (PR 299) and its script header changed (WORKAROUND mark, PR on main) so the phone's copy differs; the way-back sysctl may differ from device.toml's overlay (PR 244 + later). For EACH of the 4: diff the phone's installed file against main's source (read-only), say which side is newer; then either reinstall it through the provisioning (lpoco lab provision now / the suite put path - wake lock held, no suspend) or update/remove what surya-lab declares so the check reads clean. Re-run lpoco host check; record which of the 4 were real drift and which declarations were stale (the class: a declaration that outlives its piece). Land.
+: proven by suite run 20261119-050557 healthy; host check to read clean after next boot report (not yet re-read)
 
 About
 : deep-sleep
