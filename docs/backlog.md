@@ -2864,31 +2864,6 @@ Witness
 : person
 
 
-<a id="surya-sxmo-from-nura"></a>
-### Back to Nura's own sxmo-utils (leave the lab apk sxmo-utils@lab)
-
-Status
-: open
-
-Note
-: From orchestration, third of three: return surya to Nura's own sxmo-utils package (remove sxmo-utils@lab, the pinned lab apk with the suspend series, repository tag @lab) once the suspend series' proofs are done and the test layer is the default. Wake lock held through the swap (no gap), ModemManager still installed, migration markers read after, the suite once. grenudi/sxmo-utils stays archived/public (the lab tag still serves for anyone). Keep shell-free-base (open, yours) alongside: these three carry it.
-
-Waits
-: surya-test-layer-default (and the upstreams lane's sxmo suspend series, which uses sxmo-utils@lab for its proofs)
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-19
-
-Needs
-: phone
-
-Rank
-: 14
-
-
 <a id="clk-1047-bisect-pmic-wdt-series"></a>
 ### Find which of the 7 PMIC wdt commits (or PM8916_WATCHDOG=y) brings clk.c:1047 on boot
 
@@ -2980,3 +2955,25 @@ Needs
 
 Rank
 : 5
+
+
+<a id="surya-sxmo-from-nura"></a>
+### Back to Nura's own sxmo-utils (leave the lab apk sxmo-utils@lab)
+
+Status
+: open
+
+Note
+: PRIORITY CHANGE (orchestration, now rank 0, unblocked; the old waits are lifted): our sxmo-utils apk is AGPL-3.0 and we publish it with no licence or source notice on the page, so we stop publishing it at all. STEP: on surya swap sxmo-utils@lab back to Nura's own sxmo-utils (apk del the @lab package(s), then apk add from the Nura repo; remove the @lab repository line/tag from /etc/apk/repositories after); check sxmo still starts in its boot entry (a boot or a superd restart: the wake lock held through the swap (lpoco-awake package, no gap), ModemManager still installed, .needs-migration markers read after: Nura's package defaults differ from the lab's: run sxmo_migrate.sh state and keep our user_config declarations in mind (item surya-user-config-declared)), the suite once; claim nothing more. Does not depend on the console boot entry. DONE = surya has NO @lab sxmo package installed (apk list -I | grep -i sxmo; apk policy sxmo-utils): tell the surya coordinator at once, orchestration then retires the apk. Consequence to tell the upstreams lane: the suspend series proofs that used sxmo-utils@lab (suspend-retry-backs-off) can no longer run on surya; sensors-after-suspend moves to lpoco-health suspend cycle (surya-suspend-stop-config). Watchdog as is, no suspend. Hands: none expected; if sxmo does not come back on screen, report at once (recovery: the author's hands).
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Rank
+: 0
