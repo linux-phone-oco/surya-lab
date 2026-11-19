@@ -969,31 +969,6 @@ Rank
 : 6
 
 
-<a id="devlab-kernel-try-cmdline"></a>
-### devlab kernel try NAME --cmdline: a one-shot kernel command line
-
-Status
-: open
-
-Note
-: lab-tools change (coordinator routing it): one-shot entry NAME-cmd falling back by itself like --dtb; needed for noirqdebug in r4
-
-Waits
-: low: r5 no longer needs noirqdebug (irq 157 stays enabled with the serial's wakeup off); wanted only as a convenience: kernel try --cmdline for the RUNNING release without reinstalling modules (devlab install refuses a cmdline-only entry for the running version)
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-17
-
-Needs
-: build
-
-Proof
-: devlab kernel try NAME --cmdline noirqdebug boots with it in /proc/cmdline once, then stock/kept
-
-
 <a id="suspend-irq-quiet-check"></a>
 ### Suite check suspend-irq-quiet: interrupts across one suspended cycle stay under a threshold (lab-tools)
 
@@ -2843,28 +2818,6 @@ Witness
 : person
 
 
-<a id="surya-test-layer-entry"></a>
-### A second boot entry of the same Nura v26.06 image at multi-user.target (the hardware-test layer), through lpoco's test-kernel route with its fallback
-
-Status
-: open
-
-Note
-: 2026-11-19 keeper: lpoco lab kernel install refuses a second entry of the running kernel's release (modules would replace); needs lab-tools change (entry-only install with --cmdline) or a differently-versioned build; coordinator decides
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-19
-
-Needs
-: phone
-
-Rank
-: 4
-
-
 <a id="surya-suspend-stop-config"></a>
 ### device.toml [health] suspend_stop = ["sensorspd"]; the sensors-after-suspend wording drops 'under Sxmo'
 
@@ -3024,3 +2977,53 @@ Needs
 
 Rank
 : 2
+
+
+<a id="surya-test-layer-entry"></a>
+### A second boot entry of the same Nura v26.06 image at multi-user.target (the hardware-test layer), through lpoco's test-kernel route with its fallback
+
+Status
+: open
+
+Note
+: 2026-11-19 keeper: lpoco lab kernel install refuses a second entry of the running kernel's release (modules would replace); needs lab-tools change (entry-only install with --cmdline) or a differently-versioned build; coordinator decides
+
+Waits
+: lab-tools: an entry-only install or 'kernel try --cmdline' for the RUNNING release (asked of orchestration 2026-11-19); surya-lab#373 has the refusal text
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Rank
+: 4
+
+
+<a id="devlab-kernel-try-cmdline"></a>
+### devlab kernel try NAME --cmdline: a one-shot kernel command line
+
+Status
+: open
+
+Note
+: lab-tools change (coordinator routing it): one-shot entry NAME-cmd falling back by itself like --dtb; needed for noirqdebug in r4
+
+Waits
+: lab-tools: an entry-only install or 'kernel try --cmdline' for the RUNNING release (asked of orchestration 2026-11-19); surya-lab#373 has the refusal text
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-17
+
+Needs
+: build
+
+Proof
+: devlab kernel try NAME --cmdline noirqdebug boots with it in /proc/cmdline once, then stock/kept
