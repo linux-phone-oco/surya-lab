@@ -2629,3 +2629,21 @@ Rejected
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-1335-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: installed calls4 entry (pm8916_wdt) not tried; kept and running kernel calls+; cleared stale failed keyx0/1/3 evtest units from an earlier session; suite: only known gaps (fingerprint, cameras) fail
+
+Considered
+: next: surya-attended-real-dry-pieces when the author is at the phone
+
+About
+: deep-sleep
