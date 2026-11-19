@@ -2212,3 +2212,18 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-1600-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: kept calls+ kernel running, unchanged this run (no phone change). Closed clk-1047 bisect: series cleared, display side is the root.
+
+Considered
+: next: surya-steps-map-history / surya-step-checks (unattended); second dtb try rejected (cause unseen, no log)

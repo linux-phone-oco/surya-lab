@@ -1394,3 +1394,22 @@ About
 
 Material
 : research/deep-sleep/2026-11-19/
+
+
+<a id="clk-1047-display-side-series-cleared"></a>
+### clk-1047-display-side-series-cleared
+
+Date
+: 2026-11-19
+
+Brief
+: clk.c:1047 is display-side (DSI PLL lock failure), present with no driver, gcc/clang, wdt built-in or =m: the PMIC wdt series is cleared as far as measurable
+
+Question
+: Is clk.c:1047/1048 caused by the PMIC wdt series or the pm6150_wdt node?
+
+Found
+: Warning and DSI PLL lock failure appear on kept calls+ (no driver), calls3+ (clang), calls4+ (=m). The one-shot discriminator (calls4 dtb with &pm6150_wdt disabled) did not boot (silently, 1 try); the control dtb (dtc round trip, node okay) boots and warns. 'lpoco lab kernel log' reads empty: the failed try left no log, so the cause is unseen, not trivial to fix in the dtb copy (the node holds wakeup-source; no label dependency seen in the dts, line 3514). Per coordinator decision: no second try, no bisect, no suspend, no bite. Real fix belongs to dsi-pll-lock-failed-sm7150. Series cleared of authorship of the display bug.
+
+About
+: deep-sleep
