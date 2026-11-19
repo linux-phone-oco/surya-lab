@@ -2872,3 +2872,24 @@ Rejected
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-surya-builder-pon-reason-reads-the-pmic-reset"></a>
+### surya-builder: pon-reason reads the PMIC reset reason
+
+Entry date
+: 2026-11-19
+
+Done
+: pon-reason.sh now reads the PMIC PON/POFF/WARM/SOFT reason registers from the debugfs regmap and names the bits; host test on a fixture; reviewed by programmer (three defects fixed: whole-file reads, wrong-regmap glob, unread shown as none). Item queued for the keeper to see it on the phone.
+
+Considered
+: A driver change or SDAM read (needs a kernel try)
+
+Rejected
+: Skipping rank 1 surya-host-usb-timeline: it is lab-tools work, landed only by the lab-tools builder; left for the coordinator to route. Rank 3 (procedures-one-shape) not started this run.
+
+About
+: deep-sleep
