@@ -3228,3 +3228,28 @@ Proof
 
 Rank
 : 0
+
+
+<a id="surya-unreachable-after-calls4-try"></a>
+### surya does not answer after the unattended calls4 one-shot try (run 3): needs the author's power cycle, then read pstore and the journal before any retry
+
+Status
+: open
+
+Note
+: 2026-11-19 keeper run 3 (surya-lab PR 418): 'lpoco lab kernel try calls4' ended 'no new boot answered within ten minutes'. Surya answers at no address, is not on USB; no self-fallback, no watchdog reset seen. Runs before booted calls4 fine (64 s, 205 s). PARKED: no phone work until the author's hands: power cycle (hold power 15 s; if it loops, power off from eOS recovery, wait 30 s USB out). After it is back: FIRST read pstore/ramoops and the journal of the failed boot (what hung: boot counting should have fallen back), then record, then decide. Do not retry calls4 before that; no defuse.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Rank
+: 0
+
+Witness
+: person
