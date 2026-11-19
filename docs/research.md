@@ -1307,3 +1307,22 @@ About
 
 Material
 : research/deep-sleep/2026-11-19-clk1047/
+
+
+<a id="clk-1047-calls3-clang-still-warns"></a>
+### clk-1047-calls3-clang-still-warns
+
+Date
+: 2026-11-19
+
+Brief
+: calls2's source built with calls+'s clang+LTO config (calls3+) still warns clk.c:1047/1188: the toolchain is not the cause
+
+Question
+: Does building the calls2+ tree (c88ed67e0) with calls+'s exact clang 23.1.5 + thin LTO/CFI/SCS config remove the clk.c:1047 warning?
+
+Found
+: Built c88ed67e0 (wt-pmic-wdt2) out of tree in ~/Projects/surya-audio/obj-calls3 with calls+'s .config, only LOCALVERSION=-sm7150-calls3 and PM8916_WATCHDOG=y changed (clang 23.1.5, LTO_CLANG_THIN, SCS). One one-shot try on huaxing dtb (no suspend, PMIC wdt never armed): booted 7.1.0-sm7150-calls3+ in 79 s, health 20261119-003156 healthy 76 pass/3 known gaps/0 fail. dmesg (scratch-calls3/dmesg.txt): DSI PLL lock failed, clk.c:1188 clk_core_disable and clk.c:1048 clk_core_unprepare 'already unprepared' (the same WARN statement as 1047, line shifted by the build) all present at 0.95 s. So the warning is NOT a gcc-vs-clang artefact: it follows the source (the 7 PMIC wdt commits, most likely PM8916_WATCHDOG=y or its dtsi nodes changing probe order before the failed DSI PLL unwind). calls3+ is not a cure; whether the warning is harmful is open (it follows an old DSI PLL failure). Next: PM8916_WATCHDOG=m build, then bisect the commits. Phone returned to stock calls+ (healthy); calls3 entry removed; obj-calls3 kept.
+
+About
+: deep-sleep
