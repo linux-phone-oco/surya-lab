@@ -6,10 +6,14 @@
 //! The keeper runs what is not risky without the author: `--until FIRST_PROMPT` (the boot of the pmicwdt kernel
 //! and the probes, stopping at the first prompt) and `--part calls-plus` (the checks that need neither the bite
 //! nor the cable). Only the with(&facts, bite), the restart after it, wake in suspend and the unplug wait for the author.
+//! A rerun does not repeat what is done: `--from STEP` resumes at a step (the printed `--until` stop names it); a step whose
+//! state already holds is skipped and said: the pmicwdt kernel already running (no install, no boot), the three files already on
+//! the phone with the same checksums (a same-name rebuild is not told apart: the install is skipped by name). The physical prompts are filed in
+//! ~/.cache/lpoco-attended/xiaomi-surya/prompt and answered by writing `ok` to the `answer` file beside it (or on the terminal).
 //!
 //! ```cargo
 //! [dependencies]
-//! lpoco-attended = { git = "https://github.com/linux-phone-oco/lab-tools", tag = "lpoco-attended-v0.32.0" }
+//! lpoco-attended = { git = "https://github.com/linux-phone-oco/lab-tools", tag = "lpoco-attended-v0.34.1" }
 //! surya-steps = { path = "steps" }
 //! ```
 // SPDX-License-Identifier: MIT OR Apache-2.0

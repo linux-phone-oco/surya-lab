@@ -3474,10 +3474,10 @@ Rank
 ### Pin attended-session to lpoco-attended 0.34.1 (answer files, --from, skip-when-in-state) so the next attended run does not repeat today's reboots
 
 Status
-: open
+: done
 
 Note
-: From the Top Coordinator 2026-11-19 (author paused the surya lane): desk work only, the builder never touches the phone. In surya-lab procedures/ (attended-session): bump the pin from lpoco-attended v0.32.0 to 0.34.1 (check the tag name in lab-tools), use answer files (the physical steps answered from a file, so a rerun does not ask again), --from (resume at a step) and skip-when-in-state (a step whose state already holds is skipped: e.g. already on calls4, already armed, the way-back already put), so a run does not reboot again for a step done. Entry file stays a checklist. Dry run each mode, check, fmt, clippy, tests; land.
+: Pinned lpoco-attended v0.34.1; skip-when-in-state in put_way_back and install (by kernel name, release matched as 7.1.0-sm7150-calls4+); --from and answer files via the pin. Bite skip left out on review (bite_seen too loose): comes with attended-keep-calls4-for-bite. Dry runs green; no phone run.
 
 About
 : deep-sleep

@@ -79,9 +79,46 @@ impl Facts {
     }
 }
 
+/// Said and passed: the phone already is in the state this step brings about, so it is not done again (no reboot, no put).
+fn already(what: &str) -> Result<(), String> {
+    println!("  already in state: {what} - nothing to do");
+    Ok(())
+}
+
+/// Whether the phone runs the calls4 kernel now: false when it cannot be asked (the step then does its work).
+fn runs_pmicwdt_kernel() -> bool {
+    phone()
+        .sh("uname -r 2>/dev/null")
+        .is_ok_and(|release| release_is_kernel(&release, PMICWDT_KERNEL))
+}
+
+/// Whether the file here and the one on the phone have one checksum.
+fn on_phone_as_here(local: &str, remote: &str) -> bool {
+    let here = Command::new("sha256sum")
+        .arg(base_root().join(local))
+        .output()
+        .map(|o| String::from_utf8_lossy(&o.stdout).to_string())
+        .unwrap_or_default();
+    let Some(sha) = here.split_whitespace().next() else {
+        return false;
+    };
+    phone()
+        .sh(&format!("sha256sum {remote} 2>/dev/null"))
+        .is_ok_and(|there| sha_matches(&there, sha))
+}
+
+/// Put what is not already on the phone as it is here (way-back.sh, the standby script, the pon reason check).
 pub fn put_way_back(f: &Facts) -> Result<(), String> {
+    let mut put = 0;
     for (local, remote) in f.puts() {
+        if on_phone_as_here(local, remote) {
+            continue;
+        }
         lab(&["phone", "put", local, remote])?;
+        put += 1;
+    }
+    if put == 0 {
+        return already("way-back.sh and its two companions are on the phone, same checksums");
     }
     Ok(())
 }
@@ -94,8 +131,11 @@ fn probe_script() -> String {
     )
 }
 
-/// Every try is spent by a boot: put the entry back with its one try, from files whose checksums are known.
+/// Every try is spent by a boot: put the entry back (skipped when the kernel already runs) with its one try, from files whose checksums are known.
 pub fn install_pmicwdt_kernel(f: &Facts) -> Result<(), String> {
+    if runs_pmicwdt_kernel() {
+        return already("the phone runs the pmicwdt kernel, so its entry needs no new try");
+    }
     let mut paths = Vec::new();
     for (rel, sha) in &f.kernel_files {
         let path = base_root().join(rel).to_string_lossy().to_string();
@@ -136,6 +176,15 @@ pub fn way_back_in_place(f: &Facts) -> Result<(), String> {
     phone().root(&format!("sh {way_back} check")).map(|_| ())
 }
 
+/// The PON reason and the reset lines of the kernel log, as the phone says them now.
+fn pon_text(f: &Facts) -> Result<String, String> {
+    let pon_reason = &f.pon_reason;
+    phone().root(&format!(
+        "sh {pon_reason} 2>&1; dmesg | grep -i -E 'pon|S2_CTL|reset' | tail -20"
+    ))
+}
+
+/// Arm the fuse and let go.
 pub fn bite(f: &Facts) -> Result<(), String> {
     let way_back = &f.way_back;
     phone().root(&format!("sh {way_back} fuse 20")).map(|_| ())
@@ -148,10 +197,7 @@ pub fn wait_for_restart() -> Result<(), String> {
 }
 
 pub fn pon_reason(f: &Facts) -> Result<(), String> {
-    let pon_reason = &f.pon_reason;
-    let pon = phone().root(&format!(
-        "sh {pon_reason} 2>&1; dmesg | grep -i -E 'pon|S2_CTL|reset' | tail -20"
-    ))?;
+    let pon = pon_text(f)?;
     if bite_seen(&pon) {
         Ok(())
     } else {
