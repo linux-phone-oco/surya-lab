@@ -196,3 +196,22 @@ kind = "config"
 from = "lab/q6voiced.conf"
 to = "/usr/share/xiaomi-surya/q6voiced.conf"
 kind = "config"
+
+# User configs the lab names when they drift (lpoco host check; item surya-user-config-declared). Each should equal
+# the sxmo package default; the 2026-11-18 migration read (research 2026-11-18-sxmo-migration-diff-read) found
+# ours carried no deliberate change. foot.ini has no live copy (the package default is used), so none is declared.
+[[user_config]]
+path = "/home/user/.config/sxmo/conky.conf"
+expect = "/usr/share/sxmo/appcfg/conky.conf"
+
+[[user_config]]
+path = "/home/user/.config/sxmo/bonsai_tree.json"
+expect = "/usr/share/sxmo/appcfg/bonsai_tree.json"
+
+[[user_config]]
+path = "/home/user/.config/sxmo/profile"
+expect = "/usr/share/sxmo/appcfg/profile_template"
+
+[[user_config]]
+path = "/home/user/.config/sxmo/sway"
+expect = "/usr/share/sxmo/appcfg/sway_template"

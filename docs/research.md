@@ -1457,3 +1457,22 @@ About
 
 Supersedes
 : surya-base-image-named
+
+
+<a id="2026-11-19-sxmo-live-configs-drift-from-new-package"></a>
+### 2026-11-19-sxmo-live-configs-drift-from-new-package
+
+Date
+: 2026-11-19
+
+Brief
+: The phone's live conky.conf, bonsai_tree.json and profile now DIFFER from the package defaults (lab update 2026-11-19 05:03 moved the package on); sway equals its template
+
+Question
+: Do the live ~/.config/sxmo files equal the package defaults the manifest now expects?
+
+Found
+: Read only on the phone: diff of conky.conf (configversion line), bonsai_tree.json (delay_duration 400/delay_unit lines) and profile vs profile_template (configversion line) shows the package newer than the live copy (migrated 2026-11-18 18:11; package files date 2026-11-19 05:03 lab update). sway equals sway_template. So once the lab reports user_config, three will read DRIFTED: expected, honest, not a lab change lost. The phone was not touched; migrating them is a phone change for a later try.
+
+About
+: deep-sleep
