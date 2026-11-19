@@ -62,5 +62,8 @@ fn calls_plus() {
         "the standby script is reachable as root",
         standby_script_reachable,
     );
-    step("end on a healthy kernel, lease released", finish_healthy);
+    step(
+        "end on the kept kernel, lease released",
+        finish_on_kept_kernel,
+    );
 }
