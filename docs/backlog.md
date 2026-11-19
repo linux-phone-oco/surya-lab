@@ -3212,31 +3212,6 @@ Rank
 : 0
 
 
-<a id="surya-unreachable-after-calls4-try"></a>
-### surya's first calls4 one-shot try (run 3) hung with a black screen and no trace; a cold start after the author's restart booted the same image fine
-
-Status
-: open
-
-Note
-: Cause narrowed 2026-11-19: not calls4 - the freeze came after calls+'s clean stop at 14:32:00 with USB still up (research 2026-11-19-calls4-hang-was-the-reboot-out-of-calls-plus). Follow surya-reboot-watchdog-bound.
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-19
-
-Needs
-: phone
-
-Rank
-: 1
-
-Witness
-: person
-
-
 <a id="surya-attended-real-dry-pieces"></a>
 ### Run surya-attended's unattended modes for real on surya (no author): --until FIRST_PROMPT, then --part calls-plus; report timings and what passed
 
@@ -3434,3 +3409,30 @@ Proof
 
 Rank
 : 3
+
+
+<a id="surya-unreachable-after-calls4-try"></a>
+### surya's first calls4 one-shot try (run 3) hung with a black screen and no trace; a cold start after the author's restart booted the same image fine
+
+Status
+: open
+
+Note
+: Cause narrowed 2026-11-19: not calls4 - the freeze came after calls+'s clean stop at 14:32:00 with USB still up (research 2026-11-19-calls4-hang-was-the-reboot-out-of-calls-plus). Follow surya-reboot-watchdog-bound.
+
+2026-11-19 keeper (surya-pon-reason-every-boot, PR 439): the PON reason read on the current boot is PON_REASON1=0x03 (HARD_RESET + SMPL), POFF 0x00 - matching the author's power cycle that ended the frozen reboot out of calls+ (a hard reset, not a watchdog bite). pon-reason-read passes.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Rank
+: 1
+
+Witness
+: person
