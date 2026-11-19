@@ -3239,6 +3239,8 @@ Status
 Note
 : Top Coordinator, 2026-11-19: on the lab host surya is on USB at 3-1 as 18d1:d001 'Qualcomm SM7150 Device', serial 'post...': the postmarketOS initramfs gadget. enp10s0f3u1 is up as 172.16.42.2 but 172.16.42.1 does not ping. So calls4 got as far as the initramfs and sits there (no root found, or initramfs/module mismatch for calls4); not dead, not a watchdog loop. KEEPER, READ-ONLY, change NOTHING (no fastboot, no reboot, no write to the gadget, no power action): (1) the gadget's interfaces: lsusb -v for 18d1:d001 (mass storage? serial? rndis? log?), /sys/bus/usb devices, what the host bound; (2) does the initramfs answer on ANY port: ping 172.16.42.1, nc/ssh probe of 22, 23, telnet 23, the pmOS debug port (initramfs telnet 23 / ssh 22 when debug-shell or hooks), serial ttyACM*/ttyUSB* if any; (3) host dmesg (journalctl -k) from when it enumerated: timing, gadget type, any later disconnect; (4) record what the screen is said to show only if the author tells (do not ask for his hands here). Then record the finding on item surya-unreachable-after-calls4-try (stuck-in-initramfs, evidence, what each probe returned) and decide: if any read channel answers, read the initramfs log and the kernel messages from it; else a power hold is needed (it returns through boot counting to calls+ either way). Report to the surya coordinator in a few lines.
 
+2026-11-19 UPDATE (Top Coordinator, author's words verbatim: 'i restarted surya', 'it was stuck on black screen'): the author power-cycled it; 172.16.42.1 answers ping (~2 ms), the gadget is back at 3-1. NOW: (1) confirm which kernel it is on (should be calls+ by boot counting), run the health suite, confirm healthy; (2) read what is left of the failed calls4 boot: pstore/ramoops (/sys/fs/pstore, console-ramoops), the previous boot's journal if it got that far (journalctl -b -1), the boot-counter state of the calls4 entry (/boot/loader/entries/pmos-calls4+*.conf: left count, was it renamed/failed), the ESP log 'lpoco lab kernel log calls4'; (3) record on surya-unreachable-after-calls4-try: stayed in the initramfs gadget with a black screen, the author power-cycled it, and what the reads show. NO calls4 retry until the cause is read.
+
 About
 : deep-sleep
 
@@ -3263,6 +3265,8 @@ Note
 
 2026-11-19 Top Coordinator: NOT dead and not on a watchdog loop: surya is in the pmOS initramfs gadget (USB 3-1 18d1:d001). The keeper looks read-only first (item surya-initramfs-stuck-read-only); only then is a power hold decided.
 
+2026-11-19: it stayed in the initramfs gadget with a black screen; the author power-cycled it ('i restarted surya'); it answers again. The cause is read in item surya-initramfs-stuck-read-only; no calls4 retry before it.
+
 Blocked by
 : surya-initramfs-stuck-read-only
 
@@ -3277,6 +3281,3 @@ Needs
 
 Rank
 : 1
-
-Witness
-: person
