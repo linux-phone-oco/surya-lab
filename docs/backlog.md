@@ -3404,12 +3404,10 @@ Witness
 ### Move lab/attended (#394) to procedures/attended-session.rs plus procedures/steps, per docs decision 2026-11-19-procedures-one-shape
 
 Status
-: in-progress
+: done
 
 Note
-: 2026-11-19 surya-builder: the move is done and dry-run green (procedures/attended-session.rs + procedures/steps on lpoco-attended v0.31.1, lab/attended gone, [kernels] test = calls4, calls / kept = calls in device.toml, physical steps in place; run: lpoco-attended run attended-session [--dry-run] [--until FIRST_PROMPT | --part calls-plus], lpoco-attended check). Not run on the phone. Left: the consts and the gadget named in waits.
-
-2026-11-19 orchestration: UNBLOCKED the rest - lpoco-manifest-v0.32.0 / lpoco-attended-v0.32.0 (lab-tools #270): device.toml accepts [connection] port/address, [tools] paths, [health] battery_floor_mv, [boot] device_wait/back_wait, [images.NAME] path/sha256, [procedures.NAME], plus [kernels] test/kept and [[host.gadget]] usb_id; read with dev("...") and proc("..."). Read EVERY key at the top of main, not inside a step closure - only reads outside closures are checked by --dry-run. Do now: WAY_BACK, STANDBY, PON_REASON and the sha-pinned calls4 files into device.toml (table that owns the fact, else [procedures.attended-session]); bump the pin to v0.32.0. [[host.gadget]] usb_id 18d1:d001 needs no serial (usb_id only).
+: 2026-11-19 surya-builder: done. way_back, standby, pon_reason and the three sha256-pinned calls4 files are read from [procedures.surya-attended-session] of device.toml (the table is named by the procedure's name 'surya attended session'); pin lpoco-attended v0.32.0; Facts read at the top of main. Proof: lpoco-attended check ok; run attended-session --dry-run 19 steps and --part calls-plus 6 steps pass; cargo test/clippy green. calls4 files stay in [procedures] not [images.NAME]: images refuse a '..' path and they live in ../../surya-audio. Not run on the phone. Left: [[host.gadget]] usb_id 18d1:d001 (no step names a gadget yet).
 
 About
 : deep-sleep
