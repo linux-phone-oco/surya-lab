@@ -3409,8 +3409,7 @@ Status
 Note
 : 2026-11-19 surya-builder: the move is done and dry-run green (procedures/attended-session.rs + procedures/steps on lpoco-attended v0.31.1, lab/attended gone, [kernels] test = calls4, calls / kept = calls in device.toml, physical steps in place; run: lpoco-attended run attended-session [--dry-run] [--until FIRST_PROMPT | --part calls-plus], lpoco-attended check). Not run on the phone. Left: the consts and the gadget named in waits.
 
-Waits
-: lab-tools manifest keys (decision 2026-11-19-attended-keys-in-the-manifest): WAY_BACK, STANDBY, PON_REASON (and the sha-pinned calls4 files, RUN_ID) stay inline in procedures/steps/src/session.rs until the tag arrives, then move to the table that owns each fact or [procedures.attended-session]; [[host.gadget]] usb_id 18d1:d001 waits for the gadget's real serial (only 'starts post' is known)
+2026-11-19 orchestration: UNBLOCKED the rest - lpoco-manifest-v0.32.0 / lpoco-attended-v0.32.0 (lab-tools #270): device.toml accepts [connection] port/address, [tools] paths, [health] battery_floor_mv, [boot] device_wait/back_wait, [images.NAME] path/sha256, [procedures.NAME], plus [kernels] test/kept and [[host.gadget]] usb_id; read with dev("...") and proc("..."). Read EVERY key at the top of main, not inside a step closure - only reads outside closures are checked by --dry-run. Do now: WAY_BACK, STANDBY, PON_REASON and the sha-pinned calls4 files into device.toml (table that owns the fact, else [procedures.attended-session]); bump the pin to v0.32.0. [[host.gadget]] usb_id 18d1:d001 needs no serial (usb_id only).
 
 About
 : deep-sleep
