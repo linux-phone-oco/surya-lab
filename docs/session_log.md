@@ -2722,3 +2722,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-surya-attended-two-faults-fixed"></a>
+### surya attended: two faults fixed
+
+Entry date
+: 2026-11-19
+
+Done
+: Built surya-attended-fix-faults (PR 414): hyphen driver name, pon-reason.sh put by the program, calls+ part ends without the driver probe. Tests first, seen failing.
+
+Rejected
+: Putting pon-reason.sh through the suite: lpoco lab suite put does not carry surya's own check, and the program already puts its scripts.
+
+About
+: deep-sleep
