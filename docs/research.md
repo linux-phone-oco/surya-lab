@@ -1590,3 +1590,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-19-calls4-failed-boot-read"></a>
+### 2026-11-19-calls4-failed-boot-read
+
+Date
+: 2026-11-19
+
+Brief
+: The failed calls4 boot left no trace; calls4 ran healthy after a cold start; phone rebooted back to calls+, healthy, way-back check ok
+
+Question
+: What did the failed calls4 boot leave, and is surya clean to go back to calls+?
+
+Found
+: 2026-11-19 14:50-14:56 UTC. way-back.sh check on calls4+: watchdog, RTC, ramoops, pstore ok; note: qcom_wdt is the STOCK module there (stops the watchdog in suspend), so calls4+ had no patched module - a suspend on it would have no way back. Journal: boot -1 (calls+) ends 14:32:00 clean, boot 0 (calls4+) starts 14:48:04; no boot between, so the failed boot wrote no journal. pstore: only console/pmsg-ramoops of the calls+ run (14:31), no panic; /sys/fs/pstore empty. Boot counter: pmos-calls4+0-1.conf (0 left, 1 tried); bootctl Current Entry pmos-calls4.conf. lpoco lab kernel log prints nothing (the subcommand takes no name). Suite on calls4+ 20261119-145029 healthy, 0 fail. Then reboot (fuse armed beforehand, systemctl reboot): up on 7.1.0-sm7150-calls+ (kept), suite 20261119-145500 healthy 88 pass 0 fail, way-back check ok including patched qcom_wdt keep_armed_in_suspend=N. Conclusion: no evidence of a calls4 fault in the image; the first hang is unexplained (nothing recorded before userspace). Next time calls4 is tried, arm a console or ramoops path that survives a hang. No retry made.
+
+About
+: deep-sleep

@@ -2216,21 +2216,6 @@ About
 ---
 
 
-<a id="2026-11-19-1600-how-the-phone-stands"></a>
-### How the phone stands
-
-Entry date
-: 2026-11-19
-
-Done
-: kept calls+ kernel running, unchanged this run (no phone change). Closed clk-1047 bisect: series cleared, display side is the root.
-
-Considered
-: next: surya-steps-map-history / surya-step-checks (unattended); second dtb try rejected (cause unseen, no log)
-
----
-
-
 <a id="2026-11-19-0215-how-the-phone-stands-step-claims"></a>
 ### How the phone stands
 
@@ -2830,6 +2815,24 @@ Done
 
 Considered
 : next: calls4 is the running try not the kept kernel; coordinator to say whether to keep or let a reboot go to stock; surya-attended-real-dry-pieces waits on an attended window
+
+About
+: deep-sleep
+
+---
+
+
+<a id="2026-11-19-1600-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: Phone runs the kept kernel 7.1.0-sm7150-calls+, suite 20261119-145500 healthy 0 fail, way-back check ok (patched qcom_wdt loaded); calls4 read and put away, no retry
+
+Considered
+: next: a calls4 retry needs a trace that survives a hang, and an attended window; surya-attended-real-dry-pieces waits on that
 
 About
 : deep-sleep
