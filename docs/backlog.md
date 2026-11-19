@@ -2444,6 +2444,9 @@ Proof
 Rank
 : 3
 
+Witness
+: person
+
 
 <a id="surya-awake-from-package"></a>
 ### The wake lock comes from the lpoco-awake package, not a hand-put script
@@ -2657,28 +2660,6 @@ NEVER DELETE (orchestration, urgent): both copies of the Nura base image 2026103
 
 Waits
 : surya-base-image-named done (sha256 recorded first)
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-19
-
-Needs
-: phone
-
-Rank
-: 2
-
-
-<a id="surya-user-config-declared"></a>
-### Declare the sxmo user configs the lab cares about as [[user_config]] in device.toml
-
-Status
-: open
-
-Note
-: 2026-11-19 keeper: device.toml declares 4 [[user_config]] (conky, bonsai, profile, sway; expect = package paths; foot.ini no live copy). Repo edit landed. Phone step open: wait for lab prepare v0.22.0+ to report a boot; live conky/bonsai/profile read DRIFTED vs the newer package (research 2026-11-19-sxmo-live-configs-drift-from-new-package) - migrate or accept is a decision.
 
 About
 : deep-sleep
@@ -3023,3 +3004,27 @@ Needs
 
 Rank
 : 7
+
+
+<a id="surya-user-config-declared"></a>
+### Declare the sxmo user configs the lab cares about as [[user_config]] in device.toml
+
+Status
+: open
+
+Note
+: 2026-11-19 keeper: device.toml declares 4 [[user_config]] (conky, bonsai, profile, sway; expect = package paths; foot.ini no live copy). Repo edit landed. Phone step open: wait for lab prepare v0.22.0+ to report a boot; live conky/bonsai/profile read DRIFTED vs the newer package (research 2026-11-19-sxmo-live-configs-drift-from-new-package) - migrate or accept is a decision.
+
+DECISION (surya coordinator, 2026-11-19) for the drifted live conky/bonsai/profile (declared; 'lpoco lab prepare' is gone in 0.24.0): per file, diff the live file against the package default: (a) if the difference is a DELIBERATE lab choice (a setting we put there: say what and why in the notes), keep the live file and re-declare it with from = a copy kept in surya-lab (lab/user-config/...) so the drift is declared as intended; (b) if the difference is only age/defaults of an older package (no lab change), MIGRATE: back up the live file (cp -a to ~/migration-backup-<date>), take the package default, then sxmo_migrate.sh state clean; keep expect = the package path. Nothing deleted without a backup; wake lock held; no sxmo restart needed (the files are read at the next start of the session pieces; if a restart is wanted, say so, do not do it). Then boot-report check: lab-pieces reports them, lpoco host check reads no DRIFTED; say when a boot has reported.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Rank
+: 2
