@@ -1815,37 +1815,6 @@ Rank
 : 3
 
 
-<a id="surya-kernel-pmic-wdt"></a>
-### surya's kernel with the PMIC watchdog series (linux-phone-oco/linux topic/pmic-wdt-wake-in-suspend) and &pm6150_wdt enabled, wakeup-source
-
-Status
-: open
-
-Note
-: 2026-11-18 keeper (again): its last step (the bite) is attended only; not tried unattended; waits for the author at the phone.
-
-Waits
-: the attended session (one window, asked through the top coordinator; prerequisites: pmic-kernel-8b2283da3-build, step-checks, boot race)
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-18
-
-Needs
-: phone
-
-Proof
-: pmic-wdt-bites
-
-Rank
-: 0
-
-Witness
-: person
-
-
 <a id="pmic-kernel-8b2283da3-build"></a>
 ### Build the kept-kernel candidate with the PMIC watchdog series incl. patch 6/6 (8b2283da3): one-shot try, no bite
 
@@ -2982,3 +2951,30 @@ Rank
 
 Witness
 : person
+
+
+<a id="surya-kernel-pmic-wdt"></a>
+### surya's kernel with the PMIC watchdog series (linux-phone-oco/linux topic/pmic-wdt-wake-in-suspend) and &pm6150_wdt enabled, wakeup-source
+
+Status
+: open
+
+Note
+: 2026-11-18 keeper (again): its last step (the bite) is attended only; not tried unattended; waits for the author at the phone.
+
+2026-11-19 ATTENDED SESSION NOW (author at the phone, 20-30 min; go given through the top coordinator). Work in this order, ONE step at a time, and before EACH step stop and send the surya coordinator (local_0ecf107e-d955-49ff-aefb-b0ecaa3bcbdd) a short text for the author's phone: what will happen, what he watches, what he does if it goes wrong (e.g. hold power if it powers off). Wait for the relayed 'go' before the step. Order: (1) boot the pmicwdt kernel (calls2+/calls4+ family, patch 6/6 stop_on_reboot, with pm8916_wdt) as a one-shot try, read-only probe (driver registered, timeout, S2_CTL); (2) the bite step (surya-pmic-wdt-proof, watchdog armed, fuse as second way back); LANE RULE: after any bite the next boot is a kernel with pm8916_wdt, never calls+; recovery if it powers off: author holds power; (3) surya-pmic-wdt-proof wake-in-suspend, (4) surya-step-checks (sim-ready, pon-reason), (5) sleep-standby-current if time fits (author unplugs; BT off, sensorspd stopped, autosleep off). Surya answers now (the old 'answering again' waits are cleared). Leave surya on a kernel with pm8916_wdt or the kept kernel, healthy, at the end; record each result.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Proof
+: pmic-wdt-bites
+
+Rank
+: 0
