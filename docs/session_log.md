@@ -2833,3 +2833,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-1615-how-the-phone-stands-keeper"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: Phone runs the kept kernel 7.1.0-sm7150-calls+, suite 20261119-145500 healthy 0 fail, way-back check ok (patched qcom_wdt loaded); calls4 read and put away, no retry. The return from calls4 to calls+ was a systemctl reboot with the fuse armed, done on the coordinator's word before decision 'no unattended reboot until the calls4 hang is understood' (PR 427) was read; it came back.
+
+Considered
+: next: a calls4 retry needs a trace that survives a hang and an attended window
+
+About
+: deep-sleep
