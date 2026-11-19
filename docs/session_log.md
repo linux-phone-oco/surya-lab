@@ -2971,3 +2971,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-1815-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: kept 7.1.0-sm7150-calls+ untouched (no reboot, no suspend); suite put now (31 checks, bt-suspend.sh on the phone) and run: bt checks all pass; bt-suspend-test-land done. surya-kernel-pmic-wdt not taken: no go open in tad q ready (attended)
+
+Considered
+: next: surya-kernel-pmic-wdt when a go is open; the rest of ready needs a suspend or a witness
+
+About
+: deep-sleep
