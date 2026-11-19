@@ -3452,10 +3452,10 @@ Go until
 ### Would a pm8916-wdt bite on this PMIC read as PON 0x03 or something else, and why did calls4 not boot after the reset (one-try counter consumed?)
 
 Status
-: open
+: done
 
 Note
-: DESK WORK ONLY - the author paused the surya lane 2026-11-19 (relayed by the Top Coordinator): never touch the phone. Facts from the attended run's keeper (surya-lab PR 454): after the fuse was armed the phone reset by itself, but PON read 0x03 (HARD_RESET+SMPL), POFF 0x00, pstore empty, and it came back on calls+, not calls4. Healthy on calls+, lease released. Questions: (1) what PON_REASON/POFF/WARM_RESET registers would a PMIC watchdog bite (S2 reset, pm8916_wdt, PON_PMIC_WD_RESET_S2_CTL) leave on PM6150 - read the kernel qcom-pon / pm8916_wdt sources, the PM6150 PON docs/dtsi, others' work (mainline, postmarketOS, downstream qpnp-power-on: PON_REASON1 bit for PMIC_WD vs HARD_RESET and 'SMPL'); is 0x03 = bits 0 (HARD_RESET?) and 1 (SMPL) - read the exact bit table; could an APSS-side fuse reset (qcom_wdt bite, which the fuse uses) read as HARD_RESET on this board? Which reset was it: the apss fuse (qcom_wdt), the PMIC S2 watchdog, or a cold SMPL? (2) why was calls4 not chosen: systemd-boot one-try counting (pmos-calls4+1-0.conf -> +0-1 after the first try) - was the counter already spent by an earlier boot (the lab's kernel install re-arms with one try; did the program's reinstall step run before the try? the try boot is consumed at the first boot attempt even if the reset happened in the bootloader/early boot), what does the sd-boot default entry do, and what did the program's 'boot_once' set (bootloader variable LoaderEntryOneShot?). Read lab-tools' devlab kernel.rs and the program's steps (surya-lab procedures/). Record research (ikb research, sources, material) with the answer and what to change; no phone.
+: answered in research bite-pon-and-calls4-choice; builder item attended-keep-calls4-for-bite; phone item bite-pon-baseline-compare
 
 About
 : deep-sleep
@@ -3490,3 +3490,53 @@ Needs
 
 Rank
 : 1
+
+
+<a id="attended-keep-calls4-for-bite"></a>
+### Attended session: keep calls4 (kernel keep) for the bite, and arm the PMIC watchdog, not only the APSS fuse
+
+Status
+: open
+
+Note
+: From research bite-pon-and-calls4-choice. (1) one try is spent by the boot: keep calls4 (3 tries) before the bite, unkeep after; (2) the step arms qcom_wdt only: add arming pm8916_wdt (S2_CTL 0x56=0x07, S2_CTL2 0x57 bit7) via /dev/watchdog of the PM8916 node; (3) rewrite bite_seen: it matches strings pon-reason.sh never prints - match POFF_REASON1 bit2 (PMIC_WD) for a PMIC bite. No phone.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: build
+
+Proof
+: attended-session dry-run shows a kept calls4 before the bite and a PMIC-armed step; pon-reason check reads a named bite
+
+
+<a id="bite-pon-baseline-compare"></a>
+### Read PON/POFF after an APSS fuse bite vs plain reboot vs sysrq crash, on calls+
+
+Status
+: open
+
+Note
+: Settles what an APSS bite leaves on PM6150 (unknown by reading). Only when the author resumes the surya lane; the phone is paused.
+
+Blocked by
+: attended-keep-calls4-for-bite
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Proof
+: tests/health/base/pon-reason.sh output for each of the three resets recorded
+
+Witness
+: person

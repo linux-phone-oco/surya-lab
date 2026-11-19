@@ -156,3 +156,26 @@ By
 
 Takes
 : RebootWatchdogSec (default 10 min) arms the hardware watchdog in systemd-shutdown, the second phase of a reboot, so a stuck reboot is reset; no effect without a watchdog device.
+
+
+<a id="qpnp-power-on-android-msm"></a>
+### qpnp-power-on.c (Android MSM kernel): qpnp_pon_reason table, PON_REASON1 ffs index
+
+Url
+: https://android.googlesource.com/kernel/msm.git/+/android-msm-shamu-3.10-marshmallow/drivers/platform/msm/qpnp-power-on.c
+
+By
+: Google/Qualcomm
+
+Takes
+: PON_REASON1 bit 0 is hard reset, index = ffs-1
+
+
+<a id="linux-v7-3-pm8916-wdt"></a>
+### mainline drivers/watchdog/pm8916_wdt.c and drivers/power/reset/qcom-pon.c (v7.3)
+
+Url
+: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/watchdog/pm8916_wdt.c
+
+Takes
+: POFF_REASON1 PMIC_WD is BIT(2); qcom-pon never reads PON_REASON1
