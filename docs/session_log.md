@@ -2338,3 +2338,18 @@ Done
 
 Considered
 : next: re-read lpoco host check after the next boot; standby-current needs attended suspend; surya-user-config-declared, licences, suspend-stop-config are repo-only
+
+---
+
+
+<a id="2026-11-19-2100-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: phone untouched: kept 7.1.0-sm7150-calls+ as the last hand-over left it; recorded the base image source and rotation (research surya-base-image-source-recorded, device.toml comment); image-fresh-stock untouched
+
+Considered
+: next: surya-step-checks has only attended-suspend parts left; user-config-declared waits on lab v0.22.0 prepare; suggest second copy of image-fresh-stock/ on another disk (author)

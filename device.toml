@@ -1,5 +1,7 @@
 # This device's manifest, read by linux-phone-oco/lab-tools (lpoco lab). Secrets and what is learned at
 # run time stay outside the repository: ~/.config/devlab/xiaomi-surya/ and ~/.local/state/devlab/xiaomi-surya/
+# Base image: Nura v26.06 sxmo-de-sway-qcom-sm7150 build 20261030-1151 (sha256 202298d9...1c85, pristine copy ~/Projects/surya-audio/image-fresh-stock/, the ONLY copy: that build has rotated off
+# https://images.nura.eco/bpo/v26.06/qcom-sm7150/sxmo-de-sway/BUILD/ - checked 2026-11-19, only 20261106-0727 and 20261113-1159 remain). Research: surya-base-image-source-recorded.
 [device]
 codename = "xiaomi-surya"
 
