@@ -3477,7 +3477,7 @@ Status
 : done
 
 Note
-: Pinned lpoco-attended v0.34.1 in attended-session.rs and surya-steps; skip-when-in-state in put_way_back, install_pmicwdt_kernel, bite (boot_once skips itself); --from and answer files come with the pin. fmt, clippy, tests (11) green; dry run of whole, --part calls-plus, --until FIRST_PROMPT, --from ok. Real run not done (builder never touches the phone).
+: Pinned lpoco-attended v0.34.1; skip-when-in-state in put_way_back and install (by kernel name, release matched as 7.1.0-sm7150-calls4+); --from and answer files via the pin. Bite skip left out on review (bite_seen too loose): comes with attended-keep-calls4-for-bite. Dry runs green; no phone run.
 
 About
 : deep-sleep

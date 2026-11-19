@@ -52,6 +52,19 @@ pub fn standby_ma(samples_tsv: &str) -> Option<f64> {
     (!v.is_empty()).then(|| v.iter().sum::<f64>() / v.len() as f64)
 }
 
+/// The phone's release (`uname -r`, e.g. `7.1.0-sm7150-calls4+`) names the boot entry `name` as one of its `-` parts, so the
+/// running kernel is that entry's build; "calls4" is not matched inside another word.
+pub fn release_is_kernel(release: &str, name: &str) -> bool {
+    release
+        .lines()
+        .next()
+        .unwrap_or("")
+        .trim()
+        .split('-')
+        .skip(1)
+        .any(|part| part.trim_end_matches('+') == name)
+}
+
 /// `sha256sum FILE` output (on the phone or here) names exactly this checksum: the file is already as it should be.
 pub fn sha_matches(sum_output: &str, expected: &str) -> bool {
     expected.len() == 64 && sum_output.split_whitespace().next() == Some(expected)
@@ -105,5 +118,13 @@ mod tests {
         ));
         assert!(!sha_matches("sha256sum: /var/tmp/x: No such file", &sha));
         assert!(!sha_matches("aa  x", "aa"));
+    }
+
+    #[test]
+    fn the_real_release_names_its_kernel_entry() {
+        assert!(release_is_kernel("7.1.0-sm7150-calls4+\n", "calls4"));
+        assert!(!release_is_kernel("7.1.0-sm7150-calls+\n", "calls4"));
+        assert!(!release_is_kernel("7.1.0-sm7150-notcalls4\n", "calls4"));
+        assert!(!release_is_kernel("", "calls4"));
     }
 }

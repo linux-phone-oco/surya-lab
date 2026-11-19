@@ -3,7 +3,6 @@
 //! host's side) and returns a Result that stops the run. Nothing here reads like the procedure; main does.
 
 use crate::checks::*;
-use lpoco_attended::steps::runs_kernel;
 use lpoco_attended::{phone, proc, retry};
 use std::path::{Path, PathBuf};
 use std::process::Command;
@@ -90,7 +89,7 @@ fn already(what: &str) -> Result<(), String> {
 fn runs_pmicwdt_kernel() -> bool {
     phone()
         .sh("uname -r 2>/dev/null")
-        .is_ok_and(|release| runs_kernel(&release, PMICWDT_KERNEL))
+        .is_ok_and(|release| release_is_kernel(&release, PMICWDT_KERNEL))
 }
 
 /// Whether the file here and the one on the phone have one checksum.
@@ -185,13 +184,8 @@ fn pon_text(f: &Facts) -> Result<String, String> {
     ))
 }
 
-/// Arm the fuse and let go; skipped when this boot of the pmicwdt kernel already follows a bite.
+/// Arm the fuse and let go.
 pub fn bite(f: &Facts) -> Result<(), String> {
-    if runs_pmicwdt_kernel() && pon_text(f).is_ok_and(|pon| bite_seen(&pon)) {
-        return already(
-            "this boot of the pmicwdt kernel follows a bite, the fuse is not armed again",
-        );
-    }
     let way_back = &f.way_back;
     phone().root(&format!("sh {way_back} fuse 20")).map(|_| ())
 }
