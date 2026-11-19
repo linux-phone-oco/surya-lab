@@ -5432,3 +5432,115 @@ Gaps
 
 Skipped
 : 6
+
+
+<a id="20261118-234338"></a>
+### 20261118-234338
+
+Device id
+: xiaomi-surya
+
+Run at
+: 2026-11-18 23:43:38
+
+Kernel
+: 7.1.0-sm7150-calls2+
+
+Shell
+: swmo
+
+Passed
+: 73
+
+Failed
+: 1
+
+Gaps
+: 5
+
+Skipped
+: 6
+
+
+<a id="20261118-234709"></a>
+### 20261118-234709
+
+Device id
+: xiaomi-surya
+
+Run at
+: 2026-11-18 23:47:09
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+Passed
+: 76
+
+Failed
+: 0
+
+Gaps
+: 3
+
+Skipped
+: 6
+
+
+<a id="20261118-235035"></a>
+### 20261118-235035
+
+Device id
+: xiaomi-surya
+
+Run at
+: 2026-11-18 23:50:35
+
+Kernel
+: 7.1.0-sm7150-calls2+
+
+Shell
+: swmo
+
+Passed
+: 75
+
+Failed
+: 1
+
+Gaps
+: 3
+
+Skipped
+: 6
+
+
+<a id="20261118-235413"></a>
+### 20261118-235413
+
+Device id
+: xiaomi-surya
+
+Run at
+: 2026-11-18 23:54:13
+
+Kernel
+: 7.1.0-sm7150-calls+
+
+Shell
+: swmo
+
+Passed
+: 76
+
+Failed
+: 0
+
+Gaps
+: 3
+
+Skipped
+: 6
