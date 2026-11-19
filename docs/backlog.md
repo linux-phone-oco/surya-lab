@@ -2770,7 +2770,7 @@ Proof
 ### tests/health/base/bt-suspend.sh in the suite, pushed to the phone with the runner
 
 Status
-: open
+: done
 
 Note
 : Landed with the research; the keeper puts it on the phone with lpoco lab suite put now.
