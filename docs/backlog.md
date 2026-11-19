@@ -3068,38 +3068,6 @@ Rank
 : 0
 
 
-<a id="surya-procedures-one-shape"></a>
-### Move lab/attended (#394) to procedures/attended-session.rs plus procedures/steps, per docs decision 2026-11-19-procedures-one-shape
-
-Status
-: open
-
-Note
-: From orchestration 2026-11-19: one shape for procedures: procedures/NAME.rs in the device repo, one rust-script each over lpoco-attended, plus at most one procedures/steps crate for surya-only steps; lpoco attended new|run|check (lab-tools) scaffolds, runs and dry-runs them, so no per-procedure Cargo.toml, lock or dry-run test. Move lab/attended to procedures/attended-session.rs (main.rs's chain) + procedures/steps (session.rs, checks.rs minus boot_once, wait_for_usb, back_to_known_good, read_dmesg, which lab-tools' step library takes). Keep the entry file a checklist (decision 2026-11-19-attended-only-when-one-command-away). No hurry before the real run.
-
-Library: lpoco-attended-v0.29.2 has dmesg_clean, check_probe, wait_for_phone, read_dmesg, wait_for_usb (lab-tools #250, #251); boot_once and back_to_known_good come next, then lpoco attended new|run|check. Switch the inline read_dmesg and wait_for_usb to the library when moving.
-
-2026-11-19 orchestration (docs decision 2026-11-19-procedure-values-from-the-named-device): the procedure names its device; lpoco-attended loads that device.toml; library steps read named keys from it; a missing key fails --dry-run; devlab gets --device explicitly. With the move: surya's consts in lab/attended/session.rs (PMICWDT_KERNEL, WAY_BACK, STANDBY and the rest) go into surya-lab's device.toml under the tables that already hold those facts (kernel entries, the kept kernel and way back, [health]); a new key only where none exists. Blocked by lab-tools attended-device-values (building next, before the scaffold).
-
-Waits
-: lab-tools attended-scaffold (lpoco attended new|run|check) and attended-device-values released
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-19
-
-Needs
-: build
-
-Proof
-: surya-attended-dry-run
-
-Rank
-: 5
-
-
 <a id="surya-attended-split-unattended"></a>
 ### attended program: run everything that is not risky unattended (--until FIRST_PROMPT and a calls+ part), only the bite, wake-in-suspend and the unplug wait for the author
 
@@ -3176,3 +3144,37 @@ Proof
 
 Rank
 : 1
+
+
+<a id="surya-procedures-one-shape"></a>
+### Move lab/attended (#394) to procedures/attended-session.rs plus procedures/steps, per docs decision 2026-11-19-procedures-one-shape
+
+Status
+: open
+
+Note
+: From orchestration 2026-11-19: one shape for procedures: procedures/NAME.rs in the device repo, one rust-script each over lpoco-attended, plus at most one procedures/steps crate for surya-only steps; lpoco attended new|run|check (lab-tools) scaffolds, runs and dry-runs them, so no per-procedure Cargo.toml, lock or dry-run test. Move lab/attended to procedures/attended-session.rs (main.rs's chain) + procedures/steps (session.rs, checks.rs minus boot_once, wait_for_usb, back_to_known_good, read_dmesg, which lab-tools' step library takes). Keep the entry file a checklist (decision 2026-11-19-attended-only-when-one-command-away). No hurry before the real run.
+
+Library: lpoco-attended-v0.29.2 has dmesg_clean, check_probe, wait_for_phone, read_dmesg, wait_for_usb (lab-tools #250, #251); boot_once and back_to_known_good come next, then lpoco attended new|run|check. Switch the inline read_dmesg and wait_for_usb to the library when moving.
+
+2026-11-19 orchestration (docs decision 2026-11-19-procedure-values-from-the-named-device): the procedure names its device; lpoco-attended loads that device.toml; library steps read named keys from it; a missing key fails --dry-run; devlab gets --device explicitly. With the move: surya's consts in lab/attended/session.rs (PMICWDT_KERNEL, WAY_BACK, STANDBY and the rest) go into surya-lab's device.toml under the tables that already hold those facts (kernel entries, the kept kernel and way back, [health]); a new key only where none exists. Blocked by lab-tools attended-device-values (building next, before the scaffold).
+
+2026-11-19 orchestration (docs decision 2026-11-19-attended-steps-name-the-physical-act): ask_author is being replaced by steps that name the physical act: press_power(secs), hold_button(name, secs), unplug_usb, replug_usb, touch, swipe, look_for(".."), listen_for(".."), confirm("..") - done by a person today, by a rig later when the lab declares one. ask_author keeps working one release as confirm. No change needed now; when lpoco-attended releases the names, use them in the procedure (the unplug for standby is unplug_usb/replug_usb; the bite watch is look_for; the hold-power recovery is hold_button(power, 15)).
+
+Waits
+: lab-tools attended-scaffold (lpoco attended new|run|check) and attended-device-values released
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: build
+
+Proof
+: surya-attended-dry-run
+
+Rank
+: 5
