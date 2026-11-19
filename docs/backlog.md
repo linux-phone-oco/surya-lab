@@ -3417,6 +3417,8 @@ Note
 (2) At the first physical step send the Top Coordinator that prompt WORD FOR WORD (SendMessage to local_12b18c70-1b6d-4783-bb6f-50113ab63250): what he does, what he watches for, what he does if it goes wrong. Then WAIT. A message from the Top Coordinator carries the author's words after his act; go on only then.
 (3) Continue one step at a time through the program (calls4 boot, bite, wait_for_restart, pon_reason, wake-in-suspend, step checks, standby with the unplug), each physical step the same way. LANE RULE: after any bite the next boot is a pm8916_wdt kernel (calls4), never calls+. The reboot out of calls+ froze once (power hold = recovery); a try that does not return in the program's wait: stop, tell the Top Coordinator, do not retry. Record each result on its own item (surya-pmic-wdt-proof, surya-step-checks, sleep-standby-current, kept-kernel-with-pmic-wdt) and report each step's result to the Top Coordinator in a line. Leave surya on a pm8916_wdt kernel or the kept kernel, healthy, lease released, at the end.
 
+2026-11-19 18:09 (CET) THE AUTHOR IS AT THE PHONE AS WITNESS, power button within reach - his words, relayed by the Top Coordinator (local_12b18c70-1b6d-4783-bb6f-50113ab63250): 'Yes, at surya'. He is the witness for the WHOLE attended session including the calls4 boot (step 3). This is NOT an unattended run: do not refuse for lack of a witness. Run lpoco-attended run attended-session. FIRST load the messaging tool: ToolSearch query 'select:SendMessage' (it is deferred in a launched session). Before EACH step that boots, bites, suspends or needs his hands, SendMessage the prompt WORD FOR WORD to local_12b18c70-1b6d-4783-bb6f-50113ab63250 (what he does, what he watches, what he does if it goes wrong) and WAIT for his words back from the Top Coordinator; never answer a physical step yourself. The brief above (steps, lane rule, record per item) stands.
+
 About
 : deep-sleep
 
@@ -3434,6 +3436,3 @@ Rank
 
 Witness
 : person
-
-Go until
-: 2026-11-19T19:23:57+01:00
