@@ -3287,31 +3287,6 @@ Rank
 : 2
 
 
-<a id="surya-try-heartbeat-to-esp"></a>
-### A test kernel's own hook writes breadcrumbs to the ESP from the first second: initramfs start, then a heartbeat of uptime and the last kernel lines every 10 s
-
-Status
-: open
-
-Note
-: lab-tools devlab/src/kernel.rs TIMEOUT_HOOK. Today it sleeps 300 s first, so a hang before that leaves nothing. For a hang INSIDE a try kernel or its initramfs (not the calls4 case, which was never reached): mount the ESP by pmos_boot_uuid as soon as the block device shows, append 'initramfs start, uptime' to test-boot.stage, then every 10 s append uptime and dmesg | tail -3, sync, until PID 1 is systemd. FAT survives a power cycle with no reset needed, ramoops does not always. Only the try's second initramfs carries it, so stock and kept kernels never run it. Never pmos.debug-shell unattended; serial/earlycon wait on a cable (no hardware owned). Failing test: the hook text writes the stage line before any sleep; one keeper try of a kernel whose initramfs is held leaves the heartbeat on the ESP, read by lpoco lab kernel log.
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-19
-
-Needs
-: build
-
-Proof
-: test-boot-heartbeat
-
-Rank
-: 4
-
-
 <a id="surya-reboot-watchdog-bound"></a>
 ### Bound the reboot: RebootWatchdogSec=20s on the kept kernel, then 20 reboots, each back within 90 s or a recorded watchdog reset
 
@@ -3407,7 +3382,7 @@ Status
 : done
 
 Note
-: 2026-11-19 surya-builder: done. way_back, standby, pon_reason and the three sha256-pinned calls4 files are read from [procedures.surya-attended-session] of device.toml (the table is named by the procedure's name 'surya attended session'); pin lpoco-attended v0.32.0; Facts read at the top of main. Proof: lpoco-attended check ok; run attended-session --dry-run 19 steps and --part calls-plus 6 steps pass; cargo test/clippy green. calls4 files stay in [procedures] not [images.NAME]: images refuse a '..' path and they live in ../../surya-audio. Not run on the phone. Left: [[host.gadget]] usb_id 18d1:d001 (no step names a gadget yet).
+: 2026-11-19 builder (surya-lab #444): the attended session reads way_back/standby/pon_reason and the three sha256-pinned calls4 files from [procedures.surya-attended-session] in device.toml; pin lpoco-attended v0.32.0; dry run passes (19 steps, calls-plus 6), tests and clippy green; not run on the phone. Left: [[host.gadget]] usb_id (no step names a gadget yet).
 
 About
 : deep-sleep
@@ -3423,3 +3398,31 @@ Proof
 
 Rank
 : 3
+
+
+<a id="surya-try-heartbeat-to-esp"></a>
+### A test kernel's own hook writes breadcrumbs to the ESP from the first second: initramfs start, then a heartbeat of uptime and the last kernel lines every 10 s
+
+Status
+: open
+
+Note
+: lab-tools devlab/src/kernel.rs TIMEOUT_HOOK. Today it sleeps 300 s first, so a hang before that leaves nothing. For a hang INSIDE a try kernel or its initramfs (not the calls4 case, which was never reached): mount the ESP by pmos_boot_uuid as soon as the block device shows, append 'initramfs start, uptime' to test-boot.stage, then every 10 s append uptime and dmesg | tail -3, sync, until PID 1 is systemd. FAT survives a power cycle with no reset needed, ramoops does not always. Only the try's second initramfs carries it, so stock and kept kernels never run it. Never pmos.debug-shell unattended; serial/earlycon wait on a cable (no hardware owned). Failing test: the hook text writes the stage line before any sleep; one keeper try of a kernel whose initramfs is held leaves the heartbeat on the ESP, read by lpoco lab kernel log.
+
+Waits
+: lab-tools builder (orchestration queues it in docs, project lab-tools): the hook is in lab-tools kernel.rs, where only the lab-tools builder lands
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: build
+
+Proof
+: test-boot-heartbeat
+
+Rank
+: 4
