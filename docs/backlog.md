@@ -1080,25 +1080,6 @@ Rank
 : 0
 
 
-<a id="lpoco-health-suspend-trace-hook"></a>
-### lpoco-health suspend cycle: pre/post hooks or a --trace option (dyndbg, irq trace) so probes need no wrapper
-
-Status
-: open
-
-Note
-: sleep/bt-trace.sh is the stopgap probe to remove once this exists
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-18
-
-Needs
-: build
-
-
 <a id="bt-trace-cycles"></a>
 ### Bluetooth s2idle: 20x15 s and 3x120 s way-back cycles bt-on, wakeup ON, with hci_qca dyndbg and geni irq trace; read storm vs crash order
 
@@ -2995,3 +2976,27 @@ Needs
 
 Rank
 : 6
+
+
+<a id="lpoco-health-suspend-trace-hook"></a>
+### lpoco-health suspend cycle: pre/post hooks or a --trace option (dyndbg, irq trace) so probes need no wrapper
+
+Status
+: open
+
+Note
+: sleep/bt-trace.sh is the stopgap probe to remove once this exists
+
+2026-11-19: moved to docs as a lab-tools item (project lab-tools, rank 8), owned by orchestration's builder, which also owns its proof; this copy only waits. sleep/bt-trace.sh stays as the stopgap (marked a probe to remove) until it lands; then retire it.
+
+Waits
+: lab-tools lpoco-health-suspend-trace-hook (docs, project lab-tools, rank 8), built by the lab-tools builder
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: build
