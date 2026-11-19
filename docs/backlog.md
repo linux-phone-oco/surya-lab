@@ -3297,3 +3297,25 @@ Proof
 
 Rank
 : 1
+
+
+<a id="surya-calls4-hang-trace"></a>
+### A trace that survives a hang for the next calls4 try: the first warm boot reached the initramfs gadget (18d1:d001 'post...') and stayed, with a black screen, leaving no journal, pstore or ESP log
+
+Status
+: open
+
+Note
+: From keeper research 2026-11-19-calls4-failed-boot-read and the Top Coordinator's USB reading. Facts: on that boot the host saw the pmOS initramfs gadget but 172.16.42.1 did not answer; the author saw a black screen; the initramfs' own 5-minute log to the ESP (lpoco lab kernel log) was empty; pstore empty; boot counter 0 left, 1 tried. After a cold start the same image booted. Question: what would capture the next occurrence - initramfs console to the USB gadget serial (a debug channel that answers from the initramfs), pmos.debug / console=ttyMSM0 over the uart8 serial, a ramoops console record from the initramfs (does pstore mount there?), earlycon, a hook that writes dmesg to the ESP before the root search, boot counting that also falls back when the initramfs never reaches the rootfs. Also why the stock fallback did not happen (the counter was spent: 0 left, but the entry was never marked bad since it never reached the userspace). Read-only research; propose the smallest hook, never pmos.debug-shell unattended. Result: a recommended hook and an item for lab-tools or surya-lab.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: research
+
+Rank
+: 1
