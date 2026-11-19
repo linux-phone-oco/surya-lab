@@ -2839,3 +2839,47 @@ Proof
 
 Rank
 : 0
+
+
+<a id="surya-base-image-source-recorded"></a>
+### Record the base image's source pattern and that it has rotated off: image-fresh-stock/ is the ONLY copy
+
+Status
+: open
+
+Note
+: From orchestration: the source is Nura's image server https://images.nura.eco/bpo/v26.06/qcom-sm7150/sxmo-de-sway/BUILD/ (the old images.postmarketos.org name also answers). It keeps only the two newest builds, 20261106-0727 and 20261113-1159; 20261030-1151 returns 404. So image-fresh-stock/ (sha256 202298d9...1c85) is the ONLY copy left of the image surya was flashed from. REPO/RECORDS ONLY: add to the research row of surya-base-image-named (and device.toml's base-image comment): the URL pattern, the rotation fact, the date checked, that image-fresh-stock/ is the only copy, and that the nearest replacement is a newer v26.06 build from that folder, which means re-measuring every proof. Do NOT delete image-fresh-stock/ and do not touch it. Suggest in the report (the author decides, through the coordinator) a second copy off this machine (another disk). Whether image/ (written since, f0261713...7f06) may go is the author's call.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Rank
+: 1
+
+
+<a id="shell-past-glue-into-rust"></a>
+### Move surya-lab's shell past glue into Rust, as each file is touched (about 844 lines)
+
+Status
+: open
+
+Note
+: From ideal-agent 0.3.56 (decision 2026-11-19-rust-for-scripts-shell-only-glue): shell is only for one-off glue (no parsing, no loops over data, no functions); anything with logic is Rust, with rust-script for a single file. surya-lab has about 844 lines of shell (sleep/way-back.sh, standby-run.sh, bt-trace.sh, lab/devlab-audio-heal, tests/health/**.sh, ui/switch.sh, provision/...). NOT one rewrite: move each file as you TOUCH it (a keeper changing way-back.sh moves it, or says why not); start any NEW script with logic in Rust (rust-script for one file, a small Rust tool for what repeats), health checks included where the suite allows. List the files and their logic weight once (a research row: which are glue, which have logic), so touching order is clear. No phone step needed to write; proof on the phone only when a moved script runs there.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: build
+
+Rank
+: 40
