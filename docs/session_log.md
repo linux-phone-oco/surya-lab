@@ -2290,3 +2290,21 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-0510-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: surya-sxmo-from-nura done: sxmo-utils back to 1.18.1-r4 (8 pieces), no @lab package, @lab repo lines removed; kept kernel 7.1.0-sm7150-calls+ unchanged; suite healthy 82 pass 0 fail; sxmo running
+
+Considered
+: next: surya-step-checks (standby-current needs attended suspend), host-check-stale-pieces (devlab-usb-awake declaration is stale), licences, test-layer-entry
+
+About
+: deep-sleep
