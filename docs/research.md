@@ -1413,3 +1413,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="host-check-stale-pieces-drift"></a>
+### host-check-stale-pieces-drift
+
+Date
+: 2026-11-19
+
+Brief
+: host check's 4 STALE pieces: 3 were comment-only drift (phone had older comments), devlab-usb-awake was a declaration that outlived its piece
+
+Question
+: Which of the 4 STALE phone pieces are real drift, which declarations stale?
+
+Found
+: Diffed phone vs lab/: devlab-pd-mapper.conf, 90-lpoco-way-back.conf, devlab-audio-heal(.service) differ only in comments (main newer); reinstalled by put + root cp, no restart, wake lock held, suite after: healthy 86 pass 0 fail. devlab-usb-awake(.service) were replaced by the lpoco-awake package (active on phone, old units not found): declarations, overlays and lab files removed. Class: a declaration that outlives its piece. host check still reads STALE until the next boot reports pieces and this lands (it compares main plus the last boot's report).
+
+About
+: deep-sleep
