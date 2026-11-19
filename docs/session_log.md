@@ -2242,3 +2242,18 @@ Done
 
 Considered
 : next: surya-step-checks (new checks, code); host-check-stale-pieces; surya-base-image-source-recorded
+
+---
+
+
+<a id="2026-11-19-0430-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: kept calls+ kernel running, unchanged (no phone change); suite has 5 new boot checks, all pass, five steps claimed
+
+Considered
+: next: surya-step-checks remainder (sim-ready, standby-current, pon-reason); host-check-stale-pieces
