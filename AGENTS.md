@@ -49,6 +49,7 @@ Ask a query; never read `data/` or `docs/` to answer - they are the database's f
 | how a subject stands, then all that is known of it | `tad q about --subject S` (`--whole true` for every record in full; `tad q about` lists the subjects, and where a summary is due) |
 | the work ahead | `tad q next` (`--about S` for one subject) |
 | what you may take now, and why the rest may not | `tad q ready --for keeper\|builder\|research` (`--show ready` for the picks only) - the one picking query; a brief names it and carries no picking SQL. An item `--witness person` is skipped ("needs a witness") until a person's go is open: `ikb backlog-go --id ID --until "$(date -Is -d +1hour)"` |
+| how far what we send has got, per target and stage | `tad q upstreaming` (`--upstream U`); `tad q upstreaming-counts` for the totals |
 | where something is said | `tad q find --text WORDS` |
 | one record whole | `tad q row --id ID` |
 | what was recorded lately | `tad q recent` (`--days N`) |

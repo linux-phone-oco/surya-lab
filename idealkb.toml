@@ -1,7 +1,7 @@
 # This device base follows grenudi/ideal-knowledge-base at the release named here: the generic named statements
 # and AGENTS.md's part between idealkb:begin and idealkb:end. own names the files this base keeps as its own: its
 # tables.toml (the queue's needs, proof and rank, and the device's own tables) and the backlog records that go with it.
-version = "0.21.0"
+version = "0.22.0"
 own = ["tables.toml", "records/backlog.sql"]
 # records a script runs (lpoco lab files a run with test-run): ikb leaves them out of its help
 machine = ["test-run"]
