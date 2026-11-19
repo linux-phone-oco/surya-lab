@@ -2532,10 +2532,10 @@ Entry date
 : 2026-11-19
 
 Done
-: phone untouched (read-only), kept 7.1.0-sm7150-calls+, healthy. Took surya-layer-cmdline-source: answered, done. Top item surya-kernel-pmic-wdt not taken: its probe/bite steps are attended and no author go is open (the morning note's attended session is not open now).
+: unattended run: phone untouched, kept 7.1.0-sm7150-calls+, healthy (suite run 20261119-071125). Top item surya-kernel-pmic-wdt is attended-only, not taken. Looked at sensors-proximity-in-calls read-only: sxmo already reads iio-sensor-proxy, proximity-reads passes; only the witnessed step is left.
 
 Considered
-: next: surya-kernel-pmic-wdt when the author is at the phone (ikb backlog-go); then health-suspend-cycle-proof with fuse armed; tell surya coordinator the cmdline answer
+: next: an attended window for pmic-wdt (steps 1-5 in its note), then the proximity witness in a call; suspend items (bt-unbind-hook, sleep-fastrpc-helpers, health-suspend-cycle-proof) are not run unattended: try 4 hung with the fuse armed
 
 About
 : deep-sleep

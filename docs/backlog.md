@@ -2471,7 +2471,7 @@ Status
 : open
 
 Note
-: Decided 2026-11-17 (research-sensor-hub, decision 2026-11-17-sensors-registry-kept-current). After sensors-without-crash. The sensor is surya's stk3a5x infrared one (not ultrasonic: nothing in the microphones or earpiece). Read it through iio-sensor-proxy (monitor-sensor --proximity) near and far; find how the shell on the phone (Sxmo) does its in-call proximity lock and make it read iio-sensor-proxy rather than an IIO sysfs file - a sxmo-deviceprofiles or sxmo-utils change for SSC phones; check the panel's calibration (huaxing 2.0, tianma 1.0 in the configs). Proven by proximity-reads after every boot, and once witnessed: in a call (call-echo), the author's hand over the top of the screen blanks it and lifting it brings it back.
+: 2026-11-19 keeper (unattended): read-only look. sxmo-utils scripts/core/sxmo_proximitylock.sh already reads iio-sensor-proxy (monitor-sensor --proximity), no sysfs file; on the phone monitor-sensor shows 'Has proximity sensor (near: 0)'; proximity-reads passes (run 20261119-071125). No code change needed. What is left is the witnessed step (sensors-proximity-cover-witnessed): hand over the top in a call, screen blanks, lifting brings it back; plus panel calibration check.
 
 Opened
 : 2026-11-17
@@ -2960,9 +2960,7 @@ Status
 : open
 
 Note
-: 2026-11-18 keeper (again): its last step (the bite) is attended only; not tried unattended; waits for the author at the phone.
-
-2026-11-19 ATTENDED SESSION NOW (author at the phone, 20-30 min; go given through the top coordinator). Work in this order, ONE step at a time, and before EACH step stop and send the surya coordinator (local_0ecf107e-d955-49ff-aefb-b0ecaa3bcbdd) a short text for the author's phone: what will happen, what he watches, what he does if it goes wrong (e.g. hold power if it powers off). Wait for the relayed 'go' before the step. Order: (1) boot the pmicwdt kernel (calls2+/calls4+ family, patch 6/6 stop_on_reboot, with pm8916_wdt) as a one-shot try, read-only probe (driver registered, timeout, S2_CTL); (2) the bite step (surya-pmic-wdt-proof, watchdog armed, fuse as second way back); LANE RULE: after any bite the next boot is a kernel with pm8916_wdt, never calls+; recovery if it powers off: author holds power; (3) surya-pmic-wdt-proof wake-in-suspend, (4) surya-step-checks (sim-ready, pon-reason), (5) sleep-standby-current if time fits (author unplugs; BT off, sensorspd stopped, autosleep off). Surya answers now (the old 'answering again' waits are cleared). Leave surya on a kernel with pm8916_wdt or the kept kernel, healthy, at the end; record each result.
+: 2026-11-19 unattended keeper run (12:08): not taken - the author is not at the phone and no relayed go is open; the 'attended session now' note above was for the earlier window. Waits for the next attended window; the order in the note stands.
 
 About
 : deep-sleep
