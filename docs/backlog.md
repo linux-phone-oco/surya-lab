@@ -2968,6 +2968,8 @@ Status
 Note
 : 2026-11-19 unattended keeper run (12:08): not taken - the author is not at the phone and no relayed go is open; the 'attended session now' note above was for the earlier window. Waits for the next attended window; the order in the note stands.
 
+2026-11-19 12:15 GO WINDOW OPEN (author said go for step 1; relayed by the Top Coordinator). THIS KEEPER IS ATTENDED: take the lease, run the pre-checks (way back armed: fuse by watchdog identity, serial wakeup off, sysctls, health ok), then message the Top Coordinator (SendMessage to local_12b18c70-1b6d-4783-bb6f-50113ab63250) with exactly 'surya step 1 ready' and what you will do. Boot the pmicwdt kernel ONLY after a message from the Top Coordinator saying go. Same before each later step (bite, proof): message, wait for the relayed go. Never end the session mid-way; stay until the Top Coordinator says done. If the send fails (cap), write the text as your last message and wait.
+
 About
 : deep-sleep
 
@@ -2987,4 +2989,4 @@ Witness
 : person
 
 Go until
-: 2026-11-19T13:07:13+01:00
+: 2026-11-19T13:40:50+01:00
