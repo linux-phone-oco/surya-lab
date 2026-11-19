@@ -3252,35 +3252,6 @@ Rank
 : 0
 
 
-<a id="surya-unreachable-after-calls4-try"></a>
-### surya does not answer after the unattended calls4 one-shot try (run 3): needs the author's power cycle, then read pstore and the journal before any retry
-
-Status
-: open
-
-Note
-: 2026-11-19 keeper run 3 (surya-lab PR 418): 'lpoco lab kernel try calls4' ended 'no new boot answered within ten minutes'. Surya answers at no address, is not on USB; no self-fallback, no watchdog reset seen. Runs before booted calls4 fine (64 s, 205 s). PARKED: no phone work until the author's hands: power cycle (hold power 15 s; if it loops, power off from eOS recovery, wait 30 s USB out). After it is back: FIRST read pstore/ramoops and the journal of the failed boot (what hung: boot counting should have fallen back), then record, then decide. Do not retry calls4 before that; no defuse.
-
-2026-11-19 Top Coordinator: NOT dead and not on a watchdog loop: surya is in the pmOS initramfs gadget (USB 3-1 18d1:d001). The keeper looks read-only first (item surya-initramfs-stuck-read-only); only then is a power hold decided.
-
-2026-11-19: it stayed in the initramfs gadget with a black screen; the author power-cycled it ('i restarted surya'); it answers again. The cause is read in item surya-initramfs-stuck-read-only; no calls4 retry before it.
-
-Blocked by
-: surya-initramfs-stuck-read-only
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-19
-
-Needs
-: phone
-
-Rank
-: 1
-
-
 <a id="surya-read-failed-calls4-boot"></a>
 ### Read the calls4 boot that looked stuck: journal, pstore, boot counter, way-back check, health suite - then decide the retry
 
@@ -3301,3 +3272,28 @@ Needs
 
 Rank
 : 0
+
+
+<a id="surya-unreachable-after-calls4-try"></a>
+### surya's first calls4 one-shot try (run 3) hung with a black screen and no trace; a cold start after the author's restart booted the same image fine
+
+Status
+: in-progress
+
+Note
+: 2026-11-19 findings (keeper, research 2026-11-19-calls4-after-power-cycle, PR 425): the first calls4 try of run 3 stayed in the initramfs gadget with a black screen; the author power-cycled it ('i restarted surya', 'it was stuck on black screen'); after that cold start surya runs 7.1.0-sm7150-calls4+ (bootctl Current Entry pmos-calls4.conf, boot 14:48:04 UTC), suite 20261119-145029 healthy (88 pass, 0 fail, 9 not measured: no SIM). The failed boot left NOTHING: no journal between 14:32 (calls+ clean stop) and 14:48, empty pstore, empty ESP log. Entry pmos-calls4+0-1.conf (counter 0 left, 1 tried). NOT KNOWN: why the first (warm) boot hung; earlier warm boots of calls4 worked (64 s, 205 s). Candidates (not tested): the warm-reboot-into-a-new-kernel path on this phone (a reboot from calls+ hangs in the bootloader or the initramfs sometimes), display/USB timing. Consequence for the attended session: the boot of calls4 is NOT a safe unattended step; it is the author's first step (with the power hold in hand), and surya now already sits on calls4 (try spent): the bite can run from here; before any reboot of it read the way back. NOT done: way-back.sh check on calls4 (watchdog state unchecked). No calls4 retry, no unattended reboot of surya.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Rank
+: 1
+
+Witness
+: person
