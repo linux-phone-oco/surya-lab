@@ -2973,3 +2973,25 @@ Proof
 
 Rank
 : 3
+
+
+<a id="surya-layer-declared"></a>
+### Declare surya's device layer in device.toml under [layer]
+
+Status
+: open
+
+Note
+: From orchestration (lab-tools #212; decision 2026-11-19-device-layer-declared-once, agreed by the author; docs backlog surya-layer-declared). REPO-ONLY, one landing, no phone step: declare surya's device layer in device.toml under [layer] (the table is typed in lpoco-manifest): the kernel package, the dtb, firmware, UCM, udev and hwdb files, and the boot glue (systemd-boot's /usr/lib/kernel/devicetree). Check it against the schema manifest/device.schema.json (find it in lab-tools: do not guess keys; copy the shape of the walleye/device-template declaration if one exists). Source the lists from what surya really ships: this base's dt/, ucm/, patches/, lab/ files, provision/ and device.toml's [flash] steps - list what is OURS (the layer), not what the distro ships; each file with its path on the phone. Verify with the validator (lpoco manifest check or the schema validator) and tad check; the packer comes next in lab-tools: its first real input is this declaration; docs research/base-distro/2026-11-19-agnostic-layer/test-layer-apk-and-deb.sh packs surya's layer - run it once if it works read-only, and say what it produced. Land; tell the surya coordinator.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Rank
+: 6
