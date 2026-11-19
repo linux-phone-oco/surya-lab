@@ -1571,3 +1571,22 @@ Found
 
 About
 : deep-sleep
+
+
+<a id="2026-11-19-calls4-after-power-cycle"></a>
+### 2026-11-19-calls4-after-power-cycle
+
+Date
+: 2026-11-19
+
+Brief
+: After the author's power cycle surya runs calls4+ healthy (88 pass, 0 fail); the failed calls4 boot left no journal or pstore
+
+Question
+: What did the failed calls4 boot leave, and what kernel is the phone on after the power cycle?
+
+Found
+: 2026-11-19 14:50 UTC, read only plus lpoco lab suite run. Kernel is 7.1.0-sm7150-calls4+ (not calls+): boot 1b066a91 from 14:48:04 UTC, bootctl Current Entry pmos-calls4.conf, cmdline initrd-calls4. Suite 20261119-145029: healthy, 88 pass, 3 known gaps, 9 not measured, 0 fail (no SIM). Left of the failed boot: journal boots end at 14:32:00 (calls+, clean stop) and the next starts 14:48:04, so the failed calls4 boot wrote no journal; /var/lib/systemd/pstore holds only console/pmsg-ramoops of the calls+ run (14:31), no panic; /sys/fs/pstore empty (no crash this boot). lpoco lab kernel log prints nothing. Boot entries on /boot: pmos-calls4+0-1.conf (counter 0 left, 1 tried, file stamped 2000-01-01) and pmos-calls4-dt+0-1.conf. So the black screen was before userspace logging, or the boot did not complete the first time; the same image booted fully after the cold power cycle. Not known: why the first boot hung (hypotheses: a power-state the warm reboot left, not the image); no calls4 retry made.
+
+About
+: deep-sleep
