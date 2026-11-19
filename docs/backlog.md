@@ -2371,10 +2371,10 @@ Rank
 ### On surya, find which kernel cmdline source Nura's boot-deploy reads: /etc/deviceinfo deviceinfo_kernel_cmdline or /usr/lib/kernel-cmdline.d/*.conf, and that both together do not double it
 
 Status
-: open
+: done
 
 Note
-: Asked by orchestration 2026-11-19: lpoco-layer-pack (lab-tools v0.28.0) writes the cmdline both ways. Read-only on the phone: read the installed boot-deploy script and its generated cmdline (/boot, extlinux/grub entry), with a throwaway file in each place only if reading does not settle it; no reboot needed unless the keeper boots a one-shot try. Record the answer on lpoco-layer-pack (orchestration's item) and tell the surya coordinator.
+: proven by reading boot-deploy get_cmdline and /proc/cmdline; research 2026-11-19-surya-cmdline-source
 
 About
 : deep-sleep
