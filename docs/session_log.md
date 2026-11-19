@@ -2146,3 +2146,18 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-19-0050-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: runs kept kernel calls+, healthy 76 pass/0 fail; calls3+ (calls2 source, clang+LTO) tried once, clk.c:1047 stays: toolchain ruled out; calls3 entry removed, back on calls+
+
+Considered
+: next: clk-1047-bisect-pmic-wdt-series (PM8916_WATCHDOG=m build, then dtsi commits), unattended; obj-calls3 and scratch-calls3 kept for it
