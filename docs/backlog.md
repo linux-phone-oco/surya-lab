@@ -2821,7 +2821,9 @@ Status
 : open
 
 Note
-: From research clk-1047-calls3-clang-still-warns: toolchain ruled out. Build c88ed67e0 with PM8916_WATCHDOG=m (like calls+) first, one one-shot try each, unattended (no suspend, wdt never armed); then bisect the dtsi commits. Tree wt-pmic-wdt2, objs obj-calls3.
+: FIRST, the cheap discriminator (upstreams coordinator's read of research/deep-sleep/2026-11-19-clk1047/): the chain is the same on calls2+ both times and ALSO on calls+ (the -check log): dsi_pll_10nm_vco_prepare 'DSI PLL(0) lock failed, status=0x0', then dsi0_phy_pll_out_dsiclk 'already disabled' (clk.c:1188 on calls+) and 'already unprepared' (clk.c:1047 on calls2+/3+), from __clk_set_parent_after / clk_core_reparent_orphans_nolock / of_clk_add_hw_provider / dsi_phy_driver_probe via deferred_probe_work_func. So the root is a DISPLAY-clock fault present WITHOUT the series (the 10nm DSI PLL cannot lock when the PHY registers as a clock provider; the orphan left prepared/enabled by the bootloader splash gets unwound); whether the unprepare WARN also fires depends on deferred-probe timing, and a built-in pm8916_wdt (=y vs =m) shifts it. DISCRIMINATOR: build c88ed67e0 with calls+'s clang config and PM8916_WATCHDOG=m (one rebuild, release e.g. calls4+), one-shot try, dmesg: if 1047 goes away while the lock failure stays, it is timing, not the series. Then (and only then) bisect further if 1047 stays. Say it plainly in the research: the real fix is on the display side (queue a display/dispcc item: DSI PHY 10nm on sm7150, orphan dsi0_phy_pll_out_dsiclk, the lock failure) - not this series.
+
+From research clk-1047-calls3-clang-still-warns: toolchain ruled out. Build c88ed67e0 with PM8916_WATCHDOG=m (like calls+) first, one one-shot try each, unattended (no suspend, wdt never armed); then bisect the dtsi commits. Tree wt-pmic-wdt2, objs obj-calls3.
 
 About
 : deep-sleep
