@@ -2598,28 +2598,6 @@ Rank
 : 0
 
 
-<a id="surya-step-checks"></a>
-### Write health-suite checks for surya's daily-usable-phone steps that have no proof test
-
-Status
-: open
-
-Note
-: 2026-11-19 keeper: claimed from run 20261119-013649: done kernel-reaches-init, rootfs-boots, health-suite-runs, charger-online; partial dmesg-clean, watchdog-way-back, usb-network. NOT claimed (proof test never ran by name): shell-on-console, gadget-enumerates, storage-readonly, pmic-bound, linux-runs. STILL TO DO: the new cheap checks for steps with no proof test (shell-up, sim-ready, standby-current, pon-reason...) - code, goes to a programmer pass.
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-18
-
-Needs
-: phone
-
-Rank
-: 1
-
-
 <a id="calls2-vs-calls-fails"></a>
 ### Compare calls2+'s two suite fails against calls+ (boot-warnings clk.c:1047, one bt controller-crash line)
 
@@ -2959,3 +2937,27 @@ Proof
 
 Rank
 : 0
+
+
+<a id="surya-step-checks"></a>
+### Write health-suite checks for surya's daily-usable-phone steps that have no proof test
+
+Status
+: open
+
+Note
+: 2026-11-19 keeper: claimed from run 20261119-013649: done kernel-reaches-init, rootfs-boots, health-suite-runs, charger-online; partial dmesg-clean, watchdog-way-back, usb-network. NOT claimed (proof test never ran by name): shell-on-console, gadget-enumerates, storage-readonly, pmic-bound, linux-runs. STILL TO DO: the new cheap checks for steps with no proof test (shell-up, sim-ready, standby-current, pon-reason...) - code, goes to a programmer pass.
+
+2026-11-19 coordinator: the keeper (PR 346) claimed what the run shows and left these unclaimed because the proof test never ran by name: shell-on-console, gadget-enumerates, storage-readonly, pmic-bound, linux-runs; and said the new checks are code needing a programmer pass. DO IT: write those checks (new logic = Rust via rust-script per the one remaining rule, or a plain glue shell check where it is only a read of a sysfs/dmesg line - the existing tests/health/base/*.sh show the shape), have the ideal-agent:programmer subagent review them (give it the diff), put the suite, run it once, claim from that run id (done only with test + run). Watchdog as is, no suspend. Land in small groups; counts to the surya coordinator.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-18
+
+Needs
+: phone
+
+Rank
+: 1
