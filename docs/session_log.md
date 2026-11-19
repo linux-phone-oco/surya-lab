@@ -2539,3 +2539,18 @@ Considered
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-20-0000-how-the-phone-stands"></a>
+### How the phone stands
+
+Entry date
+: 2026-11-19
+
+Done
+: unattended run: phone untouched, kept 7.1.0-sm7150-calls+, suite latest 20261119-071125 healthy; top item surya-kernel-pmic-wdt needs an attended go window (none open), every other ready item needs a suspend or a witness; nothing taken
+
+Considered
+: next: surya-kernel-pmic-wdt when the author is at the phone and the Top Coordinator relays go
