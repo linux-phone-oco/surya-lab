@@ -2930,10 +2930,10 @@ Rank
 ### Back to Nura's own sxmo-utils (leave the lab apk sxmo-utils@lab)
 
 Status
-: open
+: done
 
 Note
-: PRIORITY CHANGE (orchestration, now rank 0, unblocked; the old waits are lifted): our sxmo-utils apk is AGPL-3.0 and we publish it with no licence or source notice on the page, so we stop publishing it at all. STEP: on surya swap sxmo-utils@lab back to Nura's own sxmo-utils (apk del the @lab package(s), then apk add from the Nura repo; remove the @lab repository line/tag from /etc/apk/repositories after); check sxmo still starts in its boot entry (a boot or a superd restart: the wake lock held through the swap (lpoco-awake package, no gap), ModemManager still installed, .needs-migration markers read after: Nura's package defaults differ from the lab's: run sxmo_migrate.sh state and keep our user_config declarations in mind (item surya-user-config-declared)), the suite once; claim nothing more. Does not depend on the console boot entry. DONE = surya has NO @lab sxmo package installed (apk list -I | grep -i sxmo; apk policy sxmo-utils): tell the surya coordinator at once, orchestration then retires the apk. Consequence to tell the upstreams lane: the suspend series proofs that used sxmo-utils@lab (suspend-retry-backs-off) can no longer run on surya; sensors-after-suspend moves to lpoco-health suspend cycle (surya-suspend-stop-config). Watchdog as is, no suspend. Hands: none expected; if sxmo does not come back on screen, report at once (recovery: the author's hands).
+: proven by apk list -I: all 8 sxmo-utils pieces 1.18.1-r4 (alpine community, no @lab package); @lab repo lines removed from /etc/apk/repositories; sxmo (superd, sway, sxmobar) still up, wake lock held; suite 82 pass 0 fail (healthy). Note: apk triggers ran boot-deploy/mkinitfs. The .needs-migration files are only the old copies in /home/user/migration-backup-20261118, none live. Package set from alpine v3.24 community (Nura's mirror carries no sxmo-utils).
 
 About
 : deep-sleep
