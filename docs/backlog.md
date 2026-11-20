@@ -3266,36 +3266,6 @@ Witness
 : person
 
 
-<a id="surya-host-usb-timeline"></a>
-### lpoco lab kernel try (and any reboot it waits on) prints the host's USB timeline for the phone's port: frozen vs re-enumerating vs absent
-
-Status
-: open
-
-Note
-: lab-tools. The lab machine's own journalctl -k --utc already says what the phone did on USB (measured 2026-11-19: device 38 stayed connected 14:25:54-14:47:45, so the phone froze after calls+ stopped clean; a normal boot shows d001 twice 12 s apart). When no new boot answers in the wait, print the events since the reboot for the phone's port (found by the device.toml address/serial, not a bus number): 'frozen: device N connected since T, no re-enumeration', 'absent', or the sequence of IDs. Read-only, no phone change. The failing test feeds the 14:25-14:48 excerpt (research 2026-11-19-calls4-hang-was-the-reboot-out-of-calls-plus) and expects 'frozen'. Pass the time range as arguments, never spliced into a shell string.
-
-2026-11-19 surya coordinator: this is lab-tools work; the surya builder skips it. Orchestration: please put it on the lab-tools build queue (the host USB timeline per boot: enumeration/disconnect times from the host log, so a hang shows as 'gadget stayed connected after a clean stop').
-
-Waits
-: lab-tools builder (orchestration queues it in docs, project lab-tools): lab-tools' AGENTS.md lets only the lab-tools builder land there
-
-About
-: deep-sleep
-
-Opened
-: 2026-11-19
-
-Needs
-: build
-
-Proof
-: kernel-try-reports-usb-timeline
-
-Rank
-: 1
-
-
 <a id="surya-unreachable-after-calls4-try"></a>
 ### surya's first calls4 one-shot try (run 3) hung with a black screen and no trace; a cold start after the author's restart booted the same image fine
 
@@ -3595,10 +3565,10 @@ Rank
 ### surya-host-usb-timeline still waits on lab-tools, whose kernel try USB timeline has landed
 
 Status
-: open
+: done
 
 Note
-: sign seen by patrol 2026-11-20: surya-host-usb-timeline waits on the lab-tools builder, but lab-tools #291 (v0.35.1) landed it and docs #692 marks kernel-try-usb-timeline done; the pin (v0.37.3) has it. Owner: surya coordinator - clear the wait or close the item, then its proof run.
+: 2026-11-20: cleared the wait on surya-host-usb-timeline (lab-tools #291 landed it); its proof is the next kernel try.
 
 About
 : deep-sleep
@@ -3608,3 +3578,32 @@ Opened
 
 Needs
 : build
+
+
+<a id="surya-host-usb-timeline"></a>
+### lpoco lab kernel try (and any reboot it waits on) prints the host's USB timeline for the phone's port: frozen vs re-enumerating vs absent
+
+Status
+: open
+
+Note
+: lab-tools. The lab machine's own journalctl -k --utc already says what the phone did on USB (measured 2026-11-19: device 38 stayed connected 14:25:54-14:47:45, so the phone froze after calls+ stopped clean; a normal boot shows d001 twice 12 s apart). When no new boot answers in the wait, print the events since the reboot for the phone's port (found by the device.toml address/serial, not a bus number): 'frozen: device N connected since T, no re-enumeration', 'absent', or the sequence of IDs. Read-only, no phone change. The failing test feeds the 14:25-14:48 excerpt (research 2026-11-19-calls4-hang-was-the-reboot-out-of-calls-plus) and expects 'frozen'. Pass the time range as arguments, never spliced into a shell string.
+
+2026-11-19 surya coordinator: this is lab-tools work; the surya builder skips it. Orchestration: please put it on the lab-tools build queue (the host USB timeline per boot: enumeration/disconnect times from the host log, so a hang shows as 'gadget stayed connected after a clean stop').
+
+2026-11-20 coordinator: LANDED in lab-tools #291 (v0.35.1), pinned at v0.37.3 on the host; the wait is cleared. What is left is the proof: the next 'lpoco lab kernel try' (the attended run's calls4 boot) must print the host USB timeline for the phone's port; record it then.
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-19
+
+Needs
+: phone
+
+Proof
+: kernel-try-reports-usb-timeline
+
+Rank
+: 1
