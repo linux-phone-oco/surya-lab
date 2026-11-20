@@ -3067,3 +3067,24 @@ Rejected
 
 About
 : deep-sleep
+
+---
+
+
+<a id="2026-11-20-surya-land-regen"></a>
+### surya-lab opts in to land's self-rebase
+
+Entry date
+: 2026-11-20
+
+Done
+: Added Makefile target land-regen (canon render), copied from docs and device-template; make land-regen runs clean on main (canon already, render 138 backlog ... as md, no file changed).
+
+Considered
+: Same one-line target as the two sibling bases, so land (lab-machine PR 79) regenerates data/*.json merges and pages itself.
+
+Rejected
+: A verify-style hash check inside land-regen: land stops on a real conflict itself, canon and render are enough.
+
+About
+: deep-sleep

@@ -3,7 +3,7 @@ SHELL := /bin/bash
 TAD ?= tad
 export DOCS_FORMAT ?= md
 
-.PHONY: setup check canon render verify
+.PHONY: setup check canon render verify land-regen
 setup:            ## install tad and ikb from their pinned releases (checksums checked)
 	./bin/install-tad.sh
 	$(TAD) engine
@@ -14,6 +14,7 @@ canon:            ## rewrite the data in canonical form
 	$(TAD) canon
 render:           ## render the pages from the data
 	$(TAD) render
+land-regen: canon render  ## what land runs after rebasing a branch onto a moved main (lab-machine bin/land, PR 79)
 verify: check     ## what CI runs: data is valid and canonical, docs are fresh
 	@sh bin/licence-check
 	@before="$$(find data docs -type f -print0 2>/dev/null | sort -z | xargs -0 sha256sum 2>/dev/null)"; \
