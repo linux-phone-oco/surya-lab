@@ -11,7 +11,7 @@
 -- --tags              string?       facet tags, comma-separated
 -- --about             string?       what it is about (tad q about lists the subjects)
 -- --local-ref         string?       the branch, pull request or commit here it is made in
--- --file              string?       its folder or file: auto makes upstream/UPSTREAM/ID/
+-- --file              string?       its folder or file, under upstream/ (auto makes upstream/UPSTREAM/ID/): the series, cover letter and send notes live there, not in research/
 -- --sent-on           date?         when it was sent
 -- --forwarded         string?       where it stands there: its address (a link, a message id), or not-needed
 -- --bug               string?       the upstream report or thread it answers or opened
@@ -23,6 +23,7 @@
 -- --waits             string?       what it waits on (a person's word, a reply)
 -- --note              string?       where it stands, and the next step
 -- --last-update       date = today  when
+SELECT CASE WHEN $file IS NOT NULL AND $file NOT LIKE 'upstream/%' THEN error('--file ' || $file || ' is not under upstream/: an outgoing series, its cover letter and send notes go in upstream/DESTINATION/ITEM/ (--file auto); research keeps only the material behind it') END;
 DELETE FROM upstream_items WHERE id = $id;
 INSERT INTO upstream_items (id, upstream, title, form, state, from_work, domain, tags, about, local_ref, file, sent_on, forwarded, bug, version, supersedes, applied_upstream, waits, note, last_update, carried_in, reviewed_by)
 SELECT $id, $upstream, $title, $form, $state, $from_work, $domain, $tags, $about, $local_ref, $file, $sent_on, $forwarded, $bug, $version, $supersedes, $applied_upstream, $waits, $note, $last_update, $carried_in, $reviewed_by
