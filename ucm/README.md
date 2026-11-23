@@ -1,4 +1,4 @@
-# UCM profile for surya
+# ucm - ALSA use-case configuration for surya's sound cards
 
 `Xiaomi/surya/HiFi.conf` makes the speaker stereo: two amplifiers share one I2S line, the TAS2564 at
 0x4d (top, labelled Left in the device tree) takes the left channel, the TAS2562 at 0x4c (bottom,

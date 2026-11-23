@@ -1,4 +1,35 @@
+---
+what: the bring-up lab of the Xiaomi POCO X3 NFC (surya, SM7150) - mainline Linux on it as a daily-driver phone
+kept by: surya coordinator (the lane); records by every role working on surya
+records in: this repository's own base (data/, through ikb); what helps every phone in linux-phone-oco/docs
+branches: ROLE/WHAT (keeper/, builder/, research/, coord/), one change each, deleted when landed
+project map: linux-phone-oco/docs MAP.md
+---
+
 # surya-lab
+
+## Map
+
+| folder or file | what it is |
+|---|---|
+| `device.toml` | the phone as facts: transports, partitions, kernel, health |
+| `procedures/` | what a keeper runs on the phone, as one command |
+| `kernel/` | the kernel's config; becomes `topics.toml`, the list the test kernel is assembled from |
+| `patches/` | patches waiting for their home (kernel ones move to topic branches); nothing new goes here |
+| `dt/` | device-tree audits, no phone needed |
+| `lab/` | services and configs the lab installs on the phone |
+| `ucm/` | ALSA use-case configuration for the sound cards |
+| `adsp/`, `sleep/`, `ui/` | trials on the phone: the ADSP, suspend and standby, the shell |
+| `provision/` | what a freshly flashed phone is given |
+| `tests/` | checks by where they run: CI, the lab machine, the phone; and the phone's reports |
+| `research/` | the material behind research rows, `research/ABOUT/DATE/` |
+| `data/`, `queries/`, `records/`, `tables.toml`, `idealkb.toml`, `devicebase.toml` | the base: its rows, named queries and records, schema and pins |
+| `docs/` | pages rendered from data/, for people |
+| `bin/` | the base's small install and check scripts |
+
+Never at the top: run logs, worktrees, copies of other repositories. Each folder's README says what belongs in it.
+
+## What this lab is
 
 The bring-up lab for the Xiaomi POCO X3 NFC (`xiaomi-surya`, SM7150): the tools and experiments
 that take it from "boots mainline Linux" to a phone you can use every day - part of
