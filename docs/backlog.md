@@ -3632,3 +3632,19 @@ Needs
 
 Rank
 : 6
+
+
+<a id="kernel-clone-moved-note-for-coordinator"></a>
+### The shared kernel clone moved to ~/Projects/linux-phone-oco/linux: a note for surya's coordinator on resume
+
+Status
+: done
+
+Note
+: 2026-11-23, by the walleye-builder, on the author's word that the lanes go onto the new structure and the Top Coordinator's ok (surya was paused): the kernel clone ~/Projects/surya-audio/linux is now ~/Projects/linux-phone-oco/linux (same repository, mv, git worktree repair; origin linux-phone-oco/linux and pulpoff kept). Nothing of surya's was lost: every local branch is on a pushed ref of origin (read back with ls-remote): dt/sm7150-lpass-soundwire-nodes, dt/surya-wcd-capture-swr-dai, dt/surya-wcd-rx-channel-map, dt/surya-wcd9375-reset-no-sleep, feat/surya-wcd937x-mic-headphone, fix/sm7150-lpass-lpi-swr-data-mux, fix/tas2562-i2s-slot-length, fix/tas2562-volume (checked out in the clone), keeper5/lpass-macro-idle-votes, test/surya-calls, test/surya-mic. Surya's two worktrees stay in place and work: ~/Projects/surya-audio/wt-dt-rxmap (dt/surya-wcd-rx-channel-map, 1 uncommitted file) and ~/Projects/surya-audio/wt-keeper5-lpass (keeper5/lpass-macro-idle-votes, 3 uncommitted files). Changed here: README.md names the new clone path (dt/build-dtbs.sh line). What you do on resume: use ~/Projects/linux-phone-oco/linux wherever a path said surya-audio/linux; the obj-*, scratch-* and image trees stay in surya-audio.
+
+About
+: surya-audio-cleanup
+
+Opened
+: 2026-11-23
