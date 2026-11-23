@@ -3607,3 +3607,28 @@ Proof
 
 Rank
 : 1
+
+
+<a id="surya-kernel-split-into-topics"></a>
+### Split the running kernel 29d92793b (9 linear commits on v7.2) into about five topic/ branches, and prove it with rhizoid assemble --reproduces 29d92793b
+
+Status
+: open
+
+Note
+: From the Steward 2026-11-23 (docs MAP.md rule: topic/ITEM on a stated mainline tag, int/surya/LIST built from kernel/topics.toml). The running kernel 29d92793b is 9 linear commits on v7.2: split into about five topic/ branches (e.g. the PMIC watchdog series on grenudi/linux topic/pmic-wdt-wake-in-suspend is one), keep each carried patch's WORKAROUND(item) marker and --local-ref, and list them in surya-lab kernel/topics.toml. rhizoid assemble ... --reproduces 29d92793b says when the split is exact. The pin in device.toml [layer.kernel] stays on the commit until then (never moved under a running phone); config sha256 and the release string must match too.
+
+Waits
+: the author's resume of the surya lane; the rhizoid assemble --reproduces tool
+
+About
+: deep-sleep
+
+Opened
+: 2026-11-23
+
+Needs
+: build
+
+Rank
+: 6
