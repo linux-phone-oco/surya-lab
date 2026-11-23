@@ -17,7 +17,7 @@
 //!
 //! ```cargo
 //! [dependencies]
-//! lpoco-attended = { git = "https://github.com/linux-phone-oco/lab-tools", tag = "lpoco-attended-v0.34.1" }
+//! lpoco-attended = { git = "https://github.com/linux-phone-oco/lab-tools", tag = "lpoco-attended-v0.44.3" }
 //! surya-steps = { path = "steps" }
 //! ```
 // SPDX-License-Identifier: MIT OR Apache-2.0
