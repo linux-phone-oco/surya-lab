@@ -7,6 +7,8 @@
 -- and carries no picking SQL of its own.
 -- An item that needs a witness shows `witness` (person) and, while a person's go is open, `go_until` - when it ends;
 -- ready with a witness and no go_until cannot be (the go is read here, not from the note).
+-- An item with no rank is a finding, not the last: it comes first among its group with `finding` saying so, so a slice recorded
+-- without a rank is not passed by.
 -- --for    string?          keeper (needs phone), builder (needs build) or research (needs research); every lane when not given
 -- --about  string?          only the work about this subject (a word before a dash names a family)
 -- --show   string = all     ready, skipped or all
@@ -25,10 +27,11 @@ WITH w AS (
     FROM backlog b)
 SELECT b.id, CASE WHEN w.why = '' THEN 'ready' ELSE 'skipped' END AS stands, w.why, b.witness,
        CASE WHEN b.witness IS NOT NULL AND try_cast(b.go_until AS TIMESTAMPTZ) > now() THEN b.go_until END AS go_until,
-       b.status, b.rank, coalesce(b.proof, '') AS proof, coalesce(b.about, '') AS about, b.title, b.note
+       b.status, b.rank, coalesce(b.proof, '') AS proof, coalesce(b.about, '') AS about, b.title, b.note,
+       CASE WHEN b.rank IS NULL THEN 'unranked: give it a rank (ikb backlog --rank N), it comes first until then' END AS finding
 FROM backlog b JOIN w USING (id)
 WHERE b.status NOT IN ('done', 'dropped')
   AND ($for IS NULL OR b.needs = CASE $for WHEN 'keeper' THEN 'phone' WHEN 'builder' THEN 'build' WHEN 'research' THEN 'research' ELSE $for END)
   AND ($about IS NULL OR b.about = $about OR b.about LIKE $about || '-%' OR b.id = $about)
   AND ($show = 'all' OR ($show = 'ready' AND w.why = '') OR ($show = 'skipped' AND w.why <> ''))
-ORDER BY w.why <> '', b.status <> 'in-progress', b.rank IS NULL, b.rank, b.proof IS NULL, b.opened, b.id;
+ORDER BY w.why <> '', b.status <> 'in-progress', b.rank IS NOT NULL, b.rank, b.proof IS NULL, b.opened, b.id;
