@@ -51,7 +51,7 @@ are not specific to audio, and most are not specific to this phone.
 | `disable-node.py` | a DTB with one node disabled: one variable for a hardware bisect |
 
 ```sh
-dt/build-dtbs.sh ~/Projects/surya-audio/linux . && DTC=/tmp/o-patch/scripts/dtc/dtc
+dt/build-dtbs.sh ~/Projects/linux-phone-oco/linux . && DTC=/tmp/o-patch/scripts/dtc/dtc
 python3 dt/irq-audit.py /tmp/o-patch/scripts/dtc/dtc base.dtb patch.dtb
 python3 dt/reg-audit.py /tmp/o-patch/scripts/dtc/dtc base.dtb patch.dtb
 DTC=/tmp/o-patch/scripts/dtc/dtc python3 dt/disable-node.py patch.dtb clock-controller@3380000 a1.dtb
