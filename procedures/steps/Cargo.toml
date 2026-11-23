@@ -6,4 +6,4 @@ description = "surya's own steps for its attended procedures: the pmicwdt kernel
 license = "MIT OR Apache-2.0"
 
 [dependencies]
-lpoco-attended = { git = "https://github.com/linux-phone-oco/lab-tools", tag = "lpoco-attended-v0.34.1" }
+lpoco-attended = { git = "https://github.com/linux-phone-oco/lab-tools", tag = "lpoco-attended-v0.44.3" }
