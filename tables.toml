@@ -81,6 +81,10 @@ enum = ["person"]
 name = "go_until"
 type = "string"
 
+[[tables.backlog.fields]]
+name = "image_sha256"
+type = "string"
+
 [tables.session_log]
 key = ["id"]
 
